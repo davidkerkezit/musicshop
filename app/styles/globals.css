@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: #dad8d7;
+  font-family: "Lato", sans-serif;
+}
+
+@layer components {
+  .nav-links {
+    @apply flex-1 text-center text-light duration-200 py-2 text-lg hover:bg-juice/50 rounded-xl;
+  }
+}
+
+.vector {
+  border-radius: 23% 77% 23% 77% / 46% 48% 52% 54%;
+  background: linear-gradient(
+    90deg,
+    rgba(234, 88, 12, 9) 5%,
+    rgba(134, 44, 44, 9) 69%
+  );
+  width: 550px;
+  height: 500px;
+}
+.vector-1 {
+  border-radius: 53% 47% 48% 52% / 40% 68% 32% 60%;
+  background: linear-gradient(
+    90deg,
+    rgba(234, 88, 12, 9) 5%,
+    rgba(134, 44, 44, 9) 69%
+  );
+  width: 450px;
+  height: 400px;
+}
+.vector-1-sm {
+  border-radius: 53% 47% 48% 52% / 40% 68% 32% 60%;
+  background: linear-gradient(
+    90deg,
+    rgba(234, 88, 12, 9) 5%,
+    rgba(134, 44, 44, 9) 69%
+  );
+  width: 150px;
+  height: 150px;
+}
+
+.background {
+  background: white;
+  background-image: url("../../assets/bg.jpg");
+  background-size: cover;
+  width: 100%;
+  height: max-content;
+  background-position: 0% 75%;
+}
+.vinyl {
+  background: white;
+  background-image: url("../../assets/vinyl.jpg");
+  background-size: cover;
+  background-position: 0% 75%;
+}
+.bg-vinyl {
+  background: white;
+  background-image: url("../../assets/bg-vinyl.jpg");
+  background-size: cover;
+  background-position: 0% 75%;
+}
+.bg-dj {
+  background: white;
+  background-image: url("../../assets/bg-dj.jpg");
+  background-size: cover;
+  background-position: 0% 75%;
+}
+
+.bg-softwere {
+  background: white;
+  background-image: url("../../assets/bg-softwere.jpg");
+  background-size: cover;
+  background-position: 0% 75%;
+}
+:root {
+  --swiper-pagination-color: #ea580c;
+  --swiper-pagination-bullet-size: 8px;
+  --swiper-pagination-bullet-width: 8px;
+  --swiper-pagination-bullet-height: 8px;
+  --swiper-pagination-bullet-inactive-color: #e59166;
+  --swiper-pagination-bullet-inactive-opacity: 0.2;
+  --swiper-pagination-bullet-opacity: 1;
+  --swiper-pagination-bullet-horizontal-gap: 4px;
+  --swiper-pagination-bullet-vertical-gap: 6px;
+}
+/* For Webkit-based browsers (Chrome, Safari and Opera) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+body,
+html {
+  overflow-x: hidden;
+}
