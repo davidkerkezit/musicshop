@@ -42,4 +42,5 @@ export const collections: collectionsType[] = [
     query: "softweres",
   },
 ];
+
 export const BASE_URL = "http://localhost:3002";
