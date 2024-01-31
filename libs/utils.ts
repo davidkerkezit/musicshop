@@ -42,4 +42,4 @@ export const collections: collectionsType[] = [
     query: "softweres",
   },
 ];
-export const BASE_URL = "https://vercel.com/davidkerkezit/musicshop";
+export const BASE_URL = "";
