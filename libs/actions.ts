@@ -1,5 +1,3 @@
-import { BASE_URL } from "./utils";
-
 export async function getProducts(
   page: any,
   sort: any,
@@ -7,7 +5,7 @@ export async function getProducts(
   collection: any
 ) {
   try {
-    const url = new URL(`${BASE_URL}/api/shop`);
+    const url = new URL(`${process.env.BASE_URL}/api/shop`);
 
     // Append defined parameters to the URL
     if (page !== undefined) url.searchParams.append("page", page);
@@ -38,7 +36,7 @@ export async function getProducts(
 
 export async function getProduct(id: string) {
   try {
-    const response = await fetch(`${BASE_URL}/api/shop/${id}`, {
+    const response = await fetch(`${process.env.BASE_URL}/api/shop/${id}`, {
       cache: "no-store",
     });
 
