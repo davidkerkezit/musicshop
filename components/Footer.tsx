@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaAngleDoubleRight, FaFacebook } from "react-icons/fa";
+import { FaAngleDoubleRight } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import { FaPhoneVolume } from "react-icons/fa";
 import { IoIosPin } from "react-icons/io";
@@ -11,8 +11,8 @@ import { Menu } from "@/libs/types";
 
 const Footer = () => {
   return (
-    <footer className="bg-black flex flex-col  ">
-      <div className="flex justify-between  pb-5 pt-10 md:py-10 gap-1 md:border-b-[1px] border-b-white/20 md:mx-6  ">
+    <footer className="bg-black flex flex-col ">
+      <div className="flex justify-between  pb-5 pt-10 md:py-10 gap-1 md:border-b-[1px] border-b-white/20 md:mx-6   ">
         <div className="flex flex-col items-center gap-3 w-1/3">
           <div className="text-xl md:text-3xl p-3 bg-juice rounded-full w-max">
             <FaPhoneVolume />

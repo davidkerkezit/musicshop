@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import VINYL from "../../assets/category-vinyl.png";
 import DJ from "../../assets/category-dj.png";
@@ -17,6 +19,7 @@ const allCategories = [
     width: 230,
     height: 230,
     hover: "lg:group-hover:rotate-[360deg] duration-500 rotate-90",
+    query: "softweres",
   },
   {
     name: "DJ Equipments",
@@ -27,6 +30,7 @@ const allCategories = [
     width: 150,
     height: 150,
     hover: "lg:group-hover:scale-110 duration-300",
+    query: "djequipments",
   },
   {
     name: "Softweres",
@@ -37,6 +41,7 @@ const allCategories = [
     width: 130,
     height: 130,
     hover: "lg:group-hover:scale-110 duration-300",
+    query: "softweres",
   },
 ];
 const Categories = () => {
@@ -61,6 +66,7 @@ const Categories = () => {
               width={category.width}
               height={category.height}
               hover={category.hover}
+              query={category.query}
             />
           );
         })}

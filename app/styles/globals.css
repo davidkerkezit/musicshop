@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -26,7 +26,14 @@ body {
     @apply flex-1 text-center text-light duration-200 py-2 text-lg hover:bg-juice/50 rounded-xl;
   }
 }
-
+.custom-shadow {
+  @apply filter drop-shadow-md;
+  filter: drop-shadow(5px 5px 5px #222);
+}
+.white-shadow {
+  @apply filter drop-shadow-md;
+  filter: drop-shadow(5px 5px 5px #444);
+}
 .vector {
   border-radius: 23% 77% 23% 77% / 46% 48% 52% 54%;
   background: linear-gradient(
@@ -66,6 +73,14 @@ body {
   height: max-content;
   background-position: 0% 75%;
 }
+.dark-bg {
+  background: white;
+  background-image: url("../../assets/brush-dark.png");
+  background-size: cover;
+  width: 100%;
+  height: 10rem;
+  background-position: 0% 75%;
+}
 .vinyl {
   background: white;
   background-image: url("../../assets/vinyl.jpg");
@@ -90,6 +105,15 @@ body {
   background-image: url("../../assets/bg-softwere.jpg");
   background-size: cover;
   background-position: 0% 75%;
+}
+.bg-history {
+  background: white;
+  background-image: url("../../assets/history.jpg");
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  background-position: 0% -30%;
+  filter: grayscale(1);
 }
 :root {
   --swiper-pagination-color: #ea580c;

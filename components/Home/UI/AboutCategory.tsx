@@ -1,5 +1,4 @@
 import Label from "@/components/UI/Label";
-import { StaticImageData } from "next/image";
 
 const AboutCategory = ({
   background,

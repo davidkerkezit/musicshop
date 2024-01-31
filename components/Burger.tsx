@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 const Burger = () => {
-  const [openMenu, setOpenMenu] = useState(false);
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
   const menuHandler = () => {
     setOpenMenu((openMenu) => !openMenu);
   };

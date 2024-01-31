@@ -1,3 +1,5 @@
+"use client";
+
 import CUSTOMER from "../../assets/davidguetta.png";
 import AboutCategory from "./UI/AboutCategory";
 import ArtistRecommendation from "./UI/ArtistRecommendation";

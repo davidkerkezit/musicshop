@@ -12,7 +12,6 @@ import { hideCart, toogleCart } from "@/libs/features/cartSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/libs/store";
 import MENU from "../constants";
-console.log(MENU);
 
 const Nav = () => {
   const path = usePathname();
@@ -28,8 +27,8 @@ const Nav = () => {
     showSearch && dispatch(hideSearch());
   };
   return (
-    <header className="w-full  z-40 fixed  ">
-      <nav className="  flex justify-between items-center md:px-8 px-2   py-5  bg-darkness border-b-[1px] border-juice/5 ">
+    <header className="w-full  z-40 fixed ">
+      <nav className="  flex justify-between items-center md:px-8 px-2   py-5  bg-darkness/50 backdrop-blur-sm border-b-[1px] border-juice/5 ">
         {/* Burger menu */}
         <div className="block md:hidden">
           <Burger />

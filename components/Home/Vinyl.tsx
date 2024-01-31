@@ -1,3 +1,5 @@
+"use client";
+
 import CUSTOMER from "../../assets/tiesto.png";
 import AboutCategory from "./UI/AboutCategory";
 import ArtistRecommendation from "./UI/ArtistRecommendation";

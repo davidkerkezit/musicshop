@@ -1,3 +1,5 @@
+"use client";
+// React Icons
 import { IoIosMail } from "react-icons/io";
 import { FaPhoneVolume } from "react-icons/fa";
 import { IoIosPin } from "react-icons/io";
@@ -71,7 +73,6 @@ const ContactForm = () => {
           </div>
           <div className="w-full px-5 md:px-20 flex flex-col gap-5">
             <div className="flex flex-col  w-full gap-1">
-              {" "}
               <div className="flex gap-1">
                 <label htmlFor="">Name</label>
                 <GiFlowerStar className="text-xs text-red-900" />
@@ -93,7 +94,6 @@ const ContactForm = () => {
               />
             </div>
             <div className="flex flex-col  w-full gap-1">
-              {" "}
               <div className="flex gap-1">
                 <label htmlFor="">Message</label>
                 <GiFlowerStar className="text-xs text-red-900" />

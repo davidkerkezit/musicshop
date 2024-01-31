@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { IoIosPin } from "react-icons/io";
 import BANNER from "../../assets/banner.png";

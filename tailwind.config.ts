@@ -31,6 +31,9 @@ const config: Config = {
         "light-juice": "#e59166",
         silver: "#525253",
       },
+      fontFamily: {
+        lato: ["Lato", "sans-serif"],
+      },
     },
     keyframes: {
       // BURGER MENU ANIMATION
@@ -59,6 +62,18 @@ const config: Config = {
         from: { top: "10rem" },
         to: { top: "-30%" },
       },
+      opacity: {
+        from: { opacity: "0" },
+        to: { opacity: "1" },
+      },
+      circulation: {
+        "0%": { top: "10rem", left: "0rem" },
+
+        "25%": { top: "7rem", left: "3rem" },
+        "50%": { top: "5rem", left: "0rem" },
+        "75%": { top: "7rem", right: "3rem" },
+        "100%": { top: "10rem", right: "0rem" },
+      },
     },
     animation: {
       menuFirst: "menuFirst .3s linear forwards ",
@@ -67,6 +82,8 @@ const config: Config = {
       closeToRight: "closeToRight .3s ease-in forwards ",
       openFromTop: "openFromTop .3s ease-in forwards ",
       closeToTop: "closeToTop .3s ease-in forwards ",
+      opacity: "opacity 1.7s linear forwards ",
+      circulation: "circulation 2s  10 ease-in forwards ",
     },
     fontFamily: {
       main: ["Lato", "sans-serif"],
