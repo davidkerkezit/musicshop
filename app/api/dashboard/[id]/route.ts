@@ -28,32 +28,22 @@ export async function GET(
       }
     }
     let category: string;
-    let similarProducts: any[];
+
     switch (modelName) {
       case "DJ":
         category = "DJ Equipments";
-        similarProducts = await DJ.find({ _id: { $ne: id } })
-          .sort({ createdAt: -1 })
-          .limit(6);
 
         break;
       case "Vinyl":
         category = "Vinyls";
-        similarProducts = await Vinyl.find({ _id: { $ne: id } })
-          .sort({ createdAt: -1 })
-          .limit(6);
 
         break;
       case "Softwere":
         category = "Softweres";
-        similarProducts = await Softwere.find({ _id: { $ne: id } })
-          .sort({ createdAt: -1 })
-          .limit(6);
 
         break;
       default:
         category = "";
-        similarProducts = [];
 
         console.log("Error: No category found");
 
@@ -65,7 +55,6 @@ export async function GET(
     return NextResponse.json({
       selectedProduct: selectedProduct[0],
       category,
-      similarProducts,
     });
   } catch (err) {
     console.error("Error:", err);

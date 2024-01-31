@@ -55,3 +55,27 @@ export async function getProduct(id: string) {
     throw error;
   }
 }
+export async function getEditableProduct(id: string) {
+  try {
+    const response = await fetch(
+      `${process.env.BASE_URL}/api/dashboard/${id}`,
+      {
+        cache: "no-store",
+      }
+    );
+
+    // Check if the request was successful
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    // Parse and return the response data
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.error("Error loading products:", error);
+    throw error;
+  }
+}
