@@ -10,7 +10,7 @@ const EditProduct = ({
   selectedProduct,
   category,
 }: {
-  selectedProduct: any[];
+  selectedProduct: ProductType;
   category: string;
 }) => {
   const [imageSrc, setImageSrc] = useState<null | string>(null);
@@ -58,7 +58,7 @@ const EditProduct = ({
             />
           ) : (
             <Image
-              src={selectedProduct[0].imageUrl}
+              src={selectedProduct.imageUrl}
               alt="product"
               width={600}
               height={600}
@@ -78,19 +78,19 @@ const EditProduct = ({
           <DashboardInput
             label="Product name"
             placeholder=""
-            value={selectedProduct[0].name}
+            value={selectedProduct.name}
           />
 
           <p className="text-xl">Category: {category}</p>
           <DashboardInput
             label="About product"
             placeholder=""
-            value={selectedProduct[0].about}
+            value={selectedProduct.about}
           />
           <DashboardInput
             label="Product price ($)"
             placeholder=""
-            value={selectedProduct[0].price}
+            value={selectedProduct.price}
           />
           <div>
             <label htmlFor="">In stock:</label>
@@ -112,8 +112,8 @@ const EditProduct = ({
         </div>
       </div>
       <ProductInformatiom
-        aboutProduct={selectedProduct[0].description}
-        aboutSeller={selectedProduct[0].aboutSeller}
+        aboutProduct={selectedProduct.description}
+        aboutSeller={selectedProduct.aboutSeller}
       />
     </div>
   );
