@@ -8,7 +8,7 @@ export async function getProducts(
   collection: any
 ) {
   try {
-    const url = new URL(`${process.env.BASE_URL}/api/shop`);
+    const url = new URL(`${process.env.NEXT_PUBLIC_API_URL}/api/shop`);
 
     // Append defined parameters to the URL
     if (page !== undefined) url.searchParams.append("page", page);
@@ -39,9 +39,12 @@ export async function getProducts(
 
 export async function getProduct(id: string) {
   try {
-    const response = await fetch(`${process.env.BASE_URL}/api/shop/${id}`, {
-      cache: "no-store",
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/shop/${id}`,
+      {
+        cache: "no-store",
+      }
+    );
 
     // Check if the request was successful
     if (!response.ok) {
@@ -89,17 +92,21 @@ export async function loginAuthAction(
 ): Promise<void> {
   const username = formData.get("username");
   const password = formData.get("password");
+  console.log(process.env.NEXT_PUBLIC_API_URL);
 
   try {
-    const response = await fetch(`${process.env.BASE_URL}/api/admin`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-      cache: "no-store",
-      credentials: "include",
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/admin`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+        cache: "no-store",
+        credentials: "include",
+      }
+    );
 
     // Check if the request was successful
     if (!response.ok) {
