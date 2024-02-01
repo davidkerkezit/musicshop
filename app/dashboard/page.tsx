@@ -4,6 +4,9 @@ import { getProducts } from "@/libs/actions";
 import { ProductType } from "@/libs/types";
 import { PageBanner } from "@/components";
 import Dashboard from "@/components/Dashboard/Dashboard";
+import { useRouter } from "next/navigation";
+import { cookies } from "next/headers";
+import { useEffect } from "react";
 
 export default async function page({
   searchParams,
@@ -17,6 +20,7 @@ export default async function page({
 
   const { products, pages }: { products: ProductType[]; pages: number } =
     await getProducts(page, sort, query, collection);
+
   return (
     <div>
       <PageBanner page="Dashboard" />

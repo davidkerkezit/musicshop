@@ -1,3 +1,5 @@
+import { revalidatePath } from "next/cache";
+
 export async function getProducts(
   page: any,
   sort: any,
@@ -74,6 +76,38 @@ export async function getEditableProduct(id: string) {
     const data = await response.json();
 
     return data;
+  } catch (error) {
+    console.error("Error loading products:", error);
+    throw error;
+  }
+}
+
+export async function loginAuthAction(
+  prevState: any,
+  formData: FormData
+): Promise<void> {
+  const username = formData.get("username");
+  const password = formData.get("password");
+
+  try {
+    const response = await fetch(` http://localhost:3000/api/admin`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+      cache: "no-store",
+      credentials: "include",
+    });
+
+    // Check if the request was successful
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    // Parse and return the response data
+
+    revalidatePath("/dashboard");
   } catch (error) {
     console.error("Error loading products:", error);
     throw error;
