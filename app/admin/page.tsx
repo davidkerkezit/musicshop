@@ -9,7 +9,7 @@ const page = async () => {
   return (
     <>
       <PageBanner page="Admin Section" />
-      <div className="relative z-10 m-32 ">
+      <div className="relative z-10 m-14 ">
         <LoginForm />
       </div>
     </>

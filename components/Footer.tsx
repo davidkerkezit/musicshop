@@ -8,6 +8,7 @@ import { GrInstagram } from "react-icons/gr";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import MENU from "@/constants";
 import { Menu } from "@/libs/types";
+import { BASE_URL } from "@/libs/utils";
 
 const Footer = () => {
   return (
@@ -54,6 +55,12 @@ const Footer = () => {
                 </Link>
               );
             })}
+            <Link
+              href={`${BASE_URL}/dashboard`}
+              className="md:border-l-[3px] md:border-l-juice md:pl-3 text-neutral-200 font-normal"
+            >
+              Dashboard
+            </Link>
           </div>
         </div>
         <div className="flex flex-col gap-4  items-center w-full md:w-1/3 ">

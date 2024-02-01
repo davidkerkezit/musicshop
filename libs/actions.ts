@@ -1,4 +1,5 @@
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function getProducts(
   page: any,
@@ -90,7 +91,7 @@ export async function loginAuthAction(
   const password = formData.get("password");
 
   try {
-    const response = await fetch(` http://localhost:3000/api/admin`, {
+    const response = await fetch(`${process.env.BASE_URL}/api/admin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -107,7 +108,7 @@ export async function loginAuthAction(
 
     // Parse and return the response data
 
-    revalidatePath("/dashboard");
+    redirect("/dashboard");
   } catch (error) {
     console.error("Error loading products:", error);
     throw error;

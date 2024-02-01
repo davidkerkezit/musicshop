@@ -37,24 +37,23 @@ export async function POST(req: NextRequest, res: CustomNextApiResponse) {
   return NextResponse.json({ message: "Succes login" }, { status: 201 });
 }
 
-export async function GET(request: NextRequest) {
-  const cookieStore = cookies();
-  console.log(cookieStore.getAll());
+// export async function GET(request: NextRequest) {
+//   const cookieStore = cookies();
 
-  // const token = cookieStore.get("token");
-  const token = "///";
-  if (token) {
-    return NextResponse.json(
-      { message: "Token exists", token },
-      { status: 201 }
-    );
-  } else {
-    return NextResponse.json(
-      { message: "Token does not exist" },
-      { status: 401 }
-    );
-  }
-}
+//   // const token = cookieStore.get("token");
+//   const token = "///";
+//   if (token) {
+//     return NextResponse.json(
+//       { message: "Token exists", token },
+//       { status: 201 }
+//     );
+//   } else {
+//     return NextResponse.json(
+//       { message: "Token does not exist" },
+//       { status: 401 }
+//     );
+//   }
+// }
 
 // ADDING ADMIN
 
