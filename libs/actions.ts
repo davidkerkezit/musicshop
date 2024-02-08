@@ -1,5 +1,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
+import { BASE_URL } from "./utils";
 
 export async function getProducts(
   page: any,
@@ -89,10 +91,11 @@ export async function getEditableProduct(id: string) {
 export async function loginAuthAction(
   prevState: any,
   formData: FormData
-): Promise<void> {
+): Promise<number | string | void> {
+
   const username = formData.get("username");
   const password = formData.get("password");
-  console.log(process.env.NEXT_PUBLIC_API_URL);
+
 
   try {
     const response = await fetch(
@@ -108,16 +111,18 @@ export async function loginAuthAction(
       }
     );
 
-    // Check if the request was successful
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+
+
+    if (response.ok) {
+      return response.status;
+    } else {
+      // If not successful, return the status code
+      return response.status;
     }
-
-    // Parse and return the response data
-
-    redirect("/dashboard");
   } catch (error) {
-    console.error("Error loading products:", error);
-    throw error;
-  }
+    console.log("Error:", error);
+    // Handle the error as needed
+    return; // Return void in case of error
+  } 
+
 }

@@ -74,6 +74,12 @@ const config: Config = {
         "75%": { top: "7rem", right: "3rem" },
         "100%": { top: "10rem", right: "0rem" },
       },
+      blink: {
+        '0%': { opacity: "0.2" },
+        '20%': { opacity: "1" },
+        '100% ': { opacity: "0.2" }
+      }
+
     },
     animation: {
       menuFirst: "menuFirst .3s linear forwards ",
@@ -84,6 +90,8 @@ const config: Config = {
       closeToTop: "closeToTop .3s ease-in forwards ",
       opacity: "opacity 1.7s linear forwards ",
       circulation: "circulation 2s  10 ease-in forwards ",
+      blink: 'blink 1.4s both infinite'
+
     },
     fontFamily: {
       main: ["Lato", "sans-serif"],

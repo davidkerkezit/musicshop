@@ -13,9 +13,10 @@ interface CustomNextApiResponse<T = any> extends NextApiResponse<T> {
 export async function POST(req: NextRequest, res: CustomNextApiResponse) {
   const { username, password } = await req.json();
 
+
   await connectMongoDB();
   const user = await Admin.findOne({ username: username });
-  console.log(user);
+ 
 
   if (!user) {
     return NextResponse.json({ message: "Wrong username" }, { status: 401 });
@@ -25,6 +26,7 @@ export async function POST(req: NextRequest, res: CustomNextApiResponse) {
   if (!passwordMatch) {
     return NextResponse.json({ message: "Wrong password" }, { status: 401 });
   }
+
   const secretKey = require("crypto").randomBytes(32).toString("hex");
   const token = jwt.sign({ username: user.username }, secretKey, {
     expiresIn: "1h",
