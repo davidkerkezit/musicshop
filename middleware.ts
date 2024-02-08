@@ -1,13 +1,21 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-export function middleware(request: NextRequest) {
+export default function middleware(request: NextRequest) {
   const cookieStore = cookies();
   const token = cookieStore.get("token");
-  if (!token) {
-    return NextResponse.redirect(new URL("admin", request.url));
+  
+  if (request.url.includes("/admin")) {
+    if (token) {
+      return NextResponse.redirect(new URL("/dashboard", request.url).toString());
+    }
+  } else if (request.url.includes("/dashboard")) {
+    if (!token) {
+      return NextResponse.redirect(new URL("/admin", request.url).toString());
+    }
   }
 }
+
 export const config = {
-  matcher: "/dashboard",
+  middleware: "on",
 };
