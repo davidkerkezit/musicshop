@@ -151,7 +151,9 @@ export async function addNewProduct(formData: any) {
     const res = await fetch(`http://localhost:3000/api/shop`, {
       method: "POST",
       headers: {
-        "Content-type": "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
       },
       body: JSON.stringify({
         name: formData.name,
