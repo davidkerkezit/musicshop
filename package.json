@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.485.0",
+    "@hookform/resolvers": "^3.3.4",
     "@react-icons/all-files": "^4.1.0",
     "@reduxjs/toolkit": "^2.0.1",
     "aws-sdk": "^2.1531.0",
@@ -26,7 +27,8 @@
     "react-icons": "^3.11.0",
     "react-redux": "^9.0.4",
     "swiper": "^11.0.5",
-    "tailwind-merge": "^2.2.0"
+    "tailwind-merge": "^2.2.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20",

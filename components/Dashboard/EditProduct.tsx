@@ -75,7 +75,7 @@ const EditProduct = ({
         </div>
         {/* INFO */}
         <div className="w-1/2 px-10 flex flex-col gap-4">
-          <DashboardInput
+          {/* <DashboardInput
             label="Product name"
             placeholder=""
             value={selectedProduct.name}
@@ -91,7 +91,7 @@ const EditProduct = ({
             label="Product price ($)"
             placeholder=""
             value={selectedProduct.price}
-          />
+          /> */}
           <div>
             <label htmlFor="">In stock:</label>
             <button onClick={() => setValue((value) => value + 1)}>+</button>

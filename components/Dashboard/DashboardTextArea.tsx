@@ -1,4 +1,6 @@
-const DashboardInput = ({
+import React from "react";
+
+const DashboardTextArea = ({
   label,
   placeholder,
   value,
@@ -19,7 +21,7 @@ const DashboardInput = ({
 }) => {
   return (
     <div className="flex flex-col   ">
-      <div className="flex-col items-center">
+      <div className="flex flex-col ">
         <label htmlFor="" className="px-1 text-lg font-light">
           {label}:
         </label>
@@ -27,9 +29,9 @@ const DashboardInput = ({
           {error && error[registerValue] && error[registerValue].message}
         </p>
       </div>
-
-      <input
-        className="bg-transparent border-juice/40 border-[1px] rounded-lg p-2 placeholder:font-thin text-sm focus:outline-none focus:border-juice "
+      <textarea
+        rows={4}
+        className="bg-transparent border-juice/40 border-[1px] rounded-lg p-2 placeholder:font-thin text-sm focus:outline-none focus:border-juice resize-none appearance-none"
         type={type}
         placeholder={placeholder}
         id={name}
@@ -40,4 +42,4 @@ const DashboardInput = ({
   );
 };
 
-export default DashboardInput;
+export default DashboardTextArea;

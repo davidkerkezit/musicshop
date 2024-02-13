@@ -5,6 +5,9 @@ const djSchema = new Schema(
     price: Number,
     imageUrl: String,
     brand: String,
+    about: String,
+    description: String,
+    aboutSeller: String,
   },
   {
     timestamps: true,

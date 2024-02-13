@@ -92,10 +92,8 @@ export async function loginAuthAction(
   prevState: any,
   formData: FormData
 ): Promise<number | string | void> {
-
   const username = formData.get("username");
   const password = formData.get("password");
-
 
   try {
     const response = await fetch(
@@ -111,8 +109,6 @@ export async function loginAuthAction(
       }
     );
 
-
-
     if (response.ok) {
       return response.status;
     } else {
@@ -123,6 +119,54 @@ export async function loginAuthAction(
     console.log("Error:", error);
     // Handle the error as needed
     return; // Return void in case of error
-  } 
+  }
+}
 
+export async function addNewProduct(formData: any) {
+  console.log("here");
+
+  try {
+    // First fetch request to upload the image
+    const response = await fetch("/api/images", {
+      method: "POST",
+      body: JSON.stringify({
+        image: formData.imageSrc,
+        categoryPath: formData.selectedCategory,
+        subCategoryPath: formData.selectedSubCategory,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to upload image");
+    }
+
+    const data = await response.json();
+
+    // Second fetch request to add product details
+    const res = await fetch(`http://localhost:3000/api/shop`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        price: parseInt(formData.price),
+        about: formData.aboutProduct,
+        description: formData.productDescription,
+        aboutSeller: formData.aboutSeller,
+        imageUrl: data.url,
+        category: formData.selectedCategory,
+      }),
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to add product");
+    }
+
+    // Handle success scenario
+    console.log("Product added successfully!");
+    // You can perform additional actions here like refreshing or navigating to another page
+  } catch (error) {
+    // Handle errors appropriately
+  }
 }

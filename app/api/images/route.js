@@ -9,14 +9,14 @@ const s3Client = new S3Client({
   },
 });
 
-async function uploadFileToS3(file, fileName) {
+async function uploadFileToS3(file, fileName, path, subPath) {
   const fileBuffer = file;
 
   const params = {
     Bucket: process.env.AWS_S3_BUCKET_NAME,
-    Key: `${fileName}`,
+    Key: `${path}${subPath !== false ? `/${subPath}` : ""}/${fileName}.png`,
     Body: fileBuffer,
-    ContentType: "image/jpg",
+    ContentType: "image/png",
   };
 
   const command = new PutObjectCommand(params);
@@ -26,20 +26,33 @@ async function uploadFileToS3(file, fileName) {
 }
 
 export async function POST(request) {
-  try {
-    const formData = await request.formData();
-    const file = formData.get("file");
+  const file = await request.json();
+  let name = Math.floor(Math.random() * 100000000);
+  const dataUrlParts = file.image.split(",");
+  const base64Data = dataUrlParts[1];
 
+  try {
     if (!file) {
       return NextResponse.json({ error: "File is required." }, { status: 400 });
     }
+    const buffer = Buffer.from(base64Data, "base64");
 
-    const buffer = Buffer.from(await file.arrayBuffer());
+    const fileName = await uploadFileToS3(
+      buffer,
+      name.toString(),
+      `${file.categoryPath}`,
+      file.subCategoryPath !== null && `${file.subCategoryPath}`
+    );
 
-    const fileName = await uploadFileToS3(buffer, file.name);
-
-    return NextResponse.json({ success: true, fileName });
+    return NextResponse.json({
+      success: true,
+      fileName,
+      url: `https://music-shop-storage.s3.eu-west-3.amazonaws.com/${
+        file.categoryPath
+      }${file.subCategoryPath !== null ? `/${subPath}` : ""}/${name}.png`,
+    });
   } catch (error) {
+    console.log("error");
     return NextResponse.json({ error });
   }
 }

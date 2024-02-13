@@ -75,14 +75,21 @@ const config: Config = {
         "100%": { top: "10rem", right: "0rem" },
       },
       blink: {
-        '0%': { opacity: "0.2" },
-        '20%': { opacity: "1" },
-        '100% ': { opacity: "0.2" }
-      }
-
+        "0%": { opacity: "0.2" },
+        "20%": { opacity: "1" },
+        "100% ": { opacity: "0.2" },
+      },
+      shake: {
+        "0%": { transform: "translateX(0)" },
+        "25%": { transform: " translateX(-15px)" },
+        "50%": { transform: " translateX(5px)" },
+        "75%": { transform: " translateX(-13px)" },
+        "100%": { transform: "translateX(0)" },
+      },
     },
     animation: {
       menuFirst: "menuFirst .3s linear forwards ",
+      shake: "shake .4s linear forwards ",
       menuThird: "menuThird .3s linear forwards ",
       openFromRight: "openFromRight .3s ease-in forwards ",
       closeToRight: "closeToRight .3s ease-in forwards ",
@@ -90,8 +97,7 @@ const config: Config = {
       closeToTop: "closeToTop .3s ease-in forwards ",
       opacity: "opacity 1.7s linear forwards ",
       circulation: "circulation 2s  10 ease-in forwards ",
-      blink: 'blink 1.4s both infinite'
-
+      blink: "blink 1.4s both infinite",
     },
     fontFamily: {
       main: ["Lato", "sans-serif"],

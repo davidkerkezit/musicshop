@@ -71,9 +71,36 @@ export async function GET(req: NextRequest, res: NextApiResponse) {
     console.error("Error:", err);
   }
 }
-// export async function POST(request: NextResponse) {
-//   const { name, price, imageUrl } = await request.json();
-//   await connectMongoDB();
-//   await Softwere.create({ name, price, imageUrl });
-//   return NextResponse.json({ message: "DJ equipment added" }, { status: 201 });
-// }
+export async function POST(request: NextRequest, response: NextResponse) {
+  const { name, price, imageUrl, about, description, aboutSeller, category } =
+    await request.json();
+  let model;
+
+  switch (category) {
+    case "dj":
+      model = DJ;
+      break;
+    case "vinyls":
+      model = Vinyl;
+      break;
+    case "softweres":
+      model = Softwere;
+      break;
+
+    default:
+      break;
+  }
+  console.log(imageUrl, "url");
+
+  await connectMongoDB();
+  model &&
+    (await model.create({
+      name,
+      price,
+      imageUrl,
+      about,
+      description,
+      aboutSeller,
+    }));
+  return NextResponse.json({ message: "DJ equipment added" }, { status: 201 });
+}
