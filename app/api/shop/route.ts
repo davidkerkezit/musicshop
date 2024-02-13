@@ -102,5 +102,10 @@ export async function POST(request: NextRequest, response: NextResponse) {
       description,
       aboutSeller,
     }));
-  return NextResponse.json({ message: "DJ equipment added" }, { status: 201 });
+  console.log("Product added successfully");
+
+  return NextResponse.json(
+    { message: "Product added successfully" },
+    { status: 201 }
+  );
 }

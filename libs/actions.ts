@@ -123,8 +123,6 @@ export async function loginAuthAction(
 }
 
 export async function addNewProduct(formData: any) {
-  console.log("here");
-
   try {
     // First fetch request to upload the image
     const response = await fetch("/api/images", {
@@ -134,6 +132,11 @@ export async function addNewProduct(formData: any) {
         categoryPath: formData.selectedCategory,
         subCategoryPath: formData.selectedSubCategory,
       }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      cache: "no-store",
     });
 
     if (!response.ok) {
