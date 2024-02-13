@@ -125,21 +125,24 @@ export async function loginAuthAction(
 export async function addNewProduct(formData: any) {
   try {
     // First fetch request to upload the image
-    const response = await fetch("/api/images", {
-      method: "POST",
-      body: JSON.stringify({
-        image: formData.imageSrc,
-        categoryPath: formData.selectedCategory,
-        subCategoryPath: formData.selectedSubCategory,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
-      },
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/images`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          image: formData.imageSrc,
+          categoryPath: formData.selectedCategory,
+          subCategoryPath: formData.selectedSubCategory,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
+        },
 
-      cache: "no-store",
-    });
+        cache: "no-store",
+      }
+    );
 
     if (!response.ok) {
       throw new Error("Failed to upload image");
@@ -148,7 +151,7 @@ export async function addNewProduct(formData: any) {
     const data = await response.json();
 
     // Second fetch request to add product details
-    const res = await fetch(`http://localhost:3000/api/shop`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/shop`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
