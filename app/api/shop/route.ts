@@ -90,7 +90,6 @@ export async function POST(request: NextRequest, response: NextResponse) {
     default:
       break;
   }
-  console.log(imageUrl, "url");
 
   await connectMongoDB();
   model &&
@@ -108,4 +107,41 @@ export async function POST(request: NextRequest, response: NextResponse) {
     { message: "Product added successfully" },
     { status: 201 }
   );
+}
+
+export async function DELETE(request: NextRequest, response: NextResponse) {
+  const { id, category } = await request.json();
+  let model;
+
+  switch (category) {
+    case "dj":
+      model = DJ;
+      break;
+    case "vinyls":
+      model = Vinyl;
+      break;
+    case "softweres":
+      model = Softwere;
+      break;
+    default:
+      break;
+  }
+  console.log(typeof id);
+
+  // if (!model) {
+  //   return NextResponse.json({ message: "Invalid category" }, { status: 400 });
+  // }
+
+  await connectMongoDB();
+  console.log("close");
+
+  const product = await Softwere.findByIdAndDelete(id);
+  console.log("2 close");
+
+  if (!product) {
+    return NextResponse.json({ message: "Product not found" }, { status: 404 });
+  }
+
+  console.log("Product deleted successfully");
+  return NextResponse.json({ message: "Product deleted successfully" });
 }

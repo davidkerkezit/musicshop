@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import {
+  S3Client,
+  PutObjectCommand,
+  DeleteObjectCommand,
+} from "@aws-sdk/client-s3";
 
 const s3Client = new S3Client({
   region: process.env.AWS_S3_REGION,
@@ -23,6 +27,22 @@ async function uploadFileToS3(file, fileName, path, subPath) {
   await s3Client.send(command);
 
   return fileName;
+}
+async function deleteFileFromS3(img) {
+  const url = new URL(img);
+  // Extracting the pathname, removing the leading slash '/'
+  const key = url.pathname.slice(1);
+  console.log(key);
+  const params = {
+    Bucket: process.env.AWS_S3_BUCKET_NAME,
+    Key: key,
+  };
+
+  // Delete the file
+  const deleteCommand = new DeleteObjectCommand(params);
+  await s3Client.send(deleteCommand);
+
+  return `Successfully deleting`;
 }
 
 export async function POST(request) {
@@ -53,6 +73,22 @@ export async function POST(request) {
     });
   } catch (error) {
     console.log("error");
+    return NextResponse.json({ error });
+  }
+}
+
+export async function DELETE(request) {
+  const img = await request.json();
+
+  try {
+    const deletedFile = await deleteFileFromS3(img.image);
+    console.log(deletedFile);
+    return NextResponse.json({
+      success: true,
+      message: "succes",
+    });
+  } catch (error) {
+    console.log(error);
     return NextResponse.json({ error });
   }
 }

@@ -8,12 +8,23 @@ import { usePathname } from "next/navigation";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { VscEdit } from "react-icons/vsc";
 import { BASE_URL } from "@/libs/utils";
+import { ButtonHTMLAttributes } from "react";
+import { deleteProduct } from "@/libs/actions";
 
 const ProductCard = ({ product }: { product: ProductType }) => {
   const pathname = usePathname();
   const isShopPage = pathname.startsWith("/shop");
   const isDashboardPage = pathname.startsWith("/dashboard");
 
+  const deleteProductHandler = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    img: string,
+    id: string
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+    await deleteProduct(img, id);
+  };
   return (
     <Link
       href={`${
@@ -41,8 +52,15 @@ const ProductCard = ({ product }: { product: ProductType }) => {
 
         {isDashboardPage && (
           <div className="flex flex-col items-center ">
-            <Button label="Edit product" icon={<VscEdit />} />{" "}
-            <Button label="Delete" icon={<RiDeleteBin2Line />} />
+            <button
+              onClick={(e) =>
+                deleteProductHandler(e, product.imageUrl, product._id)
+              }
+            >
+              delete
+            </button>
+            {/* <Button label="Edit product" icon={<VscEdit />} />{" "}
+            <Button label="Delete" icon={<RiDeleteBin2Line />} /> */}
           </div>
         )}
       </div>

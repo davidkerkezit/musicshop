@@ -4,7 +4,9 @@ const ProductSchema = new Schema(
     name: String,
     price: Number,
     imageUrl: String,
-    brand: String,
+    about: String,
+    description: String,
+    aboutSeller: String,
   },
   {
     timestamps: true,

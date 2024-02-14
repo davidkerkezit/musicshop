@@ -66,18 +66,12 @@ export async function getProduct(id: string) {
 export async function getEditableProduct(id: string) {
   try {
     const response = await fetch(
-      `${process.env.BASE_URL}/api/dashboard/${id}`,
-      {
-        cache: "no-store",
-      }
+      `${process.env.NEXT_PUBLIC_API_URL}/api/edit/${id}`
     );
 
-    // Check if the request was successful
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-
-    // Parse and return the response data
 
     const data = await response.json();
 
@@ -166,6 +160,52 @@ export async function addNewProduct(formData: any) {
         aboutSeller: formData.aboutSeller,
         imageUrl: data.url,
         category: formData.selectedCategory,
+      }),
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to add product");
+    }
+
+    // Handle success scenario
+    console.log("Product added successfully!");
+    // You can perform additional actions here like refreshing or navigating to another page
+  } catch (error) {
+    // Handle errors appropriately
+  }
+}
+export async function deleteProduct(img: string, id: string) {
+  console.log(img);
+
+  try {
+    // First fetch request to upload the image
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/images`,
+      {
+        method: "DELETE",
+        body: JSON.stringify({
+          image: img,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
+        },
+
+        cache: "no-store",
+      }
+    );
+
+    // Second fetch request to add product details
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/shop`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
+      },
+      body: JSON.stringify({
+        id: id,
       }),
     });
 

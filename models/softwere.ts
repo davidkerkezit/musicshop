@@ -3,9 +3,10 @@ const softwereSchema = new Schema(
   {
     name: String,
     price: Number,
+    imageUrl: String,
     about: String,
     description: String,
-    imageUrl: String,
+    aboutSeller: String,
   },
   {
     timestamps: true,
