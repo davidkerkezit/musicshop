@@ -15,6 +15,7 @@ export type ProductType = {
   about: string;
   description: string;
   aboutSeller: string;
+  category: string;
   __v: number;
 };
 export type PipelineStage =

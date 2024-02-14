@@ -69,7 +69,9 @@ export async function POST(request) {
       fileName,
       url: `https://music-shop-storage.s3.eu-west-3.amazonaws.com/${
         file.categoryPath
-      }${file.subCategoryPath !== null ? `/${subPath}` : ""}/${name}.png`,
+      }${
+        file.subCategoryPath !== null ? `/${file.subCategoryPath}` : ""
+      }/${name}.png`,
     });
   } catch (error) {
     console.log("error");

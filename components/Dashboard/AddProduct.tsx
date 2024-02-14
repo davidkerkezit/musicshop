@@ -12,6 +12,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import DashboardTextArea from "./DashboardTextArea";
+import { isPending } from "@reduxjs/toolkit";
+import LoadingDots from "../UI/LoadingDots";
 const dashboardInputs = [
   {
     label: "Name",
@@ -128,7 +130,7 @@ const AddProduct = () => {
     setAllErrors(errors);
   }, [errors]);
 
-  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+  const onSubmit: SubmitHandler<FormFields> = async (data, event) => {
     setHasInteracted(true);
 
     const formData = {
@@ -146,14 +148,16 @@ const AddProduct = () => {
     } else {
       subCategoryChecker = false;
     }
-    //    && ;
-    // subCategoryChecker === false && setSubSelectedCategory(null);
-    // console.log(subCategoryChecker);
 
     imageSrc && subCategoryChecker && (await addNewProduct(formData));
     setTimeout(() => {
       setHasInteracted(false);
     }, 1000);
+    event?.target.reset(); // Reset the form
+    setImageSrc(null); // Reset image source
+    setSelectedCategory(null); // Reset selected category
+    setSubSelectedCategory(null); // Reset selected subcategory
+    setHasInteracted(false); // Reset interaction state
   };
 
   return (
@@ -257,41 +261,24 @@ const AddProduct = () => {
             </div>
           </div>
         </div>
-        <SubmitButton label="Submit" icon={<MdDone />} />
+        <button
+          disabled={isSubmitting}
+          className=" flex gap-1  items-center border-[3px] border-juice rounded-full   mb-4  w-max"
+        >
+          <div className="flex items-center m-1 pr-4  rounded-full w-full bg-neutral-700">
+            <div className="text-3xl md:text-xl p-1 m-1 bg-neutral-500 rounded-full text-white border-[1px] border-juice">
+              <MdDone />
+            </div>
+            {isSubmitting ? (
+              <LoadingDots />
+            ) : (
+              <p className="text-base md:text-md pl-2">Submit</p>
+            )}
+          </div>
+        </button>
       </form>
     </div>
   );
 };
 
 export default AddProduct;
-{
-  /* <div className="flex gap-5">
-              <div className="py-1">
-                <input
-                  type="checkbox"
-                  className="mr-1"
-                  value="DJ Equipment"
-                  onChange={handleCategoryChange}
-                />
-                <label> DJ Equipment</label>
-              </div>
-              <div className="py-1">
-                <input
-                  type="checkbox"
-                  className="mr-1"
-                  value="Vinyl"
-                  onChange={handleCategoryChange}
-                />
-                <label> Vinyl</label>
-              </div>
-              <div className="py-1">
-                <input
-                  type="checkbox"
-                  className="mr-1"
-                  value="Software"
-                  onChange={handleCategoryChange}
-                />
-                <label> Software</label>
-              </div>
-</div>*/
-}

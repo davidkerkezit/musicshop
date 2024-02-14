@@ -75,16 +75,19 @@ export async function POST(request: NextRequest, response: NextResponse) {
   const { name, price, imageUrl, about, description, aboutSeller, category } =
     await request.json();
   let model;
-
+  let mongoCategory;
   switch (category) {
     case "dj":
       model = DJ;
+      mongoCategory = "djequipment";
       break;
     case "vinyls":
       model = Vinyl;
+      mongoCategory = "vinyl";
       break;
     case "softweres":
       model = Softwere;
+      mongoCategory = "softwere";
       break;
 
     default:
@@ -100,6 +103,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       about,
       description,
       aboutSeller,
+      category: mongoCategory,
     }));
   console.log("Product added successfully");
 
@@ -110,17 +114,19 @@ export async function POST(request: NextRequest, response: NextResponse) {
 }
 
 export async function DELETE(request: NextRequest, response: NextResponse) {
+  console.log("here");
+
   const { id, category } = await request.json();
   let model;
 
   switch (category) {
-    case "dj":
+    case "djequipment":
       model = DJ;
       break;
-    case "vinyls":
+    case "vinyl":
       model = Vinyl;
       break;
-    case "softweres":
+    case "softwere":
       model = Softwere;
       break;
     default:
@@ -133,12 +139,11 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
   // }
 
   await connectMongoDB();
-  console.log("close");
-
-  const product = await Softwere.findByIdAndDelete(id);
-  console.log("2 close");
-
-  if (!product) {
+  if (model) {
+    const product = await model.findByIdAndDelete(id);
+    // Handle product deletion or any other logic here
+  } else {
+    // Handle the case where model is not defined
     return NextResponse.json({ message: "Product not found" }, { status: 404 });
   }
 

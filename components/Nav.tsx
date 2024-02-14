@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaGooglePlay, FaRegUser } from "react-icons/fa";
 import { IoIosSearch } from "react-icons/io";
 import { AiOutlineShopping } from "react-icons/ai";
@@ -15,6 +15,7 @@ import MENU from "../constants";
 
 const Nav = () => {
   const path = usePathname();
+  const [productsCartLength, setProductsCartLength] = useState(0);
   const dispatch = useDispatch<AppDispatch>();
   const showCart = useAppSelector((state) => state.cartSlice);
   const showSearch = useAppSelector((state) => state.searchSliderSlice);
@@ -26,6 +27,12 @@ const Nav = () => {
     dispatch(toogleCart());
     showSearch && dispatch(hideSearch());
   };
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+    setProductsCartLength(cart.length);
+  }, [JSON.stringify(localStorage.getItem("cart") || "[]")]);
+
   return (
     <header className="w-full  z-40 fixed ">
       <nav className="  flex justify-between items-center md:px-8 px-2   py-5  bg-darkness/50 backdrop-blur-sm border-b-[1px] border-juice/5 ">
@@ -66,9 +73,11 @@ const Nav = () => {
           <button onClick={showCartHandler} className="relative">
             {" "}
             <AiOutlineShopping className="cursor-pointer text-2xl " />{" "}
-            <div className="bg-juice rounded-full absolute -top-[4px] left-[15px] w-[14px] h-[14px] flex items-center justify-center text-xs lg:text-sm">
-              2
-            </div>
+            {productsCartLength !== 0 && (
+              <div className="bg-juice rounded-full absolute -top-[4px] left-[15px] w-[15px] h-[15px] flex items-center justify-center text-xs  lg:text-sm">
+                {productsCartLength}
+              </div>
+            )}
           </button>
         </div>
       </nav>

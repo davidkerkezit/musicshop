@@ -4,6 +4,7 @@ import { unstable_noStore } from "next/cache";
 
 const Products = ({ products }: { products: ProductType[] }) => {
   unstable_noStore();
+
   return (
     <div className=" w-[80%] grid grid-cols-4  mx-auto gap-2">
       {products.map((product: ProductType, index: number) => {

@@ -143,6 +143,7 @@ export async function addNewProduct(formData: any) {
     }
 
     const data = await response.json();
+    console.log(data.url);
 
     // Second fetch request to add product details
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/shop`, {
@@ -174,9 +175,7 @@ export async function addNewProduct(formData: any) {
     // Handle errors appropriately
   }
 }
-export async function deleteProduct(img: string, id: string) {
-  console.log(img);
-
+export async function deleteProduct(img: string, id: string, category: string) {
   try {
     // First fetch request to upload the image
     const response = await fetch(
@@ -195,6 +194,7 @@ export async function deleteProduct(img: string, id: string) {
         cache: "no-store",
       }
     );
+    console.log(category);
 
     // Second fetch request to add product details
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/shop`, {
@@ -206,6 +206,7 @@ export async function deleteProduct(img: string, id: string) {
       },
       body: JSON.stringify({
         id: id,
+        category: category,
       }),
     });
 
@@ -218,5 +219,38 @@ export async function deleteProduct(img: string, id: string) {
     // You can perform additional actions here like refreshing or navigating to another page
   } catch (error) {
     // Handle errors appropriately
+  }
+}
+export async function cartProducts(cart: any) {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/cart`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
+        },
+        body: JSON.stringify({
+          cart,
+        }),
+      }
+    );
+
+    // Check if the request was successful
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    // Parse and return the response data
+
+    const data = await response.json();
+    console.log(data);
+
+    return data;
+  } catch (error) {
+    console.error("Error loading products:", error);
+    throw error;
   }
 }

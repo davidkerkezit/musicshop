@@ -7,6 +7,7 @@ const djSchema = new Schema(
     about: String,
     description: String,
     aboutSeller: String,
+    category: String,
   },
   {
     timestamps: true,
