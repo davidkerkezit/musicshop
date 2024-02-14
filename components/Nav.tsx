@@ -27,11 +27,11 @@ const Nav = () => {
     dispatch(toogleCart());
     showSearch && dispatch(hideSearch());
   };
-  useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  // useEffect(() => {
+  //   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-    setProductsCartLength(cart.length);
-  }, [JSON.stringify(localStorage.getItem("cart") || "[]")]);
+  //   setProductsCartLength(cart.length);
+  // }, [JSON.stringify(localStorage.getItem("cart") || "[]")]);
 
   return (
     <header className="w-full  z-40 fixed ">
@@ -75,7 +75,7 @@ const Nav = () => {
             <AiOutlineShopping className="cursor-pointer text-2xl " />{" "}
             {productsCartLength !== 0 && (
               <div className="bg-juice rounded-full absolute -top-[4px] left-[15px] w-[15px] h-[15px] flex items-center justify-center text-xs  lg:text-sm">
-                {productsCartLength}
+                4
               </div>
             )}
           </button>

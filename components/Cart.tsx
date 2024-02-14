@@ -14,48 +14,54 @@ const Cart = () => {
   const [allProducts, setAllProducts] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const cartCache = JSON.parse(localStorage.getItem("cart") || "[]");
-      setCart(cartCache);
+      if (typeof window !== "undefined") {
+        const cartCache = JSON.parse(localStorage.getItem("cart") || "[]");
+        setCart(cartCache);
 
-      const { products } = await cartProducts(cartCache);
-      setAllProducts(products);
+        const { products } = await cartProducts(cartCache);
+        setAllProducts(products);
+      }
     };
     fetchData();
-  }, [JSON.stringify(localStorage.getItem("cart") || "[]")]);
+  }, []);
   const removeFromCartHandler = async (id: string) => {
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-
-    const newCart = cart.filter((product: any) => product.id !== id);
-    localStorage.setItem("cart", JSON.stringify(newCart));
-    const { products } = await cartProducts(newCart);
-    setAllProducts(products);
+    if (typeof window !== "undefined") {
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      const newCart = cart.filter((product: any) => product.id !== id);
+      localStorage.setItem("cart", JSON.stringify(newCart));
+      const { products } = await cartProducts(newCart);
+      setAllProducts(products);
+    }
   };
   const increaseHandler = async (id: string) => {
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const newCart = cart.map((product: any) => {
-      if (product.id === id) {
-        product.quantity += 1;
-      }
-      return product;
-    });
-    localStorage.setItem("cart", JSON.stringify(newCart));
-    const { products } = await cartProducts(newCart);
-    setAllProducts(products);
-  };
-  const decreaseHandler = async (id: string) => {
-    let cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const newCart = cart
-      .map((product: any) => {
+    if (typeof window !== "undefined") {
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      const newCart = cart.map((product: any) => {
         if (product.id === id) {
-          product.quantity -= 1;
+          product.quantity += 1;
         }
         return product;
-      })
-      .filter((product: any) => product.quantity > 0); // Filter out products with quantity 0
-
-    localStorage.setItem("cart", JSON.stringify(newCart));
-    const { products } = await cartProducts(newCart);
-    setAllProducts(products);
+      });
+      localStorage.setItem("cart", JSON.stringify(newCart));
+      const { products } = await cartProducts(newCart);
+      setAllProducts(products);
+    }
+  };
+  const decreaseHandler = async (id: string) => {
+    if (typeof window !== "undefined") {
+      let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      const newCart = cart
+        .map((product: any) => {
+          if (product.id === id) {
+            product.quantity -= 1;
+          }
+          return product;
+        })
+        .filter((product: any) => product.quantity > 0); // Filter out products with quantity 0
+      localStorage.setItem("cart", JSON.stringify(newCart));
+      const { products } = await cartProducts(newCart);
+      setAllProducts(products);
+    }
   };
   return (
     <div
@@ -76,44 +82,45 @@ const Cart = () => {
         <p>Remove all</p>
       </div>
       <div className=" flex flex-col gap-2 mt-4">
-        {allProducts.map((product: ProductType) => (
-          <div className="flex bg-[#2f2f2f] justify-between items-center pr-4">
-            <div className="bg-[#929292] m-1">
-              <img
-                src={product.imageUrl}
-                alt={product.name}
-                className="w-20 h-20 rounded-full object-contain"
-              />
-            </div>
-            <div className="flex flex-col items-center gap-3">
-              <p className="text-base font-thin">{product.name}</p>
-              <div className="flex font-thin gap-3 items-center">
-                <button
-                  onClick={() => increaseHandler(product._id)}
-                  className="bg-gray-400 text-black h-[1.5rem] rounded-full w-[1.5rem] text-center "
-                >
-                  +
-                </button>
-                <p className="">
-                  {cart !== null &&
-                    cart.find((prod) => prod.id === product._id).quantity}
-                </p>
-                <button
-                  onClick={() => decreaseHandler(product._id)}
-                  className="bg-gray-400 text-black h-[1.5rem] rounded-full w-[1.5rem] text-center "
-                >
-                  -
+        {allProducts.length > 0 &&
+          allProducts.map((product: ProductType) => (
+            <div className="flex bg-[#2f2f2f] justify-between items-center pr-4">
+              <div className="bg-[#929292] m-1">
+                <img
+                  src={product.imageUrl}
+                  alt={product.name}
+                  className="w-20 h-20 rounded-full object-contain"
+                />
+              </div>
+              <div className="flex flex-col items-center gap-3">
+                <p className="text-base font-thin">{product.name}</p>
+                <div className="flex font-thin gap-3 items-center">
+                  <button
+                    onClick={() => increaseHandler(product._id)}
+                    className="bg-gray-400 text-black h-[1.5rem] rounded-full w-[1.5rem] text-center "
+                  >
+                    +
+                  </button>
+                  <p className="">
+                    {cart !== null &&
+                      cart.find((prod) => prod.id === product._id).quantity}
+                  </p>
+                  <button
+                    onClick={() => decreaseHandler(product._id)}
+                    className="bg-gray-400 text-black h-[1.5rem] rounded-full w-[1.5rem] text-center "
+                  >
+                    -
+                  </button>
+                </div>
+              </div>
+              <div className="flex flex-col items-end font-thin">
+                <p className="text-base font-thin   ">{product.price}.00 $</p>
+                <button onClick={() => removeFromCartHandler(product._id)}>
+                  Remove
                 </button>
               </div>
             </div>
-            <div className="flex flex-col items-end font-thin">
-              <p className="text-base font-thin   ">{product.price}.00 $</p>
-              <button onClick={() => removeFromCartHandler(product._id)}>
-                Remove
-              </button>
-            </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
