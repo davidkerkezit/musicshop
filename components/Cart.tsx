@@ -23,7 +23,7 @@ const Cart = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [JSON.stringify(cart)]);
   const removeFromCartHandler = async (id: string) => {
     if (typeof window !== "undefined") {
       const cart = JSON.parse(localStorage.getItem("cart") || "[]");
