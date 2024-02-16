@@ -433,7 +433,7 @@ export async function editProduct(formData: any) {
         {
           method: "POST",
           body: JSON.stringify({
-            image: formData.imageSrc,
+            image: formData.currentImage,
             categoryPath: formData.selectedCategory,
             subCategoryPath: formData.selectedSubCategory,
           }),
