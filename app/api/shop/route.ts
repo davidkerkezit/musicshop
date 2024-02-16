@@ -72,51 +72,74 @@ export async function GET(req: NextRequest, res: NextApiResponse) {
   }
 }
 export async function POST(request: NextRequest, response: NextResponse) {
-  const { name, price, imageUrl, about, description, aboutSeller, category } =
-    await request.json();
-  let model;
-  let mongoCategory;
-  switch (category) {
-    case "dj":
-      model = DJ;
-      mongoCategory = "djequipment";
-      break;
-    case "vinyls":
-      model = Vinyl;
-      mongoCategory = "vinyl";
-      break;
-    case "softweres":
-      model = Softwere;
-      mongoCategory = "softwere";
-      break;
-
-    default:
-      break;
-  }
-
-  await connectMongoDB();
-  model &&
-    (await model.create({
+  try {
+    const {
       name,
       price,
       imageUrl,
       about,
       description,
       aboutSeller,
-      category: mongoCategory,
-    }));
-  console.log("Product added successfully");
+      category,
+      inStock,
+    } = await request.json();
 
-  return NextResponse.json(
-    { message: "Product added successfully" },
-    { status: 201 }
-  );
+    let model;
+    let mongoCategory;
+
+    switch (category) {
+      case "dj":
+        model = DJ;
+        mongoCategory = "djequipment";
+        break;
+      case "vinyls":
+        model = Vinyl;
+        mongoCategory = "vinyl";
+        break;
+      case "softweres":
+        model = Softwere;
+        mongoCategory = "softwere";
+        break;
+      default:
+        break;
+    }
+
+    await connectMongoDB(); // Connect to MongoDB
+
+    if (model) {
+      const createdProduct = await model.create({
+        name,
+        price,
+        imageUrl,
+        about,
+        description,
+        aboutSeller,
+        category: mongoCategory,
+        inStock,
+      });
+
+      console.log("Product added successfully:", createdProduct._id); // Log the ID of the created product
+      return NextResponse.json(
+        { id: createdProduct._id, message: "Product added successfully" },
+        { status: 201 }
+      );
+    } else {
+      console.error("Invalid category");
+      return NextResponse.json({ error: "Invalid category" }, { status: 400 });
+    }
+  } catch (error) {
+    console.error("Error adding product:", error);
+    return NextResponse.json(
+      { error: "Error adding product" },
+      { status: 500 }
+    );
+  }
 }
-
 export async function DELETE(request: NextRequest, response: NextResponse) {
   console.log("here");
 
   const { id, category } = await request.json();
+  console.log(id, category);
   let model;
 
   switch (category) {

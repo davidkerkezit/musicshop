@@ -8,6 +8,7 @@ const vinylSchema = new Schema(
     description: String,
     aboutSeller: String,
     category: String,
+    inStock: Number,
   },
   {
     timestamps: true,

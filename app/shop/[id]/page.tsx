@@ -41,7 +41,11 @@ const page = async ({ params }: { params: { id: string } }) => {
             <span className="text-[3rem] font-extralight pl-1">$</span>
           </p>
           <div>
-            <Button label="Add to Cart" icon={<AiOutlineShopping />} />
+            {/* <Button
+              label="Add to Cart"
+              icon={<AiOutlineShopping />}
+              isPending={false}
+            /> */}
           </div>
         </div>
       </div>

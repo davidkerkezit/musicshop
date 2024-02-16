@@ -6,22 +6,31 @@ import Softwere from "@/models/softwere";
 import { NextRequest, NextResponse } from "next/server";
 import Product from "@/models/product";
 
-export async function GET() {
-  // req: NextRequest,
-  // { params }: { params: { id: string } }
-  console.log("here");
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  console.log("wtf");
 
-  const id = "659eb288bf0d600243bc0200";
+  const id = params.id;
   const models = [DJ, Vinyl, Softwere];
+  console.log(id, "id", "wtf");
 
   await connectMongoDB();
 
   try {
-    const product = await DJ.findById(id);
+    let modelName: string | null = null;
+    for (const model of models) {
+      const product = await model.findById(id);
+      return NextResponse.json({
+        selectedProduct: product,
+      });
+      if (product) {
+        modelName = model.modelName;
 
-    return NextResponse.json({
-      selectedProduct: product,
-    });
+        break;
+      }
+    }
   } catch (err) {
     console.error("Error:", err);
   }

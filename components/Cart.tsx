@@ -12,6 +12,10 @@ const Cart = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [cart, setCart] = useState<null | any[]>(null);
   const [allProducts, setAllProducts] = useState([]);
+  const [cartDependency, setCartDependency] = useState("");
+  useEffect(() => {
+    setCartDependency(JSON.stringify(localStorage.getItem("cart")));
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       if (typeof window !== "undefined") {
@@ -23,7 +27,7 @@ const Cart = () => {
       }
     };
     fetchData();
-  }, [JSON.stringify(cart)]);
+  }, []);
   const removeFromCartHandler = async (id: string) => {
     if (typeof window !== "undefined") {
       const cart = JSON.parse(localStorage.getItem("cart") || "[]");

@@ -4,7 +4,7 @@ import Button from "./Button";
 import { AiOutlineShopping } from "react-icons/ai";
 import { ProductType } from "@/libs/types";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { VscEdit } from "react-icons/vsc";
 import { BASE_URL } from "@/libs/utils";
@@ -12,13 +12,14 @@ import { ButtonHTMLAttributes, useState } from "react";
 import { cartProducts, deleteProduct } from "@/libs/actions";
 import LoadingDots from "./LoadingDots";
 import { AiOutlineDelete } from "react-icons/ai";
+import { isPending } from "@reduxjs/toolkit";
 
 const ProductCard = ({ product }: { product: ProductType }) => {
   const pathname = usePathname();
   const isShopPage = pathname.startsWith("/shop");
   const isDashboardPage = pathname.startsWith("/dashboard");
   const [isDeletePending, setIsDeletePending] = useState(false);
-
+  const router = useRouter();
   const deleteProductHandler = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     img: string,
@@ -96,8 +97,11 @@ const ProductCard = ({ product }: { product: ProductType }) => {
 
         {isDashboardPage && (
           <div className="flex flex-col items-center ">
-            <button
-              onClick={(e) =>
+            <Button
+              isPending={isDeletePending}
+              label="Delete"
+              icon={<RiDeleteBin2Line />}
+              func={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
                 deleteProductHandler(
                   e,
                   product.imageUrl,
@@ -105,22 +109,13 @@ const ProductCard = ({ product }: { product: ProductType }) => {
                   product.category
                 )
               }
-              disabled={isDeletePending}
-              className=" flex gap-1  items-center border-[3px] border-juice rounded-full   mb-4  w-max"
-            >
-              <div className="flex items-center m-1 pr-4  rounded-full w-full bg-neutral-700">
-                <div className="text-3xl md:text-xl p-1 m-1 bg-neutral-500 rounded-full text-white border-[1px] border-juice">
-                  <AiOutlineDelete />
-                </div>
-                {isDeletePending ? (
-                  <LoadingDots />
-                ) : (
-                  <p className="text-base md:text-md pl-2">Delete</p>
-                )}
-              </div>
-            </button>
-            {/* <Button label="Edit product" icon={<VscEdit />} />{" "}
-            <Button label="Delete" icon={<RiDeleteBin2Line />} /> */}
+            />
+            <Button
+              label="Edit product"
+              icon={<VscEdit />}
+              isPending={false}
+              func={() => router.push(`${BASE_URL}/dashboard/${product._id}`)}
+            />
           </div>
         )}
       </div>

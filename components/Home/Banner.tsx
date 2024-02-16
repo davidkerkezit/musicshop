@@ -7,8 +7,11 @@ import { AiOutlineShopping } from "react-icons/ai";
 import { BsHouseDoor } from "react-icons/bs";
 import Button from "../UI/Button";
 import StoreStatistic from "./UI/StoreStatistic";
+import { useRouter } from "next/navigation";
+import { BASE_URL } from "@/libs/utils";
 
 const Banner = () => {
+  const router = useRouter();
   return (
     <div className="flex h-[20rem] px-5 overflow-hidden background text-white relative pb-[4%] pt-20 lg:pt-40">
       {/* Container for darker banner bg */}
@@ -34,7 +37,12 @@ const Banner = () => {
           Shop," we don't just sell music; we embrace it. Visit us and let the
           melody speak.
         </p>
-        <Button label="Visit our shop" icon={<AiOutlineShopping />} />
+        <Button
+          label="Visit our shop"
+          icon={<AiOutlineShopping />}
+          func={() => router.push(`${BASE_URL}/shop`)}
+          isPending={false}
+        />
         {/* Store Statistics informatios */}
         <div className="flex gap-5 w-full flex-col lg:flex-row">
           <StoreStatistic

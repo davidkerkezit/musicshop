@@ -71,3 +71,67 @@ export async function GET(
     console.error("Error:", err);
   }
 }
+export async function PATCH(request: NextRequest, response: NextResponse) {
+  try {
+    const {
+      id,
+      name,
+      price,
+      imageUrl,
+      about,
+      description,
+      aboutSeller,
+      category,
+      inStock,
+    } = await request.json();
+
+    let model;
+    let mongoCategory;
+
+    switch (category) {
+      case "dj":
+        model = DJ;
+        mongoCategory = "djequipment";
+        break;
+      case "vinyls":
+        model = Vinyl;
+        mongoCategory = "vinyl";
+        break;
+      case "softweres":
+        model = Softwere;
+        mongoCategory = "softwere";
+        break;
+      default:
+        break;
+    }
+
+    await connectMongoDB(); // Connect to MongoDB
+
+    if (model) {
+      await model.findByIdAndUpdate(id, {
+        name,
+        price,
+        imageUrl,
+        about,
+        description,
+        aboutSeller,
+        category: mongoCategory,
+        inStock,
+      });
+      console.log("Product updated successfully");
+      return NextResponse.json(
+        { message: "Product updated successfully" },
+        { status: 200 }
+      );
+    } else {
+      console.error("Invalid category");
+      return NextResponse.json({ error: "Invalid category" }, { status: 400 });
+    }
+  } catch (error) {
+    console.error("Error updating product:", error);
+    return NextResponse.json(
+      { error: "Error updating product" },
+      { status: 500 }
+    );
+  }
+}

@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+
 const DashboardInput = ({
   label,
   placeholder,
@@ -7,6 +10,7 @@ const DashboardInput = ({
   register,
   type,
   error,
+  setValue,
 }: {
   label: string;
   placeholder: string;
@@ -16,6 +20,7 @@ const DashboardInput = ({
   register: any;
   type: string;
   error: any;
+  setValue: any;
 }) => {
   return (
     <div className="flex flex-col   ">
@@ -29,11 +34,12 @@ const DashboardInput = ({
       </div>
 
       <input
+        onChange={(e) => setValue("name", e.target.value)}
         className="bg-transparent border-juice/40 border-[1px] rounded-lg p-2 placeholder:font-thin text-sm focus:outline-none focus:border-juice "
         type={type}
         placeholder={placeholder}
         id={name}
-        value={value}
+        // value={value}
         {...register(registerValue)}
       />
     </div>

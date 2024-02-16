@@ -104,7 +104,7 @@ const ContactForm = () => {
               />
             </div>
           </div>
-          <Button label="Contact" icon={<IoIosMail />} />
+          {/* <Button label="Contact" icon={<IoIosMail />} /> */}
         </div>
       </div>
     </div>

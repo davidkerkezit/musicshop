@@ -9,6 +9,7 @@ const DashboardTextArea = ({
   register,
   type,
   error,
+  setValue,
 }: {
   label: string;
   placeholder: string;
@@ -18,6 +19,7 @@ const DashboardTextArea = ({
   register: any;
   type: string;
   error: any;
+  setValue: any;
 }) => {
   return (
     <div className="flex flex-col   ">
@@ -30,12 +32,13 @@ const DashboardTextArea = ({
         </p>
       </div>
       <textarea
+        onChange={(e) => setValue(name, e.target.value)}
         rows={4}
         className="bg-transparent border-juice/40 border-[1px] rounded-lg p-2 placeholder:font-thin text-sm focus:outline-none focus:border-juice resize-none appearance-none"
         type={type}
         placeholder={placeholder}
         id={name}
-        value={value}
+        // value={value}
         {...register(registerValue)}
       />
     </div>

@@ -8,6 +8,7 @@ const softwereSchema = new Schema(
     description: String,
     aboutSeller: String,
     category: String,
+    inStock: Number,
   },
   {
     timestamps: true,
