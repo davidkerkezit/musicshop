@@ -487,8 +487,7 @@ export async function editProduct(formData: any) {
           about: formData.aboutProduct,
           description: formData.productDescription,
           aboutSeller: formData.aboutSeller,
-          imageUrl:
-            formData.imageSrc === null ? formData.currentImage : data.url,
+          imageUrl: data.url,
           category: formData.selectedCategory,
           inStock: formData.inStockValue,
         }),
