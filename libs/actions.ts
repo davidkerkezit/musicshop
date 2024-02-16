@@ -305,10 +305,6 @@ export async function editProduct(formData: any) {
 
       data = await responseUploadImage.json();
     }
-    console.log(
-      formData.imageSrc === null ? formData.currentImage : data.url,
-      "test"
-    );
 
     // Second fetch request to add product details
     const category =
@@ -352,8 +348,108 @@ export async function editProduct(formData: any) {
       console.log("Product upload successfully!");
       // You can perform additional actions here like refreshing or navigating to another page
     }
-    if (category !== formData.currentCategory) {
+    if (category !== formData.currentCategory && formData.imageSrc !== null) {
       // Second fetch request to add product details
+      const responseDeleteProduct = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/shop`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
+          },
+          body: JSON.stringify({
+            id: formData.id,
+            category: formData.currentCategory,
+          }),
+        }
+      );
+
+      if (!responseDeleteProduct.ok) {
+        throw new Error("Failed to add product");
+      }
+
+      // Handle success scenario
+      console.log("Product deleted successfully!");
+      // You can perform additional actions here like refreshing or navigating to another page
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/shop`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
+        },
+        body: JSON.stringify({
+          id: formData.id,
+          name: formData.name,
+          price: parseInt(formData.price),
+          about: formData.aboutProduct,
+          description: formData.productDescription,
+          aboutSeller: formData.aboutSeller,
+          imageUrl:
+            formData.imageSrc === null ? formData.currentImage : data.url,
+          category: formData.selectedCategory,
+          inStock: formData.inStockValue,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to add product");
+      }
+      const uploadedProductData = await res.json();
+      // Handle success scenario
+      console.log(uploadedProductData.id);
+      redirect(`${BASE_URL}/dashboard/${uploadedProductData.id}`);
+
+      // You can perform additional actions here like refreshing or navigating to another page
+    } else if (
+      category !== formData.currentCategory &&
+      formData.imageSrc === null
+    ) {
+      const responseDeleteImage = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/images`,
+        {
+          method: "DELETE",
+          body: JSON.stringify({
+            image: formData.currentImage,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
+          },
+
+          cache: "no-store",
+        }
+      );
+      console.log("ok");
+      if (!responseDeleteImage.ok) {
+        throw new Error("Failed to delete image");
+      }
+      console.log("ok");
+      const responseUploadImage = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/images`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            image: formData.imageSrc,
+            categoryPath: formData.selectedCategory,
+            subCategoryPath: formData.selectedSubCategory,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
+          },
+        }
+      );
+      console.log("ok");
+      if (!responseUploadImage.ok) {
+        throw new Error("Failed to upload image");
+      }
+
+      data = await responseUploadImage.json();
       const responseDeleteProduct = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/shop`,
         {
