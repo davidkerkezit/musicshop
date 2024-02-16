@@ -12,7 +12,6 @@ export async function GET(
 ) {
   const id = params.id;
   const models = [DJ, Vinyl, Softwere];
-
   await connectMongoDB();
   const selectedProductPipeline = createProductPipeline(models, id);
 
@@ -29,44 +28,34 @@ export async function GET(
     }
     let category: string;
     let similarProducts: any[];
-    switch (modelName) {
-      case "DJ":
-        category = "DJ Equipments";
-        similarProducts = await DJ.find({ _id: { $ne: id } })
+
+    const modelMap: { [key: string]: any } = {
+      DJ: { category: "DJ Equipments", model: DJ },
+      Vinyl: { category: "Vinyls", model: Vinyl },
+      Softwere: { category: "Softweres", model: Softwere },
+    };
+
+    const modelInfo =
+      modelName !== null ? modelMap[modelName] : { category: "", model: null };
+    category = modelInfo.category;
+    similarProducts = modelInfo.model
+      ? await modelInfo.model
+          .find({ _id: { $ne: id } })
           .sort({ createdAt: -1 })
-          .limit(6);
-
-        break;
-      case "Vinyl":
-        category = "Vinyls";
-        similarProducts = await Vinyl.find({ _id: { $ne: id } })
-          .sort({ createdAt: -1 })
-          .limit(6);
-
-        break;
-      case "Softwere":
-        category = "Softweres";
-        similarProducts = await Softwere.find({ _id: { $ne: id } })
-          .sort({ createdAt: -1 })
-          .limit(6);
-
-        break;
-      default:
-        category = "";
-        similarProducts = [];
-
-        console.log("Error: No category found");
-
-        break;
-    }
+          .limit(6)
+      : [];
+    if (!modelInfo.model) console.log("Error: No category found");
 
     const selectedProduct = await Product.aggregate(selectedProductPipeline);
 
-    return NextResponse.json({
-      selectedProduct: selectedProduct[0],
-      category,
-      similarProducts,
-    });
+    return NextResponse.json(
+      {
+        selectedProduct: selectedProduct[0],
+        category,
+        similarProducts,
+      },
+      { status: 201 }
+    );
   } catch (err) {
     console.error("Error:", err);
   }
@@ -85,30 +74,25 @@ export async function PATCH(request: NextRequest, response: NextResponse) {
       inStock,
     } = await request.json();
 
-    let model;
-    let mongoCategory;
+    let model: any;
+    let mongoCategory: string;
+    console.log(category, "Test");
 
-    switch (category) {
-      case "dj":
-        model = DJ;
-        mongoCategory = "djequipment";
-        break;
-      case "vinyls":
-        model = Vinyl;
-        mongoCategory = "vinyl";
-        break;
-      case "softweres":
-        model = Softwere;
-        mongoCategory = "softwere";
-        break;
-      default:
-        break;
-    }
+    const categoryMap: {
+      [key: string]: { model: any; mongoCategory: string };
+    } = {
+      dj: { model: DJ, mongoCategory: "djequipment" },
+      vinyls: { model: Vinyl, mongoCategory: "vinyl" },
+      softweres: { model: Softwere, mongoCategory: "softwere" },
+    };
 
+    const categoryInfo = categoryMap[category];
+    model = categoryInfo?.model;
+    mongoCategory = categoryInfo?.mongoCategory || "";
     await connectMongoDB(); // Connect to MongoDB
 
     if (model) {
-      await model.findByIdAndUpdate(id, {
+      const product = await model.findByIdAndUpdate(id, {
         name,
         price,
         imageUrl,
@@ -118,11 +102,9 @@ export async function PATCH(request: NextRequest, response: NextResponse) {
         category: mongoCategory,
         inStock,
       });
+
       console.log("Product updated successfully");
-      return NextResponse.json(
-        { message: "Product updated successfully" },
-        { status: 200 }
-      );
+      return NextResponse.json({ status: "success", id: id }, { status: 200 });
     } else {
       console.error("Invalid category");
       return NextResponse.json({ error: "Invalid category" }, { status: 400 });

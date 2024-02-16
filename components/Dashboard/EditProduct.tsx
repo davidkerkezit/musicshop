@@ -5,6 +5,7 @@ import useImageUploader from "@/hooks/useImageUploader";
 import { editProduct, getProduct } from "@/libs/actions";
 import { ProductType } from "@/libs/types";
 import {
+  BASE_URL,
   categories,
   djsSubCategories,
   editableProductSchema,
@@ -19,6 +20,8 @@ import DashboardTextArea from "./DashboardTextArea";
 import RadioInputs from "./RadioInputs";
 import Button from "../UI/SubmitButton";
 import { MdDone } from "react-icons/md";
+import { useRouter } from "next/navigation";
+import { basename } from "path";
 
 type FormFields = z.infer<typeof editableProductSchema>;
 
@@ -34,7 +37,7 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
   const [inStockValue, setInStockValue] = useState<number>(
     selectedProduct.inStock
   );
-
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -88,8 +91,8 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
     }
 
     if (subCategoryChecker) {
-      await editProduct(formData);
-
+      const { id, status } = await editProduct(formData);
+      status === "success" && router.push(`${BASE_URL}/dashboard/${id}`);
       // event?.target.reset(); // Reset the form
       // setImageSrc(null); // Reset image source
       // setSelectedCategory(null); // Reset selected category

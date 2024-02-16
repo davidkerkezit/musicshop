@@ -13,10 +13,8 @@ interface CustomNextApiResponse<T = any> extends NextApiResponse<T> {
 export async function POST(req: NextRequest, res: CustomNextApiResponse) {
   const { username, password } = await req.json();
 
-
   await connectMongoDB();
   const user = await Admin.findOne({ username: username });
- 
 
   if (!user) {
     return NextResponse.json({ message: "Wrong username" }, { status: 401 });
@@ -38,30 +36,3 @@ export async function POST(req: NextRequest, res: CustomNextApiResponse) {
 
   return NextResponse.json({ message: "Succes login" }, { status: 201 });
 }
-
-// export async function GET(request: NextRequest) {
-//   const cookieStore = cookies();
-
-//   // const token = cookieStore.get("token");
-//   const token = "///";
-//   if (token) {
-//     return NextResponse.json(
-//       { message: "Token exists", token },
-//       { status: 201 }
-//     );
-//   } else {
-//     return NextResponse.json(
-//       { message: "Token does not exist" },
-//       { status: 401 }
-//     );
-//   }
-// }
-
-// ADDING ADMIN
-
-// export async function POST(request: NextResponse) {
-//   const { username, password } = await request.json();
-//   await connectMongoDB();
-//   await Admin.create({ username, password });
-//   return NextResponse.json({ message: "Admin added" }, { status: 201 });
-// }
