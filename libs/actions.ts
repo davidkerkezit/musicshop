@@ -311,21 +311,12 @@ export async function editProduct(formData: any) {
     );
 
     // Second fetch request to add product details
-    let category;
-    switch (formData.selectedCategory) {
-      case "dj":
-        category = "djequipment";
-        break;
-
-      case "softweres":
-        category = "softwere";
-        break;
-      case "vinyls":
-        category = "vinyl";
-        break;
-      default:
-        break;
-    }
+    const category =
+      formData.selectedCategory === "dj"
+        ? "djequipment"
+        : formData.selectedCategory === "vinyls"
+        ? "vinyl"
+        : "softwere";
 
     if (category === formData.currentCategory) {
       const res = await fetch(
