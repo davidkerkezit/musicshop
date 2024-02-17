@@ -53,10 +53,13 @@ export async function uploadImageFromUrlToS3(
   subPath
 ) {
   try {
-    const file = await fetch(imageUrl);
-    if (!file.ok) {
+    const response = await fetch(imageUrl);
+    console.log(response);
+    if (!response.ok) {
       throw new Error(`Failed to fetch image from URL: ${imageUrl}`);
     }
+
+    const fileBuffer = await response.arrayBuffer();
 
     const params = {
       Bucket: process.env.AWS_S3_BUCKET_NAME,

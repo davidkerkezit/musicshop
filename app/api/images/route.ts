@@ -8,6 +8,8 @@ import {
 export async function POST(request: NextRequest) {
   const file = await request.json();
   let name = Math.floor(Math.random() * 100000000);
+  console.log(file);
+
   try {
     if (!file) {
       console.log("Error message: File is required in POST images API");
@@ -27,6 +29,8 @@ export async function POST(request: NextRequest) {
         file.subCategoryPath !== null && `${file.subCategoryPath}`
       );
     } else if (file.format === "url") {
+      console.log(file.image, file.format);
+
       fileName = await uploadImageFromUrlToS3(
         file.image,
         name,

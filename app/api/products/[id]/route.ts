@@ -90,29 +90,26 @@ export async function PATCH(request: NextRequest, response: NextResponse) {
     model = categoryInfo?.model;
     mongoCategory = categoryInfo?.mongoCategory || "";
     await connectMongoDB(); // Connect to MongoDB
+    console.log(model);
 
-    if (model) {
-      const product = await model.findByIdAndUpdate(id, {
-        name,
-        price,
-        imageUrl,
-        about,
-        description,
-        aboutSeller,
-        category: mongoCategory,
-        inStock,
-      });
+    const product = await model.findByIdAndUpdate(id, {
+      name,
+      price,
+      imageUrl,
+      about,
+      description,
+      aboutSeller,
+      category: mongoCategory,
+      inStock,
+    });
+    console.log(product);
 
-      console.log("Product updated successfully");
-      return NextResponse.json({ status: "success", id: id }, { status: 200 });
-    } else {
-      console.error("Invalid category");
-      return NextResponse.json({ error: "Invalid category" }, { status: 400 });
-    }
+    console.log("Product updated successfully");
+    return NextResponse.json({ status: "success", id: id }, { status: 200 });
   } catch (error) {
     console.error("Error updating product:", error);
     return NextResponse.json(
-      { error: "Error updating product" },
+      { error: "Error updating product", id: null },
       { status: 500 }
     );
   }
