@@ -390,7 +390,9 @@ export async function editProduct(formData: any) {
       }
       const uploadedProductData = await res.json();
       // Handle success scenario
-      return uploadedProductData;
+
+return uploadedProductData
+
       // You can perform additional actions here like refreshing or navigating to another page
     } else if (
       category !== formData.currentCategory &&
