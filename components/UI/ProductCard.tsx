@@ -13,12 +13,18 @@ import { cartProducts, deleteProduct } from "@/libs/actions";
 import LoadingDots from "./LoadingDots";
 import { AiOutlineDelete } from "react-icons/ai";
 import { isPending } from "@reduxjs/toolkit";
+import { AppDispatch, useAppSelector } from "@/libs/store";
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "@/libs/features/cartSlice";
 
 const ProductCard = ({ product }: { product: ProductType }) => {
   const pathname = usePathname();
   const isShopPage = pathname.startsWith("/shop");
   const isDashboardPage = pathname.startsWith("/dashboard");
   const [isDeletePending, setIsDeletePending] = useState(false);
+  const cartItems = useAppSelector((state) => state.cartSlice.cartItems);
+  const dispatch = useDispatch<AppDispatch>();
+
   const router = useRouter();
   const deleteProductHandler = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -39,25 +45,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-
-    // Retrieve existing cart items from localStorage or initialize an empty array
-    const existingCartItems = JSON.parse(localStorage.getItem("cart") || "[]");
-
-    // Check if the product already exists in the cart
-    const existingProductIndex = existingCartItems.findIndex(
-      (item: any) => item.id === id
-    );
-
-    if (existingProductIndex !== -1) {
-      // If the product already exists, update its quantity
-      existingCartItems[existingProductIndex].quantity += 1;
-    } else {
-      // If the product doesn't exist, add it to the cart
-      existingCartItems.push({ id, quantity: 1 });
-    }
-
-    // Store the updated cart items back into localStorage
-    localStorage.setItem("cart", JSON.stringify(existingCartItems));
+    dispatch(addItemToCart({ productId: id, quantity: 1 }));
   };
   return (
     <Link

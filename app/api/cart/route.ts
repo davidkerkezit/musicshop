@@ -7,15 +7,16 @@ import Softwere from "@/models/softwere";
 
 export async function POST(req: NextRequest, res: NextApiResponse) {
   const { cart } = await req.json();
-  console.log(cart);
   await connectMongoDB();
 
   const models = [DJ, Vinyl, Softwere];
 
   let ids: any[] = [];
   for (const product of cart) {
-    ids.push(product.id);
+    ids.push(product.productId);
   }
+  console.log(ids);
+
   try {
     let products: any[] = [];
 
@@ -24,6 +25,7 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
       const foundProducts = await Model.find({ _id: { $in: ids } });
       products = products.concat(foundProducts);
     }
+    console.log(products);
 
     return NextResponse.json({
       products,

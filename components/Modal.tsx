@@ -7,7 +7,7 @@ import { hideSearch } from "@/libs/features/searchSliderSlice";
 
 const Modal = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const showCart = useAppSelector((state) => state.cartSlice);
+  const showCart = useAppSelector((state) => state.cartSlice.isVisible);
   const showSearch = useAppSelector((state) => state.searchSliderSlice);
 
   const modalHandler = () => {

@@ -8,7 +8,7 @@ import Burger from "./Burger";
 import { Menu } from "@/libs/types";
 import { usePathname } from "next/navigation";
 import { hideSearch, toogleSearch } from "@/libs/features/searchSliderSlice";
-import { hideCart, toogleCart } from "@/libs/features/cartSlice";
+import { hideCart, toggleCart } from "@/libs/features/cartSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/libs/store";
 import MENU from "../constants";
@@ -17,21 +17,19 @@ const Nav = () => {
   const path = usePathname();
   const [productsCartLength, setProductsCartLength] = useState(0);
   const dispatch = useDispatch<AppDispatch>();
-  const showCart = useAppSelector((state) => state.cartSlice);
+  const showCart = useAppSelector((state) => state.cartSlice.isVisible);
+  const cartItems = useAppSelector((state) => state.cartSlice.cartItems);
+
   const showSearch = useAppSelector((state) => state.searchSliderSlice);
   const showSearchHandler = () => {
     dispatch(toogleSearch());
     showCart && dispatch(hideCart());
   };
+
   const showCartHandler = () => {
-    dispatch(toogleCart());
+    dispatch(toggleCart());
     showSearch && dispatch(hideSearch());
   };
-  // useEffect(() => {
-  //   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-
-  //   setProductsCartLength(cart.length);
-  // }, [JSON.stringify(localStorage.getItem("cart") || "[]")]);
 
   return (
     <header className="w-full  z-40 fixed ">
@@ -73,11 +71,9 @@ const Nav = () => {
           <button onClick={showCartHandler} className="relative">
             {" "}
             <AiOutlineShopping className="cursor-pointer text-2xl " />{" "}
-            {productsCartLength !== 0 && (
-              <div className="bg-juice rounded-full absolute -top-[4px] left-[15px] w-[15px] h-[15px] flex items-center justify-center text-xs  lg:text-sm">
-                4
-              </div>
-            )}
+            <div className="bg-juice rounded-full absolute -top-[4px] left-[15px] w-[15px] h-[15px] flex items-center justify-center text-xs  lg:text-sm">
+              {cartItems.length}
+            </div>
           </button>
         </div>
       </nav>
