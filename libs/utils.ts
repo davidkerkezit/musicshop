@@ -119,7 +119,7 @@ export const editableProductSchema = z.object({
   productDescription: z.string().min(60),
   aboutSeller: z.string().min(60),
 });
-let BASE_URL;
+let BASE_URL: string;
 
 if (process.env.NODE_ENV === "production") {
   BASE_URL = "https://musicshop-two.vercel.app";
