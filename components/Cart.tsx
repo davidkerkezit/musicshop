@@ -2,32 +2,33 @@
 import { AppDispatch, useAppSelector } from "@/libs/store";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { hideCart } from "@/libs/features/cartSlice";
+import {
+  addItemToCart,
+  decreaseItemCart,
+  hideCart,
+} from "@/libs/features/cartSlice";
 import { FaArrowRight } from "react-icons/fa";
 import { cartProducts } from "@/libs/actions";
 import { ProductType } from "@/libs/types";
 
 const Cart = () => {
-  const showCart = useAppSelector((state) => state.cartSlice);
+  const showCart = useAppSelector((state) => state.cartSlice.isVisible);
+  const cartItems = useAppSelector((state) => state.cartSlice.cartItems);
+
   const dispatch = useDispatch<AppDispatch>();
   const [cart, setCart] = useState<null | any[]>(null);
-  const [allProducts, setAllProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState<any>([]);
   const [cartDependency, setCartDependency] = useState("");
   useEffect(() => {
     setCartDependency(JSON.stringify(localStorage.getItem("cart")));
   }, []);
   useEffect(() => {
     const fetchData = async () => {
-      if (typeof window !== "undefined") {
-        const cartCache = JSON.parse(localStorage.getItem("cart") || "[]");
-        setCart(cartCache);
-
-        const { products } = await cartProducts(cartCache);
-        setAllProducts(products);
-      }
+      const { products } = await cartProducts(cartItems);
+      setAllProducts(products);
     };
     fetchData();
-  }, []);
+  }, [cartItems]);
   const removeFromCartHandler = async (id: string) => {
     if (typeof window !== "undefined") {
       const cart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -38,34 +39,14 @@ const Cart = () => {
     }
   };
   const increaseHandler = async (id: string) => {
-    if (typeof window !== "undefined") {
-      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-      const newCart = cart.map((product: any) => {
-        if (product.id === id) {
-          product.quantity += 1;
-        }
-        return product;
-      });
-      localStorage.setItem("cart", JSON.stringify(newCart));
-      const { products } = await cartProducts(newCart);
-      setAllProducts(products);
-    }
+    dispatch(addItemToCart({ productId: id, quantity: 1 }));
+    const { products } = await cartProducts(cartItems);
+    setAllProducts(products);
   };
   const decreaseHandler = async (id: string) => {
-    if (typeof window !== "undefined") {
-      let cart = JSON.parse(localStorage.getItem("cart") || "[]");
-      const newCart = cart
-        .map((product: any) => {
-          if (product.id === id) {
-            product.quantity -= 1;
-          }
-          return product;
-        })
-        .filter((product: any) => product.quantity > 0); // Filter out products with quantity 0
-      localStorage.setItem("cart", JSON.stringify(newCart));
-      const { products } = await cartProducts(newCart);
-      setAllProducts(products);
-    }
+    dispatch(decreaseItemCart({ productId: id, quantity: 1 }));
+    const { products } = await cartProducts(cartItems);
+    setAllProducts(products);
   };
   return (
     <div
@@ -106,8 +87,10 @@ const Cart = () => {
                     +
                   </button>
                   <p className="">
-                    {cart !== null &&
-                      cart.find((prod) => prod.id === product._id).quantity}
+                    {cartItems.length > 0 &&
+                      cartItems.find(
+                        (prod: any) => prod.productId === product._id
+                      )?.quantity}
                   </p>
                   <button
                     onClick={() => decreaseHandler(product._id)}
