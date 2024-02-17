@@ -299,6 +299,7 @@ export async function editProduct(formData: any) {
         : formData.selectedCategory === "vinyls"
         ? "vinyl"
         : "softwere";
+    console.log(data);
 
     if (category === formData.currentCategory) {
       const res = await fetch(
@@ -311,6 +312,7 @@ export async function editProduct(formData: any) {
             "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
           },
           body: JSON.stringify({
+            id: formData.id,
             name: formData.name,
             price: parseInt(formData.price),
             about: formData.aboutProduct,
@@ -331,6 +333,8 @@ export async function editProduct(formData: any) {
 
       // Handle success scenario
       console.log("Product upload successfully!");
+      const dataProduct = res.json();
+      return dataProduct;
       // You can perform additional actions here like refreshing or navigating to another page
     }
     if (category !== formData.currentCategory && formData.imageSrc !== null) {

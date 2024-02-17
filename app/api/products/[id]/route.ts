@@ -90,7 +90,7 @@ export async function PATCH(request: NextRequest, response: NextResponse) {
     model = categoryInfo?.model;
     mongoCategory = categoryInfo?.mongoCategory || "";
     await connectMongoDB(); // Connect to MongoDB
-    console.log(model);
+    console.log(imageUrl, "hir", id);
 
     const product = await model.findByIdAndUpdate(id, {
       name,
@@ -105,7 +105,10 @@ export async function PATCH(request: NextRequest, response: NextResponse) {
     console.log(product);
 
     console.log("Product updated successfully");
-    return NextResponse.json({ status: "success", id: id }, { status: 200 });
+    return NextResponse.json(
+      { status: "success", id: product._id },
+      { status: 200 }
+    );
   } catch (error) {
     console.error("Error updating product:", error);
     return NextResponse.json(
