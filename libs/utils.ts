@@ -119,6 +119,16 @@ export const editableProductSchema = z.object({
   productDescription: z.string().min(60),
   aboutSeller: z.string().min(60),
 });
+export const order = z.object({
+  firstName: z.string().min(1),
+  lastName: z.string().min(1),
+  city: z.string().min(1),
+  postalCode: z.string().min(1),
+  streetName: z.string().min(1),
+  houseNumber: z.string().min(1),
+  phoneNumber: z.string().min(1),
+  moreInformation: z.string().min(1),
+});
 let BASE_URL: string;
 
 if (process.env.NODE_ENV === "production") {

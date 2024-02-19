@@ -42,11 +42,12 @@ const ProductCard = ({ product }: { product: ProductType }) => {
   const addToCartHandler = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     id: string,
-    price: number
+    price: number,
+    name: string
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    dispatch(addItemToCart({ productId: id, quantity: 1, price }));
+    dispatch(addItemToCart({ productId: id, quantity: 1, price, name }));
   };
   return (
     <Link
@@ -79,7 +80,8 @@ const ProductCard = ({ product }: { product: ProductType }) => {
                 e,
 
                 product._id,
-                product.price
+                product.price,
+                product.name
               )
             }
           />

@@ -4,6 +4,7 @@ export interface CartItem {
   productId: string;
   quantity: number;
   price: number;
+  name: string;
 }
 
 interface CartState {
@@ -51,7 +52,7 @@ export const cartSlice = createSlice({
       }
     },
     addItemToCart: (state, action: PayloadAction<CartItem>) => {
-      const { productId } = action.payload;
+      const { productId, name } = action.payload;
       const existingItemIndex = state.cartItems.findIndex(
         (item) => item.productId === productId
       );

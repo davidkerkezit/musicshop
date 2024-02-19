@@ -36,14 +36,16 @@ const Cart = () => {
     fetchData();
   }, [cartItems]);
 
-  const increaseHandler = (id: string, price: number) => {
-    dispatch(addItemToCart({ productId: id, quantity: 1, price }));
+  const increaseHandler = (id: string, price: number, name: string) => {
+    dispatch(addItemToCart({ productId: id, quantity: 1, price, name }));
   };
-  const decreaseHandler = (id: string, price: number) => {
-    dispatch(decreaseItemCart({ productId: id, quantity: 1, price }));
+  const decreaseHandler = (id: string, price: number, name: string) => {
+    dispatch(decreaseItemCart({ productId: id, quantity: 1, price, name }));
   };
-  const removeFromCartHandler = (id: string, price: number) => {
-    dispatch(removeProductFromCart({ productId: id, quantity: 1, price }));
+  const removeFromCartHandler = (id: string, price: number, name: string) => {
+    dispatch(
+      removeProductFromCart({ productId: id, quantity: 1, price, name })
+    );
   };
   const emptyCartHandler = () => {
     dispatch(emptyCart());
@@ -69,7 +71,7 @@ const Cart = () => {
             Remove All
           </button>
         </div>
-        <div className=" flex flex-col gap-2 mt-4 h-[43rem] overflow-y-scroll ">
+        <div className=" flex flex-col gap-2 mt-4 h-[41rem] overflow-y-scroll ">
           {allProducts.length > 0 &&
             allProducts.map((product: ProductType) => {
               return (
@@ -90,7 +92,11 @@ const Cart = () => {
                         <button
                           disabled={isLoading}
                           onClick={() =>
-                            increaseHandler(product._id, product.price)
+                            increaseHandler(
+                              product._id,
+                              product.price,
+                              product.name
+                            )
                           }
                           className="text-white bg-black/30 text-xl p-1  flex items-center justify-center rounded-full w-[1.6rem] h-[1.6rem]"
                         >
@@ -106,7 +112,11 @@ const Cart = () => {
                         <button
                           disabled={isLoading}
                           onClick={() =>
-                            decreaseHandler(product._id, product.price)
+                            decreaseHandler(
+                              product._id,
+                              product.price,
+                              product.name
+                            )
                           }
                           className="text-white bg-black/30 text-xl p-1 flex items-center justify-center rounded-full w-[1.6rem] h-[1.6rem]"
                         >
@@ -124,7 +134,11 @@ const Cart = () => {
                     </p>
                     <button
                       onClick={() =>
-                        removeFromCartHandler(product._id, product.price)
+                        removeFromCartHandler(
+                          product._id,
+                          product.price,
+                          product.name
+                        )
                       }
                       className=" bg-white/10 px-2 "
                     >

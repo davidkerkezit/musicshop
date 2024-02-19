@@ -2,6 +2,8 @@
 import { ProductType } from "@/libs/types";
 import { useAppSelector } from "@/libs/store";
 import { AddProduct, EditProducts } from "..";
+import { useSearchParams } from "next/navigation";
+import Orders from "./Orders";
 
 const Dashboard = ({
   products,
@@ -10,14 +12,15 @@ const Dashboard = ({
   products: ProductType[];
   pages: number;
 }) => {
-  const dashboardOption = useAppSelector((state) => state.dashboardSlice);
+  const searchParams = useSearchParams();
+  const option = searchParams.get("option") || "addproduct";
   return (
     <>
-      {dashboardOption === "add" ? (
-        <AddProduct />
-      ) : (
+      {option === "addproduct" && <AddProduct />}
+      {option === "editproducts" && (
         <EditProducts products={products} pages={pages} />
       )}
+      {option === "orders" && <Orders />}
     </>
   );
 };

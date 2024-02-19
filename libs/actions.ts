@@ -463,3 +463,62 @@ export async function editProduct(formData: any) {
     // Handle errors appropriately
   }
 }
+
+export async function addOrder(formData: any) {
+  const {
+    firstName,
+    lastName,
+    city,
+    houseNumber,
+    streetName,
+    totalPrice,
+    order,
+    isChecked,
+    moreInformation,
+    postalCode,
+    phoneNumber,
+  } = formData;
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/order`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        city,
+        houseNumber,
+        streetName,
+        totalPrice,
+        order,
+        isChecked,
+        moreInformation,
+        postalCode,
+        phoneNumber,
+      }),
+    });
+    if (!res.ok) {
+      throw new Error("Failed to add order");
+    }
+
+    console.log("Order added successfully!");
+  } catch (error) {
+    console.log("Error message: Error on addOrder action");
+  }
+}
+export async function getOrders() {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/order`);
+    if (!res.ok) {
+      throw new Error("Failed to add order");
+    }
+    const data = res.json();
+    return data;
+    console.log("Order added successfully!");
+  } catch (error) {
+    console.log("Error message: Error on addOrder action");
+  }
+}

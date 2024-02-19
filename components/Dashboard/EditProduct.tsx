@@ -11,9 +11,10 @@ import {
   editableProductSchema,
   productSchema,
 } from "@/libs/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
+
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import DashboardTextArea from "./DashboardTextArea";
@@ -21,7 +22,6 @@ import RadioInputs from "./RadioInputs";
 import Button from "../UI/SubmitButton";
 import { MdDone } from "react-icons/md";
 import { useRouter } from "next/navigation";
-import { basename } from "path";
 
 type FormFields = z.infer<typeof editableProductSchema>;
 
@@ -93,11 +93,6 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
     if (subCategoryChecker) {
       const { id, status } = await editProduct(formData);
       status === "success" && router.push(`${BASE_URL}/dashboard/${id}`);
-      // event?.target.reset(); // Reset the form
-      // setImageSrc(null); // Reset image source
-      // setSelectedCategory(null); // Reset selected category
-      // setSubSelectedCategory(null); // Reset selected subcategory
-      // setHasInteracted(false); // Reset interaction state
     } else {
       setTimeout(() => {
         setHasInteracted(false);
