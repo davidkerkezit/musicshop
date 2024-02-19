@@ -61,7 +61,6 @@ const AddProduct = () => {
     } else {
       subCategoryChecker = false;
     }
-    console.log(formData);
 
     if (imageSrc && subCategoryChecker) {
       await addNewProduct(formData);

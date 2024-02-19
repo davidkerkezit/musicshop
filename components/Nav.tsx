@@ -15,7 +15,6 @@ import MENU from "../constants";
 
 const Nav = () => {
   const path = usePathname();
-  const [productsCartLength, setProductsCartLength] = useState(0);
   const dispatch = useDispatch<AppDispatch>();
   const showCart = useAppSelector((state) => state.cartSlice.isVisible);
   const cartItems = useAppSelector((state) => state.cartSlice.cartItems);
@@ -71,9 +70,11 @@ const Nav = () => {
           <button onClick={showCartHandler} className="relative">
             {" "}
             <AiOutlineShopping className="cursor-pointer text-2xl " />{" "}
-            <div className="bg-juice rounded-full absolute -top-[4px] left-[15px] w-[15px] h-[15px] flex items-center justify-center text-xs  lg:text-sm">
-              {cartItems.length}
-            </div>
+            {cartItems.length > 0 && (
+              <div className="bg-juice rounded-full absolute -top-[4px] left-[15px] w-[15px] h-[15px] flex items-center justify-center text-xs  lg:text-sm">
+                {cartItems.length}
+              </div>
+            )}
           </button>
         </div>
       </nav>

@@ -6,108 +6,151 @@ import {
   addItemToCart,
   decreaseItemCart,
   hideCart,
+  emptyCart,
+  removeProductFromCart,
 } from "@/libs/features/cartSlice";
 import { FaArrowRight } from "react-icons/fa";
 import { cartProducts } from "@/libs/actions";
 import { ProductType } from "@/libs/types";
+import LoadingDots from "./UI/LoadingDots";
+import { BASE_URL } from "@/libs/utils";
+import { useRouter } from "next/navigation";
 
 const Cart = () => {
+  const totalPrice = useAppSelector((state) => state.cartSlice.totalPrice);
+
   const showCart = useAppSelector((state) => state.cartSlice.isVisible);
   const cartItems = useAppSelector((state) => state.cartSlice.cartItems);
-
+  const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
-  const [cart, setCart] = useState<null | any[]>(null);
   const [allProducts, setAllProducts] = useState<any>([]);
-  const [cartDependency, setCartDependency] = useState("");
-  useEffect(() => {
-    setCartDependency(JSON.stringify(localStorage.getItem("cart")));
-  }, []);
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       const { products } = await cartProducts(cartItems);
       setAllProducts(products);
+      setIsLoading(false);
     };
     fetchData();
   }, [cartItems]);
-  const removeFromCartHandler = async (id: string) => {
-    if (typeof window !== "undefined") {
-      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-      const newCart = cart.filter((product: any) => product.id !== id);
-      localStorage.setItem("cart", JSON.stringify(newCart));
-      const { products } = await cartProducts(newCart);
-      setAllProducts(products);
-    }
+
+  const increaseHandler = (id: string, price: number) => {
+    dispatch(addItemToCart({ productId: id, quantity: 1, price }));
   };
-  const increaseHandler = async (id: string) => {
-    dispatch(addItemToCart({ productId: id, quantity: 1 }));
-    const { products } = await cartProducts(cartItems);
-    setAllProducts(products);
+  const decreaseHandler = (id: string, price: number) => {
+    dispatch(decreaseItemCart({ productId: id, quantity: 1, price }));
   };
-  const decreaseHandler = async (id: string) => {
-    dispatch(decreaseItemCart({ productId: id, quantity: 1 }));
-    const { products } = await cartProducts(cartItems);
-    setAllProducts(products);
+  const removeFromCartHandler = (id: string, price: number) => {
+    dispatch(removeProductFromCart({ productId: id, quantity: 1, price }));
+  };
+  const emptyCartHandler = () => {
+    dispatch(emptyCart());
   };
   return (
     <div
-      className={`absolute z-50 w-[25%] h-[100vh] bg-black/70 backdrop-blur-xl p-4   ${
+      className={`fixed z-50 w-[25%] h-[100vh] bg-black/70 backdrop-blur-xl p-4 flex flex-col justify-between  ${
         showCart && "animate-openFromRight"
       } ${showCart === false && "animate-closeToRight"} ${
         showCart === null && "-right-[25%]"
       } `}
     >
-      <div className="flex justify-between items-end">
-        <button
-          className="bg-gray-800 p-2"
-          onClick={() => dispatch(hideCart())}
-        >
-          <FaArrowRight className="text-xl text-juice" />
-        </button>
-        <p className="text-xl font-thin">Your cart</p>
-        <p>Remove all</p>
-      </div>
-      <div className=" flex flex-col gap-2 mt-4">
-        {allProducts.length > 0 &&
-          allProducts.map((product: ProductType) => (
-            <div className="flex bg-[#2f2f2f] justify-between items-center pr-4">
-              <div className="bg-[#929292] m-1">
-                <img
-                  src={product.imageUrl}
-                  alt={product.name}
-                  className="w-20 h-20 rounded-full object-contain"
-                />
-              </div>
-              <div className="flex flex-col items-center gap-3">
-                <p className="text-base font-thin">{product.name}</p>
-                <div className="flex font-thin gap-3 items-center">
-                  <button
-                    onClick={() => increaseHandler(product._id)}
-                    className="bg-gray-400 text-black h-[1.5rem] rounded-full w-[1.5rem] text-center "
-                  >
-                    +
-                  </button>
-                  <p className="">
-                    {cartItems.length > 0 &&
-                      cartItems.find(
+      <div>
+        <div className="flex justify-between items-end">
+          <button
+            className="bg-gray-800 p-2"
+            onClick={() => dispatch(hideCart())}
+          >
+            <FaArrowRight className="text-xl text-juice" />
+          </button>
+          <p className="text-xl font-thin">Your cart</p>
+          <button onClick={emptyCartHandler} disabled={isLoading}>
+            Remove All
+          </button>
+        </div>
+        <div className=" flex flex-col gap-2 mt-4 h-[43rem] overflow-y-scroll ">
+          {allProducts.length > 0 &&
+            allProducts.map((product: ProductType) => {
+              return (
+                <div className="flex bg-white/10 justify-between items-center pr-4">
+                  <div className="bg-white/20 m-1">
+                    <img
+                      src={product.imageUrl}
+                      alt={product.name}
+                      className="w-20 h-20 rounded-full object-contain"
+                    />
+                  </div>
+                  <div className="flex flex-col items-center gap-3">
+                    <p className="text-base font-thin">{product.name}</p>
+                    {cartItems.find(
+                      (prod: any) => prod.productId === product._id
+                    )?.quantity !== 0 && (
+                      <div className="flex   items-center bg-white/10 text-white rounded-full border-[1px] border-juice/20 p-1 ">
+                        <button
+                          disabled={isLoading}
+                          onClick={() =>
+                            increaseHandler(product._id, product.price)
+                          }
+                          className="text-white bg-black/30 text-xl p-1  flex items-center justify-center rounded-full w-[1.6rem] h-[1.6rem]"
+                        >
+                          +
+                        </button>
+
+                        <p className=" px-4">
+                          {cartItems.length > 0 &&
+                            cartItems.find(
+                              (prod: any) => prod.productId === product._id
+                            )?.quantity}
+                        </p>
+                        <button
+                          disabled={isLoading}
+                          onClick={() =>
+                            decreaseHandler(product._id, product.price)
+                          }
+                          className="text-white bg-black/30 text-xl p-1 flex items-center justify-center rounded-full w-[1.6rem] h-[1.6rem]"
+                        >
+                          -
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex flex-col items-end font-thin justify-center gap-4 h-full">
+                    <p className="text-sm font-medium  bg-light-juice text-black px-2  ">
+                      {(cartItems.find(
                         (prod: any) => prod.productId === product._id
-                      )?.quantity}
-                  </p>
-                  <button
-                    onClick={() => decreaseHandler(product._id)}
-                    className="bg-gray-400 text-black h-[1.5rem] rounded-full w-[1.5rem] text-center "
-                  >
-                    -
-                  </button>
+                      )?.quantity || 0) * product.price}
+                      .00 $
+                    </p>
+                    <button
+                      onClick={() =>
+                        removeFromCartHandler(product._id, product.price)
+                      }
+                      className=" bg-white/10 px-2 "
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-col items-end font-thin">
-                <p className="text-base font-thin   ">{product.price}.00 $</p>
-                <button onClick={() => removeFromCartHandler(product._id)}>
-                  Remove
-                </button>
-              </div>
-            </div>
-          ))}
+              );
+            })}
+        </div>
+      </div>
+      <div className="mb-16 ">
+        <div className="flex justify-between py-3 text-xl px-2 font-thin border-y-[1px] border-y-white/30">
+          <p>Total price:</p>
+          <p className="bg-light-juice text-black px-2">${totalPrice}.00$</p>
+        </div>
+
+        <button
+          onClick={() => {
+            router.push(`${BASE_URL}/checkout`);
+          }}
+          disabled={isLoading}
+          className="text-xl w-full text-center bg-white/10 py-2 font-thin mt-2 border-[1px] border-light-juice/40 rounded-lg"
+        >
+          Checkout
+        </button>
       </div>
     </div>
   );

@@ -41,11 +41,12 @@ const ProductCard = ({ product }: { product: ProductType }) => {
   };
   const addToCartHandler = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    id: string
+    id: string,
+    price: number
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    dispatch(addItemToCart({ productId: id, quantity: 1 }));
+    dispatch(addItemToCart({ productId: id, quantity: 1, price }));
   };
   return (
     <Link
@@ -69,18 +70,19 @@ const ProductCard = ({ product }: { product: ProductType }) => {
         <p className="text-white/70 font-thin  ">{product.name}</p>
         <p className="text-white/70 font-thin mb-4  ">{product.price}.00 $</p>
         {isShopPage && (
-          // <Button label="Add to cart" icon={<AiOutlineShopping />} />
-          <button
-            onClick={(e) =>
+          <Button
+            isPending={false}
+            label="Add to cart"
+            icon={<AiOutlineShopping />}
+            func={(e) =>
               addToCartHandler(
                 e,
 
-                product._id
+                product._id,
+                product.price
               )
             }
-          >
-            Add to Cart
-          </button>
+          />
         )}
 
         {isDashboardPage && (
