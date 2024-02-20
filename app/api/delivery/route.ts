@@ -3,10 +3,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest, response: NextResponse) {
   try {
-    const { id } = await request.json();
+    const { id, isChecked } = await request.json();
 
     const product = await Order.findByIdAndUpdate(id, {
-      isChecked: true,
+      isChecked: !isChecked,
     });
     return NextResponse.json(
       { message: "Order added successfully", product },

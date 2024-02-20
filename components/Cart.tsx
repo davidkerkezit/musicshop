@@ -158,6 +158,7 @@ const Cart = () => {
 
         <button
           onClick={() => {
+            dispatch(hideCart());
             router.push(`${BASE_URL}/checkout`);
           }}
           disabled={isLoading}

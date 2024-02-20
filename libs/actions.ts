@@ -505,6 +505,8 @@ export async function addOrder(formData: any) {
     }
 
     console.log("Order added successfully!");
+    const data = await res.json();
+    return data;
   } catch (error) {
     console.log("Error message: Error on addOrder action");
   }
@@ -522,7 +524,7 @@ export async function getOrders() {
     console.log("Error message: Error on addOrder action");
   }
 }
-export async function completeOrder(id: string) {
+export async function completeOrder(id: string, isChecked: boolean) {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/delivery`, {
       method: "POST",
@@ -533,6 +535,7 @@ export async function completeOrder(id: string) {
       },
       body: JSON.stringify({
         id,
+        isChecked,
       }),
     });
     if (!res.ok) {

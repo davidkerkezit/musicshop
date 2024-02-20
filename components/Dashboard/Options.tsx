@@ -17,7 +17,9 @@ const Options = () => {
     const fetchData = async () => {
       const data = await getOrders();
 
-      setOrdersLength(data.orders.length);
+      setOrdersLength(
+        data.orders.filter((item: any) => item.isChecked === false).length
+      );
     };
     fetchData();
   }, []);
