@@ -522,3 +522,26 @@ export async function getOrders() {
     console.log("Error message: Error on addOrder action");
   }
 }
+export async function completeOrder(id: string) {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/delivery`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
+      },
+      body: JSON.stringify({
+        id,
+      }),
+    });
+    if (!res.ok) {
+      throw new Error("Failed to add order");
+    }
+    const data = res.json();
+    return data;
+    console.log("Order added successfully!");
+  } catch (error) {
+    console.log("Error message: Error on addOrder action");
+  }
+}

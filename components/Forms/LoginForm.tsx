@@ -22,6 +22,8 @@ const LoginForm = () => {
     initialState
   );
   useEffect(() => {
+    console.log(state);
+
     state === 201 && router.push("/dashboard");
   }, [state]);
   return (
