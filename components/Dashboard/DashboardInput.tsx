@@ -24,7 +24,7 @@ const DashboardInput = ({
 }) => {
   return (
     <div className="flex flex-col   ">
-      <div className="flex-col items-center">
+      <div className="flex gap-2 items-center">
         <label htmlFor="" className="px-1 text-lg font-light">
           {label}:
         </label>
@@ -35,7 +35,7 @@ const DashboardInput = ({
 
       <input
         onChange={(e) => setValue("name", e.target.value)}
-        className="bg-transparent border-juice/40 border-[1px] rounded-lg p-2 placeholder:font-thin text-sm focus:outline-none focus:border-juice "
+        className="bg-transparent border-light-juice border-[1px] rounded-lg p-2 placeholder:font-thin text-sm focus:outline-none focus:border-juice "
         type={type}
         placeholder={placeholder}
         id={name}

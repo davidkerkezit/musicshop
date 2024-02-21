@@ -5,6 +5,7 @@ import { AddProduct, EditProducts } from "..";
 import { useSearchParams } from "next/navigation";
 import Orders from "./Orders";
 import Subscriptions from "./Subscriptions";
+import Questions from "./Questions";
 
 const Dashboard = ({
   products,
@@ -23,6 +24,7 @@ const Dashboard = ({
       )}
       {option === "orders" && <Orders />}
       {option === "subscriptions" && <Subscriptions />}
+      {option === "questions" && <Questions />}
     </>
   );
 };

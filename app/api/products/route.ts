@@ -98,6 +98,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       console.log("Product added successfully");
       return NextResponse.json(
         {
+          message: "Product added successfully",
           id: createdProduct._id,
           status: "success",
         },

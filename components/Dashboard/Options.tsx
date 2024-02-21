@@ -11,6 +11,7 @@ import { FiTruck } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { getOrders } from "@/libs/actions";
 import { GoMail } from "react-icons/go";
+import { RiQuestionnaireFill } from "react-icons/ri";
 
 const Options = () => {
   const [ordersLength, setOrdersLength] = useState(0);
@@ -41,6 +42,10 @@ const Options = () => {
       : "bg-transparent  border-r-[5px] border-r-transparent";
   const isSubscriptionsStyle: string =
     option === "subscriptions"
+      ? "bg-white/10  border-r-[5px] border-r-juice"
+      : "bg-transparent  border-r-[5px] border-r-transparent";
+  const isQuestionsStyle: string =
+    option === "questions"
       ? "bg-white/10  border-r-[5px] border-r-juice"
       : "bg-transparent  border-r-[5px] border-r-transparent";
   return (
@@ -82,6 +87,14 @@ const Options = () => {
       >
         <GoMail size={15} />
         Subscriptions
+      </button>
+
+      <button
+        onClick={() => router.push(`${BASE_URL}/dashboard?option=questions`)}
+        className={`text-xl font-thin flex items-center py-3 px-2 gap-2 hover:bg-white/20  ${isQuestionsStyle}`}
+      >
+        <RiQuestionnaireFill size={15} />
+        Questions
       </button>
     </div>
   );

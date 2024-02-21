@@ -217,7 +217,8 @@ export async function addNewProduct(formData: any) {
     if (!res.ok) {
       throw new Error("Failed to add product");
     }
-
+    const dataProduct = res.json();
+    return dataProduct;
     console.log("Product added successfully!");
   } catch (error) {
     console.log("Error message: Error on addNewProduct action");
@@ -243,7 +244,8 @@ export async function deleteProduct(img: string, id: string, category: string) {
     if (!res.ok) {
       throw new Error("Failed to delete product");
     }
-
+    const data = res.json();
+    return data;
     console.log("Product deleted successfully!");
   } catch (error) {
     console.log("Error message: Error on deleteProduct action");

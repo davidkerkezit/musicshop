@@ -4,7 +4,7 @@ import Button from "./Button";
 import { AiOutlineShopping } from "react-icons/ai";
 import { ProductType } from "@/libs/types";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { VscEdit } from "react-icons/vsc";
 import { BASE_URL } from "@/libs/utils";
@@ -24,6 +24,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
   const [isDeletePending, setIsDeletePending] = useState(false);
   const cartItems = useAppSelector((state) => state.cartSlice.cartItems);
   const dispatch = useDispatch<AppDispatch>();
+  const searchParams = useSearchParams();
 
   const router = useRouter();
   const deleteProductHandler = async (
@@ -36,8 +37,13 @@ const ProductCard = ({ product }: { product: ProductType }) => {
 
     e.preventDefault();
     e.stopPropagation();
-    await deleteProduct(img, id, category);
+    const data = await deleteProduct(img, id, category);
+
     setIsDeletePending(false);
+    const url = `${pathname}?${searchParams}`;
+
+    data.message =
+      "Product deleted successfull" && router.push(`${BASE_URL + url}`);
   };
   const addToCartHandler = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,

@@ -31,6 +31,7 @@ export default function RootLayout({
           <Nav />
           <Search />
           <Cart />
+
           <div className="overflow-y-hidden">{children}</div>
           <Footer />
         </StoreProvider>

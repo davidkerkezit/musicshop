@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaRegImage } from "react-icons/fa";
 import DashboardInput from "./DashboardInput";
 import { addNewProduct } from "@/libs/actions";
@@ -13,13 +13,17 @@ import DashboardTextArea from "./DashboardTextArea";
 import LoadingDots from "../UI/LoadingDots";
 import useImageUploader from "@/hooks/useImageUploader";
 import {
+  BASE_URL,
   categories,
   dashboardInputs,
   dashboardTextAreas,
   djsSubCategories,
   productSchema,
 } from "@/libs/utils";
+import { BiCloudUpload } from "react-icons/bi";
+
 import Button from "../UI/SubmitButton";
+import { useRouter } from "next/navigation";
 
 type FormFields = z.infer<typeof productSchema>;
 const AddProduct = () => {
@@ -31,10 +35,12 @@ const AddProduct = () => {
   } = useForm<FormFields>({
     resolver: zodResolver(productSchema),
   });
+  const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedSubCategory, setSubSelectedCategory] = useState<string | null>(
     null
   );
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [hasInteracted, setHasInteracted] = useState<boolean>(false);
   const [allErrors, setAllErrors] = useState({});
   const { imageSrc, handleImageUpload, imageFormatCheck, setImageSrc } =
@@ -63,7 +69,11 @@ const AddProduct = () => {
     }
 
     if (imageSrc && subCategoryChecker) {
-      await addNewProduct(formData);
+      let dataProduct = await addNewProduct(formData);
+      dataProduct.message === "Product added successfully" &&
+        router.push(
+          `${BASE_URL}/dashboard?option=editproducts&collection=softweres&page=1`
+        );
 
       event?.target.reset(); // Reset the form
       setImageSrc(null); // Reset image source
@@ -78,8 +88,8 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="w-full mx-32">
-      <h2 className=" py-4 text-3xl font-thin">Add New Product</h2>
+    <div className="w-full mx-32 mt-10">
+      {/* <h2 className=" py-4 text-3xl font-thin">Add New Product</h2> */}
       <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-row gap-20 ">
           <div className="w-1/2 flex flex-col gap-4">
@@ -92,11 +102,41 @@ const AddProduct = () => {
                   You have not selected an option
                 </p>
               )}
-              <RadioInputs
-                selectedCategory={selectedCategory}
-                setSelectedCategory={setSelectedCategory}
-                categories={categories}
-              />
+              <div className="mt-2">
+                <button
+                  type="button"
+                  onClick={() => setSelectedCategory("dj")}
+                  className={` w-[10rem] py-2 rounded-l-lg border-r-[1px] border-r-light-juice/40  ${
+                    selectedCategory === "dj"
+                      ? "bg-light-juice text-black/80"
+                      : "bg-white/10 text-white hover:bg-white/20 duration-200"
+                  }`}
+                >
+                  DJ Equipment
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedCategory("vinyls")}
+                  className={` w-[10rem] py-2   ${
+                    selectedCategory === "vinyls"
+                      ? "bg-light-juice text-black/80"
+                      : "bg-white/10 text-white hover:bg-white/20 duration-200"
+                  }`}
+                >
+                  Vinyl
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedCategory("softweres")}
+                  className={` w-[10rem] py-2 rounded-r-lg border-l-[1px] border-l-light-juice/40 ${
+                    selectedCategory === "softweres"
+                      ? "bg-light-juice text-black/80 "
+                      : "bg-white/10 text-white hover:bg-white/20 duration-200"
+                  }`}
+                >
+                  Softwere
+                </button>
+              </div>
 
               {selectedCategory === "dj" && (
                 <div className=" flex mt-2  flex-col">
@@ -106,11 +146,31 @@ const AddProduct = () => {
                       You have not selected an option
                     </p>
                   )}
-                  <RadioInputs
-                    categories={djsSubCategories}
-                    selectedCategory={selectedSubCategory}
-                    setSelectedCategory={setSubSelectedCategory}
-                  />
+                  <div className="mt-2">
+                    <button
+                      type="button"
+                      onClick={() => setSubSelectedCategory("pioneer")}
+                      className={` w-[10rem] py-2 rounded-l-lg border-r-[1px] border-r-light-juice/40  ${
+                        selectedSubCategory === "pioneer"
+                          ? "bg-light-juice text-black/80"
+                          : "bg-white/10 text-white hover:bg-white/20 duration-200"
+                      }`}
+                    >
+                      Pioneer
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setSubSelectedCategory("dennon")}
+                      className={` w-[10rem] py-2 rounded-r-lg border-l-[1px] border-l-light-juice/40 ${
+                        selectedSubCategory === "dennon"
+                          ? "bg-light-juice text-black/80 "
+                          : "bg-white/10 text-white hover:bg-white/20 duration-200"
+                      }`}
+                    >
+                      Dennon
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
@@ -149,7 +209,7 @@ const AddProduct = () => {
           </div>
           <div className="w-1/2 flex flex-col gap-4 ">
             <div
-              className={`border-juice/50 border-[1px] h-[18rem] w-[18rem] aspect-square  mt-5 flex justify-center items-center ${
+              className={`border-light-juice border-dashed border-[1px] h-[18rem]  w-[18rem] aspect-square mt-5 flex justify-center items-center relative rounded-lg ${
                 imageSrc === null && hasInteracted && "animate-shake"
               } bg-gradient-to-r from-white/5 to-white/10 overflow-hidden`}
             >
@@ -162,7 +222,21 @@ const AddProduct = () => {
                   className="  "
                 />
               ) : (
-                <FaRegImage size={40} className="text-white/50" />
+                <div className="flex flex-col items-center">
+                  <BiCloudUpload size={80} className="text-light-juice/70" />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      fileInputRef.current && fileInputRef.current.click()
+                    }
+                    className="px-3 py-1 bg-light-juice/90 hover:bg-light-juice duration-100 text-black rounded-lg"
+                  >
+                    Upload File
+                  </button>
+                  <p className="absolute bottom-2 text-sm font-thin text-white/60">
+                    Only PNG file is supported
+                  </p>
+                </div>
               )}
             </div>
             <div className="flex flex-col  gap-2 ">
@@ -171,8 +245,21 @@ const AddProduct = () => {
                   Uploaded image is not in PNG format
                 </p>
               )}
+              {imageSrc !== null && (
+                <button
+                  type="button"
+                  onClick={() =>
+                    fileInputRef.current && fileInputRef.current.click()
+                  }
+                  className="px-3 py-1 bg-light-juice/90 hover:bg-light-juice duration-100 text-black rounded-lg w-max"
+                >
+                  Upload image{" "}
+                </button>
+              )}
+
               <input
-                className=""
+                ref={fileInputRef}
+                className="hidden"
                 type="file"
                 accept="image/*"
                 onChange={handleImageUpload}

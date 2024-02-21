@@ -1,5 +1,6 @@
 import { ProductType } from "@/libs/types";
-import { Filter, Pagination, Products, SearchForm } from "..";
+import { Filter, NoProducts, Pagination, Products, SearchForm } from "..";
+import SearchQuery from "../UI/SearchQuery";
 
 const EditProducts = ({
   products,
@@ -9,11 +10,12 @@ const EditProducts = ({
   pages: number;
 }) => {
   return (
-    <div className="w-full mx-32 flex flex-col items-center">
+    <div className="w-full mx-10 flex flex-col items-center">
       <SearchForm />
       <Filter />
-      <Products products={products} />
-      <Pagination pagesNumber={pages} />
+
+      {products.length > 0 ? <Products products={products} /> : <NoProducts />}
+      {products.length > 0 && <Pagination pagesNumber={pages} />}
     </div>
   );
 };

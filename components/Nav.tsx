@@ -6,19 +6,21 @@ import { IoIosSearch } from "react-icons/io";
 import { AiOutlineShopping } from "react-icons/ai";
 import Burger from "./Burger";
 import { Menu } from "@/libs/types";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { hideSearch, toogleSearch } from "@/libs/features/searchSliderSlice";
 import { hideCart, toggleCart } from "@/libs/features/cartSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/libs/store";
 import MENU from "../constants";
+import { RiAdminLine } from "react-icons/ri";
+import { BASE_URL } from "@/libs/utils";
 
 const Nav = () => {
   const path = usePathname();
   const dispatch = useDispatch<AppDispatch>();
   const showCart = useAppSelector((state) => state.cartSlice.isVisible);
   const cartItems = useAppSelector((state) => state.cartSlice.cartItems);
-
+  const router = useRouter();
   const showSearch = useAppSelector((state) => state.searchSliderSlice);
   const showSearchHandler = () => {
     dispatch(toogleSearch());
@@ -61,11 +63,12 @@ const Nav = () => {
         </div>
         {/* Search/User/Cart */}
         <div className=" gap-4 items-center text-xl flex  z-50 ">
+          <button onClick={() => router.push(`${BASE_URL}/dashboard`)}>
+            <RiAdminLine className="cursor-pointer text-xl  " />
+          </button>
           <button onClick={showSearchHandler}>
             <IoIosSearch className="cursor-pointer text-2xl  " />
           </button>
-          {/* 
-          <FaRegUser className="cursor-pointer text-lg " /> */}
 
           <button onClick={showCartHandler} className="relative">
             {" "}

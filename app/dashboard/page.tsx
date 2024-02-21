@@ -19,7 +19,7 @@ export default async function page({
   const collection = searchParams?.collection;
 
   const { products, pages }: { products: ProductType[]; pages: number } =
-    await getProducts(page, sort, query, collection);
+    await getProducts(page, "newest", query, collection);
 
   return (
     <div>
