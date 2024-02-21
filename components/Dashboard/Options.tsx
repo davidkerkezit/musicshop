@@ -10,6 +10,7 @@ import { BASE_URL } from "@/libs/utils";
 import { FiTruck } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { getOrders } from "@/libs/actions";
+import { GoMail } from "react-icons/go";
 
 const Options = () => {
   const [ordersLength, setOrdersLength] = useState(0);
@@ -36,6 +37,10 @@ const Options = () => {
       : "bg-transparent  border-r-[5px] border-r-transparent";
   const ordersDashboardStyle: string =
     option === "orders"
+      ? "bg-white/10  border-r-[5px] border-r-juice"
+      : "bg-transparent  border-r-[5px] border-r-transparent";
+  const isSubscriptionsStyle: string =
+    option === "subscriptions"
       ? "bg-white/10  border-r-[5px] border-r-juice"
       : "bg-transparent  border-r-[5px] border-r-transparent";
   return (
@@ -68,6 +73,15 @@ const Options = () => {
             {ordersLength}
           </p>
         )}
+      </button>
+      <button
+        onClick={() =>
+          router.push(`${BASE_URL}/dashboard?option=subscriptions`)
+        }
+        className={`text-xl font-thin flex items-center py-3 px-2 gap-2 hover:bg-white/20  ${isSubscriptionsStyle}`}
+      >
+        <GoMail size={15} />
+        Subscriptions
       </button>
     </div>
   );

@@ -4,6 +4,7 @@ import { useAppSelector } from "@/libs/store";
 import { AddProduct, EditProducts } from "..";
 import { useSearchParams } from "next/navigation";
 import Orders from "./Orders";
+import Subscriptions from "./Subscriptions";
 
 const Dashboard = ({
   products,
@@ -21,6 +22,7 @@ const Dashboard = ({
         <EditProducts products={products} pages={pages} />
       )}
       {option === "orders" && <Orders />}
+      {option === "subscriptions" && <Subscriptions />}
     </>
   );
 };
