@@ -22,6 +22,14 @@ const NewArrivals = ({ products }: { products: ProductType[] }) => {
   const page = searchParams.get("page");
 
   useEffect(() => {
+    if (
+      search === null &&
+      sortParam === null &&
+      collection === null &&
+      page === null
+    ) {
+      return;
+    }
     sortRef.current?.scrollIntoView();
   }, [search, sortParam, page, collection]);
   return (

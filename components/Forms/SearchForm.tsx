@@ -20,6 +20,14 @@ const SearchForm = () => {
   const page = searchParams.get("page");
 
   useEffect(() => {
+    if (
+      search === null &&
+      sortParam === null &&
+      collection === null &&
+      page === null
+    ) {
+      return;
+    }
     isDashboardPage && searchRef.current?.scrollIntoView();
   }, [search, sortParam, page, collection]);
   const searchValueHandler = (e: React.FormEvent) => {

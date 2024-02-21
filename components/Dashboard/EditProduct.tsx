@@ -11,9 +11,9 @@ import {
   editableProductSchema,
   productSchema,
 } from "@/libs/utils";
-
+import { BiCloudUpload } from "react-icons/bi";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -33,6 +33,8 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
   const [selectedSubCategory, setSubSelectedCategory] = useState<string | null>(
     null
   );
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const editProductRef = useRef<HTMLFormElement>(null);
   const [hasInteracted, setHasInteracted] = useState<boolean>(false);
   const [inStockValue, setInStockValue] = useState<number>(
     selectedProduct.inStock
@@ -93,43 +95,62 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
     if (subCategoryChecker) {
       const { id, status } = await editProduct(formData);
       status === "success" && router.push(`${BASE_URL}/dashboard/${id}`);
+      setHasInteracted(false);
+      event?.target.reset(); // Reset the form
+      setImageSrc(null); // Reset image source
+      setSelectedCategory(null); // Reset selected category
+      setSubSelectedCategory(null); // Reset selected subcategory
     } else {
-      setTimeout(() => {
-        setHasInteracted(false);
-      }, 1000);
+      editProductRef.current?.scrollIntoView();
     }
   };
 
   return (
     <form
+      ref={editProductRef}
       className="flex flex-col gap-10 mx-14 my-20 "
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex pt-40  ">
         {/* IMG */}
-        <div className="w-1/2 bg-white/10 flex items-center justify-center relative">
-          <div className="absolute  bottom-0 left-0 right-0 top-0 bg-black/40 z-10" />
+        <div className=" bg-white/10 flex items-center justify-center relative rounded-xl border-light-juice border-[1px] border-dashed h-[28rem]  w-[28rem] ">
+          <div className="absolute  bottom-0 left-0 right-0 top-0 bg-black/60 z-10 " />
 
           {imageSrc !== null ? (
             <Image
               src={imageSrc}
               alt="Uploaded"
-              width={600}
-              height={600}
+              width={300}
+              height={300}
               className=" object-contain"
             />
           ) : (
             <Image
               src={selectedProduct.imageUrl}
               alt="product"
-              width={600}
-              height={600}
+              width={300}
+              height={300}
               className="white-shadow "
             />
           )}
-
+          <div className="flex flex-col items-center  z-10  absolute">
+            <BiCloudUpload size={80} className="text-light-juice/90" />
+            <button
+              type="button"
+              onClick={() =>
+                fileInputRef.current && fileInputRef.current.click()
+              }
+              className="px-3 py-1 bg-light-juice/90 hover:bg-light-juice duration-100 text-black rounded-lg"
+            >
+              Upload File
+            </button>
+            <p className="text-sm font-thin text-white/60 pt-4">
+              Only PNG file is supported
+            </p>
+          </div>
           <input
-            className="absolute bottom-0 left-0 right-0 top-0 mx-auto my-auto  w-max h-max z-10"
+            ref={fileInputRef}
+            className="absolute bottom-0 left-0 right-0 top-0 mx-auto my-auto  w-max h-max z-10 hidden"
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
@@ -146,11 +167,41 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
                 You have not selected an option
               </p>
             )}
-            <RadioInputs
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-              categories={categories}
-            />
+            <div className="mt-2">
+              <button
+                type="button"
+                onClick={() => setSelectedCategory("dj")}
+                className={` w-[10rem] py-2 rounded-l-lg border-r-[1px] border-r-light-juice/40  ${
+                  selectedCategory === "dj"
+                    ? "bg-light-juice text-black/80"
+                    : "bg-white/10 text-white hover:bg-white/20 duration-200"
+                }`}
+              >
+                DJ Equipment
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedCategory("vinyls")}
+                className={` w-[10rem] py-2   ${
+                  selectedCategory === "vinyls"
+                    ? "bg-light-juice text-black/80"
+                    : "bg-white/10 text-white hover:bg-white/20 duration-200"
+                }`}
+              >
+                Vinyl
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedCategory("softweres")}
+                className={` w-[10rem] py-2 rounded-r-lg border-l-[1px] border-l-light-juice/40 ${
+                  selectedCategory === "softweres"
+                    ? "bg-light-juice text-black/80 "
+                    : "bg-white/10 text-white hover:bg-white/20 duration-200"
+                }`}
+              >
+                Softwere
+              </button>
+            </div>
 
             {selectedCategory === "dj" && (
               <div className=" flex mt-2  flex-col">
@@ -160,11 +211,31 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
                     You have not selected an option
                   </p>
                 )}
-                <RadioInputs
-                  categories={djsSubCategories}
-                  selectedCategory={selectedSubCategory}
-                  setSelectedCategory={setSubSelectedCategory}
-                />
+                <div className="mt-2">
+                  <button
+                    type="button"
+                    onClick={() => setSubSelectedCategory("pioneer")}
+                    className={` w-[10rem] py-2 rounded-l-lg border-r-[1px] border-r-light-juice/40  ${
+                      selectedSubCategory === "pioneer"
+                        ? "bg-light-juice text-black/80"
+                        : "bg-white/10 text-white hover:bg-white/20 duration-200"
+                    }`}
+                  >
+                    Pioneer
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setSubSelectedCategory("dennon")}
+                    className={` w-[10rem] py-2 rounded-r-lg border-l-[1px] border-l-light-juice/40 ${
+                      selectedSubCategory === "dennon"
+                        ? "bg-light-juice text-black/80 "
+                        : "bg-white/10 text-white hover:bg-white/20 duration-200"
+                    }`}
+                  >
+                    Dennon
+                  </button>
+                </div>
               </div>
             )}
           </div>

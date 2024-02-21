@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/libs/store";
 import MENU from "../constants";
 import { BASE_URL } from "@/libs/utils";
-import { GrUserAdmin } from "react-icons/gr";
+import { RiMapPinUserLine } from "react-icons/ri";
 
 const Nav = () => {
   const path = usePathname();
@@ -64,7 +64,7 @@ const Nav = () => {
         {/* Search/User/Cart */}
         <div className=" gap-4 items-center text-xl flex  z-50 ">
           <button onClick={() => router.push(`${BASE_URL}/dashboard`)}>
-            <GrUserAdmin className="cursor-pointer text-xl  " />
+            <RiMapPinUserLine className="cursor-pointer text-2xl font-thin   " />
           </button>
           <button onClick={showSearchHandler}>
             <IoIosSearch className="cursor-pointer text-2xl  " />

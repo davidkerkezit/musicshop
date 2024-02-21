@@ -40,6 +40,7 @@ const AddProduct = () => {
   const [selectedSubCategory, setSubSelectedCategory] = useState<string | null>(
     null
   );
+  const addProductRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [hasInteracted, setHasInteracted] = useState<boolean>(false);
   const [allErrors, setAllErrors] = useState({});
@@ -74,22 +75,19 @@ const AddProduct = () => {
         router.push(
           `${BASE_URL}/dashboard?option=editproducts&collection=softweres&page=1`
         );
-
+      setHasInteracted(false);
       event?.target.reset(); // Reset the form
       setImageSrc(null); // Reset image source
       setSelectedCategory(null); // Reset selected category
       setSubSelectedCategory(null); // Reset selected subcategory
-      setHasInteracted(false); // Reset interaction state
     } else {
-      setTimeout(() => {
-        setHasInteracted(false);
-      }, 1000);
+      addProductRef.current?.scrollIntoView();
     }
   };
 
   return (
-    <div className="w-full mx-32 mt-10">
-      {/* <h2 className=" py-4 text-3xl font-thin">Add New Product</h2> */}
+    <div className="w-full mx-32 mt-5" ref={addProductRef}>
+      <h2 className=" py-4 text-3xl font-thin mb-5">Add New Product</h2>
       <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-row gap-20 ">
           <div className="w-1/2 flex flex-col gap-4">
