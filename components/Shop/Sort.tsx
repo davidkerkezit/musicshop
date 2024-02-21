@@ -1,5 +1,8 @@
+"use client";
 import { sortType } from "@/libs/types";
-import React from "react";
+import { useSearchParams } from "next/navigation";
+
+import React, { useEffect, useRef } from "react";
 
 const Sort = ({
   sort,

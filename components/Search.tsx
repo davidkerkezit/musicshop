@@ -6,7 +6,7 @@ const Search = () => {
 
   return (
     <div
-      className={`absolute z-50 w-[80%] h-max  bg-white backdrop-blur-xl text-center text-4xl mx-auto left-0 right-0 rounded-full flex items-center ${
+      className={`absolute z-50 w-[30%] h-max  bg-white backdrop-blur-xl text-center text-4xl mx-auto left-0 right-0 rounded-full flex items-center ${
         showSearch && "animate-openFromTop"
       } ${showSearch === false && "animate-closeToTop"} ${
         showSearch === null && "-top-[40%]"

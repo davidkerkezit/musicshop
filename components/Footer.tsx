@@ -8,9 +8,36 @@ import { GrInstagram } from "react-icons/gr";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import MENU from "@/constants";
 import { Menu } from "@/libs/types";
-import { BASE_URL } from "@/libs/utils";
+import { BASE_URL, subscriptions } from "@/libs/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
+import { addSubscription } from "@/libs/actions";
+import { usePathname, useSearchParams } from "next/navigation";
+type FormFields = z.infer<typeof subscriptions>;
 
 const Footer = () => {
+  const path = usePathname();
+  const params = useSearchParams();
+  const categoryParam = params.get("collection");
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormFields>({
+    defaultValues: {},
+    resolver: zodResolver(subscriptions),
+  });
+  const onSubmit: SubmitHandler<FormFields> = async (data, e) => {
+    e?.preventDefault();
+
+    await addSubscription(data.email);
+    reset({
+      email: "",
+    });
+  };
   return (
     <footer className="bg-black flex flex-col ">
       <div className="flex justify-between  pb-5 pt-10 md:py-10 gap-1 md:border-b-[1px] border-b-white/20 md:mx-6   ">
@@ -49,7 +76,11 @@ const Footer = () => {
                 <Link
                   key={index}
                   href={item.link}
-                  className="md:border-l-[3px] md:border-l-juice md:pl-3 text-neutral-200 font-normal"
+                  className={`${
+                    path === item.link
+                      ? "md:border-l-[3px] md:border-l-juice text-neutral-200"
+                      : "md:border-l-[3px] md:border-l-transparent text-neutral-400"
+                  } md:pl-3  hover:text-neutral-50 duration-200 font-normal`}
                 >
                   {item.label}
                 </Link>
@@ -57,7 +88,7 @@ const Footer = () => {
             })}
             <Link
               href={`${BASE_URL}/dashboard`}
-              className="md:border-l-[3px] md:border-l-juice md:pl-3 text-neutral-200 font-normal"
+              className=" md:pl-3 text-neutral-200 font-normal"
             >
               Dashboard
             </Link>
@@ -67,20 +98,32 @@ const Footer = () => {
           <p className="text-lg font-medium">Categories</p>
           <div className="flex flex-col text-neutral-400 text-base font-thin items-center md:items-start ">
             <Link
-              href={"/"}
-              className="md:border-l-[3px] md:border-l-juice md:pl-3 text-neutral-200 font-normal"
+              href={`${BASE_URL}/shop?collection=vinyls`}
+              className={`${
+                categoryParam === "vinyls"
+                  ? "md:border-l-[3px] md:border-l-juice text-neutral-200"
+                  : "md:border-l-[3px] md:border-l-transparent text-neutral-400"
+              } md:pl-3 text-neutral-200 font-normal`}
             >
               Vinyls
             </Link>
             <Link
-              href={"/"}
-              className="md:border-l-[1px] md:border-l-transparent md:pl-3"
+              href={`${BASE_URL}/shop?collection=djequipments`}
+              className={`${
+                categoryParam === "djequipments"
+                  ? "md:border-l-[3px] md:border-l-juice text-neutral-200"
+                  : "md:border-l-[3px] md:border-l-transparent text-neutral-400"
+              } md:pl-3 text-neutral-200 font-normal`}
             >
               DJ Equipments
             </Link>
             <Link
-              href={"/"}
-              className="md:border-l-[1px] md:border-l-transparent md:pl-3"
+              href={`${BASE_URL}/shop?collection=softweres`}
+              className={`${
+                categoryParam === "softweres"
+                  ? "md:border-l-[3px] md:border-l-juice text-neutral-200"
+                  : "md:border-l-[3px] md:border-l-transparent text-neutral-400"
+              } md:pl-3 text-neutral-200 font-normal`}
             >
               Softweres
             </Link>
@@ -89,15 +132,23 @@ const Footer = () => {
         <div className="flex flex-col gap-4 col-span-2 md:col-span-1	mt-4  md:w-full  items-center">
           <p className="text-lg font-medium">Subscribe</p>
           <div className="flex flex-col gap-2">
-            <div className="bg-white flex items-center ">
+            <form
+              className="bg-white flex items-center "
+              onSubmit={handleSubmit(onSubmit)}
+            >
               {" "}
               <input
                 type="text"
-                className="bg-transparent w-full py-1 pl-2 "
-                placeholder="Email Address"
+                {...register("email")}
+                className="bg-transparent w-full py-1 pl-2 text-black text-sm focus:outline-none "
+                placeholder={`${
+                  errors.email ? errors.email.message : "Add your email address"
+                }`}
               />
-              <FaAngleDoubleRight className="text-juice text-4xl pr-1" />
-            </div>
+              <button onSubmit={handleSubmit(onSubmit)}>
+                <FaAngleDoubleRight className="text-juice text-4xl pr-1" />
+              </button>
+            </form>
             <p className="text-neutral-400 font-thin italic text-sm">
               Get digital marketing updates in your mailbox
             </p>
@@ -106,10 +157,10 @@ const Footer = () => {
       </div>
       <div className="bg-neutral-900/30 relative pt-5 pb-12">
         <div className=" flex w-max mx-auto gap-7 ">
-          <div className="text-xl p-3 rounded-full border-[1px] border-neutral-400 text-neutral-400">
+          <div className="text-xl p-3 rounded-full border-[1px] border-neutral-400 text-neutral-400 hover:text-blue-500 duration-200 cursor-pointer hover:border-blue-500 hover:bg-white/10">
             <GrFacebookOption />
           </div>
-          <div className="text-xl p-3 rounded-full border-[1px] border-neutral-400 text-neutral-400">
+          <div className="text-xl p-3 rounded-full border-[1px] border-neutral-400 text-neutral-400 hover:text-orange-500 duration-200 cursor-pointer hover:border-orange-500 hover:bg-white/10">
             <GrInstagram />
           </div>
         </div>

@@ -129,6 +129,15 @@ export const order = z.object({
   phoneNumber: z.string().min(1),
   moreInformation: z.string().min(1),
 });
+export const contact = z.object({
+  name: z.string().min(1),
+  email: z.string().email(),
+
+  message: z.string().min(20),
+});
+export const subscriptions = z.object({
+  email: z.string().email(),
+});
 let BASE_URL: string;
 
 if (process.env.NODE_ENV === "production") {

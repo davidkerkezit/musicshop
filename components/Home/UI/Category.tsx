@@ -38,11 +38,11 @@ const Category = ({
         src={imageSrc}
         className={`absolute left-0 right-0 mx-auto -top-6 lg:-top-14 lg:relative bottom-0 my-auto    group cursor-pointer ${hover} w-[45%] md:w-[40%] lg:w-[8rem]`}
       />
-      <div className="  w-full h-[12rem] absolute bottom-0 flex flex-col items-center gap-5 group cursor-pointer px-4">
+      <div className="  w-full h-[7rem] absolute bottom-0 flex flex-col items-center gap-5 group cursor-pointer px-4 ">
         <p className="italic drop-shadow-lg text-center  h-[5rem] text-base absolute px-2 hidden lg:block text-white/70  ">
           "{quote}"
         </p>
-        <p className="text-sm md:text-base uppercase font-semibold lg:group-hover:scale-125 lg:duration-300  absolute bottom-0 py-3 bg-black/60 w-full text-center lg:bg-transparent lg:text-[1.8rem] lg:bottom-10">
+        <p className="text-sm md:text-base uppercase font-semibold lg:group-hover:scale-125 lg:duration-300  absolute bottom-0 py-3 bg-black/60 w-full text-center lg:bg-transparent lg:text-[1.8rem] lg:bottom-3">
           {name}
         </p>
       </div>

@@ -8,9 +8,38 @@ import { GrInstagram } from "react-icons/gr";
 import { GiFlowerStar } from "react-icons/gi";
 import Image from "next/image";
 import LOGO from "../../assets/logo.png";
-import Button from "../UI/Button";
+import Button from "../UI/SubmitButton";
+import { sendMessage } from "@/libs/actions";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
+import { contact } from "@/libs/utils";
 
+type FormFields = z.infer<typeof contact>;
 const ContactForm = () => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormFields>({
+    defaultValues: {},
+    resolver: zodResolver(contact),
+  });
+
+  const onSubmit: SubmitHandler<FormFields> = async (data, e) => {
+    e?.preventDefault();
+    console.log("uslo");
+
+    await sendMessage(data.name, data.email, data.message);
+    reset({
+      name: "",
+      email: "",
+      message: "",
+    });
+  };
+
   return (
     <div className="bg-gradient-to-r from-neutral-900 to-neutral-800 flex  h-max overflow-hidden flex-col items-center">
       <div className="w-full h-max md:my-5 my-5 flex flex-col lg:flex-row gap-5  items-center justify-center ">
@@ -71,13 +100,22 @@ const ContactForm = () => {
               Forming partnerships will help to share good vibes
             </p>
           </div>
-          <div className="w-full px-5 md:px-20 flex flex-col gap-5">
+          <form
+            className="w-full px-5 md:px-20 flex flex-col gap-5"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <div className="flex flex-col  w-full gap-1">
               <div className="flex gap-1">
                 <label htmlFor="">Name</label>
                 <GiFlowerStar className="text-xs text-red-900" />
+                {errors.name && (
+                  <div className="text-red-500 text-sm">
+                    {errors.name.message}
+                  </div>
+                )}
               </div>
               <input
+                {...register("name")}
                 type="text"
                 className="bg-transparent border-b-[1px] border-b-light-juice focus:outline-none font-light px-1 text-lg py-1 rounded-none"
               />
@@ -87,9 +125,15 @@ const ContactForm = () => {
               <div className="flex gap-1">
                 <label htmlFor="">Email</label>
                 <GiFlowerStar className="text-xs text-red-900" />
+                {errors.email && (
+                  <div className="text-red-500 text-sm">
+                    {errors.email.message}
+                  </div>
+                )}
               </div>
               <input
-                type="text"
+                {...register("email")}
+                type="email"
                 className="bg-transparent border-b-[1px] border-b-light-juice focus:outline-none font-light px-1 text-lg py-1 rounded-none"
               />
             </div>
@@ -97,14 +141,26 @@ const ContactForm = () => {
               <div className="flex gap-1">
                 <label htmlFor="">Message</label>
                 <GiFlowerStar className="text-xs text-red-900" />
+                {errors.message && (
+                  <div className="text-red-500 text-sm">
+                    {errors.message.message}
+                  </div>
+                )}
               </div>
               <input
+                {...register("message")}
                 type="text"
                 className="bg-transparent border-b-[1px] border-b-light-juice focus:outline-none font-light px-1 text-lg py-1 rounded-none"
               />
             </div>
-          </div>
-          {/* <Button label="Contact" icon={<IoIosMail />} /> */}
+            <div className=" flex justify-center">
+              <Button
+                label="Contact"
+                icon={<IoIosMail />}
+                isSubmitting={isSubmitting}
+              />
+            </div>
+          </form>
         </div>
       </div>
     </div>

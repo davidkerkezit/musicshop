@@ -548,3 +548,59 @@ export async function completeOrder(id: string, isChecked: boolean) {
     console.log("Error message: Error on addOrder action");
   }
 }
+
+export async function sendMessage(
+  name: string,
+  email: string,
+  message: string
+) {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/contact`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        message,
+      }),
+    });
+    if (!res.ok) {
+      throw new Error("Failed to add order");
+    }
+    const data = res.json();
+    return data;
+    console.log("Order added successfully!");
+  } catch (error) {
+    console.log("Error message: Error on addOrder action");
+  }
+}
+export async function addSubscription(email: string) {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/subscriptions`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
+        },
+        body: JSON.stringify({
+          email,
+        }),
+      }
+    );
+    if (!res.ok) {
+      throw new Error("Failed to add order");
+    }
+    const data = res.json();
+    return data;
+    console.log("Order added successfully!");
+  } catch (error) {
+    console.log("Error message: Error on addOrder action");
+  }
+}

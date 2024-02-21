@@ -67,7 +67,7 @@ const page = () => {
     <div>
       <PageBanner page="Checkout" />
       <div className="z-10 relative mb-20">
-        {isSuccess && (
+        {!isSuccess && (
           <div className="flex justify-center py-8 items-center flex-col">
             <h4 className="text-2xl font-bold">Payment method</h4>
             <p className="text-juice  text-sm">

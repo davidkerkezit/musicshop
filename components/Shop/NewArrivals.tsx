@@ -11,8 +11,19 @@ import { Pagination, Mousewheel, Keyboard, Autoplay } from "swiper/modules";
 import { ProductType } from "@/libs/types";
 
 import ProductCard from "../UI/ProductCard";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 const NewArrivals = ({ products }: { products: ProductType[] }) => {
+  const sortRef = useRef<HTMLDivElement>(null);
+  const searchParams = useSearchParams();
+  const search = searchParams.get("q");
+  const sortParam = searchParams.get("sort");
+  const collection = searchParams.get("collection");
+  const page = searchParams.get("page");
+
+  useEffect(() => {
+    sortRef.current?.scrollIntoView();
+  }, [search, sortParam, page, collection]);
   return (
     <div className="py-10 bg-gradient-to-r from-gray-900/20 to-gray-500/20">
       <h3 className="mx-2 text-3xl py-2 font-bold">
@@ -39,6 +50,7 @@ const NewArrivals = ({ products }: { products: ProductType[] }) => {
           return (
             <SwiperSlide key={index}>
               <ProductCard product={product} />
+              <div ref={sortRef} className="pb-10" />
             </SwiperSlide>
           );
         })}
