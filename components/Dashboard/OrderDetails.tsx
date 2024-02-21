@@ -2,21 +2,42 @@
 import { completeOrder, getOrders } from "@/libs/actions";
 import React, { useState } from "react";
 import { FaAngleDoubleRight, FaAngleDoubleDown } from "react-icons/fa";
+import LoadingDots from "../UI/LoadingDots";
 interface OrderDetailsProps {
   order: any; // Replace 'any' with the actual type of order
   date: string;
   setAllOrders: React.Dispatch<React.SetStateAction<any[]>>;
+  setOrderLenght: React.Dispatch<React.SetStateAction<any[]>>;
+  selectedCategory: string;
 }
 const OrderDetails: React.FC<OrderDetailsProps> = ({
   order,
   date,
   setAllOrders,
+  setOrderLenght,
+  selectedCategory,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const completeOrderHandler = async (id: string, isChecked: boolean) => {
-    const { product } = await completeOrder(id, isChecked);
-    const { orders } = await getOrders();
-    setAllOrders(orders);
+    setIsLoading(true);
+    const data = await Promise.all([
+      await completeOrder(id, isChecked),
+      await getOrders(),
+    ]);
+    selectedCategory === "allorders" && setAllOrders(data[1].orders);
+    selectedCategory === "completed" &&
+      setAllOrders(
+        data[1].orders.filter((order: any) => order.isChecked === true)
+      );
+    selectedCategory === "inproccess" &&
+      setAllOrders(
+        data[1].orders.filter((order: any) => order.isChecked === false)
+      );
+
+    setOrderLenght(data[1].orders);
+    setIsLoading(false);
   };
   const toggleDetails = () => {
     setIsOpen(false);
@@ -100,7 +121,10 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
       <div className="bg-white/10 flex flex-col justify-center items-center py-4 gap-1">
         <p>Delivery Status:</p>
         <p className="bg-yellow-600 w-max px-4 rounded-md font-thin text-sm">
-          {!order.isChecked && "In procces"}
+          {!order.isChecked && "In proccess"}
+        </p>
+        <p className="bg-green-600 w-max px-4 rounded-md font-thin text-sm">
+          {order.isChecked && "Completed"}
         </p>
       </div>
       <div className="bg-white/10  flex justify-center items-center pb-4 gap-4">
@@ -110,13 +134,17 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
             order.isChecked === false
               ? "bg-green-600 hover:bg-green-500"
               : "bg-yellow-600 hover:bg-yellow-500"
-          } rounded-md text-white w-[6rem] `}
+          } rounded-md text-white w-[7rem] `}
         >
-          {order.isChecked ? "In procces" : "Complete"}
+          {isLoading ? (
+            <LoadingDots />
+          ) : (
+            <p> {order.isChecked ? "In proccess" : "Complete"}</p>
+          )}
         </button>
         <button
           onClick={toggleDetails}
-          className="px-2 py-1 border-[1px] border-white/20 rounded-md font-thin w-[6rem]  hover:bg-white/10"
+          className="px-2 py-1 border-[1px] border-white/20 rounded-md font-thin w-[7rem]  hover:bg-white/10"
         >
           Close
         </button>

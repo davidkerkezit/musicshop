@@ -86,8 +86,14 @@ const config: Config = {
         "75%": { transform: " translateX(-13px)" },
         "100%": { transform: "translateX(0)" },
       },
+      grayscale: {
+        "0%": { filter: "grayscale(0)" },
+        "50%": { filter: "grayscale(1)" },
+        "100%": { filter: "grayscale(0)" },
+      },
     },
     animation: {
+      grayscale: "grayscale 1s infinite linear",
       menuFirst: "menuFirst .3s linear forwards ",
       shake: "shake .4s linear forwards ",
       menuThird: "menuThird .3s linear forwards ",
