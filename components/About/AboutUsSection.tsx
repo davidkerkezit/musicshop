@@ -23,7 +23,7 @@ const AboutUsSection = ({
         />
       </div>
       <div className={`flex flex-col gap-5 w-full ${isEvenStyle}`}>
-        {/* <h3 className="text-4xl font-semibold">{content.header}</h3> */}
+        <h3 className="text-4xl font-semibold">{content.header}</h3>
         <p className="2xl:text-lg text-white/60 font-extralight  w-full xl:text-base text-sm">
           {content.text}
         </p>

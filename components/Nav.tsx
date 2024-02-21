@@ -12,8 +12,8 @@ import { hideCart, toggleCart } from "@/libs/features/cartSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/libs/store";
 import MENU from "../constants";
-import { RiAdminLine } from "react-icons/ri";
 import { BASE_URL } from "@/libs/utils";
+import { GrUserAdmin } from "react-icons/gr";
 
 const Nav = () => {
   const path = usePathname();
@@ -64,7 +64,7 @@ const Nav = () => {
         {/* Search/User/Cart */}
         <div className=" gap-4 items-center text-xl flex  z-50 ">
           <button onClick={() => router.push(`${BASE_URL}/dashboard`)}>
-            <RiAdminLine className="cursor-pointer text-xl  " />
+            <GrUserAdmin className="cursor-pointer text-xl  " />
           </button>
           <button onClick={showSearchHandler}>
             <IoIosSearch className="cursor-pointer text-2xl  " />
