@@ -21,6 +21,10 @@ const Sort = ({
         value={selectedSort}
         onChange={handleSortChange}
       >
+        <option value="" disabled selected hidden>
+          Select sort option
+        </option>
+
         {sort.map((option) => {
           return (
             <option key={option.query} value={option.query}>

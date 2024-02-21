@@ -73,7 +73,7 @@ const AddProduct = () => {
       let dataProduct = await addNewProduct(formData);
       dataProduct.message === "Product added successfully" &&
         router.push(
-          `${BASE_URL}/dashboard?option=editproducts&collection=softweres&page=1`
+          `${BASE_URL}/dashboard?option=editproducts&collection=allproducts&page=1`
         );
       setHasInteracted(false);
       event?.target.reset(); // Reset the form
