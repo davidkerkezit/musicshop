@@ -3,22 +3,24 @@ import { completeOrder, getOrders } from "@/libs/actions";
 import React, { useState } from "react";
 import { FaAngleDoubleRight, FaAngleDoubleDown } from "react-icons/fa";
 import LoadingDots from "../UI/LoadingDots";
+import { AppDispatch, useAppSelector } from "@/libs/store";
+import { useDispatch } from "react-redux";
+import { ordersUpdate } from "@/libs/features/ordersSlice";
 interface OrderDetailsProps {
   order: any; // Replace 'any' with the actual type of order
   date: string;
-  setAllOrders: React.Dispatch<React.SetStateAction<any[]>>;
-  setOrderLenght: React.Dispatch<React.SetStateAction<any[]>>;
   selectedCategory: string;
 }
 const OrderDetails: React.FC<OrderDetailsProps> = ({
   order,
   date,
-  setAllOrders,
-  setOrderLenght,
+
   selectedCategory,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const completeOrderHandler = async (id: string, isChecked: boolean) => {
     setIsLoading(true);
@@ -26,17 +28,9 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
       await completeOrder(id, isChecked),
       await getOrders(),
     ]);
-    selectedCategory === "allorders" && setAllOrders(data[1].orders);
-    selectedCategory === "completed" &&
-      setAllOrders(
-        data[1].orders.filter((order: any) => order.isChecked === true)
-      );
-    selectedCategory === "inproccess" &&
-      setAllOrders(
-        data[1].orders.filter((order: any) => order.isChecked === false)
-      );
-
-    setOrderLenght(data[1].orders);
+    dispatch(
+      ordersUpdate({ orders: data[1].orders, category: selectedCategory })
+    );
     setIsLoading(false);
   };
   const toggleDetails = () => {

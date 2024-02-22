@@ -14,17 +14,20 @@ import { GoMail } from "react-icons/go";
 import { RiQuestionnaireFill } from "react-icons/ri";
 
 const Options = () => {
-  const [ordersLength, setOrdersLength] = useState(0);
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getOrders();
+  const inProccessOrders = useAppSelector(
+    (state) => state.ordersSlice.inProccess
+  );
 
-      setOrdersLength(
-        data.orders.filter((item: any) => item.isChecked === false).length
-      );
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const data = await getOrders();
+
+  //     setOrdersLength(
+  //       data.orders.filter((item: any) => item.isChecked === false).length
+  //     );
+  //   };
+  //   fetchData();
+  // }, []);
   const router = useRouter();
   const searchParams = useSearchParams();
   const option = searchParams.get("option") || "addproduct";
@@ -73,9 +76,9 @@ const Options = () => {
           <FiTruck size={15} />
           <p>Orders</p>
         </div>
-        {ordersLength > 0 && (
+        {inProccessOrders.length > 0 && (
           <p className="bg-light-juice text-black w-[1.3rem] h-[1.3rem] rounded-full flex items-center justify-center text-sm">
-            {ordersLength}
+            {inProccessOrders.length}
           </p>
         )}
       </button>

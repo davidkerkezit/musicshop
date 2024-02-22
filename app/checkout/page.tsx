@@ -315,7 +315,7 @@ const page = () => {
                 </div>
               </div>
               <div className="mb-2 flex flex-col items-center">
-                <div className="flex justify-between py-3 text-xl px-2 font-thin border-y-[1px] border-y-white/30  w-full  ">
+                <div className="flex justify-between py-3 text-xl px-2 font-thin border-y-[1px] border-y-white/30  w-full bg-black/30 ">
                   <p>Total price:</p>
                   <p className="bg-light-juice text-black px-2">
                     ${totalPrice}.00$
@@ -326,7 +326,7 @@ const page = () => {
                   type="submit"
                   value="Done"
                   disabled={isLoading}
-                  className="text-xl mx-auto w-[40%] text-center bg-white/10 py-2 font-thin mt-2 border-[1px] border-light-juice/40 rounded-lg"
+                  className="text-xl mx-auto w-[40%] cursor-pointer text-center bg-gradient-to-r from-black/20 to-black/30 py-2 font-thin mt-2 border-[1px] border-light-juice/40 hover:border-light-juice rounded-lg hover:from-black/20 hover:to-black/10 duration-200 "
                 />
               </div>
             </div>

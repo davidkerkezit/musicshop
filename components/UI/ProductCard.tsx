@@ -62,9 +62,9 @@ const ProductCard = ({ product }: { product: ProductType }) => {
           ? `${BASE_URL}/shop/${product._id}`
           : `${BASE_URL}/dashboard/${product._id}`
       }`}
-      className="mx-2  bg-[#313131] rounded-2xl h-max pt-[1px] "
+      className="mx-2  bg-[#313131] rounded-2xl h-[50rem] pt-[1px] "
     >
-      <div className="w-[90%] bg-[#e1e1e1] aspect-square mx-auto mt-4 rounded-2xl flex items-center justify-center ">
+      <div className="w-[90%] bg-[#e1e1e1] aspect-square mx-auto md:mt-0 lg:mt-4 rounded-2xl flex items-center justify-center ">
         <Image
           width={300}
           height={300}

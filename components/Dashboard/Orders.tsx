@@ -2,26 +2,35 @@
 import { getOrders } from "@/libs/actions";
 import React, { Suspense, useEffect, useState } from "react";
 import Loading from "../UI/Loading";
+import { AppDispatch, useAppSelector } from "@/libs/store";
+import { useDispatch } from "react-redux";
+import { ordersUpdate } from "@/libs/features/ordersSlice";
 const OrderDetails = React.lazy(() => import("./OrderDetails")); // Lazy load OrderDetails component
 
 const Orders = () => {
   const [selectedCategory, setSelectedCategory] = useState("allorders");
-  const [allOrders, setAllOrders] = useState<any[]>([]);
   const [ordersLenght, setOrderLenght] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const selectedOrdersCategory = useAppSelector(
+    (state) => state.ordersSlice.selectedOrdersCategory
+  );
+  const allOrders = useAppSelector((state) => state.ordersSlice.allOrders);
+  const inProccessOrders = useAppSelector(
+    (state) => state.ordersSlice.inProccess
+  );
+  const completedOrders = useAppSelector(
+    (state) => state.ordersSlice.completed
+  );
+
   useEffect(() => {
     setIsLoading(true);
 
     const fetchData = async () => {
       const { orders } = await getOrders();
-
-      selectedCategory === "allorders" && setAllOrders(orders);
-      selectedCategory === "completed" &&
-        setAllOrders(orders.filter((order: any) => order.isChecked === true));
-      selectedCategory === "inproccess" &&
-        setAllOrders(orders.filter((order: any) => order.isChecked === false));
       setIsLoading(false);
-      setOrderLenght(orders);
+      dispatch(ordersUpdate({ orders, category: selectedCategory }));
     };
     fetchData();
   }, [selectedCategory]);
@@ -47,7 +56,7 @@ const Orders = () => {
             >
               <p> All Orders</p>
               <p className="bg-white rounded-full text-black w-[1rem] h-[1rem] flex items-center justify-center p-3">
-                {ordersLenght.length}
+                {allOrders.length}
               </p>
             </button>
             <button
@@ -63,10 +72,7 @@ const Orders = () => {
             >
               <p>In Proccess</p>{" "}
               <p className="bg-white text-black rounded-full w-[1rem] h-[1rem] flex items-center justify-center p-3 gap-2">
-                {
-                  ordersLenght.filter((order: any) => order.isChecked === false)
-                    .length
-                }
+                {inProccessOrders.length}
               </p>
             </button>
             <button
@@ -82,10 +88,7 @@ const Orders = () => {
             >
               <p>Completed</p>
               <p className="bg-white text-black rounded-full w-[1rem] h-[1rem] flex items-center justify-center p-3">
-                {
-                  ordersLenght.filter((order: any) => order.isChecked === true)
-                    .length
-                }
+                {completedOrders.length}
               </p>
             </button>
           </div>
@@ -109,8 +112,8 @@ const Orders = () => {
               Payment
             </p>
           </div>
-          {allOrders.length > 0 &&
-            allOrders.map((order: any) => {
+          {selectedOrdersCategory.length > 0 &&
+            selectedOrdersCategory.map((order: any) => {
               const dateObject = new Date(order.createdAt);
               const formattedDate = `${dateObject
                 .getDate()
@@ -128,8 +131,6 @@ const Orders = () => {
                   <OrderDetails
                     order={order}
                     date={formattedDate}
-                    setAllOrders={setAllOrders}
-                    setOrderLenght={setOrderLenght}
                     selectedCategory={selectedCategory}
                   />
                 </Suspense>

@@ -9,7 +9,7 @@ const Products = ({ products }: { products: ProductType[] }) => {
   return (
     <div className=" w-[80%] mx-auto">
       <SearchQuery />
-      <div className=" grid grid-cols-4 gap-2">
+      <div className=" grid lg:grid-cols-4 grid-cols-2 gap-2">
         {products.map((product: ProductType, index: number) => {
           return <ProductCard product={product} />;
         })}

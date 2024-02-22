@@ -33,7 +33,7 @@ const Nav = () => {
   };
 
   return (
-    <header className="w-full  z-40 fixed ">
+    <header className="w-full  z-40 fixed  lg:bg-red-500 md:bg-blue-400  sm:bg-yellow ">
       <nav className="  flex justify-between items-center md:px-8 px-2   py-5  bg-darkness/50 backdrop-blur-sm border-b-[1px] border-juice/5 ">
         {/* Burger menu */}
         <div className="block md:hidden">
@@ -74,7 +74,7 @@ const Nav = () => {
             {" "}
             <AiOutlineShopping className="cursor-pointer text-2xl " />{" "}
             {cartItems.length > 0 && (
-              <div className="bg-juice rounded-full absolute -top-[4px] left-[15px] w-[15px] h-[15px] flex items-center justify-center text-xs  lg:text-sm">
+              <div className="bg-juice rounded-full absolute -top-[8px] left-[15px] w-[15px] h-[15px] flex items-center justify-center text-xs p-[10px]  lg:text-sm">
                 {cartItems.length}
               </div>
             )}
