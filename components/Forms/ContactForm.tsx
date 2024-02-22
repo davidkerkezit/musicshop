@@ -117,7 +117,7 @@ const ContactForm = () => {
               <input
                 {...register("name")}
                 type="text"
-                className="bg-transparent border-b-[1px] border-b-light-juice focus:outline-none font-light px-1 text-lg py-1 rounded-none"
+                className="text-white bg-transparent border-b-[1px] border-b-light-juice focus:outline-none font-light px-1 text-lg py-1 rounded-none"
               />
             </div>
             <div className="flex flex-col  w-full gap-1">
@@ -134,7 +134,7 @@ const ContactForm = () => {
               <input
                 {...register("email")}
                 type="email"
-                className="bg-transparent border-b-[1px] border-b-light-juice focus:outline-none font-light px-1 text-lg py-1 rounded-none"
+                className="text-white bg-transparent border-b-[1px] border-b-light-juice focus:outline-none font-light px-1 text-lg py-1 rounded-none"
               />
             </div>
             <div className="flex flex-col  w-full gap-1">
@@ -150,7 +150,7 @@ const ContactForm = () => {
               <input
                 {...register("message")}
                 type="text"
-                className="bg-transparent border-b-[1px] border-b-light-juice focus:outline-none font-light px-1 text-lg py-1 rounded-none"
+                className="text-white bg-transparent border-b-[1px] border-b-light-juice focus:outline-none font-light px-1 text-lg py-1 rounded-none"
               />
             </div>
             <div className=" flex justify-center">

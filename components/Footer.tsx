@@ -23,7 +23,7 @@ const Footer = () => {
   const {
     register,
     handleSubmit,
-    setValue,
+
     reset,
     formState: { errors, isSubmitting },
   } = useForm<FormFields>({
@@ -34,6 +34,7 @@ const Footer = () => {
     e?.preventDefault();
 
     await addSubscription(data.email);
+
     reset({
       email: "",
     });

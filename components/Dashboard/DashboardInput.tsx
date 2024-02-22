@@ -35,7 +35,7 @@ const DashboardInput = ({
 
       <input
         onChange={(e) => setValue("name", e.target.value)}
-        className="bg-transparent border-light-juice border-[1px] rounded-lg p-2 placeholder:font-thin text-sm focus:outline-none focus:border-juice "
+        className="bg-transparent border-light-juice border-[1px] rounded-lg p-2 placeholder:font-thin text-sm focus:outline-none focus:border-juice text-white "
         type={type}
         placeholder={placeholder}
         id={name}

@@ -155,7 +155,7 @@ const page = () => {
                       type="text"
                       {...register("firstName")}
                       placeholder="First name"
-                      className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md"
+                      className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md text-white"
                     />
                   </div>
 
@@ -174,7 +174,7 @@ const page = () => {
                       type="text"
                       {...register("lastName")}
                       placeholder="Last name"
-                      className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md"
+                      className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md text-white"
                     />
                   </div>
                   <div className="flex flex-col">
@@ -191,7 +191,7 @@ const page = () => {
                       type="text"
                       {...register("city")}
                       placeholder="City"
-                      className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md"
+                      className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md text-white"
                     />
                   </div>
                   <div className="flex flex-col">
@@ -208,7 +208,7 @@ const page = () => {
                       type="number"
                       {...register("postalCode")}
                       placeholder="Postal code"
-                      className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md"
+                      className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md text-white"
                     />
                   </div>
                   <div className="flex flex-col">
@@ -225,7 +225,7 @@ const page = () => {
                       type="text"
                       {...register("streetName")}
                       placeholder="Street name"
-                      className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md"
+                      className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md text-white"
                     />
                   </div>
                   <div className="flex flex-col">
@@ -261,7 +261,7 @@ const page = () => {
                       type="text"
                       {...register("moreInformation")}
                       placeholder="More information"
-                      className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md"
+                      className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md text-white"
                     />
                   </div>
                   <div className="flex flex-col">
@@ -278,7 +278,7 @@ const page = () => {
                       type="text"
                       {...register("phoneNumber")}
                       placeholder="Phone number"
-                      className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md"
+                      className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md text-white"
                     />
                   </div>
                 </div>
