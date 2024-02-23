@@ -7,25 +7,30 @@ export async function PATCH(request: NextRequest) {
     const subscriptions = await Subscription.findOne();
     const mongoDBSubscriptions = subscriptions.subscriptions;
 
-    const existingSubscription = mongoDBSubscriptions.find(
-      (email: string) => email === email
-    );
-    if (!existingSubscription) {
-      return NextResponse.json({
-        success: false,
-        error: "Email already exists in subscriptions.",
-      });
+    const emailExists = mongoDBSubscriptions.includes(email);
+
+    if (emailExists) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Email already exists in subscriptions.",
+        },
+        { status: 409 }
+      );
     }
     mongoDBSubscriptions.push(email);
 
-    await Subscription.findByIdAndUpdate(existingSubscription._id, {
+    await Subscription.findByIdAndUpdate("65d5240a0aa671138424a234", {
       subscriptions: mongoDBSubscriptions,
     });
-    return NextResponse.json({
-      success: true,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+      },
+      { status: 200 }
+    );
   } catch (error) {
     console.log("Error message: Error with POST images API");
-    return NextResponse.json({ error });
+    return NextResponse.json({ error }, { status: 400 });
   }
 }

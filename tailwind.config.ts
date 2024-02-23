@@ -56,7 +56,7 @@ const config: Config = {
       },
       openFromTop: {
         from: { top: "-30%" },
-        to: { top: "10rem" },
+        to: { top: "20rem" },
       },
       closeToTop: {
         from: { top: "10rem" },

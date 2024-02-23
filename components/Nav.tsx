@@ -23,6 +23,10 @@ const Nav = () => {
   const router = useRouter();
   const showSearch = useAppSelector((state) => state.searchSliderSlice);
   const showSearchHandler = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
     dispatch(toogleSearch());
     showCart && dispatch(hideCart());
   };
@@ -33,7 +37,7 @@ const Nav = () => {
   };
 
   return (
-    <header className="w-full  z-40 fixed  lg:bg-red-500 md:bg-blue-400  sm:bg-yellow ">
+    <header className="w-full  z-40 fixed  bg-white/5 ">
       <nav className="  flex justify-between items-center md:px-8 px-2   py-5  bg-darkness/50 backdrop-blur-sm border-b-[1px] border-juice/5 ">
         {/* Burger menu */}
         <div className="block md:hidden">

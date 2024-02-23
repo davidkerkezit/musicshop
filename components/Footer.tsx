@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { FaAngleDoubleRight } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
@@ -14,11 +15,16 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { addSubscription } from "@/libs/actions";
 import { usePathname, useSearchParams } from "next/navigation";
+import { useState } from "react";
+import { MdDoneAll } from "react-icons/md";
+import { BiErrorAlt } from "react-icons/bi";
+
 type FormFields = z.infer<typeof subscriptions>;
 
 const Footer = () => {
   const path = usePathname();
   const params = useSearchParams();
+  const [status, setStatus] = useState<number | null>(null);
   const categoryParam = params.get("collection");
   const {
     register,
@@ -33,12 +39,17 @@ const Footer = () => {
   const onSubmit: SubmitHandler<FormFields> = async (data, e) => {
     e?.preventDefault();
 
-    await addSubscription(data.email);
-
-    reset({
-      email: "",
-    });
+    const subsData = await addSubscription(data.email);
+    if (subsData !== undefined) {
+      setStatus(subsData);
+      console.log(subsData);
+      subsData === 200 &&
+        reset({
+          email: "",
+        });
+    }
   };
+
   return (
     <footer className="bg-black flex flex-col ">
       <div className="flex justify-between  pb-5 pt-10 md:py-10 gap-1 md:border-b-[1px] border-b-white/20 md:mx-6   ">
@@ -132,13 +143,14 @@ const Footer = () => {
         </div>
         <div className="flex flex-col gap-4 col-span-2 md:col-span-1	mt-4  md:w-full  items-center">
           <p className="text-lg font-medium">Subscribe</p>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 w-[18rem]">
             <form
               className="bg-white flex items-center "
               onSubmit={handleSubmit(onSubmit)}
             >
               {" "}
               <input
+                onFocus={() => setStatus(null)}
                 type="text"
                 {...register("email")}
                 className="bg-transparent w-full py-1 pl-2 text-black text-sm focus:outline-none "
@@ -147,11 +159,23 @@ const Footer = () => {
                 }`}
               />
               <button onSubmit={handleSubmit(onSubmit)}>
-                <FaAngleDoubleRight className="text-juice text-4xl pr-1" />
+                {status === 200 && (
+                  <MdDoneAll className="text-green-500 text-4xl pr-1 " />
+                )}
+                {status !== 200 && status !== 409 && (
+                  <FaAngleDoubleRight className="text-juice text-4xl pr-1" />
+                )}
+                {status === 409 && (
+                  <BiErrorAlt className="text-red-500 text-4xl pr-1" />
+                )}
               </button>
             </form>
             <p className="text-neutral-400 font-thin italic text-sm">
-              Get digital marketing updates in your mailbox
+              {status === 200 && "Email added successfully"}
+              {status !== 200 &&
+                status !== 409 &&
+                "Get digital marketing updates in your mailbox"}
+              {status === 409 && "Email already exists in subscriptions."}
             </p>
           </div>
         </div>

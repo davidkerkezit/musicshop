@@ -597,9 +597,15 @@ export async function addSubscription(email: string) {
       }
     );
     if (!res.ok) {
+      const data = res.status;
+
+      return data;
+
       throw new Error("Failed to add order");
     }
-    const data = res.json();
+
+    const data = res.status;
+
     return data;
     console.log("Order added successfully!");
   } catch (error) {
