@@ -12,6 +12,7 @@ import { useAppSelector } from "@/libs/store";
 
 export default function Home() {
   const showCart = useAppSelector((state) => state.cartSlice.isVisible);
+
   return (
     <main className="">
       <Banner />

@@ -192,9 +192,12 @@ const Footer = () => {
         <p className="text-neutral-400 absolute bottom-4 md:bottom-2  left-0 right-0 text-center font-thin italic text-sm ">
           © 2023 David Kerkez. All rights reserved.
         </p>
-        <button className="text-base md:text-2xl bg-juice p-2 rounded-full absolute top-2 right-2 md:top-3 md:right-3">
+        <Link
+          href="#banner"
+          className="text-base md:text-2xl bg-juice p-2 rounded-full absolute top-2 right-2 md:top-3 md:right-3"
+        >
           <MdKeyboardArrowUp />
-        </button>
+        </Link>
       </div>
     </footer>
   );

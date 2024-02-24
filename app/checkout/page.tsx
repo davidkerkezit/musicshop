@@ -39,13 +39,17 @@ const page = () => {
     resolver: zodResolver(order),
   });
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      const { products } = await cartProducts(cartItems);
-      setAllProducts(products);
-      setIsLoading(false);
-    };
-    fetchData();
+    if (cartItems.length > 0) {
+      const fetchData = async () => {
+        setIsLoading(true);
+        const { products } = await cartProducts(cartItems);
+        setAllProducts(products);
+        setIsLoading(false);
+      };
+      fetchData();
+    } else {
+      router.push(`${BASE_URL}/shop`);
+    }
   }, [cartItems]);
   const onSubmit: SubmitHandler<FormFields> = async (data, e) => {
     e?.preventDefault();

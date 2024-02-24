@@ -60,7 +60,7 @@ const config: Config = {
       },
       closeToTop: {
         from: { top: "10rem" },
-        to: { top: "-30%" },
+        to: { top: "-60%" },
       },
       opacity: {
         from: { opacity: "0" },
@@ -91,8 +91,17 @@ const config: Config = {
         "50%": { filter: "grayscale(1)" },
         "100%": { filter: "grayscale(0)" },
       },
+      moveTopRight: {
+        from: {
+          transform: "translateY(0%) translateX(0%)",
+        },
+        to: {
+          transform: "translateY(-100%) translateX(100%)",
+        },
+      },
     },
     animation: {
+      moveTopRight: "moveTopRight .2s linear forwards ",
       grayscale: "grayscale 1s infinite linear",
       menuFirst: "menuFirst .3s linear forwards ",
       shake: "shake .4s linear forwards ",

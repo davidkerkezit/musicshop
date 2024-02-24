@@ -1,11 +1,15 @@
 import { ProductInformatiom, SimilarProducts } from "@/components";
 import Button from "@/components/UI/Button";
 import { getProduct } from "@/libs/actions";
+import { addItemToCart } from "@/libs/features/cartSlice";
+import { AppDispatch } from "@/libs/store";
 import { ProductType } from "@/libs/types";
 import Image from "next/image";
 import { AiOutlineShopping } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 const page = async ({ params }: { params: { id: string } }) => {
   const id = params.id;
+  // const dispatch = useDispatch<AppDispatch>();
   const {
     selectedProduct,
     category,
@@ -16,6 +20,7 @@ const page = async ({ params }: { params: { id: string } }) => {
     similarProducts: ProductType[];
   } = await getProduct(id);
 
+  const addToCartHandler = () => {};
   return (
     <div className="flex flex-col gap-10 mx-14 ">
       <div className="flex pt-40  ">
@@ -42,9 +47,10 @@ const page = async ({ params }: { params: { id: string } }) => {
           </p>
           <div>
             {/* <Button
-              label="Add to Cart"
-              icon={<AiOutlineShopping />}
               isPending={false}
+              label="Add to cart"
+              icon={<AiOutlineShopping />}
+              func={() => {}}
             /> */}
           </div>
         </div>

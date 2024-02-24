@@ -45,7 +45,7 @@ const LoginForm = () => {
             type="text"
             name="username"
             placeholder="Username"
-            className="bg-transparent w-full ml-4 focus:outline-none"
+            className="bg-transparent w-full ml-4 focus:outline-none text-white"
           />
         </div>
         <div className="flex bg-white/10 border-[2px] border-juice items-center px-4 py-3 rounded-xl w-full">
@@ -55,7 +55,7 @@ const LoginForm = () => {
             type={isHiddenPassword ? "text" : "password"}
             name="password"
             placeholder="Password"
-            className="bg-transparent w-full ml-4 focus:outline-none"
+            className="bg-transparent w-full ml-4 focus:outline-none text-white"
           />
           <button
             type="button"

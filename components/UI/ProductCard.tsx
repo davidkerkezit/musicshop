@@ -25,7 +25,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
   const cartItems = useAppSelector((state) => state.cartSlice.cartItems);
   const dispatch = useDispatch<AppDispatch>();
   const searchParams = useSearchParams();
-
+  const [isAddedToCart, setIsAddedToCart] = useState<boolean>(false);
   const router = useRouter();
   const deleteProductHandler = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -53,7 +53,11 @@ const ProductCard = ({ product }: { product: ProductType }) => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
+    setIsAddedToCart(true);
     dispatch(addItemToCart({ productId: id, quantity: 1, price, name }));
+    setTimeout(() => {
+      setIsAddedToCart(false);
+    }, 1000);
   };
   return (
     <Link
@@ -62,15 +66,17 @@ const ProductCard = ({ product }: { product: ProductType }) => {
           ? `${BASE_URL}/shop/${product._id}`
           : `${BASE_URL}/dashboard/${product._id}`
       }`}
-      className="mx-2  bg-[#313131] rounded-2xl h-max pt-[1px] hover:bg-[#424242] duration-200 "
+      className="mx-2  bg-[#313131] rounded-2xl h-max pt-[1px] hover:bg-[#424242] duration-200  "
     >
-      <div className="w-[90%] bg-[#e1e1e1] aspect-square mx-auto md:mt-0 lg:mt-4 rounded-2xl flex items-center justify-center ">
+      <div className="w-[90%] bg-[#e1e1e1] aspect-square mx-auto md:mt-0 lg:mt-4 rounded-2xl flex items-center justify-center relative ">
         <Image
           width={300}
           height={300}
           src={product.imageUrl}
           alt={product.name}
-          className="custom-shadow aspect-square p-3 object-contain"
+          className={`  custom-shadow aspect-square p-3 object-contain ${
+            isAddedToCart && "absolute  animate-moveTopRight"
+          } `}
         />
       </div>
       <div className="w-[90%] py-2  mx-auto flex flex-col items-center gap-2 mt-3">

@@ -22,6 +22,7 @@ const Nav = () => {
   const cartItems = useAppSelector((state) => state.cartSlice.cartItems);
   const router = useRouter();
   const showSearch = useAppSelector((state) => state.searchSliderSlice);
+  const [isUpdatedCart, setIsUpdatedCart] = useState<boolean>(false);
   const showSearchHandler = () => {
     window.scrollTo({
       top: 0,
@@ -36,8 +37,18 @@ const Nav = () => {
     showSearch && dispatch(hideSearch());
   };
 
+  useEffect(() => {
+    setIsUpdatedCart(true);
+    setTimeout(() => {
+      setIsUpdatedCart(false);
+    }, 1000);
+  }, [cartItems]);
   return (
-    <header className="w-full  z-40 fixed  bg-white/5 ">
+    <header
+      className="w-full  z-40 fixed  bg-white/5 "
+      id="nav"
+      data-nextjs-scroll-focus-boundary
+    >
       <nav className="  flex justify-between items-center md:px-8 px-2   py-5  bg-darkness/50 backdrop-blur-sm border-b-[1px] border-juice/5 ">
         {/* Burger menu */}
         <div className="block md:hidden">
@@ -78,7 +89,11 @@ const Nav = () => {
             {" "}
             <AiOutlineShopping className="cursor-pointer text-2xl " />{" "}
             {cartItems.length > 0 && (
-              <div className="bg-juice rounded-full absolute -top-[8px] left-[15px] w-[15px] h-[15px] flex items-center justify-center text-xs p-[10px]  lg:text-sm">
+              <div
+                className={`bg-juice ${
+                  isUpdatedCart ? "animate-shake" : ""
+                } rounded-full absolute -top-[8px] left-[15px] w-[15px] h-[15px] flex items-center justify-center text-xs p-[10px]  lg:text-sm`}
+              >
                 {cartItems.length}
               </div>
             )}

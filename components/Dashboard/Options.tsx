@@ -12,22 +12,21 @@ import { useEffect, useState } from "react";
 import { getOrders } from "@/libs/actions";
 import { GoMail } from "react-icons/go";
 import { RiQuestionnaireFill } from "react-icons/ri";
+import { ordersUpdate } from "@/libs/features/ordersSlice";
 
 const Options = () => {
   const inProccessOrders = useAppSelector(
     (state) => state.ordersSlice.inProccess
   );
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getOrders();
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const data = await getOrders();
-
-  //     setOrdersLength(
-  //       data.orders.filter((item: any) => item.isChecked === false).length
-  //     );
-  //   };
-  //   fetchData();
-  // }, []);
+      dispatch(ordersUpdate(data));
+    };
+    fetchData();
+  }, []);
   const router = useRouter();
   const searchParams = useSearchParams();
   const option = searchParams.get("option") || "addproduct";

@@ -10,10 +10,13 @@ import StoreStatistic from "./UI/StoreStatistic";
 import { useRouter } from "next/navigation";
 import { BASE_URL } from "@/libs/utils";
 
-const Banner = () => {
+const Banner = (bannerRef: any) => {
   const router = useRouter();
   return (
-    <div className="flex h-[20rem] px-5 overflow-hidden background text-white relative pb-[4%] pt-20 lg:pt-40">
+    <div
+      className="flex h-[20rem] px-5 overflow-hidden background text-white relative pb-[4%] pt-20 lg:pt-40"
+      id="banner"
+    >
       {/* Container for darker banner bg */}
       <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/60" />
       {/* Text Banner */}

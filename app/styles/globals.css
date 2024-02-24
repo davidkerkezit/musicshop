@@ -138,7 +138,7 @@ body {
 }
 body,
 html {
-  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 /* Hide spinners for input type number */
 input[type="number"]::-webkit-inner-spin-button,
