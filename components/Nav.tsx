@@ -11,8 +11,7 @@ import { hideSearch, toogleSearch } from "@/libs/features/searchSliderSlice";
 import { hideCart, toggleCart } from "@/libs/features/cartSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/libs/store";
-import MENU from "../constants";
-import { BASE_URL } from "@/libs/utils";
+import MENU, { BASE_URL } from "@/libs/utils";
 import { RiMapPinUserLine } from "react-icons/ri";
 
 const Nav = () => {

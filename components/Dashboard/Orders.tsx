@@ -9,7 +9,7 @@ const OrderDetails = React.lazy(() => import("./OrderDetails")); // Lazy load Or
 
 const Orders = () => {
   const [selectedCategory, setSelectedCategory] = useState("allorders");
-  const [ordersLenght, setOrderLenght] = useState<any[]>([]);
+
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
 

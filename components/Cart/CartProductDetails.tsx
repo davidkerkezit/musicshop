@@ -1,5 +1,6 @@
 import { cartProducts } from "@/libs/actions";
 import {
+  CartItem,
   addItemToCart,
   decreaseItemCart,
   removeProductFromCart,
@@ -111,7 +112,7 @@ const CartProductDetails = ({
           </div>
           <div className="flex flex-col items-center gap-3">
             <p className="text-base font-thin">{product.name}</p>
-            {cartItems.find((prod: any) => prod.productId === product._id)
+            {cartItems.find((prod: CartItem) => prod.productId === product._id)
               ?.quantity !== 0 && (
               <div className="flex   items-center bg-white/10 text-white rounded-full border-[1px] border-juice/20 p-1 ">
                 <button
@@ -133,7 +134,7 @@ const CartProductDetails = ({
                 <p className=" px-4">
                   {cartItems.length > 0 &&
                     cartItems.find(
-                      (prod: any) => prod.productId === product._id
+                      (prod: CartItem) => prod.productId === product._id
                     )?.quantity}
                 </p>
                 <button
@@ -156,8 +157,9 @@ const CartProductDetails = ({
           </div>
           <div className="flex flex-col items-end font-thin justify-center gap-4 h-full">
             <p className="text-sm font-medium  bg-light-juice text-black px-2  ">
-              {(cartItems.find((prod: any) => prod.productId === product._id)
-                ?.quantity || 0) * product.price}
+              {(cartItems.find(
+                (prod: CartItem) => prod.productId === product._id
+              )?.quantity || 0) * product.price}
               .00 $
             </p>
             <button

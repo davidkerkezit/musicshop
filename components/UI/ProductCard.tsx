@@ -42,7 +42,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
     setIsDeletePending(false);
     const url = `${pathname}?${searchParams}`;
 
-    status === 201 && router.push(`${BASE_URL}/dashboard?option=editproducts`);
+    status === 201 && router.refresh();
   };
   const addToCartHandler = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,

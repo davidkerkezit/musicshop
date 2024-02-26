@@ -10,7 +10,7 @@ import StoreStatistic from "./UI/StoreStatistic";
 import { useRouter } from "next/navigation";
 import { BASE_URL } from "@/libs/utils";
 
-const Banner = (bannerRef: any) => {
+const Banner = () => {
   const router = useRouter();
   return (
     <div

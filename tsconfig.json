@@ -28,7 +28,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/api/images/delete/route.js",
-    "libs/s3-functions.js"
+    "libs/s3-functions.ts"
   ],
   "exclude": ["node_modules"]
 }

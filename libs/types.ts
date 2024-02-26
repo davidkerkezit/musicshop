@@ -1,4 +1,5 @@
 import { StaticImageData } from "next/image";
+import { CartItem } from "./features/cartSlice";
 
 export type Menu = {
   label: string;
@@ -37,4 +38,25 @@ export type AboutUsContentType = {
   header: string;
   text: string;
   imgSrc: StaticImageData;
+};
+export type checkoutType = {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  totalPrice: number;
+  streetName: string;
+  houseNumber: string;
+  isChecked: boolean;
+  postalCode: string;
+  phoneNumber: string;
+  moreInformation: string;
+  city: string;
+
+  order: CartItem[];
+};
+export type TestimonialType = {
+  name: string;
+  occupation: string;
+  text: string;
+  imageSrc: StaticImageData;
 };

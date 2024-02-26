@@ -1,6 +1,7 @@
 // HELPERS FUNCTIONS
 
-import { ProductType } from "./types";
+import { CartItem } from "./features/cartSlice";
+import { ProductType, checkoutType } from "./types";
 
 // Aws S3 Helpers
 async function deleteImage(imageUrl: string) {
@@ -98,18 +99,21 @@ async function uploadProduct(
   // You can perform additional actions here like refreshing or navigating to another page
 }
 export async function getProducts(
-  page: any,
-  sort: any,
-  query: any,
-  collection: any
+  page: string | undefined | string[],
+  sort: string | undefined | string[],
+  query: string | undefined | string[],
+  collection: string | undefined | string[]
 ) {
   try {
     const url = new URL(`${process.env.NEXT_PUBLIC_API_URL}/api/products`);
     // Append defined parameters to the URL
-    if (page !== undefined) url.searchParams.append("page", page);
-    if (sort !== undefined) url.searchParams.append("sort", sort);
-    if (query !== undefined) url.searchParams.append("q", query);
-    if (collection !== undefined)
+    if (page !== undefined && !Array.isArray(page))
+      url.searchParams.append("page", page);
+    if (sort !== undefined && !Array.isArray(sort))
+      url.searchParams.append("sort", sort);
+    if (query !== undefined && !Array.isArray(query))
+      url.searchParams.append("q", query);
+    if (collection !== undefined && !Array.isArray(collection))
       url.searchParams.append("collection", collection);
     const response = await fetch(url.toString(), {
       cache: "no-store",
@@ -185,40 +189,61 @@ export async function loginAuthAction(username: string, password: string) {
   }
 }
 
-export async function addNewProduct(formData: any) {
-  try {
-    const data = await uploadImage(
-      formData.imageSrc,
-      formData.selectedCategory,
-      formData.selectedSubCategory,
-      "png"
-    );
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
-      },
-      body: JSON.stringify({
-        name: formData.name,
-        price: parseInt(formData.price),
-        about: formData.aboutProduct,
-        description: formData.productDescription,
-        aboutSeller: formData.aboutSeller,
-        imageUrl: data.url,
-        category: formData.selectedCategory,
-        inStock: formData.inStock,
-      }),
-    });
-    if (!res.ok) {
-      throw new Error("Failed to add product");
+export async function addNewProduct(formData: {
+  imageSrc: string | null;
+  selectedCategory: string | null;
+  selectedSubCategory: string | null;
+  price: number;
+  name: string;
+  inStock: number;
+  aboutProduct: string;
+  productDescription: string;
+  aboutSeller: string;
+}) {
+  if (
+    formData.imageSrc &&
+    formData.selectedCategory &&
+    formData.selectedSubCategory
+  ) {
+    try {
+      const data = await uploadImage(
+        formData.imageSrc,
+        formData.selectedCategory,
+        formData.selectedSubCategory,
+        "png"
+      );
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/products`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
+          },
+          cache: "no-store",
+
+          body: JSON.stringify({
+            name: formData.name,
+            price: formData.price,
+            about: formData.aboutProduct,
+            description: formData.productDescription,
+            aboutSeller: formData.aboutSeller,
+            imageUrl: data.url,
+            category: formData.selectedCategory,
+            inStock: formData.inStock,
+          }),
+        }
+      );
+      if (!res.ok) {
+        throw new Error("Failed to add product");
+      }
+      const dataProduct = res.status;
+      return dataProduct;
+      console.log("Product added successfully!");
+    } catch (error) {
+      console.log("Error message: Error on addNewProduct action");
     }
-    const dataProduct = res.status;
-    return dataProduct;
-    console.log("Product added successfully!");
-  } catch (error) {
-    console.log("Error message: Error on addNewProduct action");
   }
 }
 export async function deleteProduct(img: string, id: string, category: string) {
@@ -227,6 +252,8 @@ export async function deleteProduct(img: string, id: string, category: string) {
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`, {
       method: "DELETE",
+      cache: "no-store",
+
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
@@ -248,7 +275,7 @@ export async function deleteProduct(img: string, id: string, category: string) {
     console.log("Error message: Error on deleteProduct action");
   }
 }
-export async function cartProducts(cart: any) {
+export async function cartProducts(cart: CartItem[]) {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/cart`,
@@ -277,11 +304,28 @@ export async function cartProducts(cart: any) {
   }
 }
 
-export async function editProduct(formData: any) {
+export async function editProduct(formData: {
+  id: string;
+  imageSrc: string | null;
+  selectedCategory: string | null;
+  selectedSubCategory: string | null;
+  inStockValue: number;
+  currentCategory: string;
+  currentImage: string;
+  name: string;
+  price: string;
+  aboutProduct: string;
+  productDescription: string;
+  aboutSeller: string;
+}) {
   let data;
   try {
     // First fetch request to upload the image
-    if (formData.imageSrc !== null) {
+    if (
+      formData.imageSrc &&
+      formData.selectedCategory &&
+      formData.selectedSubCategory
+    ) {
       await deleteImage(formData.currentImage);
       data = await uploadImage(
         formData.imageSrc,
@@ -395,7 +439,9 @@ export async function editProduct(formData: any) {
       // You can perform additional actions here like refreshing or navigating to another page
     } else if (
       category !== formData.currentCategory &&
-      formData.imageSrc === null
+      formData.imageSrc &&
+      formData.selectedCategory &&
+      formData.selectedSubCategory
     ) {
       const imageResponse = await uploadImage(
         formData.currentImage,
@@ -628,7 +674,7 @@ export async function logoutAuthAction() {
     console.log("Error:", error);
   }
 }
-export async function updateProducts(products: any[]) {
+export async function updateProducts(products: CartItem[]) {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/checkout`, {
       method: "PATCH",

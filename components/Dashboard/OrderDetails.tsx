@@ -6,8 +6,10 @@ import LoadingDots from "../UI/LoadingDots";
 import { AppDispatch, useAppSelector } from "@/libs/store";
 import { useDispatch } from "react-redux";
 import { ordersUpdate } from "@/libs/features/ordersSlice";
+import { CartItem } from "@/libs/features/cartSlice";
+import { checkoutType } from "@/libs/types";
 interface OrderDetailsProps {
-  order: any; // Replace 'any' with the actual type of order
+  order: checkoutType;
   date: string;
   selectedCategory: string;
 }
@@ -94,7 +96,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
           <p className="bg-light-juice w-max px-4 text-black mb-4">
             Order Information{" "}
           </p>
-          {order.order.map((product: any) => {
+          {order.order.map((product: CartItem) => {
             return (
               <div className="flex justify-between items-center border-b-[1px] border-b-light-juice/30">
                 <p className="font-thin text-base">{product.name}</p>

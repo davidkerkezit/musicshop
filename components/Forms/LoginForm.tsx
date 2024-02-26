@@ -35,12 +35,11 @@ const LoginForm = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data, event) => {
     event?.preventDefault();
-    console.log(data);
 
     const { username, password } = data;
     const status = await loginAuthAction(username, password);
     if (status === 201) {
-      router.push(`${BASE_URL}/dashboard`);
+      router.refresh();
     }
     setError(status);
   };

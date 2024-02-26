@@ -44,8 +44,13 @@ const AddProduct = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [hasInteracted, setHasInteracted] = useState<boolean>(false);
   const [allErrors, setAllErrors] = useState({});
-  const { imageSrc, handleImageUpload, imageFormatCheck, setImageSrc } =
-    useImageUploader();
+  const {
+    imageSrc,
+    handleImageUpload,
+    imageFormatCheck,
+    setImageSrc,
+    errorMessage,
+  } = useImageUploader();
 
   useEffect(() => {
     setAllErrors(errors);
@@ -69,9 +74,8 @@ const AddProduct = () => {
       subCategoryChecker = false;
     }
 
-    if (imageSrc && subCategoryChecker) {
+    if (imageSrc !== null && subCategoryChecker !== null) {
       let dataProduct = await addNewProduct(formData);
-      console.log(dataProduct);
 
       dataProduct === 201 &&
         router.push(
@@ -233,17 +237,18 @@ const AddProduct = () => {
                   >
                     Upload File
                   </button>
-                  <p className="absolute bottom-2 text-sm font-thin text-white/60">
+                  <p className="absolute bottom-8 text-sm font-thin text-white/60">
                     Only PNG file is supported
+                  </p>
+                  <p className="absolute bottom-2 text-sm font-thin text-white/60">
+                    Maximum allowed size limit: 1500KB
                   </p>
                 </div>
               )}
             </div>
             <div className="flex flex-col  gap-2 ">
               {imageFormatCheck === false && (
-                <p className="text-sm text-red-500">
-                  Uploaded image is not in PNG format
-                </p>
+                <p className="text-sm text-red-500">{errorMessage}</p>
               )}
               {imageSrc !== null && (
                 <button

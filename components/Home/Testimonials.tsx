@@ -21,6 +21,7 @@ import USER5 from "../../assets/user5.jpg";
 import USER6 from "../../assets/user6.jpg";
 import USER7 from "../../assets/user7.jpg";
 import USER8 from "../../assets/user8.jpg";
+import { TestimonialType } from "@/libs/types";
 interface TestimonialTypes {
   name: string;
   occupation: string;

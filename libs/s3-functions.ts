@@ -1,20 +1,28 @@
-import { NextResponse } from "next/server";
-
 import {
   S3Client,
   PutObjectCommand,
   DeleteObjectCommand,
 } from "@aws-sdk/client-s3";
 
-const s3Client = new S3Client({
-  region: process.env.AWS_S3_REGION,
+import { S3ClientConfig } from "@aws-sdk/client-s3";
+
+const s3ClientConfig: S3ClientConfig = {
+  region: process.env.AWS_S3_REGION || "", // Ensure region is not undefined
   credentials: {
-    accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY_ID,
+    accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID || "", // Ensure accessKeyId is not undefined
+    secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY_ID || "", // Ensure secretAccessKey is not undefined
   },
-});
+};
+
+const s3Client = new S3Client(s3ClientConfig);
+
 // Upload image to AWS
-export async function uploadFileToS3(file, fileName, path, subPath) {
+export async function uploadFileToS3(
+  file: Buffer,
+  fileName: number | string,
+  path: string,
+  subPath: string | boolean
+) {
   const fileBuffer = file;
   console.log("AWS S3 Bucket Name:", process.env.AWS_S3_BUCKET_NAME);
   const params = {
@@ -30,7 +38,7 @@ export async function uploadFileToS3(file, fileName, path, subPath) {
   return fileName;
 }
 // Delete image from AWS
-export async function deleteFileFromS3(img) {
+export async function deleteFileFromS3(img: string) {
   const url = new URL(img);
   // Extracting the pathname, removing the leading slash '/'
   const key = url.pathname.slice(1);
@@ -47,10 +55,10 @@ export async function deleteFileFromS3(img) {
   return `Successfully deleting`;
 }
 export async function uploadImageFromUrlToS3(
-  imageUrl,
-  fileName,
-  path,
-  subPath
+  imageUrl: string,
+  fileName: number | string,
+  path: string,
+  subPath: string | boolean
 ) {
   try {
     const response = await fetch(imageUrl);

@@ -25,7 +25,7 @@ const Cart = () => {
   const cartItems = useAppSelector((state) => state.cartSlice.cartItems);
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
-  const [allProducts, setAllProducts] = useState<any>([]);
+  const [allProducts, setAllProducts] = useState<ProductType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {

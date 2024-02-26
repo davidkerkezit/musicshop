@@ -26,8 +26,13 @@ import { useRouter } from "next/navigation";
 type FormFields = z.infer<typeof editableProductSchema>;
 
 const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
-  const { imageSrc, handleImageUpload, imageFormatCheck, setImageSrc } =
-    useImageUploader();
+  const {
+    imageSrc,
+    handleImageUpload,
+    imageFormatCheck,
+    setImageSrc,
+    errorMessage,
+  } = useImageUploader();
   const [allErrors, setAllErrors] = useState({});
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedSubCategory, setSubSelectedCategory] = useState<string | null>(
@@ -109,48 +114,56 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
     >
       <div className="flex pt-40  ">
         {/* IMG */}
-        <div className=" bg-white/10 flex items-center justify-center relative rounded-xl border-light-juice border-[1px] border-dashed h-[28rem]  w-[28rem] ">
-          <div className="absolute  bottom-0 left-0 right-0 top-0 bg-black/60 z-10 " />
+        <div className="flex flex-col">
+          <div className=" bg-white/10 flex items-center justify-center relative rounded-xl border-light-juice border-[1px] border-dashed h-[28rem]  w-[28rem] ">
+            <div className="absolute  bottom-0 left-0 right-0 top-0 bg-black/60 z-10 " />
 
-          {imageSrc !== null ? (
-            <Image
-              src={imageSrc}
-              alt="Uploaded"
-              width={300}
-              height={300}
-              className=" object-contain"
+            {imageSrc !== null ? (
+              <Image
+                src={imageSrc}
+                alt="Uploaded"
+                width={300}
+                height={300}
+                className=" object-contain"
+              />
+            ) : (
+              <Image
+                src={selectedProduct.imageUrl}
+                alt="product"
+                width={300}
+                height={300}
+                className="white-shadow "
+              />
+            )}
+            <div className="flex flex-col items-center  z-10  absolute">
+              <BiCloudUpload size={80} className="text-light-juice/90" />
+              <button
+                type="button"
+                onClick={() =>
+                  fileInputRef.current && fileInputRef.current.click()
+                }
+                className="px-3 py-1 bg-light-juice/90 hover:bg-light-juice duration-100 text-black rounded-lg"
+              >
+                Upload File
+              </button>
+              <p className="text-sm font-thin text-white/60 pt-4">
+                Only PNG file is supported
+              </p>
+              <p className="text-sm font-thin text-white/60 pt-2">
+                Maximum allowed size limit: 1500KB
+              </p>
+            </div>
+            <input
+              ref={fileInputRef}
+              className="absolute bottom-0 left-0 right-0 top-0 mx-auto my-auto  w-max h-max z-10 hidden"
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
             />
-          ) : (
-            <Image
-              src={selectedProduct.imageUrl}
-              alt="product"
-              width={300}
-              height={300}
-              className="white-shadow "
-            />
-          )}
-          <div className="flex flex-col items-center  z-10  absolute">
-            <BiCloudUpload size={80} className="text-light-juice/90" />
-            <button
-              type="button"
-              onClick={() =>
-                fileInputRef.current && fileInputRef.current.click()
-              }
-              className="px-3 py-1 bg-light-juice/90 hover:bg-light-juice duration-100 text-black rounded-lg"
-            >
-              Upload File
-            </button>
-            <p className="text-sm font-thin text-white/60 pt-4">
-              Only PNG file is supported
-            </p>
           </div>
-          <input
-            ref={fileInputRef}
-            className="absolute bottom-0 left-0 right-0 top-0 mx-auto my-auto  w-max h-max z-10 hidden"
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
-          />
+          {imageFormatCheck === false && (
+            <p className="text-sm text-red-500">{errorMessage}</p>
+          )}
         </div>
         {/* INFO */}
         <div className="w-1/2 px-10 flex flex-col gap-4">

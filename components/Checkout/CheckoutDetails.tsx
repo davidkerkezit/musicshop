@@ -23,16 +23,15 @@ type FormFields = z.infer<typeof order>;
 const CheckoutDetails = () => {
   const totalPrice = useAppSelector((state) => state.cartSlice.totalPrice);
   const cartItems = useAppSelector((state) => state.cartSlice.cartItems);
-  const [allProducts, setAllProducts] = useState<any>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [allProducts, setAllProducts] = useState<ProductType[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
   const {
     register,
     handleSubmit,
-    setValue,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<FormFields>({
     defaultValues: {},
     resolver: zodResolver(order),
