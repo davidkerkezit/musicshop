@@ -5,6 +5,8 @@ export interface CartItem {
   quantity: number;
   price: number;
   name: string;
+  inStock: number;
+  category: string;
 }
 
 interface CartState {
@@ -52,7 +54,8 @@ export const cartSlice = createSlice({
       }
     },
     addItemToCart: (state, action: PayloadAction<CartItem>) => {
-      const { productId, name } = action.payload;
+      const { productId } = action.payload;
+
       const existingItemIndex = state.cartItems.findIndex(
         (item) => item.productId === productId
       );
@@ -66,6 +69,7 @@ export const cartSlice = createSlice({
         (total, item) => total + item.quantity * item.price,
         0
       );
+
       localStorage.setItem("cart", JSON.stringify(state.cartItems));
     },
     decreaseItemCart: (state, action: PayloadAction<CartItem>) => {

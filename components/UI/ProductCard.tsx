@@ -49,15 +49,33 @@ const ProductCard = ({ product }: { product: ProductType }) => {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     id: string,
     price: number,
-    name: string
+    name: string,
+    inStock: number,
+    category: string
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsAddedToCart(true);
-    dispatch(addItemToCart({ productId: id, quantity: 1, price, name }));
-    setTimeout(() => {
-      setIsAddedToCart(false);
-    }, 1000);
+    const productQuantity = cartItems.find(
+      (item) => item.productId === id
+    )?.quantity;
+
+    if (productQuantity === undefined || inStock >= productQuantity) {
+      setIsAddedToCart(true);
+
+      dispatch(
+        addItemToCart({
+          productId: id,
+          quantity: 1,
+          price,
+          name,
+          inStock,
+          category,
+        })
+      );
+      setTimeout(() => {
+        setIsAddedToCart(false);
+      }, 1000);
+    }
   };
   return (
     <Link
@@ -74,9 +92,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
           height={300}
           src={product.imageUrl}
           alt={product.name}
-          className={`  custom-shadow aspect-square p-3 object-contain ${
-            isAddedToCart && "absolute  animate-moveTopRight"
-          } `}
+          className={`  custom-shadow aspect-square p-3 object-contain  `}
         />
       </div>
       <div className="w-[90%] py-2  mx-auto flex flex-col items-center gap-2 mt-3">
@@ -85,7 +101,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
         {isShopPage && (
           <Button
             isPending={false}
-            label="Add to cart"
+            label={`${product.inStock === 0 ? "Out of stock" : "Add to cart"}`}
             icon={<AiOutlineShopping />}
             func={(e) =>
               addToCartHandler(
@@ -93,7 +109,9 @@ const ProductCard = ({ product }: { product: ProductType }) => {
 
                 product._id,
                 product.price,
-                product.name
+                product.name,
+                product.inStock,
+                product.category
               )
             }
           />

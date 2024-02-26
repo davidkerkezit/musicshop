@@ -1,6 +1,6 @@
 "use client";
 import LoadingDots from "@/components/UI/LoadingDots";
-import { addOrder, cartProducts } from "@/libs/actions";
+import { addOrder, cartProducts, updateProducts } from "@/libs/actions";
 import { AppDispatch, useAppSelector } from "@/libs/store";
 import { ProductType } from "@/libs/types";
 import Image from "next/image";
@@ -14,7 +14,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { BASE_URL, order } from "@/libs/utils";
 import { useDispatch } from "react-redux";
-import { emptyCart } from "@/libs/features/cartSlice";
+import { CartItem, emptyCart } from "@/libs/features/cartSlice";
 import { useRouter } from "next/navigation";
 import { MdDone } from "react-icons/md";
 
@@ -60,7 +60,9 @@ const CheckoutDetails = () => {
     };
     const { message } = await addOrder(formData);
     if (message === "Order added successfully") {
+      await updateProducts(cartItems);
       dispatch(emptyCart());
+
       setIsSuccess(true);
       setTimeout(() => router.push(`${BASE_URL}`), 1000);
     }
@@ -78,7 +80,7 @@ const CheckoutDetails = () => {
       )}
 
       {isSuccess ? (
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center mt-20">
           <p className="text-3xl ">Order sent successfully</p>
           <MdDone size={64} className="text-light-juice" />
         </div>
@@ -250,17 +252,12 @@ const CheckoutDetails = () => {
                   <div className="flex flex-row gap-2 items-center">
                     {" "}
                     <label className="font-thin">More information:</label>{" "}
-                    {errors.moreInformation && (
-                      <div className="text-red-500 text-sm">
-                        {errors.moreInformation.message}
-                      </div>
-                    )}
                   </div>
                   <input
                     type="text"
                     {...register("moreInformation")}
                     placeholder="More information"
-                    className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md text-white"
+                    className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md text-white focus:outline-none focus:border-light-juice"
                   />
                 </div>
                 <div className="flex flex-col">
@@ -277,7 +274,7 @@ const CheckoutDetails = () => {
                     type="text"
                     {...register("phoneNumber")}
                     placeholder="Phone number"
-                    className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md text-white"
+                    className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md text-white focus:outline-none focus:border-light-juice"
                   />
                 </div>
               </div>
@@ -293,6 +290,9 @@ const CheckoutDetails = () => {
                 {isLoading && <LoadingDots />}
                 {allProducts.length > 0 &&
                   allProducts.map((product: ProductType) => {
+                    const quantity = cartItems.find(
+                      (item: CartItem) => item.productId === product._id
+                    )?.quantity;
                     return (
                       <div className="flex bg-black/50 justify-between items-center ">
                         <div className="bg-white/20 m-1">
@@ -302,9 +302,22 @@ const CheckoutDetails = () => {
                             className="w-10 h-10 rounded-full object-contain"
                           />
                         </div>
-                        <div className="flex flex-col items-center  pr-2">
+                        <div className="flex flex-col items-end  pr-2">
                           <p className="text-base font-thin">{product.name}</p>
-                          <p>{product.price}.00$</p>
+                          <div className="flex">
+                            <p className=" bg-light-juice/20 pl-2 text-gray-300">
+                              {quantity && quantity}x
+                            </p>
+                            <p className=" bg-light-juice/20 pr-2 text-gray-300">
+                              {product.price}.00$
+                            </p>
+                            <p className="bg-light-juice px-2 text-black ">
+                              {quantity
+                                ? quantity * product.price
+                                : product.price}
+                              .00$
+                            </p>
+                          </div>
                         </div>
                       </div>
                     );

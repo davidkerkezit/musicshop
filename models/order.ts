@@ -4,9 +4,9 @@ const OrderSchema = new Schema(
     firstName: String,
     lastName: String,
     city: String,
-    postalCode: Number,
+    postalCode: String,
     streetName: String,
-    houseNumber: Number,
+    houseNumber: String,
     phoneNumber: String,
     moreInformation: String,
     order: [

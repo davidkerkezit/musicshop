@@ -127,7 +127,7 @@ export const order = z.object({
   streetName: z.string().min(1),
   houseNumber: z.string().min(1),
   phoneNumber: z.string().min(1),
-  moreInformation: z.string().min(1),
+  moreInformation: z.string(),
 });
 export const contact = z.object({
   name: z.string().min(1),

@@ -33,6 +33,7 @@ const Cart = () => {
       setIsLoading(true);
       const { products } = await cartProducts(cartItems);
       setAllProducts(products);
+
       setIsLoading(false);
     };
     fetchData();

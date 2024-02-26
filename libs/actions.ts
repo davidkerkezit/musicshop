@@ -1,5 +1,7 @@
 // HELPERS FUNCTIONS
 
+import { ProductType } from "./types";
+
 // Aws S3 Helpers
 async function deleteImage(imageUrl: string) {
   const response = await fetch(
@@ -624,5 +626,30 @@ export async function logoutAuthAction() {
     return response.status;
   } catch (error) {
     console.log("Error:", error);
+  }
+}
+export async function updateProducts(products: any[]) {
+  console.log(products);
+
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/checkout`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
+      },
+      body: JSON.stringify({
+        products,
+      }),
+    });
+    if (!res.ok) {
+      throw new Error("Failed to add product");
+    }
+    const dataProduct = res.json();
+    return dataProduct;
+    console.log("Product added successfully!");
+  } catch (error) {
+    console.log("Error message: Error on addNewProduct action");
   }
 }

@@ -20,25 +20,74 @@ const CartProductDetails = ({
   const cartItems = useAppSelector((state) => state.cartSlice.cartItems);
   const [updatedItem, setUpdatedItem] = useState<null | string>(null);
   const dispatch = useDispatch<AppDispatch>();
-  const increaseHandler = (id: string, price: number, name: string) => {
-    setUpdatedItem(id);
+  const increaseHandler = (
+    id: string,
+    price: number,
+    name: string,
+    inStock: number,
+    category: string
+  ) => {
+    const productQuantity = cartItems.find(
+      (item) => item.productId === id
+    )?.quantity;
 
-    dispatch(addItemToCart({ productId: id, quantity: 1, price, name }));
-    setTimeout(() => {
-      setUpdatedItem(null);
-    }, 400);
+    if (productQuantity && inStock >= productQuantity) {
+      setUpdatedItem(id);
+
+      dispatch(
+        addItemToCart({
+          productId: id,
+          quantity: 1,
+          price,
+          name,
+          inStock: inStock,
+          category: category,
+        })
+      );
+      setTimeout(() => {
+        setUpdatedItem(null);
+      }, 400);
+    }
   };
-  const decreaseHandler = (id: string, price: number, name: string) => {
-    setUpdatedItem(id);
-    dispatch(decreaseItemCart({ productId: id, quantity: 1, price, name }));
-    setTimeout(() => {
-      setUpdatedItem(null);
-    }, 400);
-  };
-  const removeFromCartHandler = (id: string, price: number, name: string) => {
+  const decreaseHandler = (
+    id: string,
+    price: number,
+    name: string,
+    inStock: number,
+    category: string
+  ) => {
     setUpdatedItem(id);
     dispatch(
-      removeProductFromCart({ productId: id, quantity: 1, price, name })
+      decreaseItemCart({
+        productId: id,
+        quantity: 1,
+        price,
+        name,
+        inStock,
+        category,
+      })
+    );
+    setTimeout(() => {
+      setUpdatedItem(null);
+    }, 400);
+  };
+  const removeFromCartHandler = (
+    id: string,
+    price: number,
+    name: string,
+    inStock: number,
+    category: string
+  ) => {
+    setUpdatedItem(id);
+    dispatch(
+      removeProductFromCart({
+        productId: id,
+        quantity: 1,
+        price,
+        name,
+        inStock,
+        category,
+      })
     );
     setTimeout(() => {
       setUpdatedItem(null);
@@ -68,7 +117,13 @@ const CartProductDetails = ({
                 <button
                   disabled={isLoading}
                   onClick={() =>
-                    increaseHandler(product._id, product.price, product.name)
+                    increaseHandler(
+                      product._id,
+                      product.price,
+                      product.name,
+                      product.inStock,
+                      product.category
+                    )
                   }
                   className="text-white bg-black/30 text-xl p-1  flex items-center justify-center rounded-full w-[1.6rem] h-[1.6rem]"
                 >
@@ -84,7 +139,13 @@ const CartProductDetails = ({
                 <button
                   disabled={isLoading}
                   onClick={() =>
-                    decreaseHandler(product._id, product.price, product.name)
+                    decreaseHandler(
+                      product._id,
+                      product.price,
+                      product.name,
+                      product.inStock,
+                      product.category
+                    )
                   }
                   className="text-white bg-black/30 text-xl p-1 flex items-center justify-center rounded-full w-[1.6rem] h-[1.6rem]"
                 >
@@ -101,7 +162,13 @@ const CartProductDetails = ({
             </p>
             <button
               onClick={() =>
-                removeFromCartHandler(product._id, product.price, product.name)
+                removeFromCartHandler(
+                  product._id,
+                  product.price,
+                  product.name,
+                  product.inStock,
+                  product.category
+                )
               }
               className=" bg-white/10 px-2 "
             >
