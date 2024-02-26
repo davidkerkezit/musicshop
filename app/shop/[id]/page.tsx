@@ -3,8 +3,22 @@ import {
   SimilarProducts,
   ProductDetails,
 } from "@/components";
-import { getProduct } from "@/libs/actions";
+import { getEditableProduct, getProduct } from "@/libs/actions";
 import { ProductType } from "@/libs/types";
+import { Metadata } from "next";
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const { selectedProduct } = await getEditableProduct(params.id);
+
+  return {
+    title: `Music Shop | ${selectedProduct.name}`,
+
+    description: "Feel Our Vibe",
+  };
+}
 
 const page = async ({ params }: { params: { id: string } }) => {
   const id = params.id;

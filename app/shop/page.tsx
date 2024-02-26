@@ -8,7 +8,12 @@ import {
   Pagination,
 } from "@/components";
 import { ProductType } from "@/libs/types";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Music Shop | Shop",
 
+  description: "Feel Our Vibe",
+};
 export default async function Page({
   searchParams,
 }: {

@@ -1,4 +1,3 @@
-"use client";
 import {
   Banner,
   Categories,
@@ -8,11 +7,13 @@ import {
   Testimonials,
   Vinyl,
 } from "@/components";
-import { useAppSelector } from "@/libs/store";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Music Shop | Home",
 
+  description: "Feel Our Vibe",
+};
 export default function Home() {
-  const showCart = useAppSelector((state) => state.cartSlice.isVisible);
-
   return (
     <main className="">
       <Banner />

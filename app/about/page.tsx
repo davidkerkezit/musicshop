@@ -1,6 +1,11 @@
-"use client";
 import { aboutUsContent } from "@/libs/content";
 import { AboutUsSection, PageBanner } from "@/components";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Music Shop | About Us",
+
+  description: "Feel Our Vibe",
+};
 const page = () => {
   return (
     <div>

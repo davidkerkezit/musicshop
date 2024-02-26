@@ -84,20 +84,21 @@ const Nav = () => {
           <button onClick={showSearchHandler}>
             <IoIosSearch className="cursor-pointer text-2xl  " />
           </button>
-
-          <button onClick={showCartHandler} className="relative">
-            {" "}
-            <AiOutlineShopping className="cursor-pointer text-2xl " />{" "}
+          <div className="relative">
+            <button onClick={showCartHandler}>
+              {" "}
+              <AiOutlineShopping className="cursor-pointer text-2xl " />{" "}
+            </button>
             {cartItems.length > 0 && (
-              <div
+              <p
                 className={`bg-juice ${
                   isUpdatedCart ? "animate-shake" : ""
                 } rounded-full absolute -top-[8px] left-[15px] w-[15px] h-[15px] flex items-center justify-center text-xs p-[10px]  lg:text-sm`}
               >
                 {cartItems.length}
-              </div>
+              </p>
             )}
-          </button>
+          </div>
         </div>
       </nav>
     </header>

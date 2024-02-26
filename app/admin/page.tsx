@@ -1,6 +1,10 @@
-"use client";
 import { PageBanner, LoginForm } from "@/components";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Music Shop | Admin",
 
+  description: "Feel Our Vibe",
+};
 const page = () => {
   return (
     <>
