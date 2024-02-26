@@ -7,7 +7,6 @@ import Softwere from "@/models/softwere"; // Corrected the import name
 export async function PATCH(request: NextRequest, response: NextResponse) {
   try {
     const { products } = await request.json();
-    console.log(products);
 
     await connectMongoDB(); // Connect to MongoDB
 
@@ -30,8 +29,15 @@ export async function PATCH(request: NextRequest, response: NextResponse) {
       if (model) {
         // Find the current product
         const currentProduct = await model.findById(element.productId);
-        console.log(currentProduct);
-
+        if (element.quantity > currentProduct.inStock) {
+          return NextResponse.json(
+            {
+              error: "Requested quantity exceeds available in-stock quantity.",
+              id: null,
+            },
+            { status: 500 }
+          );
+        }
         // Calculate the new value for inStock
         const newInStock = currentProduct.inStock - element.quantity;
 

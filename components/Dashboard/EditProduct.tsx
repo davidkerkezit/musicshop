@@ -96,10 +96,6 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
       const { id, status } = await editProduct(formData);
       status === "success" && router.push(`${BASE_URL}/dashboard/${id}`);
       setHasInteracted(false);
-      event?.target.reset(); // Reset the form
-      setImageSrc(null); // Reset image source
-      setSelectedCategory(null); // Reset selected category
-      setSubSelectedCategory(null); // Reset selected subcategory
     } else {
       editProductRef.current?.scrollIntoView();
     }

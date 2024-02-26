@@ -214,7 +214,7 @@ export async function addNewProduct(formData: any) {
     if (!res.ok) {
       throw new Error("Failed to add product");
     }
-    const dataProduct = res.json();
+    const dataProduct = res.status;
     return dataProduct;
     console.log("Product added successfully!");
   } catch (error) {
@@ -241,7 +241,7 @@ export async function deleteProduct(img: string, id: string, category: string) {
     if (!res.ok) {
       throw new Error("Failed to delete product");
     }
-    const data = res.json();
+    const data = res.status;
     return data;
     console.log("Product deleted successfully!");
   } catch (error) {
@@ -629,8 +629,6 @@ export async function logoutAuthAction() {
   }
 }
 export async function updateProducts(products: any[]) {
-  console.log(products);
-
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/checkout`, {
       method: "PATCH",
@@ -646,7 +644,7 @@ export async function updateProducts(products: any[]) {
     if (!res.ok) {
       throw new Error("Failed to add product");
     }
-    const dataProduct = res.json();
+    const dataProduct = res.status;
     return dataProduct;
     console.log("Product added successfully!");
   } catch (error) {

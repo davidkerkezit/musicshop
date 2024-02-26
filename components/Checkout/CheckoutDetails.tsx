@@ -58,13 +58,15 @@ const CheckoutDetails = () => {
       totalPrice,
       isChecked: false,
     };
-    const { message } = await addOrder(formData);
-    if (message === "Order added successfully") {
-      await updateProducts(cartItems);
-      dispatch(emptyCart());
+    const status = await updateProducts(cartItems);
+    if (status === 200) {
+      const { message } = await addOrder(formData);
+      if (message === "Order added successfully") {
+        dispatch(emptyCart());
 
-      setIsSuccess(true);
-      setTimeout(() => router.push(`${BASE_URL}`), 1000);
+        setIsSuccess(true);
+        setTimeout(() => router.push(`${BASE_URL}`), 1000);
+      }
     }
   };
 
@@ -245,7 +247,7 @@ const CheckoutDetails = () => {
                     type="string"
                     placeholder="House number"
                     {...register("houseNumber")}
-                    className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md focus:outline-none focus:border-light-juice"
+                    className="bg-white/5 font-thin p-2 border-[1px] border-light-juice/50 rounded-md text-white focus:outline-none focus:border-light-juice"
                   />
                 </div>
                 <div className="flex flex-col">

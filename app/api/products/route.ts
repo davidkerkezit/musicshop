@@ -100,7 +100,6 @@ export async function POST(request: NextRequest, response: NextResponse) {
         {
           message: "Product added successfully",
           id: createdProduct._id,
-          status: "success",
         },
         { status: 201 }
       );
@@ -142,5 +141,8 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
   }
 
   console.log("Product deleted successfully");
-  return NextResponse.json({ message: "Product deleted successfully" });
+  return NextResponse.json(
+    { message: "Product deleted successfully" },
+    { status: 201 }
+  );
 }

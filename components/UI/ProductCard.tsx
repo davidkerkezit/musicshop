@@ -37,13 +37,12 @@ const ProductCard = ({ product }: { product: ProductType }) => {
 
     e.preventDefault();
     e.stopPropagation();
-    const data = await deleteProduct(img, id, category);
+    const status = await deleteProduct(img, id, category);
 
     setIsDeletePending(false);
     const url = `${pathname}?${searchParams}`;
 
-    data.message =
-      "Product deleted successfull" && router.push(`${BASE_URL + url}`);
+    status === 201 && router.push(`${BASE_URL}/dashboard?option=editproducts`);
   };
   const addToCartHandler = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,

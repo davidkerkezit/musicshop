@@ -15,7 +15,6 @@ export async function POST(request: NextRequest, response: NextResponse) {
       postalCode,
       phoneNumber,
     } = await request.json();
-
     await Order.create({
       firstName,
       lastName,
