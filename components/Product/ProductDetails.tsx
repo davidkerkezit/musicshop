@@ -78,6 +78,8 @@ const ProductDetails = ({
                   quantity: 1,
                   price: selectedProduct.price,
                   name: selectedProduct.name,
+                  inStock: selectedProduct.inStock,
+                  category: selectedProduct.category,
                 })
               );
             }}
