@@ -1,17 +1,25 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-export const dashboardSlider = createSlice({
-  name: "dashboardSlider",
-  initialState: "add" as string | null,
+interface ProductsState {
+  products: any[];
+}
+
+const initialState: ProductsState = {
+  products: [],
+};
+export const productsSlice = createSlice({
+  name: "productsSlice",
+  initialState,
   reducers: {
-    selectDashboardOption: (
-      state: string | null,
-      action: PayloadAction<string | null>
+    productsUpdate: (
+      state: ProductsState,
+      action: PayloadAction<{ products: any[] } | null>
     ) => {
-      return action.payload;
+      if (action.payload) {
+      }
     },
   },
 });
 
-export const { selectDashboardOption } = dashboardSlider.actions;
-export default dashboardSlider.reducer;
+export const { productsUpdate } = productsSlice.actions;
+export default productsSlice.reducer;

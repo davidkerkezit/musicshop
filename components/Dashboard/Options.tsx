@@ -3,7 +3,7 @@ import { FiEdit } from "react-icons/fi";
 import { BsPlusCircle } from "react-icons/bs";
 import { AppDispatch, useAppSelector } from "@/libs/store";
 import { useDispatch } from "react-redux";
-import { selectDashboardOption } from "@/libs/features/dashboardSlice";
+
 import { Router } from "next/router";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { BASE_URL } from "@/libs/utils";
@@ -13,20 +13,27 @@ import { getOrders } from "@/libs/actions";
 import { GoMail } from "react-icons/go";
 import { RiQuestionnaireFill } from "react-icons/ri";
 import { ordersUpdate } from "@/libs/features/ordersSlice";
+import { RiLogoutCircleLine } from "react-icons/ri";
+import Logout from "./Logout";
+import LoadingDots from "../UI/LoadingDots";
 
 const Options = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const inProccessOrders = useAppSelector(
     (state) => state.ordersSlice.inProccess
   );
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       const data = await getOrders();
 
       dispatch(ordersUpdate(data));
+      setIsLoading(false);
     };
     fetchData();
   }, []);
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const option = searchParams.get("option") || "addproduct";
@@ -75,10 +82,14 @@ const Options = () => {
           <FiTruck size={15} />
           <p>Orders</p>
         </div>
-        {inProccessOrders.length > 0 && (
-          <p className="bg-light-juice text-black w-[1.3rem] h-[1.3rem] rounded-full flex items-center justify-center text-sm">
-            {inProccessOrders.length}
-          </p>
+        {isLoading ? (
+          <LoadingDots />
+        ) : (
+          inProccessOrders.length > 0 && (
+            <p className="bg-light-juice text-black w-[1.3rem] h-[1.3rem] rounded-full flex items-center justify-center text-sm">
+              {inProccessOrders.length}
+            </p>
+          )
         )}
       </button>
       <button
@@ -98,6 +109,7 @@ const Options = () => {
         <RiQuestionnaireFill size={15} />
         Questions
       </button>
+      <Logout />
     </div>
   );
 };

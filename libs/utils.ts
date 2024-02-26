@@ -106,8 +106,8 @@ export const djsSubCategories = [
 ];
 export const productSchema = z.object({
   name: z.string().min(1),
-  price: z.string().min(1),
-  inStock: z.string().min(1),
+  price: z.coerce.number().min(1),
+  inStock: z.coerce.number().min(1),
   aboutProduct: z.string().min(10),
   productDescription: z.string().min(60),
   aboutSeller: z.string().min(60),
@@ -137,6 +137,10 @@ export const contact = z.object({
 });
 export const subscriptions = z.object({
   email: z.string().email(),
+});
+export const login = z.object({
+  username: z.string().min(1),
+  password: z.string().min(1),
 });
 let BASE_URL: string;
 

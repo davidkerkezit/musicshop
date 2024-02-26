@@ -17,7 +17,7 @@ const Modal = () => {
   return (
     <div
       onClick={modalHandler}
-      className={`fixed top-0 right-0 left-0 bottom-0 z-40 h-[100vh] bg-black/50 ${
+      className={`fixed top-0 right-0 left-0 bottom-0 z-50 h-[100vh] bg-black/50 ${
         showCart || showSearch ? "block" : "hidden"
       }`}
     />

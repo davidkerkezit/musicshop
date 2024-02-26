@@ -23,7 +23,19 @@ import SimilarProducts from "./Product/SimilarProducts";
 import AddProduct from "./Dashboard/AddProduct";
 import EditProducts from "./Dashboard/EditProducts";
 import SearchForm from "./Forms/SearchForm";
+import LoginForm from "./Forms/LoginForm";
+import CheckoutDetails from "./Checkout/CheckoutDetails";
+import Dashboard from "./Dashboard/Dashboard";
+import Options from "./Dashboard/Options";
+import EditProduct from "./Dashboard/EditProduct";
+import ProductDetails from "./Product/ProductDetails";
 export {
+  ProductDetails,
+  EditProduct,
+  Options,
+  Dashboard,
+  CheckoutDetails,
+  LoginForm,
   Nav,
   Search,
   Modal,

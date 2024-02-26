@@ -1,4 +1,5 @@
 // HELPERS FUNCTIONS
+
 // Aws S3 Helpers
 async function deleteImage(imageUrl: string) {
   const response = await fetch(
@@ -162,13 +163,7 @@ export async function getEditableProduct(id: string) {
   }
 }
 
-export async function loginAuthAction(
-  prevState: any,
-  formData: FormData
-): Promise<number | string | void> {
-  const username = formData.get("username");
-  const password = formData.get("password");
-
+export async function loginAuthAction(username: string, password: string) {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/login`,
@@ -177,7 +172,7 @@ export async function loginAuthAction(
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, action: "login" }),
         cache: "no-store",
         credentials: "include",
       }
@@ -610,5 +605,24 @@ export async function addSubscription(email: string) {
     console.log("Order added successfully!");
   } catch (error) {
     console.log("Error message: Error on addOrder action");
+  }
+}
+export async function logoutAuthAction() {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ action: "logout" }),
+        cache: "no-store",
+        credentials: "include",
+      }
+    );
+    return response.status;
+  } catch (error) {
+    console.log("Error:", error);
   }
 }

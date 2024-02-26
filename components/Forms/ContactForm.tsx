@@ -41,7 +41,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-neutral-900 to-neutral-800 flex  h-max overflow-hidden flex-col items-center">
+    <div className="bg-gradient-to-r from-neutral-900 to-neutral-800 flex  h-max overflow-hidden flex-col items-center relative z-10 m-32">
       <div className="w-full h-max md:my-5 my-5 flex flex-col lg:flex-row gap-5  items-center justify-center ">
         <div className="lg:w-1/2 w-full  md:px-20 px-5 flex flex-col md:gap-10 gap-5">
           <h3 className="text-3xl md:text-5xl font-semibold md:leading-[4rem] text-center">

@@ -1,13 +1,11 @@
-import { PageBanner } from "@/components";
-import LoginForm from "@/components/Forms/LoginForm";
+"use client";
+import { PageBanner, LoginForm } from "@/components";
 
-const page = async () => {
+const page = () => {
   return (
     <>
       <PageBanner page="Admin Section" />
-      <div className="relative z-10 m-14 ">
-        <LoginForm />
-      </div>
+      <LoginForm />
     </>
   );
 };
