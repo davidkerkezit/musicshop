@@ -58,7 +58,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
       (item) => item.productId === id
     )?.quantity;
 
-    if (productQuantity === undefined || inStock >= productQuantity) {
+    if (productQuantity === undefined || inStock > productQuantity) {
       setIsAddedToCart(true);
 
       dispatch(

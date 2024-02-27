@@ -40,15 +40,22 @@ const NewArrivals = ({ products }: { products: ProductType[] }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   useEffect(() => {
+    console.log("usklo", search, sortParam, collection, page);
+
     if (
       search === null &&
       sortParam === null &&
       collection === null &&
       page === null
     ) {
+      console.log("here");
+
       return;
     }
+    console.log("here2");
+
     sortRef.current?.scrollIntoView();
+    console.log("here2");
   }, [search, sortParam, page, collection]);
   return (
     <div className=" md:py-0 lg:py-10 bg-gradient-to-r from-gray-900/20 to-gray-500/20">

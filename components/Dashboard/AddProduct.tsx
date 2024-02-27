@@ -77,7 +77,7 @@ const AddProduct = () => {
     if (imageSrc !== null && subCategoryChecker !== null) {
       let dataProduct = await addNewProduct(formData);
 
-      dataProduct === 201 &&
+      dataProduct.status === 201 &&
         router.push(
           `${BASE_URL}/dashboard?option=editproducts&collection=allproducts&page=1`
         );

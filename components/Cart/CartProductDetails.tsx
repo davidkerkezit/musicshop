@@ -32,7 +32,7 @@ const CartProductDetails = ({
       (item) => item.productId === id
     )?.quantity;
 
-    if (productQuantity && inStock >= productQuantity) {
+    if (productQuantity && inStock > productQuantity) {
       setUpdatedItem(id);
 
       dispatch(

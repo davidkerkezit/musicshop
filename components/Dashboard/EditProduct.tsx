@@ -88,19 +88,21 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
       currentImage: selectedProduct.imageUrl,
     };
     let subCategoryChecker;
-    if (selectedCategory === "dj" && selectedSubCategory !== null) {
-      subCategoryChecker = true;
-    } else if (selectedCategory !== "dj" && selectedCategory !== null) {
-      setSubSelectedCategory(null);
+    if (selectedCategory === "dj" && selectedSubCategory === null) {
+      subCategoryChecker = false;
+    } else if (selectedCategory !== "dj" && selectedSubCategory === null) {
       subCategoryChecker = true;
     } else {
-      subCategoryChecker = false;
+      subCategoryChecker = true;
     }
+    console.log(subCategoryChecker, selectedSubCategory);
 
     if (subCategoryChecker) {
+      setHasInteracted(true);
+
       const { id, status } = await editProduct(formData);
-      status === "success" && router.push(`${BASE_URL}/dashboard/${id}`);
-      setHasInteracted(false);
+
+      status === 201 && router.push(`${BASE_URL}/dashboard/${id}`);
     } else {
       editProductRef.current?.scrollIntoView();
     }
@@ -190,7 +192,10 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
               </button>
               <button
                 type="button"
-                onClick={() => setSelectedCategory("vinyls")}
+                onClick={() => {
+                  setSelectedCategory("vinyls");
+                  setSubSelectedCategory(null);
+                }}
                 className={` w-[10rem] py-2   ${
                   selectedCategory === "vinyls"
                     ? "bg-light-juice text-black/80"
@@ -201,7 +206,10 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
               </button>
               <button
                 type="button"
-                onClick={() => setSelectedCategory("softweres")}
+                onClick={() => {
+                  setSelectedCategory("softweres");
+                  setSubSelectedCategory(null);
+                }}
                 className={` w-[10rem] py-2 rounded-r-lg border-l-[1px] border-l-light-juice/40 ${
                   selectedCategory === "softweres"
                     ? "bg-light-juice text-black/80 "

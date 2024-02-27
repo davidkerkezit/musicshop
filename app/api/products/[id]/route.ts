@@ -102,6 +102,7 @@ export async function PATCH(request: NextRequest, response: NextResponse) {
       category: mongoCategory,
       inStock,
     });
+    console.log(product);
 
     console.log("Product updated successfully");
     return NextResponse.json(

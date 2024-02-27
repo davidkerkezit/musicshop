@@ -25,7 +25,7 @@ async function deleteImage(imageUrl: string) {
 async function uploadImage(
   image: string,
   category: string,
-  subcategory: string,
+  subcategory: string | null,
   format: string
 ) {
   const response = await fetch(
@@ -200,11 +200,7 @@ export async function addNewProduct(formData: {
   productDescription: string;
   aboutSeller: string;
 }) {
-  if (
-    formData.imageSrc &&
-    formData.selectedCategory &&
-    formData.selectedSubCategory
-  ) {
+  if (formData.imageSrc && formData.selectedCategory) {
     try {
       const data = await uploadImage(
         formData.imageSrc,
@@ -238,7 +234,7 @@ export async function addNewProduct(formData: {
       if (!res.ok) {
         throw new Error("Failed to add product");
       }
-      const dataProduct = res.status;
+      const dataProduct = res.json();
       return dataProduct;
       console.log("Product added successfully!");
     } catch (error) {
@@ -321,11 +317,7 @@ export async function editProduct(formData: {
   let data;
   try {
     // First fetch request to upload the image
-    if (
-      formData.imageSrc &&
-      formData.selectedCategory &&
-      formData.selectedSubCategory
-    ) {
+    if (formData.imageSrc && formData.selectedCategory) {
       await deleteImage(formData.currentImage);
       data = await uploadImage(
         formData.imageSrc,
@@ -342,7 +334,6 @@ export async function editProduct(formData: {
         : formData.selectedCategory === "vinyls"
         ? "vinyl"
         : "softwere";
-    console.log(data);
 
     if (category === formData.currentCategory) {
       const res = await fetch(
@@ -381,6 +372,8 @@ export async function editProduct(formData: {
       // You can perform additional actions here like refreshing or navigating to another page
     }
     if (category !== formData.currentCategory && formData.imageSrc !== null) {
+      console.log("donee");
+
       // Second fetch request to add product details
       const responseDeleteProduct = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/products`,
@@ -439,9 +432,7 @@ export async function editProduct(formData: {
       // You can perform additional actions here like refreshing or navigating to another page
     } else if (
       category !== formData.currentCategory &&
-      formData.imageSrc &&
-      formData.selectedCategory &&
-      formData.selectedSubCategory
+      formData.selectedCategory
     ) {
       const imageResponse = await uploadImage(
         formData.currentImage,

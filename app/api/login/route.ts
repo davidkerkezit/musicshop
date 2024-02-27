@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 interface CustomNextApiResponse<T = any> extends NextApiResponse<T> {
-  cookie: (name: string, value: string, options?: any) => void;
+  cookie: (name: string, value: string, options?: string) => void;
 }
 
 export async function POST(req: NextRequest, res: CustomNextApiResponse) {

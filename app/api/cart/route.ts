@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import DJ from "@/models/dj";
 import Vinyl from "@/models/vinyl";
 import Softwere from "@/models/softwere";
+import { ProductType } from "@/libs/types";
 
 export async function POST(req: NextRequest, res: NextApiResponse) {
   const { cart } = await req.json();
@@ -11,13 +12,13 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
 
   const models = [DJ, Vinyl, Softwere];
 
-  let ids: any[] = [];
+  let ids: string[] = [];
   for (const product of cart) {
     ids.push(product.productId);
   }
 
   try {
-    let products: any[] = [];
+    let products: ProductType[] = [];
 
     for (const Model of models) {
       // Find products by ID for each model

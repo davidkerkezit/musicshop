@@ -17,7 +17,7 @@ const Sort = ({
     <div>
       <select
         id="sortSelect"
-        className="p-2 m-4 text-white font-thin rounded-md bg-white/10"
+        className="p-2 m-4 text-white font-thin rounded-md bg-white/10 focus:outline-none"
         value={selectedSort}
         onChange={handleSortChange}
       >

@@ -5,6 +5,7 @@ import Product from "@/models/product";
 import connectMongoDB from "@/libs/mongodb";
 import { NextRequest, NextResponse } from "next/server";
 import { NextApiResponse } from "next";
+import { Collection } from "mongodb"; // Import the appropriate type from MongoDB library
 
 import {
   createAllProductsPipeline,
@@ -100,6 +101,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
         {
           message: "Product added successfully",
           id: createdProduct._id,
+          status: 201,
         },
         { status: 201 }
       );
