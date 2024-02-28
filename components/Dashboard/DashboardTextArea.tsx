@@ -10,6 +10,7 @@ const DashboardTextArea = ({
   type,
   error,
   setValue,
+  access,
 }: {
   label: string;
   placeholder: string;
@@ -20,6 +21,7 @@ const DashboardTextArea = ({
   type: string;
   error: any;
   setValue: any;
+  access: boolean;
 }) => {
   return (
     <div className="flex flex-col   ">
@@ -32,9 +34,12 @@ const DashboardTextArea = ({
         </p>
       </div>
       <textarea
+        disabled={!access}
         onChange={(e) => setValue(name, e.target.value)}
         rows={4}
-        className="bg-transparent border-light-juice border-[1px] rounded-lg p-2 placeholder:font-thin text-sm focus:outline-none focus:border-juice resize-none appearance-none"
+        className={`bg-transparent border-light-juice border-[1px] rounded-lg p-2 placeholder:font-thin text-sm focus:outline-none focus:border-juice resize-none appearance-none ${
+          access ? "cursor-text " : "cursor-not-allowed"
+        }`}
         type={type}
         placeholder={placeholder}
         id={name}

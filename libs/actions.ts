@@ -123,6 +123,7 @@ export async function getProducts(
       throw new Error(`getProducts response error`);
     }
     const data = await response.json();
+
     return data;
   } catch (error) {
     console.error("Error loading products:", error);

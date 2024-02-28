@@ -94,6 +94,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
         aboutSeller,
         category: mongoCategory,
         inStock,
+        access: true,
       });
 
       console.log("Product added successfully");

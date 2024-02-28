@@ -9,6 +9,7 @@ const ProductSchema = new Schema(
     aboutSeller: String,
     category: String,
     inStock: Number,
+    access: Boolean,
   },
   {
     timestamps: true,

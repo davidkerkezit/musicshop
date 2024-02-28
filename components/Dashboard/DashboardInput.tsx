@@ -11,6 +11,7 @@ const DashboardInput = ({
   type,
   error,
   setValue,
+  access,
 }: {
   label: string;
   placeholder: string;
@@ -21,6 +22,7 @@ const DashboardInput = ({
   type: string;
   error: any;
   setValue: any;
+  access: boolean;
 }) => {
   return (
     <div className="flex flex-col   ">
@@ -35,7 +37,10 @@ const DashboardInput = ({
 
       <input
         onChange={(e) => setValue("name", e.target.value)}
-        className="bg-transparent border-light-juice border-[1px] rounded-lg p-2 placeholder:font-thin text-sm focus:outline-none focus:border-juice text-white "
+        disabled={!access}
+        className={`bg-transparent border-light-juice border-[1px] rounded-lg p-2 placeholder:font-thin text-sm focus:outline-none focus:border-juice text-white ${
+          access ? "cursor-text " : "cursor-not-allowed"
+        }`}
         type={type}
         placeholder={placeholder}
         id={name}

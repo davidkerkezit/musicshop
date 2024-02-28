@@ -24,9 +24,13 @@ import { BiCloudUpload } from "react-icons/bi";
 
 import Button from "../UI/SubmitButton";
 import { useRouter } from "next/navigation";
+import Portal from "../UI/Modals/Portal";
+import NoPermission from "../UI/Modals/NoPermission";
+import ProductAdded from "../UI/Modals/ProductAdded";
 
 type FormFields = z.infer<typeof productSchema>;
 const AddProduct = () => {
+  const [showModal, setShowModal] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -76,16 +80,13 @@ const AddProduct = () => {
 
     if (imageSrc !== null && subCategoryChecker !== null) {
       let dataProduct = await addNewProduct(formData);
-
-      dataProduct.status === 201 &&
-        router.push(
-          `${BASE_URL}/dashboard?option=editproducts&collection=allproducts&page=1`
-        );
-      setHasInteracted(false);
-      event?.target.reset(); // Reset the form
-      setImageSrc(null); // Reset image source
-      setSelectedCategory(null); // Reset selected category
-      setSubSelectedCategory(null); // Reset selected subcategory
+      setShowModal(true);
+      if (dataProduct.status === 201) {
+        event?.target.reset(); // Reset the form
+        setImageSrc(null); // Reset image source
+        setSelectedCategory(null); // Reset selected category
+        setSubSelectedCategory(null); // Reset selected subcategory
+      }
     } else {
       addProductRef.current?.scrollIntoView();
     }
@@ -93,6 +94,11 @@ const AddProduct = () => {
 
   return (
     <div className="w-full mx-32 mt-5" ref={addProductRef}>
+      {showModal && (
+        <Portal setHidden={setShowModal}>
+          <ProductAdded />
+        </Portal>
+      )}
       <h2 className=" py-4 text-3xl font-thin mb-5">Add New Product</h2>
       <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-row gap-20 ">
@@ -181,6 +187,7 @@ const AddProduct = () => {
             {dashboardInputs.map((input) => {
               return (
                 <DashboardInput
+                  access={true}
                   setValue={setValue}
                   error={allErrors}
                   key={input.name}
@@ -197,6 +204,7 @@ const AddProduct = () => {
             {dashboardTextAreas.map((input) => {
               return (
                 <DashboardTextArea
+                  access={true}
                   setValue={setValue}
                   error={allErrors}
                   key={input.name}

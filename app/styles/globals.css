@@ -169,6 +169,8 @@ select:-webkit-autofill:focus {
 }
 input.text-white:-webkit-autofill {
   -webkit-text-fill-color: white !important; /* Set text color to white */
+  border: 1px solid initial !important;
+  -webkit-box-shadow: 0 0 0px 1000px initial inset !important;
 }
 
 /* Reset text color during autofill for input with black text */

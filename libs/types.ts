@@ -19,6 +19,7 @@ export type ProductType = {
   category: string;
   inStock: number;
   __v: number;
+  access: boolean;
 };
 export type PipelineStage =
   | { $unionWith: { coll: string } }
