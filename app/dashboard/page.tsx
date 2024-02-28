@@ -2,6 +2,7 @@ import { getProducts } from "@/libs/actions";
 import { ProductType } from "@/libs/types";
 import { PageBanner, Dashboard, Options } from "@/components";
 import { Metadata } from "next";
+import NoPermission from "@/components/UI/Modals/NoPermission";
 export const metadata: Metadata = {
   title: "Music Shop | Dashboard",
 
@@ -23,6 +24,7 @@ export default async function page({
   return (
     <div>
       <PageBanner page="Dashboard" />
+
       <div className="z-10 relative flex">
         <Options />
         <Dashboard products={products} pages={pages} />
