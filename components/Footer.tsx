@@ -113,7 +113,7 @@ const Footer = () => {
           <p className="text-lg font-medium">Categories</p>
           <div className="flex flex-col text-neutral-400 text-base font-thin items-center md:items-start ">
             <Link
-              href={`${BASE_URL}/shop?collection=vinyls`}
+              href={`${BASE_URL}/shop?collection=vinyls#sort`}
               className={`${
                 categoryParam === "vinyls"
                   ? "md:border-l-[3px] md:border-l-juice text-neutral-200"
@@ -123,7 +123,7 @@ const Footer = () => {
               Vinyls
             </Link>
             <Link
-              href={`${BASE_URL}/shop?collection=djequipments`}
+              href={`${BASE_URL}/shop?collection=djequipments#sort`}
               className={`${
                 categoryParam === "djequipments"
                   ? "md:border-l-[3px] md:border-l-juice text-neutral-200"
@@ -133,7 +133,7 @@ const Footer = () => {
               DJ Equipments
             </Link>
             <Link
-              href={`${BASE_URL}/shop?collection=softweres`}
+              href={`${BASE_URL}/shop?collection=softweres#sort`}
               className={`${
                 categoryParam === "softweres"
                   ? "md:border-l-[3px] md:border-l-juice text-neutral-200"

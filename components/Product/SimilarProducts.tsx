@@ -36,7 +36,7 @@ const SimilarProducts = ({
       <div className="flex justify-between px-4 py-2">
         <h3 className="text-xl">Similar Products</h3>
         <Link
-          href={`${BASE_URL}/shop?collection=${selectedCollection}`}
+          href={`${BASE_URL}/shop?collection=${selectedCollection}#sort`}
           className="font-thin pr-2 flex items-center gap-2"
         >
           See all
