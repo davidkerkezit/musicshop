@@ -32,7 +32,7 @@ const SearchForm = () => {
         className="w-max "
         href={`${BASE_URL}/${
           isShopPage ? "shop" : "dashboard?option=editproducts&"
-        }?page=1&q=${searchValue}${isShopPage && "#sort"}`}
+        }?page=1&q=${searchValue}${isShopPage ? "#sort" : ""}`}
         shallow={true}
         ref={searchRef}
       >
