@@ -39,24 +39,20 @@ const NewArrivals = ({ products }: { products: ProductType[] }) => {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  useEffect(() => {
-    console.log("usklo", search, sortParam, collection, page);
+  // useEffect(() => {
 
-    if (
-      search === null &&
-      sortParam === null &&
-      collection === null &&
-      page === null
-    ) {
-      console.log("here");
+  //   if (
+  //     search === null &&
+  //     sortParam === null &&
+  //     collection === null &&
+  //     page === null
+  //   ) {
 
-      return;
-    }
-    console.log("here2");
+  //     return;
+  //   }
 
-    sortRef.current?.scrollIntoView();
-    console.log("here2");
-  }, [search, sortParam, page, collection]);
+  //   sortRef.current?.scrollIntoView();
+  // }, [search, sortParam, page, collection]);
   return (
     <div className=" md:py-0 lg:py-10 bg-gradient-to-r from-gray-900/20 to-gray-500/20">
       <h3 className="mx-2 text-3xl py-2 font-bold">
@@ -90,7 +86,7 @@ const NewArrivals = ({ products }: { products: ProductType[] }) => {
           return (
             <SwiperSlide key={index} className="h-[50rem]">
               <ProductCard product={product} />
-              <div ref={sortRef} className="md:pb-0 lg:pb-10" />
+              <div ref={sortRef} id="sort" className="md:pb-0 lg:pb-10" />
             </SwiperSlide>
           );
         })}

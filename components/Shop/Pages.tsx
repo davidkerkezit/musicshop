@@ -1,15 +1,35 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { BASE_URL } from "@/libs/utils";
+import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+export const dynamic = "force-dynamic";
 
 const Pages = ({ pagesNumber }: { pagesNumber: number }) => {
   const [displayedPages, setDisplayedPages] = useState<number[]>([]);
   const router = useRouter();
+  const pathname = usePathname();
+  const [currentUrl, setCurrentUrl] = useState<string>("");
   const params = useSearchParams();
   const selectedPageQuery = params.get("page") ?? "1";
   const selectedPageNumber = parseInt(selectedPageQuery);
+  const searchQuery = params.get("q");
+  const sortQuery = params.get("sort");
+  const collectionQuery = params.get("collection");
 
+  const isShopPage = pathname.startsWith("/shop");
+  useEffect(() => {
+    const searchParams = new URLSearchParams(params);
+
+    searchParams.delete("page");
+
+    const searchString = searchParams.toString();
+
+    const updatedUrl = `${pathname}?${searchString}`;
+
+    setCurrentUrl(updatedUrl);
+  }, [selectedPageQuery, sortQuery, collectionQuery, searchQuery]);
   useEffect(() => {
     if (selectedPageNumber < 3 && pagesNumber < 4) {
       let array = [];
@@ -32,18 +52,17 @@ const Pages = ({ pagesNumber }: { pagesNumber: number }) => {
       ]);
     }
   }, [pagesNumber, selectedPageQuery, selectedPageNumber]);
-  const pageHandler = (page: number) => {
-    const currentUrl = new URL(window.location.href);
-    currentUrl.searchParams.set("page", String(page));
-    router.push(currentUrl.href);
-  };
+
   return (
     <div className="flex gap-2 items-center">
       {displayedPages?.map((page) => {
         return (
-          <button
+          <Link
             key={page}
-            onClick={() => pageHandler(page)}
+            href={`${currentUrl}&page=${page}#${
+              isShopPage ? "sort" : "search"
+            }`}
+            shallow={true}
             className={`border-[3px]   rounded-full text-lg w-[40px] h-[40px] flex items-center justify-center ${
               selectedPageNumber === page
                 ? "bg-juice/20 font-semibold border-juice  "
@@ -51,7 +70,7 @@ const Pages = ({ pagesNumber }: { pagesNumber: number }) => {
             } `}
           >
             {page}
-          </button>
+          </Link>
         );
       })}
     </div>

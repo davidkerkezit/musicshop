@@ -99,7 +99,11 @@ const Footer = () => {
             })}
             <Link
               href={`${BASE_URL}/dashboard`}
-              className=" md:pl-3 text-neutral-200 font-normal"
+              className={`${
+                path === "/dashboard"
+                  ? "md:border-l-[3px] md:border-l-juice text-neutral-200"
+                  : "md:border-l-[3px] md:border-l-transparent text-neutral-400"
+              } md:pl-3  hover:text-neutral-50 duration-200 font-normal`}
             >
               Dashboard
             </Link>

@@ -19,7 +19,7 @@ const allCategories = [
     width: 230,
     height: 230,
     hover: "lg:group-hover:rotate-[360deg] duration-500 rotate-90",
-    query: "softweres",
+    query: "vinyls",
   },
   {
     name: "DJ Equipments",

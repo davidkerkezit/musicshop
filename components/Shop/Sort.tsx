@@ -1,5 +1,6 @@
 "use client";
 import { sortType } from "@/libs/types";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 import React, { useEffect, useRef } from "react";

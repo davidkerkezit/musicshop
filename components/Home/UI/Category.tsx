@@ -1,6 +1,7 @@
 "use client";
 import { BASE_URL } from "@/libs/utils";
 import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const Category = ({
@@ -26,8 +27,9 @@ const Category = ({
 }) => {
   const router = useRouter();
   return (
-    <button
-      onClick={() => router.push(`${BASE_URL}/shop?collection=${query}`)}
+    <Link
+      href={`${BASE_URL}/shop?page=1&collection=${query}#sort`}
+      shallow={true}
       className={`group ${background} border-[3px] lg:border-[5px] border-light-juice lg:hover:border-juice duration-200 lg:w-full    w-full lg:h-[23rem] h-[13rem] relative `}
     >
       <div className="absolute left-0 right-0 top-0 bottom-0 bg-black/50  backdrop-blur-md lg:group-hover:backdrop-blur-sm lg:group-hover:bg-black/40 duration-200 cursor-pointer" />
@@ -46,7 +48,7 @@ const Category = ({
           {name}
         </p>
       </div>
-    </button>
+    </Link>
   );
 };
 
