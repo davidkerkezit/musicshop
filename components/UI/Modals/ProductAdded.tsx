@@ -1,10 +1,13 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import LOGO from "@/assets/logo.png";
 import Link from "next/link";
 import { BASE_URL } from "@/libs/utils";
 import LoadingDots from "../LoadingDots";
-const ProductAdded = () => {
+import { useRouter } from "next/navigation";
+const ProductAdded = ({ setHidden }: { setHidden: any }) => {
+  const router = useRouter();
   return (
     <div
       onClick={(e) => {
@@ -18,18 +21,24 @@ const ProductAdded = () => {
         Your product has been successfully added
       </h2>
       <div className="flex gap-2 mt-4">
-        <Link
-          href={`${BASE_URL}/dashboard?option=addproduct`}
+        <button
+          onClick={() => {
+            setHidden(false);
+            router.push(`${BASE_URL}/dashboard?option=addproduct`);
+          }}
           className="bg-white px-2 rounded-md text-black text-lg py-2 border-[1px] border-light-juice"
         >
           Add Product
-        </Link>
-        <Link
-          href={`${BASE_URL}/dashboard?option=editproducts`}
+        </button>
+        <button
+          onClick={() => {
+            setHidden(false);
+            router.push(`${BASE_URL}/dashboard?option=editproducts`);
+          }}
           className="bg-white px-2 rounded-md text-black text-lg py-2 border-[1px] border-light-juice"
         >
           Dashboard
-        </Link>
+        </button>
       </div>
     </div>
   );

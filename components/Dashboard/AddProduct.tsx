@@ -96,7 +96,7 @@ const AddProduct = () => {
     <div className="w-full mx-32 mt-5" ref={addProductRef}>
       {showModal && (
         <Portal setHidden={setShowModal}>
-          <ProductAdded />
+          <ProductAdded setHidden={setShowModal} />
         </Portal>
       )}
       <h2 className=" py-4 text-3xl font-thin mb-5">Add New Product</h2>
