@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  swcMinify: true,
   images: {
     domains: ["music-shop-storage.s3.eu-west-3.amazonaws.com"],
   },
