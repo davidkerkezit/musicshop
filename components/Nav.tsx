@@ -76,17 +76,21 @@ const Nav = () => {
           })}
         </div>
         {/* Search/User/Cart */}
-        <div className=" gap-4 items-center text-xl flex  z-50 ">
-          <button onClick={() => router.push(`${BASE_URL}/dashboard`)}>
-            <RiMapPinUserLine className="cursor-pointer text-2xl font-thin   " />
-          </button>
-          <button onClick={showSearchHandler}>
-            <IoIosSearch className="cursor-pointer text-2xl  " />
-          </button>
-          <div className="relative">
+        <div className=" gap-4 items-bottom text-xl flex  z-50 ">
+          <div>
+            <button onClick={() => router.push(`${BASE_URL}/dashboard`)}>
+              <RiMapPinUserLine className="cursor-pointer text-2xl font-thin   " />
+            </button>
+          </div>
+          <div>
+            <button onClick={showSearchHandler}>
+              <IoIosSearch className="cursor-pointer text-2xl  " />
+            </button>
+          </div>
+          <div className="relative ">
             <button onClick={showCartHandler}>
               {" "}
-              <AiOutlineShopping className="cursor-pointer text-2xl " />{" "}
+              <AiOutlineShopping className="cursor-pointer text-2xl  " />{" "}
             </button>
             {cartItems.length > 0 && (
               <p

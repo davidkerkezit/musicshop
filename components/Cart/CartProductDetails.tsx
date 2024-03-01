@@ -57,20 +57,25 @@ const CartProductDetails = ({
     inStock: number,
     category: string
   ) => {
-    setUpdatedItem(id);
-    dispatch(
-      decreaseItemCart({
-        productId: id,
-        quantity: 1,
-        price,
-        name,
-        inStock,
-        category,
-      })
-    );
-    setTimeout(() => {
-      setUpdatedItem(null);
-    }, 400);
+    const productQuantity = cartItems.find(
+      (item: CartItem) => item.productId === id
+    )?.quantity;
+    if (productQuantity && productQuantity > 0) {
+      setUpdatedItem(id);
+      dispatch(
+        decreaseItemCart({
+          productId: id,
+          quantity: 1,
+          price,
+          name,
+          inStock,
+          category,
+        })
+      );
+      setTimeout(() => {
+        setUpdatedItem(null);
+      }, 400);
+    }
   };
   const removeFromCartHandler = (
     id: string,

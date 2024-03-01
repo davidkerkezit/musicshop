@@ -36,7 +36,7 @@ export async function POST(req: NextRequest, res: CustomNextApiResponse) {
     const serialised = serialize("OursiteJWT", token, {
       httpOnly: true,
       sameSite: "strict",
-      maxAge: 60 * 60 * 24 * 30,
+      maxAge: 60 * 60,
       path: "/",
     });
 

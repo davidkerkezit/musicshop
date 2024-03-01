@@ -36,6 +36,12 @@ const DashboardInput = ({
       </div>
 
       <input
+        min={1}
+        onKeyDown={(evt) =>
+          type === "number" &&
+          ["e", "E", "+", "-"].includes(evt.key) &&
+          evt.preventDefault()
+        }
         onChange={(e) => setValue("name", e.target.value)}
         disabled={!access}
         className={`bg-transparent border-light-juice border-[1px] rounded-lg p-2 placeholder:font-thin text-sm focus:outline-none focus:border-juice text-white ${

@@ -704,7 +704,7 @@ export async function sign(payload: any, secret: string): Promise<string> {
 
   return new SignJWT({ payload })
     .setProtectedHeader({ alg: "HS256", typ: "JWT" })
-    .setExpirationTime("1m")
+    .setExpirationTime("1h")
     .setIssuedAt(iat)
     .setNotBefore(iat)
     .sign(new TextEncoder().encode(secret));

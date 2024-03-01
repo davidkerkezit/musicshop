@@ -32,7 +32,7 @@ const SimilarProducts = ({
     }
   }, [category]);
   return (
-    <div className="w-max bg-juice/40 py-2 rounded-2xl ">
+    <div className=" bg-white/5 border-[1px] border-light-juice/40 py-2 rounded-2xl  overflow-x-hidden w-full">
       <div className="flex justify-between px-4 py-2">
         <h3 className="text-xl">Similar Products</h3>
         <Link
@@ -43,7 +43,7 @@ const SimilarProducts = ({
           <FaArrowRight size={12} />
         </Link>
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center ">
         {products.map((product) => {
           return <ProductCard product={product} />;
         })}

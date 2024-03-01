@@ -59,6 +59,8 @@ const NewArrivals = ({ products }: { products: ProductType[] }) => {
         <span className=" font-thin">New</span> Arrivals
       </h3>
       <Swiper
+        mousewheel={true}
+        direction={"horizontal"}
         autoplay={true}
         breakpoints={{
           576: {
@@ -67,6 +69,9 @@ const NewArrivals = ({ products }: { products: ProductType[] }) => {
           1000: {
             slidesPerView: 7,
           },
+        }}
+        pagination={{
+          clickable: true,
         }}
         cssMode={true}
         coverflowEffect={{
@@ -77,7 +82,7 @@ const NewArrivals = ({ products }: { products: ProductType[] }) => {
         }}
         effect="coverflow"
         // pagination={{ clickable: true }}
-        mousewheel={true}
+
         keyboard={true}
         modules={[Pagination, Mousewheel, Keyboard, Autoplay]}
         className="w-full    "
