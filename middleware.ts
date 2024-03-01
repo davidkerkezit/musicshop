@@ -51,7 +51,7 @@ export default async function middleware(request: NextRequest) {
           headers: { "Set-Cookie": serialised },
         });
       } else if (verifiedToken) {
-        return NextResponse.redirect(new URL("/dashboard", request.url));
+        return;
       }
     }
   } catch (error) {
