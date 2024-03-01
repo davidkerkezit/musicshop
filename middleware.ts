@@ -40,7 +40,6 @@ export default async function middleware(request: NextRequest) {
         headers: { "Set-Cookie": serialised },
       });
     } else {
-      console.error("Token verification failed:", error);
       return NextResponse.error();
     }
   }
