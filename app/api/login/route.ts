@@ -53,9 +53,8 @@ export async function POST(req: NextRequest, res: CustomNextApiResponse) {
       path: "/",
     });
 
-    return NextResponse.json(
-      { message: "Token expired. Please log in again." },
-      { status: 201, headers: { "Set-Cookie": serialised } }
-    );
+    return NextResponse.redirect(new URL("/admin", req.url), {
+      headers: { "Set-Cookie": serialised },
+    });
   }
 }
