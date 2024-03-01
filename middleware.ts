@@ -7,7 +7,7 @@ import { serialize } from "cookie";
 export default async function middleware(request: NextRequest) {
   const cookieStore = cookies();
   const token = cookieStore.get("OursiteJWT");
-  const secretKey = process.env.SECRET_KEY || "";
+  const secretKey = process.env.NEXT_PUBLIC_SECRET_KEY || "";
 
   try {
     if (request.url.includes("/admin")) {

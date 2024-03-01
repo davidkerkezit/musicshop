@@ -28,7 +28,7 @@ export async function POST(req: NextRequest, res: CustomNextApiResponse) {
       return NextResponse.json({ message: "Wrong password" }, { status: 401 });
     }
 
-    const secretKey = process.env.SECRET_KEY || "";
+    const secretKey = process.env.NEXT_PUBLIC_SECRET_KEY || "";
     const token = await sign(
       { username: user.username, password: user.password },
       secretKey
