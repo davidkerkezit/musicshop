@@ -53,8 +53,9 @@ export async function POST(req: NextRequest, res: CustomNextApiResponse) {
       path: "/",
     });
 
-    return NextResponse.redirect(new URL("/admin", req.url), {
-      headers: { "Set-Cookie": serialised },
-    });
+    return NextResponse.json(
+      { message: "Logout successfully" },
+      { status: 201, headers: { "Set-Cookie": serialised } }
+    );
   }
 }
