@@ -2,7 +2,7 @@
 
 import { CartItem } from "./features/cartSlice";
 import { ProductType, checkoutType } from "./types";
-
+import { SignJWT, jwtVerify, type JWTPayload } from "jose";
 // Aws S3 Helpers
 async function deleteImage(imageUrl: string) {
   const response = await fetch(
@@ -688,4 +688,24 @@ export async function updateProducts(products: CartItem[]) {
   } catch (error) {
     console.log("Error message: Error on addNewProduct action");
   }
+}
+export async function verify(
+  token: string,
+  secret: string
+): Promise<JWTPayload> {
+  const { payload } = await jwtVerify(token, new TextEncoder().encode(secret));
+  // run some checks on the returned payload, perhaps you expect some specific values
+
+  // if its all good, return it, or perhaps just return a boolean
+  return payload;
+}
+export async function sign(payload: any, secret: string): Promise<string> {
+  const iat = Math.floor(Date.now() / 1000);
+
+  return new SignJWT({ payload })
+    .setProtectedHeader({ alg: "HS256", typ: "JWT" })
+    .setExpirationTime("1m")
+    .setIssuedAt(iat)
+    .setNotBefore(iat)
+    .sign(new TextEncoder().encode(secret));
 }
