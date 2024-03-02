@@ -13,6 +13,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@react-icons/all-files": "^4.1.0",
     "@reduxjs/toolkit": "^2.0.1",
+    "@vercel/analytics": "^1.2.2",
     "aws-sdk": "^2.1531.0",
     "axios": "^1.6.5",
     "bcrypt": "^5.1.1",
