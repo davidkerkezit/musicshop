@@ -34,3 +34,19 @@ export async function PATCH(request: NextRequest) {
     return NextResponse.json({ error }, { status: 400 });
   }
 }
+export async function GET() {
+  try {
+    const subscriptions = await Subscription.find();
+
+    return NextResponse.json(
+      {
+        success: true,
+        subscriptions: subscriptions[0].subscriptions,
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.log("Error message: Error with POST images API");
+    return NextResponse.json({ error }, { status: 400 });
+  }
+}

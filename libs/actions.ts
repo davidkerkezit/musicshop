@@ -3,6 +3,7 @@
 import { CartItem } from "./features/cartSlice";
 import { ProductType, checkoutType } from "./types";
 import { SignJWT, jwtVerify, type JWTPayload } from "jose";
+import { BASE_URL } from "./utils";
 // Aws S3 Helpers
 async function deleteImage(imageUrl: string) {
   const response = await fetch(
@@ -708,4 +709,19 @@ export async function sign(payload: any, secret: string): Promise<string> {
     .setIssuedAt(iat)
     .setNotBefore(iat)
     .sign(new TextEncoder().encode(secret));
+}
+export async function getAllSubscriptions() {
+  try {
+    const res = await fetch(
+      `${BASE_URL}/api/subscriptions`,
+
+      {
+        cache: "no-store",
+      }
+    );
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 }
