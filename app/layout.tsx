@@ -22,6 +22,7 @@ export default function RootLayout({
         )}
       >
         <StoreProvider>
+          <Analytics />
           <Modal />
           <Nav />
           <Search />
