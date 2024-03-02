@@ -1,13 +1,15 @@
 "use client";
-import { getAllSubscriptions } from "@/libs/actions";
+import { getAllSubscriptions, sendMails } from "@/libs/actions";
 import React, { useEffect, useState } from "react";
 import LoadingDots from "../UI/LoadingDots";
 import { useSearchParams } from "next/navigation";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import Button from "../UI/SubmitButton";
 import { FiSend } from "react-icons/fi";
-import Image from "next/image";
-import EMAILLOGO from "@/assets/letters.png";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { subscriptionSchema } from "@/libs/utils";
 const Skeleton = () => {
   return (
     <div className="flex gap-2 flex-wrap ">
@@ -21,6 +23,7 @@ const Skeleton = () => {
     </div>
   );
 };
+type FormFields = z.infer<typeof subscriptionSchema>;
 
 const Subscriptions = () => {
   const params = useSearchParams();
@@ -29,6 +32,15 @@ const Subscriptions = () => {
   const [selectedEmails, setSelectedEmails] = useState<string[]>([]);
   const [subscriptionsOption, setSubscriptionsOption] = useState<string>("all");
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors, isSubmitting },
+  } = useForm<FormFields>({
+    defaultValues: {},
+    resolver: zodResolver(subscriptionSchema),
+  });
   useEffect(() => {
     const fetchData = async () => {
       const { subscriptions } = await getAllSubscriptions();
@@ -41,6 +53,14 @@ const Subscriptions = () => {
   useEffect(() => {
     selectedEmails.length === 0 && setSubscriptionsOption("all");
   }, [selectedEmails]);
+  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    const formData = {
+      ...data,
+      emails: subscriptionsOption === "selected" ? selectedEmails : allEmails,
+    };
+    await sendMails(formData);
+  };
+
   return (
     <div className=" w-full h-max flex flex-col gap-4   m-10 ">
       <div className=" flex flex-col gap-2 p-2">
@@ -101,10 +121,14 @@ const Subscriptions = () => {
           )}
         </div>
       </div>
-      <form className="flex flex-col gap-2 mt-5 bg-white/10 p-2 rounded-xl">
+      <form
+        className="flex flex-col gap-2 mt-5 bg-white/10 p-2 rounded-xl"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="flex flex-col ">
           <label className="text-lg font-whin">Subject:</label>
           <input
+            {...register("subject")}
             type="text"
             className="bg-transparent text-white border-[1px] border-light-juice rounded-md w-1/3 py-1 px-2"
             placeholder="Enter subject..."
@@ -151,6 +175,7 @@ const Subscriptions = () => {
             Message:
           </label>
           <textarea
+            {...register("message")}
             className="bg-transparent text-white border-[1px] border-light-juice rounded-md w-full py-1 px-2 resize-none"
             rows={6}
             placeholder="Enter message..."
@@ -158,7 +183,7 @@ const Subscriptions = () => {
         </div>
         <div className="flex justify-center mt-4 ">
           {" "}
-          <Button icon={<FiSend />} label="Send" isSubmitting={false} />
+          <Button icon={<FiSend />} label="Send" isSubmitting={isLoading} />
         </div>
       </form>
     </div>

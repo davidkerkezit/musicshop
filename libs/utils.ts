@@ -142,6 +142,13 @@ export const login = z.object({
   username: z.string().min(1),
   password: z.string().min(1),
 });
+
+export const subscriptionSchema = z.object({
+  subject: z.string().min(1),
+
+  message: z.string().min(1),
+});
+
 let BASE_URL: string;
 
 if (process.env.NODE_ENV === "production") {

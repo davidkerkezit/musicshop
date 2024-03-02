@@ -127,13 +127,11 @@ const Orders = () => {
                 .padStart(2, "0")}`;
 
               return (
-                <Suspense fallback={""}>
-                  <OrderDetails
-                    order={order}
-                    date={formattedDate}
-                    selectedCategory={selectedCategory}
-                  />
-                </Suspense>
+                <OrderDetails
+                  order={order}
+                  date={formattedDate}
+                  selectedCategory={selectedCategory}
+                />
               );
             })}
         </div>

@@ -61,3 +61,11 @@ export type TestimonialType = {
   text: string;
   imageSrc: StaticImageData;
 };
+export type QuestionType = {
+  _id: string;
+  name: string;
+  email: string;
+  message: string;
+  read: boolean;
+  createdAt: string;
+};

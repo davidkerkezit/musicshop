@@ -76,7 +76,6 @@ export async function PATCH(request: NextRequest, response: NextResponse) {
 
     let model: any;
     let mongoCategory: string;
-    console.log(category, "Test");
 
     const categoryMap: {
       [key: string]: { model: any; mongoCategory: string };
@@ -90,7 +89,6 @@ export async function PATCH(request: NextRequest, response: NextResponse) {
     model = categoryInfo?.model;
     mongoCategory = categoryInfo?.mongoCategory || "";
     await connectMongoDB(); // Connect to MongoDB
-    console.log(imageUrl, "hir", id);
 
     const product = await model.findByIdAndUpdate(id, {
       name,

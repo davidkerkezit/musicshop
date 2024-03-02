@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import searchSliderSlice from "./features/searchSliderSlice";
 import cartSlice from "./features/cartSlice";
-
+import questionsSlice from "./features/questionsSlice";
 import ordersSlice from "./features/ordersSlice";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 export const makeStore = () => {
@@ -9,7 +9,7 @@ export const makeStore = () => {
     reducer: {
       searchSliderSlice,
       cartSlice,
-
+      questionsSlice,
       ordersSlice,
     },
   });

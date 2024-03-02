@@ -30,7 +30,6 @@ const ContactForm = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data, e) => {
     e?.preventDefault();
-    console.log("uslo");
 
     await sendMessage(data.name, data.email, data.message);
     reset({

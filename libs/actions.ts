@@ -725,3 +725,57 @@ export async function getAllSubscriptions() {
     console.log(error);
   }
 }
+export async function sendMails({
+  subject,
+  message,
+  emails,
+}: {
+  subject: string;
+  message: string;
+  emails: string[];
+}) {
+  try {
+    const res = await fetch(`${BASE_URL}/api/subscriptions/message`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ subject, message, emails }),
+      cache: "no-store",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+export async function getQuestions() {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/contact`, {
+      cache: "no-store",
+    });
+
+    const data = await res.json();
+    return data;
+    console.log("Order added successfully!");
+  } catch (error) {
+    console.log("Error message: Error on addOrder action");
+  }
+}
+export async function readQuestion(id: string, isRead: boolean) {
+  try {
+    const res = await fetch(`${BASE_URL}/api/contact`, {
+      method: "PATCH",
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
+      },
+      body: JSON.stringify({
+        id,
+        isRead,
+      }),
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}

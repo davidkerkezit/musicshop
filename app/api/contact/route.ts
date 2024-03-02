@@ -8,7 +8,36 @@ export async function POST(request: NextRequest) {
       name,
       email,
       message,
+      read: false,
     });
+    return NextResponse.json({
+      success: true,
+    });
+  } catch (error) {
+    console.log("Error message: Error with POST images API");
+    return NextResponse.json({ error });
+  }
+}
+export async function GET(request: NextRequest) {
+  try {
+    const questions = await Contact.find();
+
+    return NextResponse.json({
+      questions,
+    });
+  } catch (error) {
+    console.log("Error message: Error with POST images API");
+    return NextResponse.json({ error });
+  }
+}
+export async function PATCH(request: NextRequest) {
+  try {
+    const { id, isRead } = await request.json();
+
+    const data = await Contact.findByIdAndUpdate(id, {
+      read: !isRead,
+    });
+
     return NextResponse.json({
       success: true,
     });
