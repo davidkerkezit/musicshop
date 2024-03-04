@@ -30,7 +30,7 @@ const Search = () => {
   return (
     <form
       onSubmit={searchValueHandler}
-      className={`fixed z-50 w-[30%] h-max   text-center  mx-auto left-0 right-0  flex flex-col items-center ${
+      className={`fixed z-50 w-[60%] md:w-[30%] h-max   text-center  mx-auto left-0 right-0  flex flex-col items-center ${
         showSearch && "animate-openFromTop"
       } ${showSearch === false && "animate-closeToTop"} ${
         showSearch === null && "-top-[70%]"
