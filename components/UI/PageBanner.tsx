@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 
 const PageBanner = ({ page }: { page: string }) => {
   const path = usePathname();
-  console.log(path);
 
   return (
     <div className="background  w-full pt-40 pb-32 h-[20rem] flex justify-center relative">
