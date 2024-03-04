@@ -139,8 +139,9 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
           )}
         </button>
         <button
+          disabled
           onClick={toggleDetails}
-          className="px-2 py-1 border-[1px] border-white/20 rounded-md font-thin w-[7rem]  hover:bg-white/10"
+          className="px-2 py-1 border-[1px] border-white/20 rounded-md font-thin w-[7rem]  hover:bg-white/10 cursor-not-allowed"
         >
           Close
         </button>

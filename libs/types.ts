@@ -68,4 +68,5 @@ export type QuestionType = {
   message: string;
   read: boolean;
   createdAt: string;
+  answer: string;
 };

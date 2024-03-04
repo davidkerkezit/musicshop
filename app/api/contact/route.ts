@@ -9,6 +9,7 @@ export async function POST(request: NextRequest) {
       email,
       message,
       read: false,
+      answer: "",
     });
     return NextResponse.json({
       success: true,
@@ -32,10 +33,11 @@ export async function GET(request: NextRequest) {
 }
 export async function PATCH(request: NextRequest) {
   try {
-    const { id, isRead } = await request.json();
+    const { id, isRead, answer } = await request.json();
 
     const data = await Contact.findByIdAndUpdate(id, {
       read: !isRead,
+      answer: answer,
     });
 
     return NextResponse.json({

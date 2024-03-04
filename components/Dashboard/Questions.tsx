@@ -33,6 +33,7 @@ const Questions = () => {
           category: selectedCategory,
         })
       );
+      console.log(allQuestions);
     };
     fetchData();
   }, [selectedCategory]);
@@ -78,7 +79,7 @@ const Questions = () => {
                 : "bg-white/10 text-white hover:bg-white/20 duration-200"
             } `}
           >
-            <p>Read</p>
+            <p>Answered</p>
             <p className="bg-white text-black rounded-full w-[1rem] h-[1rem] flex items-center justify-center p-3">
               {readQuestions.length}
             </p>

@@ -5,6 +5,7 @@ const ContactSchema = new Schema(
     email: String,
     message: String,
     read: Boolean,
+    answer: String,
   },
   {
     timestamps: true,

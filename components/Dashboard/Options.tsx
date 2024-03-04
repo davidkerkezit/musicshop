@@ -40,7 +40,7 @@ const Options = () => {
       dispatch(
         questionsUpdate({
           questions: questions,
-          category: "unread",
+          category: "all",
         })
       );
 

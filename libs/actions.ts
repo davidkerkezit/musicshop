@@ -760,7 +760,11 @@ export async function getQuestions() {
     console.log("Error message: Error on addOrder action");
   }
 }
-export async function readQuestion(id: string, isRead: boolean) {
+export async function readQuestion(
+  id: string,
+  isRead: boolean,
+  answer: string
+) {
   try {
     const res = await fetch(`${BASE_URL}/api/contact`, {
       method: "PATCH",
@@ -773,6 +777,7 @@ export async function readQuestion(id: string, isRead: boolean) {
       body: JSON.stringify({
         id,
         isRead,
+        answer,
       }),
     });
   } catch (error) {

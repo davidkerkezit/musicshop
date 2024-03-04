@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { subscriptionSchema } from "@/libs/utils";
 import emailjs from "emailjs-com";
+import { error } from "console";
 
 const Skeleton = () => {
   return (
@@ -150,6 +151,9 @@ const Subscriptions = () => {
       >
         <div className="flex flex-col ">
           <label className="text-lg font-whin">Subject:</label>
+          <p className="text-sm text-red-500">
+            {errors && errors.subject && errors.subject.message}
+          </p>
           <input
             {...register("subject")}
             type="text"
@@ -197,6 +201,9 @@ const Subscriptions = () => {
           <label className="text-lg font-whin" htmlFor="">
             Message:
           </label>
+          <p className="text-sm text-red-500">
+            {errors && errors.message && errors.message.message}
+          </p>
           <textarea
             {...register("message")}
             className="bg-transparent text-white border-[1px] border-light-juice rounded-md w-full py-1 px-2 resize-none"

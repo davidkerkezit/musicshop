@@ -17,12 +17,17 @@ import { questionsUpdate } from "@/libs/features/questionsSlice";
 import Button from "../UI/SubmitButton";
 import { FiSend } from "react-icons/fi";
 import emailjs from "emailjs-com";
-
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { subscriptionSchema } from "@/libs/utils";
 interface QuestionDetailProps {
   question: QuestionType;
   date: string;
   selectedCategory: string;
 }
+type FormFields = z.infer<typeof subscriptionSchema>;
+
 const QuestionDetails: React.FC<QuestionDetailProps> = ({
   question,
   date,
@@ -33,39 +38,52 @@ const QuestionDetails: React.FC<QuestionDetailProps> = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors, isSubmitting },
+  } = useForm<FormFields>({
+    defaultValues: {},
+    resolver: zodResolver(subscriptionSchema),
+  });
 
-  const readQuestionHandler = async (id: string, isRead: boolean) => {
-    setIsLoading(true);
-    const data = await Promise.all([
-      await readQuestion(id, isRead),
-      await getQuestions(),
-    ]);
-
-    dispatch(
-      questionsUpdate({
-        questions: data[1].questions,
-        category: selectedCategory,
-      })
-    );
-    setIsLoading(false);
-  };
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    if (process.env.EMAILJS_SERVICE_ID && process.env.TEMPLETE_ID) {
+  const onSubmit: SubmitHandler<FormFields> = async (data, e) => {
+    if (
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID &&
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+    ) {
       emailjs
         .send(
-          process.env.EMAILJS_SERVICE_ID,
-          process.env.TEMPLETE_ID,
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
           {
             to_email: question.email,
             name: question.name,
-            subject: "Header",
-            message: "MESSAGE",
+            subject: data.subject,
+            message: data.message,
           },
-          process.env.EMAILJS_PUBLIC_KEY
+          process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
         )
-        .then((response) => {
+        .then(async (response) => {
           console.log("Email sent successfully:", response);
+          if (response.status === 200) {
+            setIsLoading(true);
+            const dataQuestions = await Promise.all([
+              readQuestion(question._id, question.read, data.message),
+              getQuestions(),
+            ]);
+            console.log(dataQuestions);
+
+            dispatch(
+              questionsUpdate({
+                questions: dataQuestions[1].questions,
+                category: selectedCategory,
+              })
+            );
+            setIsLoading(false);
+            e?.target.reset();
+          }
         })
         .catch((error) => {
           console.error("Email sending failed:", error);
@@ -109,6 +127,14 @@ const QuestionDetails: React.FC<QuestionDetailProps> = ({
           <p className="my-4 max-w-[60rem] p-2 h-max break-words bg-white/5 rounded-lg ">
             Message:<span className="font-thin"> {question.message}</span>
           </p>
+          {question.read && (
+            <div className="bg-light-juice text-black rounded-lg w-1/2 float-right p-2 flex flex-col mb-5">
+              <h6 className="bg-black/50 font-semibold w-max p-1 rounded-lg text-white tracking-wide ">
+                Musicshop:
+              </h6>
+              <p className="p-2 ">{question.answer}</p>
+            </div>
+          )}
         </div>
       </div>
 
@@ -118,71 +144,57 @@ const QuestionDetails: React.FC<QuestionDetailProps> = ({
           {!question.read && "Unread"}
         </p>
         <p className="bg-green-600 w-max px-4 rounded-md font-thin text-sm">
-          {question.read && "Read"}
+          {question.read && "Answered"}
         </p>
       </div>
-      <div className="bg-white/10  flex justify-center items-center pb-4 gap-4">
-        {/* <button
-          onClick={() => readQuestionHandler(question._id, question.read)}
-          className={`px-2 py-1 ${
-            question.read === false
-              ? "bg-green-600 hover:bg-green-500"
-              : "bg-yellow-600 hover:bg-yellow-500"
-          } rounded-md text-white w-[7rem] `}
+      <div className="bg-white/10  flex justify-center items-center pb-4 gap-4 "></div>
+      {!question.read && (
+        <form
+          className="flex flex-col gap-2 mt-5 bg-white/10 p-2 rounded-xl m-2"
+          onSubmit={handleSubmit(onSubmit)}
         >
-          {isLoading ? (
-            <LoadingDots />
-          ) : (
-            <p> {question.read ? "Unread" : "Read"}</p>
-          )}
-        </button>
-        <button
-          onClick={toggleDetails}
-          className="px-2 py-1 border-[1px] border-white/20 rounded-md font-thin w-[7rem]  hover:bg-white/10"
-        >
-          Close
-        </button> */}
-      </div>
-      <form
-        className="flex flex-col gap-2 mt-5 bg-white/10 p-2 rounded-xl"
-        // onSubmit={handleSubmit(onSubmit)}
-      >
-        <div className="flex flex-col ">
-          <label className="text-lg font-whin">Subject:</label>
-          <input
-            // {...register("subject")}
-            type="text"
-            className="bg-transparent text-white border-[1px] border-light-juice rounded-md w-1/3 py-1 px-2"
-            placeholder="Enter subject..."
-          />
-        </div>
-        <div className="flex  gap-4 items-center">
-          <label className="text-lg font-whin">To:</label>
-          <div className="flex flex-row gap-2">
-            <p
-              className={`px-2 py-1 border-[1px] border-juice/20 rounded-md  `}
-            >
-              {question.email}{" "}
+          <div className="flex flex-col ">
+            <label className="text-lg font-whin">Subject:</label>
+            <p className="text-sm text-red-500">
+              {errors && errors.subject && errors.subject.message}
             </p>
+            <input
+              {...register("subject")}
+              type="text"
+              className="bg-transparent text-white border-[1px] border-light-juice rounded-md w-1/3 py-1 px-2"
+              placeholder="Enter subject..."
+            />
           </div>
-        </div>
-        <div className="flex flex-col ">
-          <label className="text-lg font-whin" htmlFor="">
-            Message:
-          </label>
-          <textarea
-            // {...register("message")}
-            className="bg-transparent text-white border-[1px] border-light-juice rounded-md w-full py-1 px-2 resize-none"
-            rows={6}
-            placeholder="Enter message..."
-          />
-        </div>
-        <div className="flex justify-center mt-4 ">
-          {" "}
-          {/* <Button icon={<FiSend />} label="Send" isSubmitting={isLoading} /> */}
-          <button onClick={handleSubmit}>SUBMIT</button>
-        </div>
-      </form>
+          <div className="flex  gap-4 items-center">
+            <label className="text-lg font-whin">To:</label>
+            <div className="flex flex-row gap-2">
+              <p
+                className={`px-2 py-1 border-[1px] border-juice/20 rounded-md  `}
+              >
+                {question.email}{" "}
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-col ">
+            <label className="text-lg font-whin" htmlFor="">
+              Message:
+            </label>
+            <p className="text-sm text-red-500">
+              {errors && errors.message && errors.message.message}
+            </p>
+            <textarea
+              {...register("message")}
+              className="bg-transparent text-white border-[1px] border-light-juice rounded-md w-full py-1 px-2 resize-none"
+              rows={6}
+              placeholder="Enter message..."
+            />
+          </div>
+          <div className="flex justify-center mt-4 ">
+            {" "}
+            <Button icon={<FiSend />} label="Answer" isSubmitting={isLoading} />
+          </div>
+        </form>
+      )}
     </details>
   );
 };
