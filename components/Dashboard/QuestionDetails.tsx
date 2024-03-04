@@ -69,18 +69,17 @@ const QuestionDetails: React.FC<QuestionDetailProps> = ({
           console.log("Email sent successfully:", response);
           if (response.status === 200) {
             setIsLoading(true);
-            const dataQuestions = await Promise.all([
-              readQuestion(question._id, question.read, data.message),
-              getQuestions(),
-            ]);
-            console.log(dataQuestions);
+            await readQuestion(question._id, question.read, data.message);
+            const dataQuestions = await getQuestions();
 
             dispatch(
               questionsUpdate({
-                questions: dataQuestions[1].questions,
+                questions: dataQuestions.questions,
                 category: selectedCategory,
               })
             );
+            console.log(question);
+
             setIsLoading(false);
             e?.target.reset();
           }

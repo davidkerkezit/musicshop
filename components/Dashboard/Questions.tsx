@@ -33,7 +33,6 @@ const Questions = () => {
           category: selectedCategory,
         })
       );
-      console.log(allQuestions);
     };
     fetchData();
   }, [selectedCategory]);
@@ -115,6 +114,7 @@ const Questions = () => {
 
             return (
               <QuestionDetails
+                key={question._id}
                 question={question}
                 date={formattedDate}
                 selectedCategory={selectedCategory}

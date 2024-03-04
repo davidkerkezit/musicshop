@@ -22,7 +22,7 @@ const Sort = ({
         value={selectedSort}
         onChange={handleSortChange}
       >
-        <option value="" disabled selected hidden>
+        <option value="" disabled hidden>
           Select sort option
         </option>
 

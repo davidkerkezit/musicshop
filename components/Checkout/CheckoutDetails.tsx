@@ -295,7 +295,10 @@ const CheckoutDetails = () => {
                       (item: CartItem) => item.productId === product._id
                     )?.quantity;
                     return (
-                      <div className="flex bg-black/50 justify-between items-center ">
+                      <div
+                        key={product._id}
+                        className="flex bg-black/50 justify-between items-center "
+                      >
                         <div className="bg-white/20 m-1">
                           <img
                             src={product.imageUrl}

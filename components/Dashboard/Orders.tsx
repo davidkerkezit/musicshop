@@ -128,6 +128,7 @@ const Orders = () => {
 
               return (
                 <OrderDetails
+                  key={order._id}
                   order={order}
                   date={formattedDate}
                   selectedCategory={selectedCategory}

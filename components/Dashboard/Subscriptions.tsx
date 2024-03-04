@@ -16,9 +16,12 @@ import { error } from "console";
 const Skeleton = () => {
   return (
     <div className="flex gap-2 flex-wrap ">
-      {[...Array(8)].map((email) => {
+      {[...Array(8)].map((_, index: number) => {
         return (
-          <p className=" px-2  h-[2.5rem] border-[1px] border-juice rounded-md bg-light-juice/20 w-[7rem] flex items-center justify-center">
+          <p
+            key={index}
+            className=" px-2  h-[2.5rem] border-[1px] border-juice rounded-md bg-light-juice/20 w-[7rem] flex items-center justify-center"
+          >
             <LoadingDots />
           </p>
         );
@@ -95,6 +98,7 @@ const Subscriptions = () => {
             allEmails.map((email) => {
               return (
                 <button
+                  key={email}
                   onClick={() => {
                     const emailExists = selectedEmails.includes(email);
                     const updatedEmails = emailExists
@@ -123,7 +127,10 @@ const Subscriptions = () => {
           {selectedEmails.length > 0 ? (
             selectedEmails.map((email) => {
               return (
-                <div className=" px-2 py-1 border-[1px] border-juice rounded-md bg-light-juice/20 relative">
+                <div
+                  key={email}
+                  className=" px-2 py-1 border-[1px] border-juice rounded-md bg-light-juice/20 relative"
+                >
                   <p> {email}</p>
                   <button
                     className="absolute -top-2 -right-2 bg-black rounded-full"

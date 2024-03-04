@@ -45,7 +45,7 @@ const SimilarProducts = ({
       </div>
       <div className="flex justify-center ">
         {products.map((product) => {
-          return <ProductCard product={product} />;
+          return <ProductCard key={product._id} product={product} />;
         })}
       </div>
     </div>

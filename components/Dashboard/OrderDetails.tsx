@@ -98,7 +98,10 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
           </p>
           {order.order.map((product: CartItem) => {
             return (
-              <div className="flex justify-between items-center border-b-[1px] border-b-light-juice/30">
+              <div
+                key={product.productId}
+                className="flex justify-between items-center border-b-[1px] border-b-light-juice/30"
+              >
                 <p className="font-thin text-base">{product.name}</p>
                 <p className="font-thin text-base">
                   {product.quantity} x {product.price}.00 $

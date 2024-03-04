@@ -75,7 +75,11 @@ const Cart = () => {
           {allProducts.length > 0 ? (
             allProducts.map((product: ProductType) => {
               return (
-                <CartProductDetails product={product} isLoading={isLoading} />
+                <CartProductDetails
+                  key={product._id}
+                  product={product}
+                  isLoading={isLoading}
+                />
               );
             })
           ) : (
