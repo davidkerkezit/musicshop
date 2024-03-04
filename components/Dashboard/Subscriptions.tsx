@@ -10,6 +10,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { subscriptionSchema } from "@/libs/utils";
+import emailjs from "emailjs-com";
+
 const Skeleton = () => {
   return (
     <div className="flex gap-2 flex-wrap ">
@@ -53,12 +55,33 @@ const Subscriptions = () => {
   useEffect(() => {
     selectedEmails.length === 0 && setSubscriptionsOption("all");
   }, [selectedEmails]);
-  const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    const formData = {
-      ...data,
-      emails: subscriptionsOption === "selected" ? selectedEmails : allEmails,
-    };
-    await sendMails(formData);
+  const onSubmit: SubmitHandler<FormFields> = (data) => {
+    let emails =
+      subscriptionsOption === "selected" ? selectedEmails : allEmails;
+
+    if (
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID &&
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+    ) {
+      emailjs
+        .send(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+          {
+            to_email: emails.join(","),
+            name: " Musicshop Customer",
+            subject: data.subject,
+            message: data.message,
+          },
+          process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+        )
+        .then((response) => {
+          console.log("Email sent successfully:", response);
+        })
+        .catch((error) => {
+          console.error("Email sending failed:", error);
+        });
+    }
   };
 
   return (

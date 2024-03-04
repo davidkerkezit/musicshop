@@ -9,26 +9,41 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { BASE_URL } from "@/libs/utils";
 import { FiTruck } from "react-icons/fi";
 import { useEffect, useState } from "react";
-import { getOrders } from "@/libs/actions";
+import { getOrders, getQuestions } from "@/libs/actions";
 import { GoMail } from "react-icons/go";
 import { RiQuestionnaireFill } from "react-icons/ri";
 import { ordersUpdate } from "@/libs/features/ordersSlice";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import Logout from "./Logout";
 import LoadingDots from "../UI/LoadingDots";
+import { questionsUpdate } from "@/libs/features/questionsSlice";
 
 const Options = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const unreadQuestions = useAppSelector(
+    (state) => state.questionsSlice.unreadQuestions
+  );
   const inProccessOrders = useAppSelector(
     (state) => state.ordersSlice.inProccess
+  );
+  const allQuestions = useAppSelector(
+    (state) => state.questionsSlice.allQuestions
   );
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       const data = await getOrders();
+      const { questions } = await getQuestions();
 
       dispatch(ordersUpdate(data));
+      dispatch(
+        questionsUpdate({
+          questions: questions,
+          category: "unread",
+        })
+      );
+
       setIsLoading(false);
     };
     fetchData();
@@ -104,10 +119,22 @@ const Options = () => {
 
       <button
         onClick={() => router.push(`${BASE_URL}/dashboard?option=questions`)}
-        className={`text-xl font-thin flex items-center py-3 px-2 gap-2 hover:bg-white/20  ${isQuestionsStyle}`}
+        className={`text-xl font-thin flex items-center justify-between gap-2 py-3 px-2 hover:bg-white/20  ${isQuestionsStyle}`}
       >
-        <RiQuestionnaireFill size={15} />
-        Questions
+        <div className="flex items-center gap-2">
+          {" "}
+          <RiQuestionnaireFill size={15} />
+          <p>Questions</p>
+        </div>
+        {isLoading ? (
+          <LoadingDots />
+        ) : (
+          unreadQuestions.length > 0 && (
+            <p className="bg-light-juice text-black w-[1.3rem] h-[1.3rem] rounded-full flex items-center justify-center text-sm">
+              {unreadQuestions.length}
+            </p>
+          )
+        )}
       </button>
       <Logout />
     </div>
