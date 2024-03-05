@@ -1,24 +1,23 @@
 "use client";
+
+import { useState } from "react";
 import { loginAuthAction } from "@/libs/actions";
-import React, { useEffect, useState } from "react";
-import { useFormState } from "react-dom";
-import { FaUser } from "react-icons/fa";
-import { RiLockPasswordFill } from "react-icons/ri";
+import {
+  FaUser,
+  RiLockPasswordFill,
+  FaEye,
+  FaEyeSlash,
+  IoMdLogIn,
+} from "@/components/UI/Icons";
 import Button from "../UI/SubmitButton";
-import { IoMdLogIn } from "react-icons/io";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import SubmitButton from "../UI/SubmitButton";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { BASE_URL, login } from "@/libs/utils";
+import { BASE_URL, loginSchema } from "@/libs/utils";
 import Loading from "../UI/Loading";
 
-const initialState = {
-  message: null,
-};
-type FormFields = z.infer<typeof login>;
+type FormFields = z.infer<typeof loginSchema>;
 const LoginForm = () => {
   const [isHiddenPassword, setIsHiddenPassword] = useState(false);
   const router = useRouter();
@@ -30,16 +29,15 @@ const LoginForm = () => {
     setValue,
     formState: { errors, isSubmitting },
   } = useForm<FormFields>({
-    resolver: zodResolver(login),
+    resolver: zodResolver(loginSchema),
   });
 
   const onSubmit: SubmitHandler<FormFields> = async (data, event) => {
     event?.preventDefault();
-
     const { username, password } = data;
     const status = await loginAuthAction(username, password);
     if (status === 201) {
-      router.refresh();
+      router.push(`${BASE_URL}/dashboard`);
     }
     setError(status);
   };

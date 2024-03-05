@@ -55,12 +55,7 @@ export type checkoutType = {
 
   order: CartItem[];
 };
-export type TestimonialType = {
-  name: string;
-  occupation: string;
-  text: string;
-  imageSrc: StaticImageData;
-};
+
 export type QuestionType = {
   _id: string;
   name: string;
@@ -69,4 +64,49 @@ export type QuestionType = {
   read: boolean;
   createdAt: string;
   answer: string;
+};
+export type CategoryType = {
+  name: string;
+  quote: string;
+  background: string;
+  imageSrc: StaticImageData;
+  imageAlt: string;
+  width: number;
+  height: number;
+  hover: string;
+  query: string;
+};
+export type AboutCategoryType = {
+  background: string;
+  quote: string;
+  label: string;
+  description: string;
+  artist: string;
+  profession: string;
+  statement: string;
+  width: number;
+  height: number;
+  imageSrc: StaticImageData;
+  imageAlt: string;
+  imageStyle: string;
+};
+export type TestimonialType = {
+  name: string;
+  occupation: string;
+  text: string;
+  stars: number;
+  imageSrc: StaticImageData;
+};
+export type OrderType = {
+  firstName: string;
+  lastName: string;
+  city: string;
+  houseNumber: string;
+  streetName: string;
+  totalPrice: number;
+  order: CartItem[];
+  isChecked: boolean;
+  moreInformation: string;
+  postalCode: string;
+  phoneNumber: string;
 };

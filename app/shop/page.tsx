@@ -11,8 +11,8 @@ import { ProductType } from "@/libs/types";
 import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Music Shop | Shop",
-
-  description: "Feel Our Vibe",
+  description:
+    "Welcome to Musicshop London - your ultimate destination for music enthusiasts. Explore our vast collection of vinyl records, DJ equipment, and audio software. Discover top-quality products and elevate your music experience with Musicshop today.",
 };
 export default async function Page({
   searchParams,

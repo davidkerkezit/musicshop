@@ -1,14 +1,11 @@
 "use client";
-
-import { BASE_URL } from "@/libs/utils";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 export const dynamic = "force-dynamic";
 
 const Pages = ({ pagesNumber }: { pagesNumber: number }) => {
   const [displayedPages, setDisplayedPages] = useState<number[]>([]);
-  const router = useRouter();
   const pathname = usePathname();
   const [currentUrl, setCurrentUrl] = useState<string>("");
   const params = useSearchParams();
@@ -17,25 +14,21 @@ const Pages = ({ pagesNumber }: { pagesNumber: number }) => {
   const searchQuery = params.get("q");
   const sortQuery = params.get("sort");
   const collectionQuery = params.get("collection");
-
   const isShopPage = pathname.startsWith("/shop");
+
   useEffect(() => {
     const searchParams = new URLSearchParams(params);
-
     searchParams.delete("page");
-
     const searchString = searchParams.toString();
-
     const updatedUrl = `${pathname}?${searchString}`;
-
     setCurrentUrl(updatedUrl);
   }, [selectedPageQuery, sortQuery, collectionQuery, searchQuery]);
+
   useEffect(() => {
     if (selectedPageNumber < 3 && pagesNumber < 4) {
       let array = [];
       for (let index = 1; index <= pagesNumber; index++) {
         array.push(index);
-
         setDisplayedPages(array);
       }
     } else if (selectedPageNumber < 3 && pagesNumber > 3) {
@@ -55,7 +48,7 @@ const Pages = ({ pagesNumber }: { pagesNumber: number }) => {
 
   return (
     <div className="flex gap-2 items-center">
-      {displayedPages?.map((page) => {
+      {displayedPages?.map((page: number) => {
         return (
           <Link
             key={page}

@@ -1,22 +1,23 @@
 "use client";
 import { BASE_URL } from "@/libs/utils";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
-import { IoIosSearch } from "react-icons/io";
+import { usePathname } from "next/navigation";
+import { useRef, useState } from "react";
+import { IoIosSearch } from "@/components/UI/Icons";
 const SearchForm = () => {
   const pathname = usePathname();
   const isShopPage = pathname.startsWith("/shop");
   const [searchValue, setSearchValue] = useState<string>("");
   const searchRef = useRef<HTMLAnchorElement>(null);
-  const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setSearchValue(e.target.value);
-  };
   const searchValueHandler = (e: React.FormEvent) => {
     e.preventDefault();
     searchRef.current && searchRef.current.click();
   };
+  const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setSearchValue(e.target.value);
+  };
+
   return (
     <form
       onSubmit={searchValueHandler}

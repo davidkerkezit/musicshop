@@ -2,38 +2,28 @@
 import { AppDispatch, useAppSelector } from "@/libs/store";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  addItemToCart,
-  decreaseItemCart,
-  hideCart,
-  emptyCart,
-  removeProductFromCart,
-} from "@/libs/features/cartSlice";
-import { FaArrowRight } from "react-icons/fa";
+import { hideCart, emptyCart } from "@/libs/features/cartSlice";
+import { FaArrowRight } from "@/components/UI/Icons";
 import { cartProducts } from "@/libs/actions";
 import { ProductType } from "@/libs/types";
-import LoadingDots from "./UI/LoadingDots";
 import { BASE_URL } from "@/libs/utils";
 import { useRouter } from "next/navigation";
-import CartProductDetails from "./Cart/CartProductDetails";
-import EmptyCartAnimation from "./Shop/EmptyCartAnimation";
+import CartProductDetails from "./CartProductDetails";
+import EmptyCartAnimation from "../Shop/EmptyCartAnimation";
 
 const Cart = () => {
   const totalPrice = useAppSelector((state) => state.cartSlice.totalPrice);
-
   const showCart = useAppSelector((state) => state.cartSlice.isVisible);
   const cartItems = useAppSelector((state) => state.cartSlice.cartItems);
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const [allProducts, setAllProducts] = useState<ProductType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       const { products } = await cartProducts(cartItems);
       setAllProducts(products);
-
       setIsLoading(false);
     };
     fetchData();
@@ -59,9 +49,7 @@ const Cart = () => {
             <FaArrowRight className="text-xl text-juice" />
           </button>
           <p className={`text-xl font-thin`}>Your cart</p>
-          {cartItems.length === 0 ? (
-            <p></p>
-          ) : (
+          {cartItems.length > 0 && (
             <button onClick={emptyCartHandler} disabled={isLoading}>
               Remove All
             </button>

@@ -1,7 +1,7 @@
 // HELPERS FUNCTIONS
 
 import { CartItem } from "./features/cartSlice";
-import { ProductType, checkoutType } from "./types";
+import { OrderType, ProductType, checkoutType } from "./types";
 import { SignJWT, jwtVerify, type JWTPayload } from "jose";
 import { BASE_URL } from "./utils";
 // Aws S3 Helpers
@@ -502,7 +502,7 @@ export async function editProduct(formData: {
   }
 }
 
-export async function addOrder(formData: any) {
+export async function addOrder(formData: OrderType) {
   const {
     firstName,
     lastName,
@@ -543,7 +543,7 @@ export async function addOrder(formData: any) {
     }
 
     console.log("Order added successfully!");
-    const data = await res.json();
+    const data = res.status;
     return data;
   } catch (error) {
     console.log("Error message: Error on addOrder action");

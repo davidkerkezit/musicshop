@@ -1,7 +1,7 @@
 "use client";
 
 import LoadingDots from "./LoadingDots";
-import { FaLock } from "react-icons/fa";
+import { FaLock } from "@/components/UI/Icons";
 
 const Button = ({
   icon,

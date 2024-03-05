@@ -2,7 +2,7 @@
 import { ProductType } from "@/libs/types";
 import Image from "next/image";
 import Button from "../UI/Button";
-import { AiOutlineShopping } from "react-icons/ai";
+import { AiOutlineShopping } from "@/components/UI/Icons";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/libs/store";
 import { addItemToCart } from "@/libs/features/cartSlice";

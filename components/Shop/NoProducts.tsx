@@ -1,5 +1,4 @@
-import { GoPackage } from "react-icons/go";
-import { AiOutlineSearch } from "react-icons/ai";
+import { GoPackage, AiOutlineSearch } from "@/components/UI/Icons";
 
 const NoProducts = () => {
   return (

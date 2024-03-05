@@ -5,7 +5,7 @@ import {
   AiOutlineLeft,
   AiOutlineDoubleRight,
   AiOutlineRight,
-} from "react-icons/ai";
+} from "@/components/UI/Icons";
 import Arrow from "../UI/Arrow";
 import { useSearchParams } from "next/navigation";
 import Pages from "./Pages";

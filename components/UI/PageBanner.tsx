@@ -34,7 +34,7 @@ const PageBanner = ({ page }: { page: string }) => {
       <h1 className="text-[7rem] font-bold relative z-10">{page}</h1>
       <Image
         src={DARK_BG}
-        alt=""
+        alt="dark-background"
         width={1600}
         height={300}
         className="w-full absolute -bottom-[16rem]"

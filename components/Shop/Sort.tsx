@@ -1,9 +1,5 @@
 "use client";
 import { sortType } from "@/libs/types";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-
-import React, { useEffect, useRef } from "react";
 
 const Sort = ({
   sort,
@@ -26,7 +22,7 @@ const Sort = ({
           Select sort option
         </option>
 
-        {sort.map((option) => {
+        {sort.map((option: sortType) => {
           return (
             <option key={option.query} value={option.query}>
               {option.option}

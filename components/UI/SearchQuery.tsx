@@ -2,8 +2,8 @@
 import { BASE_URL } from "@/libs/utils";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
-import { TiDeleteOutline } from "react-icons/ti";
+import { useEffect, useState } from "react";
+import { TiDeleteOutline } from "@/components/UI/Icons";
 
 const SearchQuery = () => {
   const pathname = usePathname();

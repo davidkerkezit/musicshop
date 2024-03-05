@@ -2,18 +2,14 @@
 import { hideSearch } from "@/libs/features/searchSliderSlice";
 import { AppDispatch, useAppSelector } from "@/libs/store";
 import { BASE_URL } from "@/libs/utils";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
-import { IoIosSearch } from "react-icons/io";
+import { useRef, useState } from "react";
+import { IoIosSearch } from "@/components/UI/Icons";
 import { useDispatch } from "react-redux";
 import LOGO from "@/assets/logo.png";
 import Image from "next/image";
 import Link from "next/link";
 const Search = () => {
   const showSearch = useAppSelector((state) => state.searchSliderSlice);
-  const pathname = usePathname();
-  const isShopPage = pathname.startsWith("/shop");
-
   const searchRef = useRef<HTMLAnchorElement>(null);
   const dispatch = useDispatch<AppDispatch>();
   const [searchValue, setSearchValue] = useState<string>("");

@@ -1,6 +1,7 @@
 "use client";
+import { CategoryType } from "@/libs/types";
 import { BASE_URL } from "@/libs/utils";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -14,17 +15,7 @@ const Category = ({
   height,
   hover,
   query,
-}: {
-  name: string;
-  background: string;
-  quote: string;
-  imageSrc: StaticImageData;
-  imageAlt: string;
-  width: number;
-  height: number;
-  hover: string;
-  query: string;
-}) => {
+}: CategoryType) => {
   const router = useRouter();
   return (
     <Link

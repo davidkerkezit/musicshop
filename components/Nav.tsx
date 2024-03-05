@@ -1,9 +1,12 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { FaGooglePlay, FaRegUser } from "react-icons/fa";
-import { IoIosSearch } from "react-icons/io";
-import { AiOutlineShopping } from "react-icons/ai";
+import { useEffect, useState } from "react";
+import {
+  RiMapPinUserLine,
+  AiOutlineShopping,
+  IoIosSearch,
+  FaGooglePlay,
+} from "@/components/UI/Icons";
 import Burger from "./Burger";
 import { Menu } from "@/libs/types";
 import { usePathname, useRouter } from "next/navigation";
@@ -12,7 +15,6 @@ import { hideCart, toggleCart } from "@/libs/features/cartSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/libs/store";
 import MENU, { BASE_URL } from "@/libs/utils";
-import { RiMapPinUserLine } from "react-icons/ri";
 
 const Nav = () => {
   const path = usePathname();
@@ -32,6 +34,10 @@ const Nav = () => {
   };
 
   const showCartHandler = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
     dispatch(toggleCart());
     showSearch && dispatch(hideSearch());
   };

@@ -1,18 +1,13 @@
 import Image from "next/image";
-import React from "react";
 import LOGO from "@/assets/logo.png";
-import Link from "next/link";
-import { BASE_URL } from "@/libs/utils";
-import LoadingDots from "../LoadingDots";
+
 const DeletingProduct = ({
   name,
-  deletingConfirmation,
   showModal,
   image,
   deleteProductHandler,
 }: {
   name: string;
-  deletingConfirmation: any;
   showModal: any;
   image: string;
   deleteProductHandler: any;
@@ -58,5 +53,3 @@ const DeletingProduct = ({
 };
 
 export default DeletingProduct;
-
-// are you sure you want to delete this product

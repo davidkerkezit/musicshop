@@ -1,39 +1,36 @@
 "use client";
+import {
+  AiOutlineShopping,
+  FaLockOpen,
+  FaLock,
+  RiDeleteBin2Line,
+  VscEdit,
+  FaUnlock,
+} from "@/components/UI/Icons";
 import Image from "next/image";
 import Button from "./Button";
-import { AiOutlineShopping } from "react-icons/ai";
 import { ProductType } from "@/libs/types";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { RiDeleteBin2Line } from "react-icons/ri";
-import { VscEdit } from "react-icons/vsc";
 import { BASE_URL } from "@/libs/utils";
-import { ButtonHTMLAttributes, useState } from "react";
-import { cartProducts, deleteProduct } from "@/libs/actions";
-import LoadingDots from "./LoadingDots";
-import { AiOutlineDelete } from "react-icons/ai";
-import { isPending } from "@reduxjs/toolkit";
+import { useState } from "react";
+import { deleteProduct } from "@/libs/actions";
 import { AppDispatch, useAppSelector } from "@/libs/store";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "@/libs/features/cartSlice";
-import { FaLock, FaLockOpen } from "react-icons/fa";
-import { FaUnlock } from "react-icons/fa";
 import Portal from "./Modals/Portal";
-import SuccessfullyEdit from "./Modals/SuccessfullyEdit";
 import DeletingProduct from "./Modals/DeletingProduct";
 
 const ProductCard = ({ product }: { product: ProductType }) => {
-  const pathname = usePathname();
-  const [confirmation, setConfirmation] = useState<null | boolean>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const pathname = usePathname();
   const isShopPage = pathname.startsWith("/shop");
   const isDashboardPage = pathname.startsWith("/dashboard");
   const [isDeletePending, setIsDeletePending] = useState(false);
   const cartItems = useAppSelector((state) => state.cartSlice.cartItems);
   const dispatch = useDispatch<AppDispatch>();
-  const searchParams = useSearchParams();
-  const [isAddedToCart, setIsAddedToCart] = useState<boolean>(false);
   const router = useRouter();
+
   const deleteProductHandler = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -47,10 +44,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
       product._id,
       product.category
     );
-
     setIsDeletePending(false);
-    const url = `${pathname}?${searchParams}`;
-
     status === 201 && router.refresh();
   };
   const addToCartHandler = async (
@@ -66,10 +60,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
     const productQuantity = cartItems.find(
       (item) => item.productId === id
     )?.quantity;
-
     if (productQuantity === undefined || inStock > productQuantity) {
-      setIsAddedToCart(true);
-
       dispatch(
         addItemToCart({
           productId: id,
@@ -80,9 +71,6 @@ const ProductCard = ({ product }: { product: ProductType }) => {
           category,
         })
       );
-      setTimeout(() => {
-        setIsAddedToCart(false);
-      }, 1000);
     }
   };
   return (
@@ -91,7 +79,6 @@ const ProductCard = ({ product }: { product: ProductType }) => {
         <Portal setHidden={setShowModal}>
           <DeletingProduct
             name={product.name}
-            deletingConfirmation={setConfirmation}
             showModal={setShowModal}
             image={product.imageUrl}
             deleteProductHandler={deleteProductHandler}

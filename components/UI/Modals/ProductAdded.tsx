@@ -2,9 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import LOGO from "@/assets/logo.png";
-import Link from "next/link";
 import { BASE_URL } from "@/libs/utils";
-import LoadingDots from "../LoadingDots";
 import { useRouter } from "next/navigation";
 const ProductAdded = ({ setHidden }: { setHidden: any }) => {
   const router = useRouter();

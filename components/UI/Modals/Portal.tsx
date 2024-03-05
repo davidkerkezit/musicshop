@@ -2,11 +2,9 @@ import React, { ReactNode } from "react";
 
 const Portal = ({
   children,
-
   setHidden,
 }: {
   children: ReactNode;
-
   setHidden: any;
 }) => {
   return (

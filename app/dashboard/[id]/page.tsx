@@ -10,14 +10,11 @@ export async function generateMetadata({
 
   return {
     title: `Music Shop | ${selectedProduct.name}`,
-
-    description: "Feel Our Vibe",
   };
 }
 const page = async ({ params }: { params: { id: string } }) => {
   const id = params.id;
   const { selectedProduct } = await getEditableProduct(id);
-
   return (
     <>
       <EditProduct selectedProduct={selectedProduct} />

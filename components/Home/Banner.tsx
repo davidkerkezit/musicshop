@@ -1,12 +1,13 @@
 "use client";
-import React from "react";
-import { IoIosPin } from "react-icons/io";
-import BANNER from "../../assets/banner.png";
+import {
+  IoIosPin,
+  AiOutlineShopping,
+  BsHouseDoor,
+} from "@/components/UI/Icons";
+import BANNER from "@/assets/banner.png";
 import Image from "next/image";
-import { AiOutlineShopping } from "react-icons/ai";
-import { BsHouseDoor } from "react-icons/bs";
 import Button from "../UI/Button";
-import StoreStatistic from "./UI/StoreStatistic";
+import { StoreStatistic } from ".";
 import { useRouter } from "next/navigation";
 import { BASE_URL } from "@/libs/utils";
 

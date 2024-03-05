@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React from "react";
 import LOGO from "@/assets/logo.png";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const Loading = () => {
   return (

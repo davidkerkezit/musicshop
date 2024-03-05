@@ -7,14 +7,13 @@ const Collections = ({
   handleCollectionChange,
 }: {
   collections: collectionsType[];
-  selectedCollection: string | null;
   handleCollectionChange: (value: string) => void;
 }) => {
   const params = useSearchParams();
   const collectionQuery = params.get("collection") ?? "allproducts";
   return (
     <div className="flex  text-xl font-extralight ">
-      {collections.map((collection) => {
+      {collections.map((collection: collectionsType) => {
         const isSelectedCollectionStyle: string =
           collectionQuery === collection.query
             ? " border-b-juice bg-white/5"

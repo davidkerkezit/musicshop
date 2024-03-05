@@ -1,8 +1,6 @@
 import Image from "next/image";
 import React from "react";
 import LOGO from "@/assets/logo.png";
-import Link from "next/link";
-import { BASE_URL } from "@/libs/utils";
 import LoadingDots from "../LoadingDots";
 const SuccessfullyEdit = () => {
   return (
@@ -11,7 +9,6 @@ const SuccessfullyEdit = () => {
       <h2 className="text-xl font-bold mb-4 text-light-juice py-4">
         Your product has been successfully updated
       </h2>
-
       <LoadingDots />
     </div>
   );

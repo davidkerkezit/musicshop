@@ -16,7 +16,7 @@ const AboutUsSection = ({
       <div className="p-7 bg-white/10 rounded-3xl  w-1/2">
         <Image
           src={content.imgSrc}
-          alt=""
+          alt="about-us"
           width={700}
           height={700}
           className="rounded-3xl object-cover grayscale "

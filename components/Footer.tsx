@@ -1,12 +1,16 @@
 "use client";
+import {
+  MdKeyboardArrowUp,
+  GrInstagram,
+  GrFacebookOption,
+  IoIosPin,
+  FaPhoneVolume,
+  IoIosMail,
+  FaAngleDoubleRight,
+  BiErrorAlt,
+  MdDoneAll,
+} from "@/components/UI/Icons";
 import Link from "next/link";
-import { FaAngleDoubleRight } from "react-icons/fa";
-import { IoIosMail } from "react-icons/io";
-import { FaPhoneVolume } from "react-icons/fa";
-import { IoIosPin } from "react-icons/io";
-import { GrFacebookOption } from "react-icons/gr";
-import { GrInstagram } from "react-icons/gr";
-import { MdKeyboardArrowUp } from "react-icons/md";
 import { Menu } from "@/libs/types";
 import MENU, { BASE_URL, subscriptions } from "@/libs/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,11 +19,8 @@ import { z } from "zod";
 import { addSubscription } from "@/libs/actions";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { MdDoneAll } from "react-icons/md";
-import { BiErrorAlt } from "react-icons/bi";
 
 type FormFields = z.infer<typeof subscriptions>;
-
 const Footer = () => {
   const path = usePathname();
   const params = useSearchParams();
@@ -28,7 +29,6 @@ const Footer = () => {
   const {
     register,
     handleSubmit,
-
     reset,
     formState: { errors, isSubmitting },
   } = useForm<FormFields>({
@@ -41,7 +41,6 @@ const Footer = () => {
     const subsData = await addSubscription(data.email);
     if (subsData !== undefined) {
       setStatus(subsData);
-      console.log(subsData);
       subsData === 200 &&
         reset({
           email: "",
@@ -140,7 +139,7 @@ const Footer = () => {
                   : "md:border-l-[3px] md:border-l-transparent text-neutral-400"
               } md:pl-3 text-neutral-200 font-normal`}
             >
-              Softweres
+              Softwares
             </Link>
           </div>
         </div>

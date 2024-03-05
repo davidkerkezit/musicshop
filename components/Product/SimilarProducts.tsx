@@ -3,7 +3,7 @@ import { ProductType } from "@/libs/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import ProductCard from "../UI/ProductCard";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight } from "@/components/UI/Icons";
 import { BASE_URL } from "@/libs/utils";
 
 const SimilarProducts = ({
@@ -44,7 +44,7 @@ const SimilarProducts = ({
         </Link>
       </div>
       <div className="flex justify-center ">
-        {products.map((product) => {
+        {products.map((product: ProductType) => {
           return <ProductCard key={product._id} product={product} />;
         })}
       </div>

@@ -1,26 +1,22 @@
+import { ContactForm } from "@/components";
 import {
+  AboutCategories,
   Banner,
   Categories,
-  ContactForm,
-  Dj,
-  Softwere,
   Testimonials,
-  Vinyl,
-} from "@/components";
+} from "@/components/Home";
 import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Music Shop | Home",
-
-  description: "Feel Our Vibe",
+  description:
+    "Welcome to Musicshop London - your premier destination for vinyl records, DJ equipment, and audio software. Explore our extensive collection and elevate your music experience today.",
 };
 export default function Home() {
   return (
-    <main className="">
+    <main>
       <Banner />
       <Categories />
-      <Vinyl />
-      <Dj />
-      <Softwere />
+      <AboutCategories />
       <Testimonials />
       <ContactForm />
     </main>

@@ -1,4 +1,3 @@
-import { cartProducts } from "@/libs/actions";
 import {
   CartItem,
   addItemToCart,
@@ -7,7 +6,7 @@ import {
 } from "@/libs/features/cartSlice";
 import { AppDispatch, useAppSelector } from "@/libs/store";
 import { ProductType } from "@/libs/types";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import LoadingDots from "../UI/LoadingDots";
 

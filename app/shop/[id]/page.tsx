@@ -16,7 +16,7 @@ export async function generateMetadata({
   return {
     title: `Music Shop | ${selectedProduct.name}`,
 
-    description: "Feel Our Vibe",
+    description: `Explore our featured product at Musicshop London - ${selectedProduct.name}. Delve into the details of this top-quality ${selectedProduct.name}, crafted for music aficionados. Elevate your sound with ${selectedProduct.name} from Musicshop today.`,
   };
 }
 

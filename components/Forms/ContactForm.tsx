@@ -1,13 +1,15 @@
 "use client";
-// React Icons
-import { IoIosMail } from "react-icons/io";
-import { FaPhoneVolume } from "react-icons/fa";
-import { IoIosPin } from "react-icons/io";
-import { GrFacebookOption } from "react-icons/gr";
-import { GrInstagram } from "react-icons/gr";
-import { GiFlowerStar } from "react-icons/gi";
+// React Iconss
+import {
+  IoIosMail,
+  FaPhoneVolume,
+  IoIosPin,
+  GrFacebookOption,
+  GrInstagram,
+  GiFlowerStar,
+} from "@/components/UI/Icons";
 import Image from "next/image";
-import LOGO from "../../assets/logo.png";
+import LOGO from "@/assets/logo.png";
 import Button from "../UI/SubmitButton";
 import { sendMessage } from "@/libs/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,7 +22,6 @@ const ContactForm = () => {
   const {
     register,
     handleSubmit,
-    setValue,
     reset,
     formState: { errors, isSubmitting },
   } = useForm<FormFields>({
@@ -30,7 +31,6 @@ const ContactForm = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data, e) => {
     e?.preventDefault();
-
     await sendMessage(data.name, data.email, data.message);
     reset({
       name: "",
@@ -67,19 +67,16 @@ const ContactForm = () => {
           </div>
           <div className="flex gap-10 justify-center pb-5">
             <div className="flex items-center gap-3 flex-col md:flex-row ">
-              {" "}
               <div className="bg-neutral-700 rounded-full p-2">
-                {" "}
                 <GrFacebookOption className="text-3xl text-light-juice " />
               </div>
-              <p> Music Shop London</p>{" "}
+              <p> Music Shop London</p>
             </div>
             <div className="flex items-center gap-3 flex-col md:flex-row">
               <div className="bg-neutral-700 rounded-full p-2">
-                {" "}
                 <GrInstagram className="text-3xl text-light-juice " />
               </div>
-              <p> musicshop.london</p>{" "}
+              <p> musicshop.london</p>
             </div>
           </div>
         </div>

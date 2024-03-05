@@ -1,12 +1,7 @@
 import Nav from "./Nav";
 import Search from "./Search";
 import Modal from "./Modal";
-import Banner from "./Home/Banner";
-import Vinyl from "./Home/Vinyl";
-import Categories from "./Home/Categories";
-import Dj from "./Home/Dj";
-import Softwere from "./Home/Softwere";
-import Testimonials from "./Home/Testimonials";
+
 import ContactForm from "./Forms/ContactForm";
 import Footer from "./Footer";
 import AboutUsSection from "./About/AboutUsSection";
@@ -29,7 +24,10 @@ import Dashboard from "./Dashboard/Dashboard";
 import Options from "./Dashboard/Options";
 import EditProduct from "./Dashboard/EditProduct";
 import ProductDetails from "./Product/ProductDetails";
+import Cart from "./Cart/Cart";
+
 export {
+  Cart,
   ProductDetails,
   EditProduct,
   Options,
@@ -39,12 +37,6 @@ export {
   Nav,
   Search,
   Modal,
-  Banner,
-  Vinyl,
-  Categories,
-  Dj,
-  Softwere,
-  Testimonials,
   ContactForm,
   Footer,
   // About

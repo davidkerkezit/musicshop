@@ -1,24 +1,24 @@
 "use client";
 import LoadingDots from "@/components/UI/LoadingDots";
-import { addOrder, cartProducts, updateProducts } from "@/libs/actions";
-import { AppDispatch, useAppSelector } from "@/libs/store";
-import { ProductType } from "@/libs/types";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
 import MASTERCARD from "@/assets/mastercard.png";
 import DINACARD from "@/assets/dinacard.png";
 import VISACARD from "@/assets/visacard.png";
 import FEDEX from "@/assets/fedex.png";
+import { addOrder, cartProducts, updateProducts } from "@/libs/actions";
+import { AppDispatch, useAppSelector } from "@/libs/store";
+import { ProductType } from "@/libs/types";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
-import { BASE_URL, order } from "@/libs/utils";
+import { BASE_URL, orderSchema } from "@/libs/utils";
 import { useDispatch } from "react-redux";
 import { CartItem, emptyCart } from "@/libs/features/cartSlice";
 import { useRouter } from "next/navigation";
-import { MdDone } from "react-icons/md";
+import { MdDone } from "@/components/UI/Icons";
 
-type FormFields = z.infer<typeof order>;
+type FormFields = z.infer<typeof orderSchema>;
 
 const CheckoutDetails = () => {
   const totalPrice = useAppSelector((state) => state.cartSlice.totalPrice);
@@ -34,7 +34,7 @@ const CheckoutDetails = () => {
     formState: { errors },
   } = useForm<FormFields>({
     defaultValues: {},
-    resolver: zodResolver(order),
+    resolver: zodResolver(orderSchema),
   });
   useEffect(() => {
     if (cartItems.length > 0) {
@@ -59,10 +59,9 @@ const CheckoutDetails = () => {
     };
     const status = await updateProducts(cartItems);
     if (status === 200) {
-      const { message } = await addOrder(formData);
-      if (message === "Order added successfully") {
+      const orderDataStatus = await addOrder(formData);
+      if (orderDataStatus === 201) {
         dispatch(emptyCart());
-
         setIsSuccess(true);
         setTimeout(() => router.push(`${BASE_URL}`), 1000);
       }
