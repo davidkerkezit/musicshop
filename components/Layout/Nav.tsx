@@ -80,6 +80,12 @@ const Nav = () => {
               </Link>
             );
           })}
+          <Link
+            className={`nav-links ${path === "dashboard" && "bg-juice/90"}`}
+            href={`${BASE_URL}/dashboard`}
+          >
+            Dashboard
+          </Link>
         </div>
         {/* Search/User/Cart */}
         <div className=" gap-4 items-bottom text-xl flex  z-50 ">
