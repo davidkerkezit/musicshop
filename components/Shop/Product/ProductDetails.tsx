@@ -1,7 +1,7 @@
 "use client";
 import { ProductType } from "@/libs/types";
 import Image from "next/image";
-import Button from "../UI/Button";
+import Button from "../../UI/Button";
 import { AiOutlineShopping } from "@/components/UI/Icons";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/libs/store";

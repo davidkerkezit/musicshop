@@ -1,4 +1,5 @@
-import { PageBanner, LoginForm } from "@/components";
+import LoginForm from "@/components/Forms/LoginForm";
+import PageBanner from "@/components/UI/PageBanner";
 import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Music Shop | Admin",

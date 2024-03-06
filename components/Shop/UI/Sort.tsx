@@ -1,12 +1,12 @@
 "use client";
-import { sortType } from "@/libs/types";
+import { SortType } from "@/libs/types";
 
 const Sort = ({
   sort,
   selectedSort,
   handleSortChange,
 }: {
-  sort: sortType[];
+  sort: SortType[];
   selectedSort: string;
   handleSortChange: (value: React.ChangeEvent<HTMLSelectElement>) => void;
 }) => {
@@ -22,7 +22,7 @@ const Sort = ({
           Select sort option
         </option>
 
-        {sort.map((option: sortType) => {
+        {sort.map((option: SortType) => {
           return (
             <option key={option.query} value={option.query}>
               {option.option}

@@ -1,13 +1,7 @@
-import { twMerge } from "tailwind-merge";
-import { ClassValue, clsx } from "clsx";
-import {
-  AboutCategoryType,
-  CategoryType,
-  TestimonialType,
-  collectionsType,
-  sortType,
-} from "./types";
-import { z } from "zod";
+import STORY from "@/assets/story.jpg";
+import TEAM from "@/assets/team.jpg";
+import VISION from "@/assets/vision.jpg";
+import COMUNITY from "@/assets/comunity.jpg";
 import USER1 from "@/assets/user1.jpg";
 import USER2 from "@/assets/user2.jpg";
 import USER3 from "@/assets/user3.jpg";
@@ -22,9 +16,26 @@ import BRUNOMARS from "@/assets/brunomars.png";
 import VINYL from "@/assets/category-vinyl.png";
 import DJ from "@/assets/category-dj.png";
 import SOFTWERE from "@/assets/category-softwere.png";
-
-// Home page
-
+import {
+  AboutCategoryType,
+  AboutUsContentType,
+  CategoryType,
+  TestimonialType,
+  CollectionsType,
+  SortType,
+} from "./types";
+import { twMerge } from "tailwind-merge";
+import { ClassValue, clsx } from "clsx";
+import { z } from "zod";
+// MENU
+const MENU = [
+  { label: "Home", link: "/" },
+  { label: "About Us", link: "/about" },
+  { label: "Shop", link: "/shop" },
+  { label: "Contact", link: "/contact" },
+];
+export default MENU;
+// HOME PAGE
 export const allCategories: CategoryType[] = [
   {
     name: "Vinyls",
@@ -49,7 +60,7 @@ export const allCategories: CategoryType[] = [
     query: "djequipments",
   },
   {
-    name: "Softweres",
+    name: "Softwares",
     quote: "Where melodies meet algorithms, music software sparks creativity.",
     background: "bg-softwere",
     imageSrc: SOFTWERE,
@@ -137,7 +148,7 @@ export const aboutCategories: AboutCategoryType[] = [
   {
     background: "bg-softwere",
     quote: "Melody is a universal language.",
-    label: "Softwere",
+    label: "Software",
     description: `   Dive into the world of music production with our exceptional
   collection of cutting-edge music software. Whether you're a seasoned
   producer or just starting your musical journey, our curated selection
@@ -230,17 +241,32 @@ export const testimonials: TestimonialType[] = [
     imageSrc: USER8,
   },
 ];
+// ABOUT PAGE
+export const aboutUsContent: AboutUsContentType[] = [
+  {
+    header: "Our Story",
+    text: "Embark on a captivating journey through the history of our music shop, tracing its humble beginnings to the vibrant tapestry it weaves today. From the initial chords that marked our inception to the harmonious notes that define our present, our story is a testament to the enduring passion and dedication that fuel our love for music. Explore the milestones that shape our identity and the unwavering commitment that has propelled us forward.",
+    imgSrc: STORY,
+  },
+  {
+    header: "Meet the Team",
+    text: "Meet the faces behind the music – our talented and knowledgeable team members who breathe life into our musical haven. Each profile unveils a unique story, skill set, and passion for all things musical. From seasoned musicians to gear aficionados, our team shares a common love for the art form. Discover the individuals who make up our musical family, each contributing a distinct note to the harmonious ensemble that defines our vibrant community.",
+    imgSrc: TEAM,
+  },
+  {
+    header: "Our Mission and Values",
+    text: "At the heart of our existence lies a vision that transcends the mere transaction of instruments. Uncover the core principles that guide us in serving you better – to inspire, educate, and elevate the musical journey for everyone who walks through our doors. Explore the values that form the foundation of our commitment to providing not just instruments, but expert advice and a welcoming atmosphere. Our mission goes beyond commerce; it's about fostering a community where the true spirit of music thrives.",
+    imgSrc: VISION,
+  },
+  {
+    header: "Community Engagement",
+    text: "Music is a universal language that binds us together, and community engagement is a vital chord in our symphony. Discover how we actively connect with the local music community through events, workshops, and partnerships. Our efforts are aimed at creating a space where enthusiasts of all skill levels can not only find quality instruments but also connect, learn, and share their love for music. Join us in building a community where the language of music is spoken fluently, and the notes we play resonate with the shared heartbeat of our passion for the art form.",
+    imgSrc: COMUNITY,
+  },
+];
 
-//
-//
-//
-//
-//
-export const cn = (...inputs: ClassValue[]) => {
-  return twMerge(clsx(inputs));
-};
-
-export const sort: sortType[] = [
+// SHOP
+export const sort: SortType[] = [
   {
     option: "Price (Low to High)",
     query: "lowprice",
@@ -258,7 +284,7 @@ export const sort: sortType[] = [
     query: "oldest",
   },
 ];
-export const collections: collectionsType[] = [
+export const collections: CollectionsType[] = [
   {
     title: "All Products",
     query: "allproducts",
@@ -272,10 +298,20 @@ export const collections: collectionsType[] = [
     query: "djequipments",
   },
   {
-    title: "Softweres",
+    title: "Softwares",
     query: "softweres",
   },
 ];
+export const categories = [
+  { name: "DJ Equipment", path: "dj" },
+  { name: "Vinyl", path: "vinyls" },
+  { name: "Software", path: "softweres" },
+];
+export const djsSubCategories = [
+  { name: "Pioneer", path: "pioneer" },
+  { name: "Dennon", path: "denon" },
+];
+// DASHBOARD
 export const dashboardInputs = [
   {
     label: "Name",
@@ -328,15 +364,7 @@ export const dashboardTextAreas = [
     type: "text",
   },
 ];
-export const categories = [
-  { name: "DJ Equipment", path: "dj" },
-  { name: "Vinyl", path: "vinyls" },
-  { name: "Softwere", path: "softweres" },
-];
-export const djsSubCategories = [
-  { name: "Pioneer", path: "pioneer" },
-  { name: "Dennon", path: "denon" },
-];
+// ZOD
 export const productSchema = z.object({
   name: z.string().min(1),
   price: z.coerce.number().min(1),
@@ -389,12 +417,7 @@ if (process.env.NODE_ENV === "production") {
 } else {
   BASE_URL = "http://localhost:3000";
 }
-
 export { BASE_URL };
-const MENU = [
-  { label: "Home", link: "/" },
-  { label: "About Us", link: "/about" },
-  { label: "Shop", link: "/shop" },
-  { label: "Contact", link: "/contact" },
-];
-export default MENU;
+export const cn = (...inputs: ClassValue[]) => {
+  return twMerge(clsx(inputs));
+};

@@ -1,8 +1,10 @@
 import "./styles/globals.css";
-import { Footer, Modal, Nav, Search, Cart } from "@/components";
 import StoreProvider from "./StoreProvider";
 import { cn } from "@/libs/utils";
 import { Analytics } from "@vercel/analytics/react";
+import Modal from "@/components/UI/Modals/Modal";
+import { Footer, Nav, Search } from "@/components/Layout";
+import { Cart } from "@/components/Cart";
 export default function RootLayout({
   children,
 }: {

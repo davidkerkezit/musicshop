@@ -1,7 +1,5 @@
 "use client";
-import { useState } from "react";
-
-import { MdCheck } from "react-icons/md";
+import { MdCheck } from "@/components/UI/Icons";
 
 const RadioInputs = ({
   selectedCategory,

@@ -17,12 +17,15 @@ import { MdDone } from "react-icons/md";
 import { FaArrowRight } from "react-icons/fa";
 import { GoPackage } from "react-icons/go";
 import { AiOutlineSearch } from "react-icons/ai";
+import { BiCloudUpload } from "react-icons/bi";
+
 import {
   AiOutlineDoubleLeft,
   AiOutlineLeft,
   AiOutlineDoubleRight,
   AiOutlineRight,
 } from "react-icons/ai";
+import { GoMail } from "react-icons/go";
 import { FaLock } from "react-icons/fa";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { FaLockOpen } from "react-icons/fa";
@@ -34,9 +37,27 @@ import { BiErrorAlt } from "react-icons/bi";
 import { FaAngleDoubleRight } from "react-icons/fa";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { FaGooglePlay } from "react-icons/fa";
-
+import { FiEdit } from "react-icons/fi";
+import { BsPlusCircle } from "react-icons/bs";
+import { FiTruck } from "react-icons/fi";
 import { RiMapPinUserLine } from "react-icons/ri";
+import { RiQuestionnaireFill } from "react-icons/ri";
+import { IoMdCloseCircleOutline } from "react-icons/io";
+import { FiSend } from "react-icons/fi";
+import { RiLogoutCircleLine } from "react-icons/ri";
+import { MdCheck } from "react-icons/md";
+
 export {
+  MdCheck,
+  RiLogoutCircleLine,
+  FiSend,
+  IoMdCloseCircleOutline,
+  GoMail,
+  RiQuestionnaireFill,
+  FiEdit,
+  BsPlusCircle,
+  FiTruck,
+  BiCloudUpload,
   FaGooglePlay,
   RiMapPinUserLine,
   MdDoneAll,

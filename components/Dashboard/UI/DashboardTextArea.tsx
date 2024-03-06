@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-
-const DashboardInput = ({
+"use client";
+const DashboardTextArea = ({
   label,
   placeholder,
   value,
@@ -26,7 +24,7 @@ const DashboardInput = ({
 }) => {
   return (
     <div className="flex flex-col   ">
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2 ">
         <label htmlFor="" className="px-1 text-lg font-light">
           {label}:
         </label>
@@ -34,17 +32,11 @@ const DashboardInput = ({
           {error && error[registerValue] && error[registerValue].message}
         </p>
       </div>
-
-      <input
-        min={1}
-        onKeyDown={(evt) =>
-          type === "number" &&
-          ["e", "E", "+", "-"].includes(evt.key) &&
-          evt.preventDefault()
-        }
-        onChange={(e) => setValue("name", e.target.value)}
+      <textarea
         disabled={!access}
-        className={`bg-transparent border-light-juice border-[1px] rounded-lg p-2 placeholder:font-thin text-sm focus:outline-none focus:border-juice text-white ${
+        onChange={(e) => setValue(name, e.target.value)}
+        rows={4}
+        className={`bg-transparent border-light-juice border-[1px] rounded-lg p-2 placeholder:font-thin text-sm focus:outline-none focus:border-juice resize-none appearance-none ${
           access ? "cursor-text " : "cursor-not-allowed"
         }`}
         type={type}
@@ -57,4 +49,4 @@ const DashboardInput = ({
   );
 };
 
-export default DashboardInput;
+export default DashboardTextArea;

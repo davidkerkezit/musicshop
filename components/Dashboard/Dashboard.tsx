@@ -1,11 +1,13 @@
 "use client";
 import { ProductType } from "@/libs/types";
-import { useAppSelector } from "@/libs/store";
-import { AddProduct, EditProducts } from "..";
 import { useSearchParams } from "next/navigation";
-import Orders from "./Orders";
-import Subscriptions from "./Subscriptions";
-import Questions from "./Questions";
+import {
+  AddProduct,
+  EditProducts,
+  Orders,
+  Subscriptions,
+  Questions,
+} from "@/components/Dashboard";
 
 const Dashboard = ({
   products,

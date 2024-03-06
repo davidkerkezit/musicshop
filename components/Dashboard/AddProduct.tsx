@@ -1,31 +1,23 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { FaRegImage } from "react-icons/fa";
-import DashboardInput from "./DashboardInput";
+import DashboardInput from "./UI/DashboardInput";
 import { addNewProduct } from "@/libs/actions";
-import { MdDone } from "react-icons/md";
-import RadioInputs from "./RadioInputs";
+import { MdDone, BiCloudUpload } from "@/components/UI/Icons";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
-import DashboardTextArea from "./DashboardTextArea";
-import LoadingDots from "../UI/LoadingDots";
+import DashboardTextArea from "./UI/DashboardTextArea";
 import useImageUploader from "@/hooks/useImageUploader";
 import {
-  BASE_URL,
-  categories,
   dashboardInputs,
   dashboardTextAreas,
-  djsSubCategories,
   productSchema,
 } from "@/libs/utils";
-import { BiCloudUpload } from "react-icons/bi";
 
 import Button from "../UI/SubmitButton";
 import { useRouter } from "next/navigation";
 import Portal from "../UI/Modals/Portal";
-import NoPermission from "../UI/Modals/NoPermission";
 import ProductAdded from "../UI/Modals/ProductAdded";
 
 type FormFields = z.infer<typeof productSchema>;
@@ -39,7 +31,6 @@ const AddProduct = () => {
   } = useForm<FormFields>({
     resolver: zodResolver(productSchema),
   });
-  const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedSubCategory, setSubSelectedCategory] = useState<string | null>(
     null
@@ -82,10 +73,10 @@ const AddProduct = () => {
       let dataProduct = await addNewProduct(formData);
       setShowModal(true);
       if (dataProduct.status === 201) {
-        event?.target.reset(); // Reset the form
-        setImageSrc(null); // Reset image source
-        setSelectedCategory(null); // Reset selected category
-        setSubSelectedCategory(null); // Reset selected subcategory
+        event?.target.reset();
+        setImageSrc(null);
+        setSelectedCategory(null);
+        setSubSelectedCategory(null);
       }
     } else {
       addProductRef.current?.scrollIntoView();
@@ -144,7 +135,7 @@ const AddProduct = () => {
                       : "bg-white/10 text-white hover:bg-white/20 duration-200"
                   }`}
                 >
-                  Softwere
+                  Software
                 </button>
               </div>
 

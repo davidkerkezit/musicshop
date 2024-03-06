@@ -2,7 +2,7 @@
 import { ProductType } from "@/libs/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import ProductCard from "../UI/ProductCard";
+import ProductCard from "../../UI/ProductCard";
 import { FaArrowRight } from "@/components/UI/Icons";
 import { BASE_URL } from "@/libs/utils";
 

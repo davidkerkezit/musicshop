@@ -27,11 +27,11 @@ export type PipelineStage =
   | { $limit: number }
   | { $match: { name: { $regex: RegExp } } };
 
-export type sortType = {
+export type SortType = {
   option: string;
   query: string;
 };
-export type collectionsType = {
+export type CollectionsType = {
   title: string;
   query: string;
 };
@@ -40,7 +40,7 @@ export type AboutUsContentType = {
   text: string;
   imgSrc: StaticImageData;
 };
-export type checkoutType = {
+export type CheckoutType = {
   _id: string;
   firstName: string;
   lastName: string;
@@ -52,6 +52,7 @@ export type checkoutType = {
   phoneNumber: string;
   moreInformation: string;
   city: string;
+  createdAt: string;
 
   order: CartItem[];
 };

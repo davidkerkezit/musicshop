@@ -2,8 +2,8 @@
 import { sort, collections } from "@/libs/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import Collections from "./Collections";
-import Sort from "./Sort";
+import Collections from "./UI/Collections";
+import Sort from "./UI/Sort";
 const Filter = () => {
   const [selectedSort, setSelectedSort] = useState<string>("");
   const params = useSearchParams();

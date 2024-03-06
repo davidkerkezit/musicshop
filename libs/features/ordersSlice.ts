@@ -1,12 +1,12 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { CartItem } from "./cartSlice";
-import { ProductType, checkoutType } from "../types";
+import { CheckoutType } from "../types";
 
 interface OrdersState {
-  selectedOrdersCategory: CartItem[];
-  allOrders: CartItem[];
-  inProccess: CartItem[];
-  completed: CartItem[];
+  selectedOrdersCategory: CheckoutType[];
+  allOrders: CheckoutType[];
+  inProccess: CheckoutType[];
+  completed: CheckoutType[];
 }
 
 const initialState: OrdersState = {
@@ -21,16 +21,16 @@ export const ordersSlice = createSlice({
   reducers: {
     ordersUpdate: (
       state: OrdersState,
-      action: PayloadAction<{ orders: any[]; category: string } | null>
+      action: PayloadAction<{ orders: CheckoutType[]; category: string } | null>
     ) => {
       if (action.payload) {
         const { orders, category } = action.payload;
         state.allOrders = orders;
         state.inProccess = orders.filter(
-          (order: checkoutType) => !order.isChecked
+          (order: CheckoutType) => !order.isChecked
         );
         state.completed = orders.filter(
-          (order: checkoutType) => order.isChecked
+          (order: CheckoutType) => order.isChecked
         );
 
         // Update selectedOrdersCategory based on the category

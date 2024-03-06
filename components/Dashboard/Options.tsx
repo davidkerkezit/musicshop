@@ -1,20 +1,19 @@
 "use client";
-import { FiEdit } from "react-icons/fi";
-import { BsPlusCircle } from "react-icons/bs";
+import {
+  FiTruck,
+  BsPlusCircle,
+  FiEdit,
+  RiQuestionnaireFill,
+  GoMail,
+} from "@/components/UI/Icons";
 import { AppDispatch, useAppSelector } from "@/libs/store";
 import { useDispatch } from "react-redux";
-
-import { Router } from "next/router";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { BASE_URL } from "@/libs/utils";
-import { FiTruck } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { getOrders, getQuestions } from "@/libs/actions";
-import { GoMail } from "react-icons/go";
-import { RiQuestionnaireFill } from "react-icons/ri";
 import { ordersUpdate } from "@/libs/features/ordersSlice";
-import { RiLogoutCircleLine } from "react-icons/ri";
-import Logout from "./Logout";
+import Logout from "./UI/Logout";
 import LoadingDots from "../UI/LoadingDots";
 import { questionsUpdate } from "@/libs/features/questionsSlice";
 
@@ -35,7 +34,6 @@ const Options = () => {
       setIsLoading(true);
       const data = await getOrders();
       const { questions } = await getQuestions();
-
       dispatch(ordersUpdate(data));
       dispatch(
         questionsUpdate({
@@ -93,7 +91,6 @@ const Options = () => {
         className={`text-xl font-thin flex items-center justify-between gap-2 py-3 px-2 hover:bg-white/20 ${ordersDashboardStyle}`}
       >
         <div className="flex items-center gap-2">
-          {" "}
           <FiTruck size={15} />
           <p>Orders</p>
         </div>

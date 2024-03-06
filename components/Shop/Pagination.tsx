@@ -8,7 +8,7 @@ import {
 } from "@/components/UI/Icons";
 import Arrow from "../UI/Arrow";
 import { useSearchParams } from "next/navigation";
-import Pages from "./Pages";
+import Pages from "./UI/Pages";
 
 const Pagination = ({ pagesNumber }: { pagesNumber: number }) => {
   const [isHiddenLeftArrows, setIsHiddenLeftArrows] = useState<true | false>(

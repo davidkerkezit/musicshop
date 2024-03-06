@@ -1,8 +1,8 @@
 import {
-  ProductInformatiom,
-  SimilarProducts,
   ProductDetails,
-} from "@/components";
+  ProductInformation,
+  SimilarProducts,
+} from "@/components/Shop";
 import { getEditableProduct, getProduct } from "@/libs/actions";
 import { ProductType } from "@/libs/types";
 import { Metadata } from "next";
@@ -35,7 +35,7 @@ const page = async ({ params }: { params: { id: string } }) => {
   return (
     <div className="flex flex-col gap-10 mx-14 ">
       <ProductDetails selectedProduct={selectedProduct} category={category} />
-      <ProductInformatiom
+      <ProductInformation
         aboutProduct={selectedProduct.description}
         aboutSeller={selectedProduct.aboutSeller}
       />

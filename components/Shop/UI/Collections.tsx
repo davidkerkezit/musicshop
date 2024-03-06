@@ -1,19 +1,19 @@
 "use client";
-import { collectionsType } from "@/libs/types";
+import { CollectionsType } from "@/libs/types";
 import { useSearchParams } from "next/navigation";
 
 const Collections = ({
   collections,
   handleCollectionChange,
 }: {
-  collections: collectionsType[];
+  collections: CollectionsType[];
   handleCollectionChange: (value: string) => void;
 }) => {
   const params = useSearchParams();
   const collectionQuery = params.get("collection") ?? "allproducts";
   return (
     <div className="flex  text-xl font-extralight ">
-      {collections.map((collection: collectionsType) => {
+      {collections.map((collection: CollectionsType) => {
         const isSelectedCollectionStyle: string =
           collectionQuery === collection.query
             ? " border-b-juice bg-white/5"

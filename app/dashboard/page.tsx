@@ -1,6 +1,7 @@
+import { Dashboard, Options } from "@/components/Dashboard";
+import PageBanner from "@/components/UI/PageBanner";
 import { getProducts } from "@/libs/actions";
 import { ProductType } from "@/libs/types";
-import { PageBanner, Dashboard, Options } from "@/components";
 import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Music Shop | Dashboard",

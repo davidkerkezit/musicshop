@@ -5,10 +5,9 @@ import { AppDispatch, useAppSelector } from "@/libs/store";
 import { QuestionType } from "@/libs/types";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import QuestionDetails from "./QuestionDetails";
+import QuestionDetails from "./UI/QuestionDetails";
 
 const Questions = () => {
-  const [question, setQuestions] = useState<any[]>();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const dispatch = useDispatch<AppDispatch>();
   const selectedQuestionsCategory = useAppSelector(

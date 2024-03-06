@@ -1,17 +1,15 @@
 "use client";
-import { getAllSubscriptions, sendMails } from "@/libs/actions";
+import { getAllSubscriptions } from "@/libs/actions";
 import React, { useEffect, useState } from "react";
 import LoadingDots from "../UI/LoadingDots";
 import { useSearchParams } from "next/navigation";
-import { IoMdCloseCircleOutline } from "react-icons/io";
 import Button from "../UI/SubmitButton";
-import { FiSend } from "react-icons/fi";
+import { FiSend, IoMdCloseCircleOutline } from "@/components/UI/Icons";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { subscriptionSchema } from "@/libs/utils";
 import emailjs from "emailjs-com";
-import { error } from "console";
 
 const Skeleton = () => {
   return (

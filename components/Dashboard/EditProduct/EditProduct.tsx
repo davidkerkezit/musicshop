@@ -1,31 +1,21 @@
 "use client";
-import DashboardInput from "@/components/Dashboard/DashboardInput";
-import ProductInformatiom from "@/components/Product/ProductInformatiom";
+import DashboardInput from "@/components/Dashboard/UI/DashboardInput";
 import useImageUploader from "@/hooks/useImageUploader";
-import { editProduct, getProduct } from "@/libs/actions";
+import { editProduct } from "@/libs/actions";
 import { ProductType } from "@/libs/types";
-import {
-  BASE_URL,
-  categories,
-  djsSubCategories,
-  editableProductSchema,
-  productSchema,
-} from "@/libs/utils";
-import { BiCloudUpload } from "react-icons/bi";
+import { BASE_URL, editableProductSchema } from "@/libs/utils";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
-import DashboardTextArea from "./DashboardTextArea";
-import RadioInputs from "./RadioInputs";
-import Button from "../UI/SubmitButton";
-import { MdDone } from "react-icons/md";
+import DashboardTextArea from "../UI/DashboardTextArea";
+import Button from "../../UI/SubmitButton";
+import { MdDone, BiCloudUpload } from "@/components/UI/Icons";
 import { useRouter } from "next/navigation";
-import NoPermission from "../UI/Modals/NoPermission";
-import Portal from "../UI/Modals/Portal";
-import ProductAdded from "../UI/Modals/ProductAdded";
-import SuccessfullyEdit from "../UI/Modals/SuccessfullyEdit";
+import NoPermission from "../../UI/Modals/NoPermission";
+import Portal from "../../UI/Modals/Portal";
+import SuccessfullyEdit from "../../UI/Modals/SuccessfullyEdit";
 
 type FormFields = z.infer<typeof editableProductSchema>;
 
@@ -258,7 +248,7 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
                       : "cursor-not-allowed"
                   }`}
                 >
-                  Softwere
+                  Software
                 </button>
               </div>
 

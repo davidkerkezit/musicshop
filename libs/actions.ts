@@ -1,7 +1,5 @@
-// HELPERS FUNCTIONS
-
 import { CartItem } from "./features/cartSlice";
-import { OrderType, ProductType, checkoutType } from "./types";
+import { OrderType } from "./types";
 import { SignJWT, jwtVerify, type JWTPayload } from "jose";
 import { BASE_URL } from "./utils";
 // Aws S3 Helpers
@@ -493,12 +491,11 @@ export async function editProduct(formData: {
         throw new Error("Failed to add product");
       }
       const uploadedProductData = await res.json();
-      // Handle success scenario
+
       return uploadedProductData;
-      // You can perform additional actions here like refreshing or navigating to another page
     }
   } catch (error) {
-    // Handle errors appropriately
+    console.log("Error message: Error on EditProduct action");
   }
 }
 
@@ -542,7 +539,6 @@ export async function addOrder(formData: OrderType) {
       throw new Error("Failed to add order");
     }
 
-    console.log("Order added successfully!");
     const data = res.status;
     return data;
   } catch (error) {
@@ -553,13 +549,12 @@ export async function getOrders() {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/order`);
     if (!res.ok) {
-      throw new Error("Failed to add order");
+      throw new Error("Failed to get orders");
     }
     const data = res.json();
     return data;
-    console.log("Order added successfully!");
   } catch (error) {
-    console.log("Error message: Error on addOrder action");
+    console.log("Error message: Error on getOrders action");
   }
 }
 export async function completeOrder(id: string, isChecked: boolean) {
@@ -577,13 +572,12 @@ export async function completeOrder(id: string, isChecked: boolean) {
       }),
     });
     if (!res.ok) {
-      throw new Error("Failed to add order");
+      throw new Error("Failed to complete order");
     }
     const data = res.json();
     return data;
-    console.log("Order added successfully!");
   } catch (error) {
-    console.log("Error message: Error on addOrder action");
+    console.log("Error message: Error on completeOrder action");
   }
 }
 
@@ -607,13 +601,12 @@ export async function sendMessage(
       }),
     });
     if (!res.ok) {
-      throw new Error("Failed to add order");
+      throw new Error("Failed to send contact message");
     }
     const data = res.json();
     return data;
-    console.log("Order added successfully!");
   } catch (error) {
-    console.log("Error message: Error on addOrder action");
+    console.log("Error message: Error on sendMessage action");
   }
 }
 export async function addSubscription(email: string) {
@@ -639,13 +632,10 @@ export async function addSubscription(email: string) {
 
       throw new Error("Failed to add order");
     }
-
     const data = res.status;
-
     return data;
-    console.log("Order added successfully!");
   } catch (error) {
-    console.log("Error message: Error on addOrder action");
+    console.log("Error message: Error on addSubscription action");
   }
 }
 export async function logoutAuthAction() {
@@ -662,9 +652,12 @@ export async function logoutAuthAction() {
         credentials: "include",
       }
     );
+    if (!response.ok) {
+      throw new Error("Failed to Logout");
+    }
     return response.status;
   } catch (error) {
-    console.log("Error:", error);
+    console.log("Error message:", "Error with Logout action");
   }
 }
 export async function updateProducts(products: CartItem[]) {
@@ -681,13 +674,12 @@ export async function updateProducts(products: CartItem[]) {
       }),
     });
     if (!res.ok) {
-      throw new Error("Failed to add product");
+      throw new Error("Failed to update product");
     }
     const dataProduct = res.status;
     return dataProduct;
-    console.log("Product added successfully!");
   } catch (error) {
-    console.log("Error message: Error on addNewProduct action");
+    console.log("Error message: Error on updateProducts action");
   }
 }
 export async function verify(
@@ -695,12 +687,12 @@ export async function verify(
   secret: string
 ): Promise<JWTPayload> {
   const { payload } = await jwtVerify(token, new TextEncoder().encode(secret));
-  // run some checks on the returned payload, perhaps you expect some specific values
-
-  // if its all good, return it, or perhaps just return a boolean
   return payload;
 }
-export async function sign(payload: any, secret: string): Promise<string> {
+export async function sign(
+  payload: { username: string; password: string },
+  secret: string
+): Promise<string> {
   const iat = Math.floor(Date.now() / 1000);
 
   return new SignJWT({ payload })
@@ -719,32 +711,13 @@ export async function getAllSubscriptions() {
         cache: "no-store",
       }
     );
+    if (!res.ok) {
+      throw new Error("Failed to fetch all subscriptions");
+    }
     const data = await res.json();
     return data;
   } catch (error) {
-    console.log(error);
-  }
-}
-export async function sendMails({
-  subject,
-  message,
-  emails,
-}: {
-  subject: string;
-  message: string;
-  emails: string[];
-}) {
-  try {
-    const res = await fetch(`${BASE_URL}/api/subscriptions/message`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ subject, message, emails }),
-      cache: "no-store",
-    });
-  } catch (error) {
-    console.log(error);
+    console.log("Error message: Error on getAllSubscriptions action");
   }
 }
 export async function getQuestions() {
@@ -752,12 +725,14 @@ export async function getQuestions() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/contact`, {
       cache: "no-store",
     });
-
+    if (!res.ok) {
+      throw new Error("Failed to fetch questions");
+    }
     const data = await res.json();
     return data;
-    console.log("Order added successfully!");
+    console.log("Questions fetched successfully!");
   } catch (error) {
-    console.log("Error message: Error on addOrder action");
+    console.log("Error message: Error on getQuestions action");
   }
 }
 export async function readQuestion(
@@ -780,7 +755,10 @@ export async function readQuestion(
         answer,
       }),
     });
+    if (!res.ok) {
+      throw new Error("Failed to read question");
+    }
   } catch (error) {
-    console.log(error);
+    console.log("Error message: Error on readQuestion action");
   }
 }

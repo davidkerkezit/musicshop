@@ -1,5 +1,5 @@
 "use client";
-import { SearchForm } from "..";
+import SearchForm from "@/components/Forms/SearchForm";
 
 const SearchSection = () => {
   return (

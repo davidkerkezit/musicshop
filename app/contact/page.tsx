@@ -1,4 +1,5 @@
-import { ContactForm, PageBanner } from "@/components";
+import ContactForm from "@/components/Forms/ContactForm";
+import PageBanner from "@/components/UI/PageBanner";
 import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Music Shop | Contact",

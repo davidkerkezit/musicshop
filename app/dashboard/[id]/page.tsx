@@ -1,5 +1,6 @@
+import { EditProduct } from "@/components/Dashboard";
 import { getEditableProduct } from "@/libs/actions";
-import { EditProduct } from "@/components";
+
 import { Metadata } from "next";
 export async function generateMetadata({
   params,

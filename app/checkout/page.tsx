@@ -1,4 +1,5 @@
-import { PageBanner, CheckoutDetails } from "@/components";
+import CheckoutDetails from "@/components/Checkout/CheckoutDetails";
+import PageBanner from "@/components/UI/PageBanner";
 import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Music Shop | Checkout",

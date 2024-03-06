@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { CartItem } from "./cartSlice";
-import { ProductType, QuestionType, checkoutType } from "../types";
+
+import { QuestionType } from "../types";
 
 interface QuestionsState {
   selectedQuestionsCategory: QuestionType[];
@@ -21,16 +21,19 @@ export const questionsSlice = createSlice({
   reducers: {
     questionsUpdate: (
       state: QuestionsState,
-      action: PayloadAction<{ questions: any[]; category: string } | null>
+      action: PayloadAction<{
+        questions: QuestionType[];
+        category: string;
+      } | null>
     ) => {
       if (action.payload) {
         const { questions, category } = action.payload;
         state.allQuestions = questions;
         state.unreadQuestions = questions.filter(
-          (question: any) => !question.read
+          (question: QuestionType) => !question.read
         );
         state.readQuestions = questions.filter(
-          (question: any) => question.read
+          (question: QuestionType) => question.read
         );
 
         // Update selectedOrdersCategory based on the category

@@ -1,6 +1,6 @@
-import React from "react";
+"use client";
 
-const DashboardTextArea = ({
+const DashboardInput = ({
   label,
   placeholder,
   value,
@@ -25,7 +25,7 @@ const DashboardTextArea = ({
 }) => {
   return (
     <div className="flex flex-col   ">
-      <div className="flex items-center gap-2 ">
+      <div className="flex gap-2 items-center">
         <label htmlFor="" className="px-1 text-lg font-light">
           {label}:
         </label>
@@ -33,11 +33,17 @@ const DashboardTextArea = ({
           {error && error[registerValue] && error[registerValue].message}
         </p>
       </div>
-      <textarea
+
+      <input
+        min={1}
+        onKeyDown={(evt) =>
+          type === "number" &&
+          ["e", "E", "+", "-"].includes(evt.key) &&
+          evt.preventDefault()
+        }
+        onChange={(e) => setValue("name", e.target.value)}
         disabled={!access}
-        onChange={(e) => setValue(name, e.target.value)}
-        rows={4}
-        className={`bg-transparent border-light-juice border-[1px] rounded-lg p-2 placeholder:font-thin text-sm focus:outline-none focus:border-juice resize-none appearance-none ${
+        className={`bg-transparent border-light-juice border-[1px] rounded-lg p-2 placeholder:font-thin text-sm focus:outline-none focus:border-juice text-white ${
           access ? "cursor-text " : "cursor-not-allowed"
         }`}
         type={type}
@@ -50,4 +56,4 @@ const DashboardTextArea = ({
   );
 };
 
-export default DashboardTextArea;
+export default DashboardInput;

@@ -1,7 +1,9 @@
-import { aboutUsContent } from "@/libs/content";
-import { AboutUsSection, PageBanner } from "@/components";
+import AboutUsSection from "@/components/About/AboutUsSection";
+import PageBanner from "@/components/UI/PageBanner";
 import { Metadata } from "next";
 import { AboutUsContentType } from "@/libs/types";
+import { aboutUsContent } from "@/libs/utils";
+
 export const metadata: Metadata = {
   title: "Music Shop | About Us",
   description:

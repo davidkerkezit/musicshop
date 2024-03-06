@@ -1,21 +1,12 @@
 "use client";
-import {
-  completeOrder,
-  getOrders,
-  getQuestions,
-  readQuestion,
-} from "@/libs/actions";
-import React, { useState } from "react";
-import { FaAngleDoubleRight, FaAngleDoubleDown } from "react-icons/fa";
-import LoadingDots from "../UI/LoadingDots";
-import { AppDispatch, useAppSelector } from "@/libs/store";
+import { getQuestions, readQuestion } from "@/libs/actions";
+import { useState } from "react";
+import { FaAngleDoubleRight, FiSend } from "@/components/UI/Icons";
+import { AppDispatch } from "@/libs/store";
 import { useDispatch } from "react-redux";
-import { ordersUpdate } from "@/libs/features/ordersSlice";
-import { CartItem } from "@/libs/features/cartSlice";
-import { QuestionType, checkoutType } from "@/libs/types";
+import { QuestionType } from "@/libs/types";
 import { questionsUpdate } from "@/libs/features/questionsSlice";
-import Button from "../UI/SubmitButton";
-import { FiSend } from "react-icons/fi";
+import Button from "../../UI/SubmitButton";
 import emailjs from "emailjs-com";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";

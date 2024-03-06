@@ -7,7 +7,7 @@ import {
   IoIosSearch,
   FaGooglePlay,
 } from "@/components/UI/Icons";
-import Burger from "./Burger";
+import Burger from "../UI/Burger";
 import { Menu } from "@/libs/types";
 import { usePathname, useRouter } from "next/navigation";
 import { hideSearch, toogleSearch } from "@/libs/features/searchSliderSlice";

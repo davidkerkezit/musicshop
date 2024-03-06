@@ -1,15 +1,15 @@
 "use client";
 import { completeOrder, getOrders } from "@/libs/actions";
 import React, { useState } from "react";
-import { FaAngleDoubleRight, FaAngleDoubleDown } from "react-icons/fa";
-import LoadingDots from "../UI/LoadingDots";
-import { AppDispatch, useAppSelector } from "@/libs/store";
+import { FaAngleDoubleRight } from "@/components/UI/Icons";
+import LoadingDots from "../../UI/LoadingDots";
+import { AppDispatch } from "@/libs/store";
 import { useDispatch } from "react-redux";
 import { ordersUpdate } from "@/libs/features/ordersSlice";
 import { CartItem } from "@/libs/features/cartSlice";
-import { checkoutType } from "@/libs/types";
+import { CheckoutType } from "@/libs/types";
 interface OrderDetailsProps {
-  order: checkoutType;
+  order: CheckoutType;
   date: string;
   selectedCategory: string;
 }

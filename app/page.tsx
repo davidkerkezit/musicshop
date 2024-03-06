@@ -1,4 +1,4 @@
-import { ContactForm } from "@/components";
+import ContactForm from "@/components/Forms/ContactForm";
 import {
   AboutCategories,
   Banner,

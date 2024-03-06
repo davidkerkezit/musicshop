@@ -1,10 +1,10 @@
 "use client";
-import { RiLogoutCircleLine } from "react-icons/ri";
+import { RiLogoutCircleLine } from "@/components/UI/Icons";
 import { logoutAuthAction } from "@/libs/actions";
 import { useState } from "react";
-import LoadingDots from "../UI/LoadingDots";
 import { useRouter } from "next/navigation";
 import { BASE_URL } from "@/libs/utils";
+import LoadingDots from "@/components/UI/LoadingDots";
 
 const Logout = () => {
   const router = useRouter();

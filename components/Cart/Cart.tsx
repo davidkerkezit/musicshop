@@ -9,8 +9,7 @@ import { ProductType } from "@/libs/types";
 import { BASE_URL } from "@/libs/utils";
 import { useRouter } from "next/navigation";
 import CartProductDetails from "./CartProductDetails";
-import EmptyCartAnimation from "../Shop/EmptyCartAnimation";
-
+import { EmptyCartAnimation } from ".";
 const Cart = () => {
   const totalPrice = useAppSelector((state) => state.cartSlice.totalPrice);
   const showCart = useAppSelector((state) => state.cartSlice.isVisible);

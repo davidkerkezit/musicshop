@@ -1,11 +1,12 @@
 "use client";
 import { getOrders } from "@/libs/actions";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Loading from "../UI/Loading";
 import { AppDispatch, useAppSelector } from "@/libs/store";
 import { useDispatch } from "react-redux";
 import { ordersUpdate } from "@/libs/features/ordersSlice";
-const OrderDetails = React.lazy(() => import("./OrderDetails")); // Lazy load OrderDetails component
+import { CheckoutType } from "@/libs/types";
+const OrderDetails = React.lazy(() => import("./UI/OrderDetails"));
 
 const Orders = () => {
   const [selectedCategory, setSelectedCategory] = useState("allorders");
@@ -113,7 +114,7 @@ const Orders = () => {
             </p>
           </div>
           {selectedOrdersCategory.length > 0 &&
-            selectedOrdersCategory.map((order: any) => {
+            selectedOrdersCategory.map((order: CheckoutType) => {
               const dateObject = new Date(order.createdAt);
               const formattedDate = `${dateObject
                 .getDate()

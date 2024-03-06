@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-const ProductInformatiom = ({
+const ProductInformation = ({
   aboutProduct,
   aboutSeller,
 }: {
@@ -45,4 +45,4 @@ const ProductInformatiom = ({
   );
 };
 
-export default ProductInformatiom;
+export default ProductInformation;

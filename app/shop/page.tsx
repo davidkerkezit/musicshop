@@ -1,12 +1,12 @@
-import { getProducts } from "@/libs/actions";
 import {
-  Products,
-  NewArrivals,
-  SearchSection,
   Filter,
+  NewArrivals,
   NoProducts,
   Pagination,
-} from "@/components";
+  Products,
+  SearchSection,
+} from "@/components/Shop";
+import { getProducts } from "@/libs/actions";
 import { ProductType } from "@/libs/types";
 import { Metadata } from "next";
 export const metadata: Metadata = {
