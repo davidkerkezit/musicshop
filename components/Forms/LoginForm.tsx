@@ -37,7 +37,7 @@ const LoginForm = () => {
     const { username, password } = data;
     const status = await loginAuthAction(username, password);
     if (status === 201) {
-      router.push(`${BASE_URL}/dashboard`);
+      router.refresh();
     }
     setError(status);
   };
