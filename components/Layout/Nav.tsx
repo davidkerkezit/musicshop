@@ -18,6 +18,8 @@ import MENU, { BASE_URL } from "@/libs/utils";
 
 const Nav = () => {
   const path = usePathname();
+  console.log(path);
+
   const dispatch = useDispatch<AppDispatch>();
   const showCart = useAppSelector((state) => state.cartSlice.isVisible);
   const cartItems = useAppSelector((state) => state.cartSlice.cartItems);
@@ -81,7 +83,10 @@ const Nav = () => {
             );
           })}
           <Link
-            className={`nav-links ${path === "dashboard" && "bg-juice/90"}`}
+            className={`nav-links ${
+              (path.includes("dashboard") || path.includes("admin")) &&
+              "bg-juice/90"
+            }`}
             href={`${BASE_URL}/dashboard`}
           >
             Dashboard
