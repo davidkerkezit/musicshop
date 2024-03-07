@@ -29,7 +29,7 @@ const Filter = () => {
   };
 
   return (
-    <div className="w-[80%] my-5 mx-auto   flex justify-between border-b-[1px] border-b-white/20 items-end  bg-white/5 ">
+    <div className="md:w-[80%] w-full  my-5 mx-auto   flex justify-between border-b-[1px] border-b-white/20 items-end  bg-white/5 ">
       <Collections
         collections={collections}
         handleCollectionChange={handleCollectionChange}

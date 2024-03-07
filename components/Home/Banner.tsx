@@ -15,7 +15,7 @@ const Banner = () => {
   const router = useRouter();
   return (
     <div
-      className="flex h-[20rem] px-5 overflow-hidden background text-white relative pb-[4%] pt-20 lg:pt-40"
+      className="flex h-max px-5 overflow-hidden background text-white relative pb-[4%] pt-20 lg:pt-40"
       id="banner"
     >
       {/* Container for darker banner bg */}

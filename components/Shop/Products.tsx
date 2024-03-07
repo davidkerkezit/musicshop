@@ -7,7 +7,7 @@ const Products = ({ products }: { products: ProductType[] }) => {
   unstable_noStore();
 
   return (
-    <div className=" w-[80%] mx-auto">
+    <div className="md:w-[80%] w-full mx-auto">
       <SearchQuery />
       <div className=" grid lg:grid-cols-4 grid-cols-2 gap-2">
         {products.map((product: ProductType, index: number) => {

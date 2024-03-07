@@ -91,15 +91,15 @@ const ProductCard = ({ product }: { product: ProductType }) => {
             ? `${BASE_URL}/shop/${product._id}`
             : `${BASE_URL}/dashboard/${product._id}`
         }`}
-        className="mx-2  bg-[#313131] rounded-2xl h-max pt-[1px] hover:bg-[#424242] duration-200  "
+        className="md:mx-2   bg-white/5 md:hover:bg-white/10 md:rounded-2xl h-max pt-[1px] group duration-200 md:hover:border-[1px] md:hover:border-juice border-transparent  "
       >
-        <div className="w-[90%] bg-[#e1e1e1] aspect-square mx-auto md:mt-0 lg:mt-4 rounded-2xl flex items-center justify-center relative  ">
+        <div className="md:w-[90%] bg-gradient-to-tr from-[#424242] to-[#191919] aspect-square mx-auto md:mt-0 lg:mt-4 md:rounded-2xl flex items-center justify-center relative  ">
           <Image
             width={300}
             height={300}
             src={product.imageUrl}
             alt={product.name}
-            className={`  custom-shadow aspect-square p-3 object-contain  `}
+            className={`  custom-shadow aspect-square p-3 object-contain md:group-hover:scale-110 duration-200  `}
           />
           {!isShopPage && (
             <div className="absolute top-1 right-1 bg-[#6e6e6e] p-2 rounded-full ">
@@ -111,10 +111,15 @@ const ProductCard = ({ product }: { product: ProductType }) => {
             </div>
           )}
 
-          {!isShopPage ? <FaLockOpen /> : <FaLock />}
+          {/* {!isShopPage ? <FaLockOpen /> : <FaLock />} */}
         </div>
         <div className="w-[90%] py-2  mx-auto flex flex-col items-center gap-2 mt-3">
-          <p className="text-white/70 font-thin  ">{product.name}</p>
+          <p
+            className="text-white/70 md:font-thin md:text-base text-lg h-[4rem] text-center 
+          "
+          >
+            {product.name}
+          </p>
           <p className="text-white/70 font-thin mb-4  ">{product.price}.00 $</p>
           {isShopPage && (
             <Button

@@ -105,7 +105,7 @@ export const aboutCategories: AboutCategoryType[] = [
     imageSrc: TIESTO,
     imageAlt: "artist",
     imageStyle:
-      "object-contain absolute mx-auto my-auto  bottom-0 left-0 right-0 lg:w-[64%] top-[10rem] ",
+      "object-contain absolute md:mx-auto md:my-auto -top-10 left-10  md:bottom-0 md:left-0 right-0 lg:w-[64%] md:top-[10rem] ",
   },
   {
     background: "bg-dj",
@@ -179,7 +179,7 @@ export const aboutCategories: AboutCategoryType[] = [
     imageSrc: BRUNOMARS,
     imageAlt: "artist",
     imageStyle:
-      "object-contain absolute mx-auto my-auto top-[10rem] bottom-0 left-0 right-0 w-[100%] lg:w-[80%]",
+      "object-contain absolute mx-auto my-auto top-0 md:top-[10rem] -bottom-4 md:bottom-0 left-0 right-0 w-[100%] lg:w-[80%]",
   },
 ];
 export const testimonials: TestimonialType[] = [

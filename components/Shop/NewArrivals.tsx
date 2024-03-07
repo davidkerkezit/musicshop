@@ -19,8 +19,8 @@ const NewArrivals = ({ products }: { products: ProductType[] }) => {
         direction={"horizontal"}
         autoplay={true}
         breakpoints={{
-          576: {
-            slidesPerView: 4,
+          370: {
+            slidesPerView: 2,
           },
           1000: {
             slidesPerView: 7,
@@ -45,9 +45,9 @@ const NewArrivals = ({ products }: { products: ProductType[] }) => {
       >
         {products.map((product, index: number) => {
           return (
-            <SwiperSlide key={index} className="h-[50rem]">
+            <SwiperSlide key={index} className="h-[55rem]">
               <ProductCard product={product} />
-              <div id="sort" className="md:pb-0 lg:pb-10" />
+              <div id="sort" className="pb-10 lg:pb-10" />
             </SwiperSlide>
           );
         })}

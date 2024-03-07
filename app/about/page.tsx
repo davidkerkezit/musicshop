@@ -13,7 +13,7 @@ const page = () => {
   return (
     <>
       <PageBanner page="About Us" />
-      <div className="relative z-10 m-32 flex flex-col gap-10 ">
+      <div className="relative z-10 md:m-32 flex flex-col gap-10 ">
         {aboutUsContent.map((content: AboutUsContentType, index: number) => {
           let isEven = index % 2 === 0;
           return <AboutUsSection content={content} isEven={isEven} />;

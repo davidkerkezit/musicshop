@@ -7,8 +7,8 @@ const PageBanner = ({ page }: { page: string }) => {
   const path = usePathname();
 
   return (
-    <div className="background  w-full pt-40 pb-32 h-[20rem] flex justify-center relative">
-      <div className="absolute top-0 right-0 bottom-0 left-0 bg-darkness/40" />{" "}
+    <div className="background  w-full pt-32 md:pt-40 md:pb-32 pb-40 h-[2rem]  md:h-[30rem] flex justify-center relative">
+      <div className="absolute top-0 right-0 bottom-0 left-0 md:bg-darkness/40 bg-darkness/60" />{" "}
       {page === "Dashboard" && (
         <div className=" p-12  rounded-lg shadow-lg bg-black/40 mx-auto left-0 right-0 backdrop-blur-xl  bottom-3 my-auto h-max absolute flex flex-col items-center w-1/2   ">
           <p className="font-thin text-center">
@@ -31,7 +31,9 @@ const PageBanner = ({ page }: { page: string }) => {
           </p>
         </div>
       )}
-      <h1 className="text-[7rem] font-bold relative z-10">{page}</h1>
+      <h1 className="md:text-[7rem] text-[5rem] font-bold relative z-10">
+        {page}
+      </h1>
       <Image
         src={DARK_BG}
         alt="dark-background"

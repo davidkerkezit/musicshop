@@ -87,7 +87,7 @@ const Footer = () => {
                   key={index}
                   href={item.link}
                   className={`${
-                    path === item.link
+                    path == item.link
                       ? "md:border-l-[3px] md:border-l-juice text-neutral-200"
                       : "md:border-l-[3px] md:border-l-transparent text-neutral-400"
                   } md:pl-3  hover:text-neutral-50 duration-200 font-normal`}

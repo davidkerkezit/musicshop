@@ -15,10 +15,9 @@ import { hideCart, toggleCart } from "@/libs/features/cartSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/libs/store";
 import MENU, { BASE_URL } from "@/libs/utils";
-
+import { motion } from "framer-motion";
 const Nav = () => {
   const path = usePathname();
-  console.log(path);
 
   const dispatch = useDispatch<AppDispatch>();
   const showCart = useAppSelector((state) => state.cartSlice.isVisible);
@@ -75,20 +74,29 @@ const Nav = () => {
             return (
               <Link
                 key={index}
-                className={`nav-links ${path === item.link && "bg-juice/90"}`}
+                className={`nav-links relative `}
                 href={item.link}
               >
+                {path === item.link && (
+                  <motion.div
+                    layoutId="bubble"
+                    className="absolute inset-0 -z-10 bg-juice rounded-xl "
+                    transition={{ type: "spring", duration: 0.6 }}
+                  ></motion.div>
+                )}
+
                 {item.label}
               </Link>
             );
           })}
-          <Link
-            className={`nav-links ${
-              (path.includes("dashboard") || path.includes("admin")) &&
-              "bg-juice/90"
-            }`}
-            href={`${BASE_URL}/dashboard`}
-          >
+          <Link className={`nav-links relative`} href={`${BASE_URL}/dashboard`}>
+            {(path.includes("dashboard") || path.includes("admin")) && (
+              <motion.div
+                layoutId="bubble"
+                className="absolute inset-0 -z-10 bg-juice rounded-xl "
+                transition={{ type: "spring", duration: 0.6 }}
+              ></motion.div>
+            )}
             Dashboard
           </Link>
         </div>

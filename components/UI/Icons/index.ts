@@ -17,6 +17,8 @@ import { MdDone } from "react-icons/md";
 import { FaArrowRight } from "react-icons/fa";
 import { GoPackage } from "react-icons/go";
 import { AiOutlineSearch } from "react-icons/ai";
+import { FaAngleDown } from "react-icons/fa";
+
 import { BiCloudUpload } from "react-icons/bi";
 
 import {
@@ -49,6 +51,7 @@ import { MdCheck } from "react-icons/md";
 
 export {
   MdCheck,
+  FaAngleDown,
   RiLogoutCircleLine,
   FiSend,
   IoMdCloseCircleOutline,

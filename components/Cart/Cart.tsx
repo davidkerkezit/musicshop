@@ -33,10 +33,10 @@ const Cart = () => {
   };
   return (
     <div
-      className={`fixed z-50 w-[90%] md:w-[25%] h-[100vh] bg-black/70 backdrop-blur-xl p-4 flex flex-col justify-between  ${
+      className={`fixed z-50 w-full md:w-[25%] h-[100vh] bg-black/70 backdrop-blur-xl p-4 flex flex-col justify-between  ${
         showCart && "animate-openFromRight"
       } ${showCart === false && "animate-closeToRight"} ${
-        showCart === null && "-right-[25%]"
+        showCart === null && " -right-[100%] md:-right-[25%]"
       } `}
     >
       <div>

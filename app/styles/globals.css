@@ -70,7 +70,7 @@ body {
   background-image: url("../../assets/bg.jpg");
   background-size: cover;
   width: 100%;
-  height: max-content;
+
   background-position: 0% 75%;
 }
 .dark-bg {
