@@ -50,7 +50,7 @@ const Filter = () => {
   }, [selectedSort]);
   return (
     <div className="md:w-[80%] w-full  my-5 mx-auto   flex md:flex-row flex-col  justify-between border-b-[1px] md:border-b-white/20 border-b-white/5 items-end  bg-white/5 ">
-      <div className=" flex flex-row w-full">
+      <div className=" flex flex-row w-full md:hidden">
         <div className="w-full ">
           {" "}
           <button

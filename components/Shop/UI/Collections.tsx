@@ -26,7 +26,7 @@ const Collections = ({
         !showCollections && "hidden"
       }`}
     >
-      <div className="md:flex grid grid-cols-2 ">
+      <div className="md:flex grid grid-cols-2  ">
         {collections.map((collection: CollectionsType) => {
           const isSelectedCollectionStyle: string =
             collectionQuery === collection.query
