@@ -84,7 +84,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="w-full mx-32 mt-5" ref={addProductRef}>
+    <div className="w-full md:mx-32 mt-5" ref={addProductRef}>
       {showModal && (
         <Portal setHidden={setShowModal}>
           <ProductAdded setHidden={setShowModal} />
@@ -92,8 +92,8 @@ const AddProduct = () => {
       )}
       <h2 className=" py-4 text-3xl font-thin mb-5">Add New Product</h2>
       <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-row gap-20 ">
-          <div className="w-1/2 flex flex-col gap-4">
+        <div className="flex md:flex-row flex-col-reverse gap-20 ">
+          <div className="md:w-1/2 w-full flex flex-col gap-4">
             <div>
               <label htmlFor="" className="text-lg font-light">
                 Category:
