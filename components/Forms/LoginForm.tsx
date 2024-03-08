@@ -42,11 +42,11 @@ const LoginForm = () => {
     setError(status);
   };
   return (
-    <div className="relative z-10 m-14 ">
+    <div className="relative z-10 md:m-14 m-4 ">
       {error === 201 ? (
         <Loading />
       ) : (
-        <div className="w-1/3  mx-auto ">
+        <div className="md:w-1/3 w-full  mx-auto ">
           <h1 className=" py-4 text-center text-4xl font-thin">
             Admin Acces Only{" "}
           </h1>

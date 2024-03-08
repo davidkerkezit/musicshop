@@ -20,7 +20,7 @@ const PageBanner = ({ page }: { page: string }) => {
         </div>
       )}
       {path === "/admin" && (
-        <div className=" p-12  rounded-lg shadow-lg bg-black/40 mx-auto left-0 right-0 backdrop-blur-xl  bottom-3 my-auto h-max absolute flex flex-col items-center w-1/2   ">
+        <div className=" p-12  rounded-lg shadow-lg bg-black/40 mx-auto left-0 right-0 md:backdrop-blur-xl backdrop-blur-sm bottom-3 my-auto h-max absolute flex flex-col items-center md:w-1/2 w-full   ">
           <p className="font-thin text-center">This is public Pilot Project.</p>
           <p className="font-thin text-center">
             Username: <span className="bg-juice px-2 text-black">admin</span>
@@ -31,7 +31,11 @@ const PageBanner = ({ page }: { page: string }) => {
           </p>
         </div>
       )}
-      <h1 className="md:text-[7rem] text-[5rem] font-bold relative z-10">
+      <h1
+        className={`  md:text-[7rem] text-[5rem] font-bold relative z-10 ${
+          path === "/admin" && "hidden md:block"
+        } `}
+      >
         {page}
       </h1>
       <Image
