@@ -21,6 +21,7 @@ const NewArrivals = ({ products }: { products: ProductType[] }) => {
         breakpoints={{
           370: {
             slidesPerView: 2,
+            spaceBetween: 10,
           },
           1000: {
             slidesPerView: 7,
