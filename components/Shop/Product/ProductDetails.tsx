@@ -46,18 +46,18 @@ const ProductDetails = ({
     }
   };
   return (
-    <div className="flex pt-40  ">
-      <div className=" bg-white/10 flex items-center justify-center h-[28rem]  w-1/2">
+    <div className="flex md:pt-40 pt-20 md:flex-row flex-col ">
+      <div className=" bg-white/10 flex items-center justify-center h-[28rem]  w-full md:w-1/2">
         <Image
           src={selectedProduct.imageUrl}
           alt="product"
           width={400}
           height={400}
-          className="white-shadow "
+          className="white-shadow w-1/2"
         />
       </div>
 
-      <div className="w-1/2 px-10 flex flex-col gap-4">
+      <div className="md:w-1/2 w-full md:px-10 px-2 md:mt-0 mt-2 flex flex-col gap-2 md:gap-4">
         <h2 className="text-5xl  font-semibold">{selectedProduct.name}</h2>
         <div className="flex  text-xl gap-2">
           <p>Category: </p>
