@@ -214,7 +214,7 @@ const AddProduct = () => {
           </div>
           <div className="md:w-1/2 w-full  flex flex-col gap-4 md:justify-start justify-center items-center md:items-start ">
             <div
-              className={`border-light-juice border-dashed border-[1px] h-[18rem]  w-[90%] md:w-[18rem] aspect-square md:mt-5 mt-1 flex justify-center items-center relative rounded-lg ${
+              className={`border-light-juice border-dashed border-[1px] h-[18rem]  w-[90%] md:w-[18rem]  aspect-square md:mt-5 mt-1 flex justify-center items-center relative rounded-lg ${
                 imageSrc === null && hasInteracted && "animate-shake"
               } bg-gradient-to-r from-white/5 to-white/10 overflow-hidden`}
             >

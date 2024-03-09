@@ -40,7 +40,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
   };
   return (
     <details className=" border-b-[1px] border-b-white/10  " open={isOpen}>
-      {/* <summary className="md:flex hidden  bg-white/20  cursor-pointer hover:bg-white/30 ">
+      <summary className="md:flex hidden  bg-white/20  cursor-pointer hover:bg-white/30 ">
         <div className="flex items-center w-[2%] justify-center text-light-juice">
           <FaAngleDoubleRight />
         </div>
@@ -68,7 +68,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
         <p className="w-[10%] font-thin text-white/60  px-1 py-1 text-center">
           Cash on Delivery
         </p>
-      </summary> */}
+      </summary>
       <summary className="  flex  bg-white/20  cursor-pointer hover:bg-white/30 ">
         <div className="flex flex-col w-[70%] text-sm">
           <p>
@@ -84,7 +84,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
           >
             {order.isChecked ? "Completed" : "In Proccess"}
           </p>
-          <p className="text-sm bg-black w-full text-juice text-center">
+          <p className="text-sm bg-black/30 w-full text-juice text-center">
             {order.totalPrice}.00$
           </p>
         </div>

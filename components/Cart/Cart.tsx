@@ -55,7 +55,7 @@ const Cart = () => {
           )}
         </div>
         <div
-          className={` flex flex-col gap-2 mt-4 h-[41rem] ${
+          className={` flex flex-col gap-2 mt-4 md:h-[41rem] h-[24rem] ${
             cartItems.length > 7 && "overflow-y-scroll"
           }`}
         >
@@ -74,7 +74,7 @@ const Cart = () => {
           )}
         </div>
       </div>
-      <div className="mb-16 ">
+      <div className="md:mb-16 ">
         <div className="flex justify-between py-3 text-xl px-2 font-thin border-y-[1px] border-y-white/30">
           <p className={`${cartItems.length === 0 && "hidden"}`}>
             Total price:

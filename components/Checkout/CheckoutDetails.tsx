@@ -73,7 +73,7 @@ const CheckoutDetails = () => {
       {!isSuccess && (
         <div className="flex justify-center py-8 items-center flex-col">
           <h4 className="text-2xl font-bold">Payment method</h4>
-          <p className="text-juice  text-sm">
+          <p className="text-juice  text-sm md:text-left text-center">
             Choose a payment option and fill in the requested information
           </p>
         </div>
@@ -85,13 +85,16 @@ const CheckoutDetails = () => {
           <MdDone size={64} className="text-light-juice" />
         </div>
       ) : (
-        <form className="mx-20 flex" onSubmit={handleSubmit(onSubmit)}>
-          <div className="w-[70%] rounded-l-xl bg-white/10 p-5 my-6 border-[1px] border-light-juice/20 ">
+        <form
+          className="md:mx-20 mx-2 flex md:flex-row flex-col"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="md:w-[70%] w-full rounded-l-xl bg-white/10 p-5 my-6 border-[1px] border-light-juice/20 ">
             <h4 className="pb-3 text-xl font-semibold">Payment options</h4>
             <div className="bg-white/10 p-3 rounded-lg">
               {/* Payment */}
               <div className=" flex flex-col gap-2">
-                <div className="flex justify-between  p-1">
+                <div className="flex justify-between md:flex-row flex-col  p-1">
                   <label className="flex flex-col  ">
                     <div className="flex items-center  gap-2">
                       <input
@@ -106,23 +109,31 @@ const CheckoutDetails = () => {
                       Secure transfer using your bank account (Not Available )
                     </span>
                   </label>
-                  <div className="flex items-center flex-row gap-2">
+                  <div className="flex items-center flex-row gap-2 md:ml-0 ml-4">
                     <Image
                       width={50}
                       height={30}
                       src={MASTERCARD}
                       alt="master-card"
+                      className=" w-1/8"
                     />
-                    <Image width={50} height={30} src={VISACARD} alt="visa" />
+                    <Image
+                      width={50}
+                      height={30}
+                      src={VISACARD}
+                      alt="visa"
+                      className=" w-1/8"
+                    />
                     <Image
                       width={50}
                       height={30}
                       src={DINACARD}
                       alt="dina-card"
+                      className=" w-1/8"
                     />
                   </div>
                 </div>
-                <div className="flex justify-between bg-white/5 p-1">
+                <div className="flex justify-between md:flex-row flex-col bg-white/5 p-1">
                   <label className="flex flex-col  ">
                     <div className="flex items-center  gap-2">
                       <input
@@ -137,13 +148,13 @@ const CheckoutDetails = () => {
                       Free delivery
                     </span>
                   </label>
-                  <div className="flex items-center flex-row gap-2">
+                  <div className="flex items-center flex-row gap-2 ml-5 md:ml-0 md:mt-0 my-1">
                     <Image width={50} height={30} src={FEDEX} alt="fedex" />
                   </div>
                 </div>
               </div>
               {/* About user */}
-              <div className=" grid grid-cols-2 gap-5 my-4 pt-4 border-t-[1px] border-t-white/40 border-dotted">
+              <div className=" grid md:grid-cols-2 grid-cols-1 gap-5 my-4 pt-4 border-t-[1px] border-t-white/40 border-dotted">
                 <div className="flex flex-col ">
                   <div className="flex flex-row gap-2 items-center">
                     {" "}
@@ -280,7 +291,7 @@ const CheckoutDetails = () => {
               </div>
             </div>
           </div>
-          <div className="w-[30%] bg-white/20 rounded-xl flex flex-col justify-between border-[1px] border-light-juice/70 ">
+          <div className="md:w-[30%] w-full bg-white/20 rounded-xl flex flex-col justify-between border-[1px] border-light-juice/70 ">
             <div className="flex flex-col ">
               <p className="text-center text-2xl font-semibold py-4">
                 {" "}
@@ -327,7 +338,7 @@ const CheckoutDetails = () => {
                   })}
               </div>
             </div>
-            <div className="mb-2 flex flex-col items-center">
+            <div className="mb-2 flex flex-col items-center md:mt-0 mt-10">
               <div className="flex justify-between py-3 text-xl px-2 font-thin border-y-[1px] border-y-white/30  w-full bg-black/30 ">
                 <p>Total price:</p>
                 <p className="bg-light-juice text-black px-2">
