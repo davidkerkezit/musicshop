@@ -1,3 +1,4 @@
+import DashboardNav from "@/components/Layout/DashboardNav";
 import {
   ProductDetails,
   ProductInformation,

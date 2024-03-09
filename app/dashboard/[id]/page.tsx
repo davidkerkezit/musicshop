@@ -1,4 +1,5 @@
 import { EditProduct } from "@/components/Dashboard";
+import DashboardNav from "@/components/Layout/DashboardNav";
 import { getEditableProduct } from "@/libs/actions";
 
 import { Metadata } from "next";
@@ -18,6 +19,8 @@ const page = async ({ params }: { params: { id: string } }) => {
   const { selectedProduct } = await getEditableProduct(id);
   return (
     <>
+      <DashboardNav />
+
       <EditProduct selectedProduct={selectedProduct} />
     </>
   );

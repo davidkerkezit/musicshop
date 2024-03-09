@@ -87,10 +87,10 @@ const Subscriptions = () => {
   };
 
   return (
-    <div className=" w-full h-max flex flex-col gap-4   m-10 ">
+    <div className=" w-full h-max flex flex-col gap-4 m-2  md:m-10 ">
       <div className=" flex flex-col gap-2 p-2">
         <h2 className="text-2xl font-thin">All Subscriptions:</h2>
-        <div className="flex gap-2 flex-wrap ">
+        <div className="md:flex gap-2 flex-wrap grid grid-cols-2">
           {allEmails.length > 0 &&
             !isLoading &&
             allEmails.map((email) => {
@@ -106,7 +106,7 @@ const Subscriptions = () => {
                       : [...selectedEmails, email];
                     setSelectedEmails(updatedEmails);
                   }}
-                  className={`px-2  h-[2.5rem] border-[1px] border-juice rounded-md  ${
+                  className={`md:px-2 px-0  h-[2.5rem] border-[1px] border-juice rounded-md md:text-base text-xs md:w-max w-full   ${
                     selectedEmails.includes(email)
                       ? "bg-light-juice/40"
                       : "bg-light-juice/20"
@@ -121,13 +121,13 @@ const Subscriptions = () => {
       </div>
       <div className=" flex flex-col gap-2 p-2">
         <h2 className="text-2xl font-thin">Selected Subscriptions:</h2>
-        <div className="flex gap-2 flex-wrap ">
+        <div className="md:flex gap-2 flex-wrap grid grid-cols-2 ">
           {selectedEmails.length > 0 ? (
             selectedEmails.map((email) => {
               return (
                 <div
                   key={email}
-                  className=" px-2 py-1 border-[1px] border-juice rounded-md bg-light-juice/20 relative"
+                  className=" px-2 py-1 border-[1px] border-juice rounded-md bg-light-juice/20 relative md:text-base text-xs"
                 >
                   <p> {email}</p>
                   <button
@@ -151,7 +151,7 @@ const Subscriptions = () => {
         </div>
       </div>
       <form
-        className="flex flex-col gap-2 mt-5 bg-white/10 p-2 rounded-xl"
+        className="flex flex-col gap-2 mt-5 bg-white/10 p-2 rounded-xl "
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="flex flex-col ">
@@ -162,7 +162,7 @@ const Subscriptions = () => {
           <input
             {...register("subject")}
             type="text"
-            className="bg-transparent text-white border-[1px] border-light-juice rounded-md w-1/3 py-1 px-2"
+            className="bg-transparent text-white border-[1px] border-light-juice rounded-md md:w-1/3 w-full py-1 px-2"
             placeholder="Enter subject..."
           />
         </div>
@@ -174,7 +174,7 @@ const Subscriptions = () => {
                 e.preventDefault();
                 setSubscriptionsOption("all");
               }}
-              className={`px-2 py-1 border-[1px] border-juice rounded-md  ${
+              className={`px-2 py-1 border-[1px] border-juice rounded-md md:text-base text-sm  ${
                 subscriptionsOption === "all"
                   ? "bg-light-juice/40"
                   : "bg-light-juice/10"
@@ -188,7 +188,7 @@ const Subscriptions = () => {
                 e.preventDefault();
                 setSubscriptionsOption("selected");
               }}
-              className={`px-2 py-1 border-[1px] border-juice rounded-md ${
+              className={`px-2 py-1 border-[1px] border-juice rounded-md md:text-base text-sm ${
                 selectedEmails.length !== 0
                   ? "cursor-pointer"
                   : "cursor-not-allowed"

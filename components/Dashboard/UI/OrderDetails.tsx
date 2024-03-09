@@ -40,7 +40,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
   };
   return (
     <details className=" border-b-[1px] border-b-white/10  " open={isOpen}>
-      <summary className="flex  bg-white/20  cursor-pointer hover:bg-white/30">
+      {/* <summary className="md:flex hidden  bg-white/20  cursor-pointer hover:bg-white/30 ">
         <div className="flex items-center w-[2%] justify-center text-light-juice">
           <FaAngleDoubleRight />
         </div>
@@ -68,6 +68,26 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
         <p className="w-[10%] font-thin text-white/60  px-1 py-1 text-center">
           Cash on Delivery
         </p>
+      </summary> */}
+      <summary className="  flex  bg-white/20  cursor-pointer hover:bg-white/30 ">
+        <div className="flex flex-col w-[70%] text-sm">
+          <p>
+            {order.firstName} {order.lastName}
+          </p>
+          <p>{date}</p>
+        </div>
+        <div className="w-[30%] flex items-center justify-center flex-col">
+          <p
+            className={` font-thin text-white/60  w-full text-center text-sm  ${
+              order.isChecked ? "bg-green-500" : "bg-red-500"
+            }`}
+          >
+            {order.isChecked ? "Completed" : "In Proccess"}
+          </p>
+          <p className="text-sm bg-black w-full text-juice text-center">
+            {order.totalPrice}.00$
+          </p>
+        </div>
       </summary>
       <div className="flex pt-4 px-[2%] bg-white/5 ">
         <h2 className=" bg-juice w-max px-2 text-black/80 ">
@@ -75,8 +95,8 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
         </h2>
       </div>
 
-      <div className="flex py-4 px-[2%] bg-white/5 ">
-        <div className="w-1/2 ">
+      <div className="flex md:flex-row flex-col py-4 px-[2%] bg-white/5 ">
+        <div className="md:w-1/2 w-full ">
           <p className="bg-light-juice w-max px-4 text-black mb-4">
             About Customer
           </p>
@@ -92,7 +112,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
           <p className="font-thin">{order.phoneNumber}</p>
           <p className="font-thin">{order.moreInformation}</p>
         </div>
-        <div className="w-1/2 bg-white/5 p-5 flex flex-col gap-1 ">
+        <div className="md:w-1/2 w-full bg-white/5 p-5 flex flex-col gap-1 ">
           <p className="bg-light-juice w-max px-4 text-black mb-4">
             Order Information{" "}
           </p>

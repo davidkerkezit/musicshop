@@ -123,13 +123,13 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
       )}
       <form
         ref={editProductRef}
-        className="flex flex-col gap-10 mx-14 my-20 "
+        className="flex flex-col gap-10 md:mx-14 mx-2 my-20 "
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="flex pt-40  ">
+        <div className="flex md:pt-40 pt-5 md:flex-row flex-col-reverse  ">
           {/* IMG */}
-          <div className="flex flex-col">
-            <div className=" bg-white/10 flex items-center justify-center relative rounded-xl border-light-juice border-[1px] border-dashed h-[28rem]  w-[28rem] ">
+          <div className="flex flex-col items-center md:mt-0 mt-5">
+            <div className=" bg-white/10 flex items-center justify-center relative rounded-xl border-light-juice border-[1px] border-dashed md:h-[28rem] w-[90%] md:w-[28rem] ">
               <div className="absolute  bottom-0 left-0 right-0 top-0 bg-black/60 z-10 " />
 
               {imageSrc !== null ? (
@@ -185,7 +185,7 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
             )}
           </div>
           {/* INFO */}
-          <div className="w-1/2 px-10 flex flex-col gap-4">
+          <div className="md:w-1/2 w-full md:px-10 px-2 flex flex-col gap-4">
             <div>
               <label htmlFor="" className="text-lg font-light">
                 Category:
@@ -200,7 +200,7 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
                   disabled={!selectedProduct.access}
                   type="button"
                   onClick={() => setSelectedCategory("dj")}
-                  className={` w-[10rem] py-2 rounded-l-lg border-r-[1px] border-r-light-juice/40  ${
+                  className={`md:w-[10rem] w-[7rem] text-sm md:text-base md:px-0 py-2 rounded-l-lg border-r-[1px] border-r-light-juice/40  ${
                     selectedCategory === "dj"
                       ? "bg-light-juice text-black/80"
                       : "bg-white/10 text-white hover:bg-white/20 duration-200"
@@ -219,7 +219,7 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
                     setSelectedCategory("vinyls");
                     setSubSelectedCategory(null);
                   }}
-                  className={` w-[10rem] py-2   ${
+                  className={`md:w-[10rem] w-[7rem] text-sm md:text-base md:px-0 py-2    ${
                     selectedCategory === "vinyls"
                       ? "bg-light-juice text-black/80"
                       : "bg-white/10 text-white hover:bg-white/20 duration-200"
@@ -238,7 +238,7 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
                     setSelectedCategory("softweres");
                     setSubSelectedCategory(null);
                   }}
-                  className={` w-[10rem] py-2 rounded-r-lg border-l-[1px] border-l-light-juice/40 ${
+                  className={` md:w-[10rem] w-[7rem] text-sm md:text-base md:px-0 py-2 rounded-r-lg border-l-[1px] border-l-light-juice/40 ${
                     selectedCategory === "softweres"
                       ? "bg-light-juice text-black/80 "
                       : "bg-white/10 text-white hover:bg-white/20 duration-200"
@@ -264,7 +264,7 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
                     <button
                       type="button"
                       onClick={() => setSubSelectedCategory("pioneer")}
-                      className={` w-[10rem] py-2 rounded-l-lg border-r-[1px] border-r-light-juice/40  ${
+                      className={`md:w-[10rem] w-[7rem] text-sm md:text-base md:px-0 py-2 rounded-l-lg border-r-[1px] border-r-light-juice/40 ${
                         selectedSubCategory === "pioneer"
                           ? "bg-light-juice text-black/80"
                           : "bg-white/10 text-white hover:bg-white/20 duration-200"
@@ -276,7 +276,7 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
                     <button
                       type="button"
                       onClick={() => setSubSelectedCategory("dennon")}
-                      className={` w-[10rem] py-2 rounded-r-lg border-l-[1px] border-l-light-juice/40 ${
+                      className={` md:w-[10rem] w-[7rem] text-sm md:text-base md:px-0 py-2 rounded-r-lg border-l-[1px] border-l-light-juice/40 ${
                         selectedSubCategory === "dennon"
                           ? "bg-light-juice text-black/80 "
                           : "bg-white/10 text-white hover:bg-white/20 duration-200"

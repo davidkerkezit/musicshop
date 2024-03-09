@@ -84,18 +84,20 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="w-full md:mx-32 mt-5" ref={addProductRef}>
+    <div className="w-full md:mx-32 md:mt-5 mt-2 " ref={addProductRef}>
       {showModal && (
         <Portal setHidden={setShowModal}>
           <ProductAdded setHidden={setShowModal} />
         </Portal>
       )}
-      <h2 className=" py-4 text-3xl font-thin mb-5">Add New Product</h2>
+      <h2 className=" py-1 md:py-4 text-3xl font-thin md:mb-5 mb-2  text-center md:text-left">
+        Add New Product
+      </h2>
       <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex md:flex-row flex-col-reverse gap-20 ">
-          <div className="md:w-1/2 w-full flex flex-col gap-4">
-            <div>
-              <label htmlFor="" className="text-lg font-light">
+        <div className="flex md:flex-row flex-col md:gap-20 gap-5 items-center md:items-start ">
+          <div className="md:w-1/2 w-[90%] flex flex-col gap-4   ">
+            <div className="md:block flex justify-center flex-col items-center">
+              <label htmlFor="" className="text-lg font-light ">
                 Category:
               </label>
               {selectedCategory === null && hasInteracted && (
@@ -103,11 +105,11 @@ const AddProduct = () => {
                   You have not selected an option
                 </p>
               )}
-              <div className="mt-2">
+              <div className="mt-2 md:block flex justify-center">
                 <button
                   type="button"
                   onClick={() => setSelectedCategory("dj")}
-                  className={` w-[10rem] py-2 rounded-l-lg border-r-[1px] border-r-light-juice/40  ${
+                  className={` md:w-[10rem] w-[7rem] text-sm md:text-base md:px-0 py-2 rounded-l-lg border-r-[1px] border-r-light-juice/40  ${
                     selectedCategory === "dj"
                       ? "bg-light-juice text-black/80"
                       : "bg-white/10 text-white hover:bg-white/20 duration-200"
@@ -118,7 +120,7 @@ const AddProduct = () => {
                 <button
                   type="button"
                   onClick={() => setSelectedCategory("vinyls")}
-                  className={` w-[10rem] py-2   ${
+                  className={`md:w-[10rem] w-[7rem] text-sm md:text-base md:px-0 py-2   ${
                     selectedCategory === "vinyls"
                       ? "bg-light-juice text-black/80"
                       : "bg-white/10 text-white hover:bg-white/20 duration-200"
@@ -129,7 +131,7 @@ const AddProduct = () => {
                 <button
                   type="button"
                   onClick={() => setSelectedCategory("softweres")}
-                  className={` w-[10rem] py-2 rounded-r-lg border-l-[1px] border-l-light-juice/40 ${
+                  className={` md:w-[10rem] w-[7rem] text-sm md:text-base md:px-0 py-2 rounded-r-lg border-l-[1px] border-l-light-juice/40 ${
                     selectedCategory === "softweres"
                       ? "bg-light-juice text-black/80 "
                       : "bg-white/10 text-white hover:bg-white/20 duration-200"
@@ -140,7 +142,7 @@ const AddProduct = () => {
               </div>
 
               {selectedCategory === "dj" && (
-                <div className=" flex mt-2  flex-col">
+                <div className=" flex mt-2  flex-col md:items-start items-center">
                   <label htmlFor="">Brand:</label>
                   {selectedSubCategory === null && hasInteracted && (
                     <p className="text-sm text-red-500">
@@ -151,7 +153,7 @@ const AddProduct = () => {
                     <button
                       type="button"
                       onClick={() => setSubSelectedCategory("pioneer")}
-                      className={` w-[10rem] py-2 rounded-l-lg border-r-[1px] border-r-light-juice/40  ${
+                      className={`md:w-[10rem] w-[7rem] text-sm md:text-base md:px-0 py-2 rounded-l-lg border-r-[1px] border-r-light-juice/40  ${
                         selectedSubCategory === "pioneer"
                           ? "bg-light-juice text-black/80"
                           : "bg-white/10 text-white hover:bg-white/20 duration-200"
@@ -163,7 +165,7 @@ const AddProduct = () => {
                     <button
                       type="button"
                       onClick={() => setSubSelectedCategory("dennon")}
-                      className={` w-[10rem] py-2 rounded-r-lg border-l-[1px] border-l-light-juice/40 ${
+                      className={` md:w-[10rem] w-[7rem] text-sm md:text-base md:px-0 py-2 rounded-r-lg border-l-[1px] border-l-light-juice/40 ${
                         selectedSubCategory === "dennon"
                           ? "bg-light-juice text-black/80 "
                           : "bg-white/10 text-white hover:bg-white/20 duration-200"
@@ -210,9 +212,9 @@ const AddProduct = () => {
               );
             })}
           </div>
-          <div className="w-1/2 flex flex-col gap-4 ">
+          <div className="md:w-1/2 w-full  flex flex-col gap-4 md:justify-start justify-center items-center md:items-start ">
             <div
-              className={`border-light-juice border-dashed border-[1px] h-[18rem]  w-[18rem] aspect-square mt-5 flex justify-center items-center relative rounded-lg ${
+              className={`border-light-juice border-dashed border-[1px] h-[18rem]  w-[90%] md:w-[18rem] aspect-square md:mt-5 mt-1 flex justify-center items-center relative rounded-lg ${
                 imageSrc === null && hasInteracted && "animate-shake"
               } bg-gradient-to-r from-white/5 to-white/10 overflow-hidden`}
             >
@@ -271,7 +273,13 @@ const AddProduct = () => {
             </div>
           </div>
         </div>
-        <Button icon={<MdDone />} label="Submit" isSubmitting={isSubmitting} />
+        <div className=" md:block flex justify-center">
+          <Button
+            icon={<MdDone />}
+            label="Submit"
+            isSubmitting={isSubmitting}
+          />
+        </div>
       </form>
     </div>
   );

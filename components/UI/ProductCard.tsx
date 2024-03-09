@@ -102,16 +102,14 @@ const ProductCard = ({ product }: { product: ProductType }) => {
             className={`  custom-shadow aspect-square p-3 object-contain md:group-hover:scale-110 duration-200  `}
           />
           {!isShopPage && (
-            <div className="absolute top-1 right-1 bg-[#6e6e6e] p-2 rounded-full ">
+            <div className="absolute  md:top-1 top-2 right-2 md:right-1 bg-[#6e6e6e] md:p-2 p-1 rounded-full ">
               {product.access ? (
-                <FaUnlock className="  text-base text-green-500 " />
+                <FaUnlock className=" text-xs md:text-base text-green-500 " />
               ) : (
-                <FaLock className="  text-base  text-red-500" />
+                <FaLock className=" text-xs md:text-base  text-red-500" />
               )}
             </div>
           )}
-
-          {/* {!isShopPage ? <FaLockOpen /> : <FaLock />} */}
         </div>
         <div className="w-[90%] py-2  mx-auto flex flex-col items-center gap-2 mt-3">
           <p
