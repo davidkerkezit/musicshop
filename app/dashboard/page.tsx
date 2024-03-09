@@ -1,4 +1,5 @@
 import { Dashboard, Options } from "@/components/Dashboard";
+import DashboardNav from "@/components/Layout/DashboardNav";
 import PageBanner from "@/components/UI/PageBanner";
 import { getProducts } from "@/libs/actions";
 import { ProductType } from "@/libs/types";
@@ -24,6 +25,8 @@ export default async function page({
       <PageBanner page="Dashboard" />
 
       <div className="z-10 relative flex">
+        <DashboardNav />
+
         <Options />
         <Dashboard products={products} pages={pages} />
       </div>
