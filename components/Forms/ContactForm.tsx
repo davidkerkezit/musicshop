@@ -101,9 +101,11 @@ const ContactForm = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="flex flex-col  w-full gap-1">
-              <div className="flex gap-1">
-                <label htmlFor="">Name</label>
-                <GiFlowerStar className="text-xs text-red-900" />
+              <div className="flex md:gap-1 md:flex-row flex-col ">
+                <label htmlFor="" className="flex  gap-1">
+                  Name <GiFlowerStar className="text-xs text-red-900" />
+                </label>
+
                 {errors.name && (
                   <div className="text-red-500 text-sm">
                     {errors.name.message}
@@ -118,9 +120,11 @@ const ContactForm = () => {
             </div>
             <div className="flex flex-col  w-full gap-1">
               {" "}
-              <div className="flex gap-1">
-                <label htmlFor="">Email</label>
-                <GiFlowerStar className="text-xs text-red-900" />
+              <div className="flex flex-col  w-full gap-1">
+                <label htmlFor="" className="flex  gap-1">
+                  Email <GiFlowerStar className="text-xs text-red-900" />
+                </label>
+
                 {errors.email && (
                   <div className="text-red-500 text-sm">
                     {errors.email.message}
@@ -134,9 +138,11 @@ const ContactForm = () => {
               />
             </div>
             <div className="flex flex-col  w-full gap-1">
-              <div className="flex gap-1">
-                <label htmlFor="">Message</label>
-                <GiFlowerStar className="text-xs text-red-900" />
+              <div className="flex md:gap-1 md:flex-row flex-col">
+                <label htmlFor="" className="flex  gap-1">
+                  Message <GiFlowerStar className="text-xs text-red-900" />
+                </label>
+
                 {errors.message && (
                   <div className="text-red-500 text-sm">
                     {errors.message.message}

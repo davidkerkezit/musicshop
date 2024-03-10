@@ -54,6 +54,14 @@ const config: Config = {
         from: { right: "0" },
         to: { right: "-100%" },
       },
+      openFromLeft: {
+        from: { left: "-100%" },
+        to: { left: "0" },
+      },
+      closeToLeft: {
+        from: { left: "0" },
+        to: { left: "-100%" },
+      },
       openFromTop: {
         from: { top: "-30%" },
         to: { top: "12rem" },
@@ -107,6 +115,8 @@ const config: Config = {
       shake: "shake .4s linear forwards ",
       menuThird: "menuThird .3s linear forwards ",
       openFromRight: "openFromRight .3s ease-in forwards ",
+      openFromLeft: "openFromLeft .3s ease-in forwards ",
+      closeToLeft: "closeToLeft .3s ease-in forwards ",
       closeToRight: "closeToRight .3s ease-in forwards ",
       openFromTop: "openFromTop .3s ease-in forwards ",
       closeToTop: "closeToTop .3s ease-in forwards ",

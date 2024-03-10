@@ -88,7 +88,7 @@ const Footer = () => {
                   href={item.link}
                   className={`${
                     path == item.link
-                      ? "md:border-l-[3px] md:border-l-juice text-neutral-200"
+                      ? "md:border-l-[3px] md:border-l-juice text-juice"
                       : "md:border-l-[3px] md:border-l-transparent text-neutral-400"
                   } md:pl-3  hover:text-neutral-50 duration-200 font-normal`}
                 >
@@ -100,7 +100,7 @@ const Footer = () => {
               href={`${BASE_URL}/dashboard`}
               className={`${
                 path === "/dashboard"
-                  ? "md:border-l-[3px] md:border-l-juice text-neutral-200"
+                  ? "md:border-l-[3px] md:border-l-juice text-juice"
                   : "md:border-l-[3px] md:border-l-transparent text-neutral-400"
               } md:pl-3  hover:text-neutral-50 duration-200 font-normal`}
             >
@@ -115,7 +115,7 @@ const Footer = () => {
               href={`${BASE_URL}/shop?collection=vinyls#sort`}
               className={`${
                 categoryParam === "vinyls"
-                  ? "md:border-l-[3px] md:border-l-juice text-neutral-200"
+                  ? "md:border-l-[3px] md:border-l-juice text-juice"
                   : "md:border-l-[3px] md:border-l-transparent text-neutral-400"
               } md:pl-3 text-neutral-200 font-normal`}
             >
@@ -125,7 +125,7 @@ const Footer = () => {
               href={`${BASE_URL}/shop?collection=djequipments#sort`}
               className={`${
                 categoryParam === "djequipments"
-                  ? "md:border-l-[3px] md:border-l-juice text-neutral-200"
+                  ? "md:border-l-[3px] md:border-l-juice text-juice"
                   : "md:border-l-[3px] md:border-l-transparent text-neutral-400"
               } md:pl-3 text-neutral-200 font-normal`}
             >
@@ -135,7 +135,7 @@ const Footer = () => {
               href={`${BASE_URL}/shop?collection=softweres#sort`}
               className={`${
                 categoryParam === "softweres"
-                  ? "md:border-l-[3px] md:border-l-juice text-neutral-200"
+                  ? "md:border-l-[3px] md:border-l-juice text-juice"
                   : "md:border-l-[3px] md:border-l-transparent text-neutral-400"
               } md:pl-3 text-neutral-200 font-normal`}
             >

@@ -11,12 +11,12 @@ const ProductInformation = ({
   const [selectedTab, setSelectedTab] = useState<string>("product");
   const isSelectedTabProductStyle: string =
     selectedTab === "product"
-      ? "text-white border-b-[1px] border-b-juice bg-white/10 py-3 text-2xl "
-      : "text-white/60 bg-white/5 border-b-[1px] border-b-white/10 py-2 text-xl ";
+      ? "text-white border-b-[1px] border-b-juice bg-white/10 py-3 md:text-2xl text-base"
+      : "text-white/60 bg-white/5 border-b-[1px] border-b-white/10 py-2 md:text-xl ";
   const isSelectedTabSellerStyle: string =
     selectedTab === "seller"
-      ? "text-white border-b-[1px] border-b-juice bg-white/10 py-3 text-2xl  "
-      : "text-white/60 bg-white/5 border-b-[1px] border-b-white/10 py-2 text-xl ";
+      ? "text-white border-b-[1px] border-b-juice bg-white/10 py-3 text-base md:text-2xl  "
+      : "text-white/60 bg-white/5 border-b-[1px] border-b-white/10 py-2 text-sm md:text-xl text-sm";
   return (
     <div>
       <div className="flex flex-row items-end ">
@@ -37,7 +37,7 @@ const ProductInformation = ({
           About seller
         </button>
       </div>
-      <p className="px-8 py-8 text-lg text-white/80 font-light bg-white/10 ">
+      <p className="px-8 py-8 text-base text-center md:text-left md:text-lg text-white/80 font-light bg-white/10 ">
         {selectedTab === "product" && aboutProduct}
         {selectedTab === "seller" && aboutSeller}
       </p>

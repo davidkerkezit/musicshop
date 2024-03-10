@@ -1,20 +1,25 @@
 "use client";
+import { showMenu } from "@/libs/features/menuSlice";
+import { AppDispatch, useAppSelector } from "@/libs/store";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 const Burger = () => {
-  const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const openMenu = useAppSelector((state) => state.menuSlice);
+
   const menuHandler = () => {
-    setOpenMenu((openMenu) => !openMenu);
+    dispatch(showMenu());
   };
   return (
-    <button onClick={menuHandler} className="w-[1.2rem] h-[1.2rem] relative   ">
+    <button onClick={menuHandler} className="w-[1.3rem] h-[1rem] relative   ">
       <div
         className={` bg-white w-full h-[1px]  absolute  ${
           openMenu ? "animate-menuFirst top-0 bottom-0 my-auto" : " top-0 "
         }`}
       />
       <div
-        className={`  w-full h-[1px]  ${
+        className={`  w-[80%] h-[1px]  ${
           openMenu ? "bg-transparent" : "bg-white"
         } `}
       />

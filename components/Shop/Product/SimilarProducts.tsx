@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import ProductCard from "../../UI/ProductCard";
 import { FaArrowRight } from "@/components/UI/Icons";
 import { BASE_URL } from "@/libs/utils";
+import Image from "next/image";
 
 const SimilarProducts = ({
   products,
@@ -32,8 +33,8 @@ const SimilarProducts = ({
     }
   }, [category]);
   return (
-    <div className=" bg-white/5 border-[1px] border-light-juice/40 py-2 rounded-2xl  overflow-x-hidden w-full">
-      <div className="flex justify-between px-4 py-2">
+    <div className=" bg-white/5 md:border-[1px] border-y-[1px] border-light-juice/40 py-2 md:rounded-2xl  overflow-x-scroll w-full">
+      <div className="flex justify-between px-4 md:py-2 py-5">
         <h3 className="text-xl">Similar Products</h3>
         <Link
           href={`${BASE_URL}/shop?collection=${selectedCollection}#sort`}
@@ -43,7 +44,7 @@ const SimilarProducts = ({
           <FaArrowRight size={12} />
         </Link>
       </div>
-      <div className="flex justify-center ">
+      <div className="md:flex md:justify-center justify-start md:gap-0 gap-1  ">
         {products.map((product: ProductType) => {
           return <ProductCard key={product._id} product={product} />;
         })}

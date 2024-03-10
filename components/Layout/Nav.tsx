@@ -55,9 +55,9 @@ const Nav = () => {
       id="nav"
       data-nextjs-scroll-focus-boundary
     >
-      <nav className="  flex justify-between items-center md:px-8 px-2   py-5  bg-darkness/50 backdrop-blur-sm border-b-[1px] border-juice/5 ">
+      <nav className="  flex justify-between items-center md:px-8 px-3   py-5  bg-darkness/50 backdrop-blur-sm border-b-[1px] border-juice/5 ">
         {/* Burger menu */}
-        <div className="block md:hidden">
+        <div className="flex md:hidden ">
           <Burger />
         </div>
         {/* Logo */}
@@ -121,7 +121,7 @@ const Nav = () => {
               <p
                 className={`bg-juice ${
                   isUpdatedCart ? "animate-shake" : ""
-                } rounded-full absolute -top-[8px] left-[15px] w-[15px] h-[15px] flex items-center justify-center text-xs p-[10px]  lg:text-sm`}
+                } rounded-full absolute -top-[8px] left-[15px] md:w-[15px] md:h-[15px] w-[12px] h-[12px] flex items-center justify-center text-xs p-[8px] md:p-[10px]  lg:text-sm`}
               >
                 {cartItems.length}
               </p>

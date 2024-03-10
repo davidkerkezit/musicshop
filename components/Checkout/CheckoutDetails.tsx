@@ -71,7 +71,7 @@ const CheckoutDetails = () => {
   return (
     <div className="z-10 relative mb-20">
       {!isSuccess && (
-        <div className="flex justify-center py-8 items-center flex-col">
+        <div className="flex justify-center md:py-8 pt-7 items-center flex-col">
           <h4 className="text-2xl font-bold">Payment method</h4>
           <p className="text-juice  text-sm md:text-left text-center">
             Choose a payment option and fill in the requested information
@@ -86,10 +86,10 @@ const CheckoutDetails = () => {
         </div>
       ) : (
         <form
-          className="md:mx-20 mx-2 flex md:flex-row flex-col"
+          className="md:mx-20  flex md:flex-row flex-col"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="md:w-[70%] w-full rounded-l-xl bg-white/10 p-5 my-6 border-[1px] border-light-juice/20 ">
+          <div className="md:w-[70%] w-full md:rounded-l-xl bg-white/10 p-5 my-6 md:border-[1px] border-y-[1px] border-light-juice/20 ">
             <h4 className="pb-3 text-xl font-semibold">Payment options</h4>
             <div className="bg-white/10 p-3 rounded-lg">
               {/* Payment */}
@@ -115,21 +115,21 @@ const CheckoutDetails = () => {
                       height={30}
                       src={MASTERCARD}
                       alt="master-card"
-                      className=" w-1/8"
+                      className=" w-[10%] md:w-1/3"
                     />
                     <Image
                       width={50}
                       height={30}
                       src={VISACARD}
                       alt="visa"
-                      className=" w-1/8"
+                      className=" w-[10%] md:w-1/3"
                     />
                     <Image
                       width={50}
                       height={30}
                       src={DINACARD}
                       alt="dina-card"
-                      className=" w-1/8"
+                      className=" w-[10%] md:w-1/3"
                     />
                   </div>
                 </div>
@@ -149,14 +149,20 @@ const CheckoutDetails = () => {
                     </span>
                   </label>
                   <div className="flex items-center flex-row gap-2 ml-5 md:ml-0 md:mt-0 my-1">
-                    <Image width={50} height={30} src={FEDEX} alt="fedex" />
+                    <Image
+                      width={50}
+                      height={30}
+                      src={FEDEX}
+                      alt="fedex"
+                      className=" w-[10%] md:w-full"
+                    />
                   </div>
                 </div>
               </div>
               {/* About user */}
               <div className=" grid md:grid-cols-2 grid-cols-1 gap-5 my-4 pt-4 border-t-[1px] border-t-white/40 border-dotted">
                 <div className="flex flex-col ">
-                  <div className="flex flex-row gap-2 items-center">
+                  <div className="flex md:flex-row flex-col md:gap-2 md:items-center">
                     {" "}
                     <label className="font-thin">First name:</label>{" "}
                     {errors.firstName && (
@@ -174,7 +180,7 @@ const CheckoutDetails = () => {
                 </div>
 
                 <div className="flex flex-col">
-                  <div className="flex flex-row gap-2 items-center">
+                  <div className="flex md:flex-row flex-col md:gap-2 md:items-center">
                     {" "}
                     <label className="font-thin">Last name:</label>{" "}
                     {errors.lastName && (
@@ -192,7 +198,7 @@ const CheckoutDetails = () => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <div className="flex flex-row gap-2 items-center">
+                  <div className="flex md:flex-row flex-col md:gap-2 md:items-center">
                     {" "}
                     <label className="font-thin">City:</label>{" "}
                     {errors.city && (
@@ -209,7 +215,7 @@ const CheckoutDetails = () => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <div className="flex flex-row gap-2 items-center">
+                  <div className="flex md:flex-row flex-col md:gap-2 md:items-center">
                     {" "}
                     <label className="font-thin">Postal code:</label>{" "}
                     {errors.postalCode && (
@@ -226,7 +232,7 @@ const CheckoutDetails = () => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <div className="flex flex-row gap-2 items-center">
+                  <div className="flex md:flex-row flex-col md:gap-2 md:items-center">
                     {" "}
                     <label className="font-thin">Street name:</label>{" "}
                     {errors.streetName && (
@@ -243,7 +249,7 @@ const CheckoutDetails = () => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <div className="flex flex-row gap-2 items-center">
+                  <div className="flex md:flex-row flex-col md:gap-2 md:items-center">
                     {" "}
                     <label className="font-thin">House number:</label>{" "}
                     {errors.houseNumber && (
@@ -260,7 +266,7 @@ const CheckoutDetails = () => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <div className="flex flex-row gap-2 items-center">
+                  <div className="flex md:flex-row flex-col md:gap-2 md:items-center">
                     {" "}
                     <label className="font-thin">More information:</label>{" "}
                   </div>
@@ -272,7 +278,7 @@ const CheckoutDetails = () => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <div className="flex flex-row gap-2 items-center">
+                  <div className="flex md:flex-row flex-col md:gap-2 md:items-center">
                     {" "}
                     <label className="font-thin">Phone number:</label>{" "}
                     {errors.phoneNumber && (
@@ -291,7 +297,7 @@ const CheckoutDetails = () => {
               </div>
             </div>
           </div>
-          <div className="md:w-[30%] w-full bg-white/20 rounded-xl flex flex-col justify-between border-[1px] border-light-juice/70 ">
+          <div className="md:w-[30%] w-full md:bg-white/20 bg-white/5 md:rounded-xl flex flex-col justify-between border-[1px] border-light-juice/70 ">
             <div className="flex flex-col ">
               <p className="text-center text-2xl font-semibold py-4">
                 {" "}
@@ -307,7 +313,7 @@ const CheckoutDetails = () => {
                     return (
                       <div
                         key={product._id}
-                        className="flex bg-black/50 justify-between items-center "
+                        className="flex md:bg-black/50 bg-white/10 justify-between items-center "
                       >
                         <div className="bg-white/20 m-1">
                           <img
@@ -317,12 +323,14 @@ const CheckoutDetails = () => {
                           />
                         </div>
                         <div className="flex flex-col items-end  pr-2">
-                          <p className="text-base font-thin">{product.name}</p>
+                          <p className="text-sm md:text-base font-thin">
+                            {product.name}
+                          </p>
                           <div className="flex">
-                            <p className=" bg-light-juice/20 pl-2 text-gray-300">
+                            <p className=" md:bg-light-juice/20 pl-2 text-gray-300">
                               {quantity && quantity}x
                             </p>
-                            <p className=" bg-light-juice/20 pr-2 text-gray-300">
+                            <p className=" md:bg-light-juice/20 pr-2 text-gray-300">
                               {product.price}.00$
                             </p>
                             <p className="bg-light-juice px-2 text-black ">
@@ -350,7 +358,7 @@ const CheckoutDetails = () => {
                 type="submit"
                 value="Done"
                 disabled={isLoading}
-                className="text-xl mx-auto w-[40%] cursor-pointer text-center bg-gradient-to-r from-black/20 to-black/30 py-2 font-thin mt-2 border-[1px] border-light-juice/40 hover:border-light-juice rounded-lg hover:from-black/20 hover:to-black/10 duration-200 "
+                className="text-xl mx-auto w-[40%] cursor-pointer text-center bg-white/10 md:bg-gradient-to-r md:from-black/20 md:to-black/30 py-2 font-thin mt-2 border-[1px] border-light-juice/40 hover:border-light-juice rounded-lg hover:from-black/20 hover:to-black/10 duration-200 "
               />
             </div>
           </div>

@@ -105,7 +105,7 @@ export const aboutCategories: AboutCategoryType[] = [
     imageSrc: TIESTO,
     imageAlt: "artist",
     imageStyle:
-      "object-contain absolute md:mx-auto md:my-auto -top-10 left-10  md:bottom-0 md:left-0 right-0 lg:w-[64%] md:top-[10rem] ",
+      "object-contain absolute md:mx-auto md:my-auto -top-10 left-10   md:bottom-0 md:left-0 right-0  md:w-[64%] md:top-[10rem] ",
   },
   {
     background: "bg-dj",

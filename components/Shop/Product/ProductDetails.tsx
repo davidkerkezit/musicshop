@@ -53,13 +53,15 @@ const ProductDetails = ({
           alt="product"
           width={400}
           height={400}
-          className="white-shadow w-1/2"
+          className="white-shadow w-full"
         />
       </div>
 
-      <div className="md:w-1/2 w-full md:px-10 px-2 md:mt-0 mt-2 flex flex-col gap-2 md:gap-4">
-        <h2 className="text-5xl  font-semibold">{selectedProduct.name}</h2>
-        <div className="flex  text-xl gap-2">
+      <div className="md:w-1/2 w-full md:px-10 px-2 md:mt-0 mt-2 flex flex-col gap-1 md:gap-4">
+        <h2 className="md:text-5xl text-3xl  font-semibold">
+          {selectedProduct.name}
+        </h2>
+        <div className="flex  md:text-xl text-base gap-2">
           <p>Category: </p>
           {category === "DJ Equipments" && (
             <Link
@@ -86,15 +88,15 @@ const ProductDetails = ({
             </Link>
           )}
         </div>
-        <p className="text-lg  font-light text-white/60">
+        <p className="text-lg  font-light text-white/60 my-2 md:my-0">
           {selectedProduct.about}
         </p>
-        <p className="text-[4rem] font-extralight">
+        <p className="md:text-[4rem] text-2xl font-extralight">
           <span className="text-lg  font-light pr-1">Price: </span>
-          {selectedProduct.price}
-          <span className="text-[3rem] font-extralight pl-1">$</span>
+          {selectedProduct.price}.00
+          <span className="md:text-[3rem] text-xl font-extralight pl-1">$</span>
         </p>
-        <div>
+        <div className="md:mt-0 mt-4">
           <Button
             isPending={false}
             label={`${
