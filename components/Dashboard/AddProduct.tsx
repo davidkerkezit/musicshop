@@ -96,7 +96,7 @@ const AddProduct = () => {
       <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex md:flex-row flex-col md:gap-20 gap-5 items-center md:items-start ">
           <div className="md:w-1/2 w-[90%] flex flex-col gap-4   ">
-            <div className="md:block flex justify-center flex-col items-center">
+            <div className="md:block flex justify-center flex-col items-start md:items-center">
               <label htmlFor="" className="text-lg font-light ">
                 Category:
               </label>
@@ -105,7 +105,7 @@ const AddProduct = () => {
                   You have not selected an option
                 </p>
               )}
-              <div className="mt-2 md:block flex justify-center">
+              <div className="mt-2 md:block flex justify-start">
                 <button
                   type="button"
                   onClick={() => setSelectedCategory("dj")}

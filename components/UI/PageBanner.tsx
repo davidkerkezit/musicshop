@@ -10,7 +10,7 @@ const PageBanner = ({ page }: { page: string }) => {
     <div className="background  w-full pt-32 md:pt-40 md:pb-32 pb-40 h-[2rem]  md:h-[30rem] flex justify-center relative">
       <div className="absolute top-0 right-0 bottom-0 left-0 md:bg-darkness/40 bg-darkness/60" />{" "}
       {page === "Dashboard" && (
-        <div className=" p-12  rounded-lg shadow-lg bg-black/40 mx-auto left-0 right-0 backdrop-blur-xl  bottom-3 my-auto h-max absolute flex flex-col items-center w-1/2   ">
+        <div className=" p-12  rounded-lg shadow-lg bg-black/40 mx-auto left-0 right-0 md:backdrop-blur-xl  bottom-3 my-auto h-max absolute flex flex-col items-center md:w-1/2   ">
           <p className="font-thin text-center">
             This is public Pilot Project. You are not allowed to edit some
             products for security reasons of our database. Find products with{" "}
@@ -32,8 +32,8 @@ const PageBanner = ({ page }: { page: string }) => {
         </div>
       )}
       <h1
-        className={`  md:text-[7rem] text-[5rem] font-bold relative z-10 ${
-          path === "/admin" && "hidden md:block"
+        className={`  md:text-[7rem] text-[4rem] font-bold relative z-10 ${
+          (path === "/admin" || path === "/dashboard") && "hidden md:block"
         } `}
       >
         {page}

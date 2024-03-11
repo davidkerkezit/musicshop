@@ -24,7 +24,7 @@ const DashboardTextArea = ({
 }) => {
   return (
     <div className="flex flex-col   ">
-      <div className="flex items-center gap-2 ">
+      <div className="flex md:items-center md:gap-2 md:flex-row flex-col ">
         <label htmlFor="" className="px-1 text-lg font-light">
           {label}:
         </label>

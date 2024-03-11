@@ -81,7 +81,7 @@ const Orders = () => {
               onClick={() => {
                 setSelectedCategory("completed");
               }}
-              className={` md:w-[10rem] w-max px-2 py-2 rounded-r-lg border-l-[1px] border-l-light-juice/40 flex items-center justify-center p-1 md:p-3 gap-1 md:gap-2 md:text-base text-sm${
+              className={` md:w-[10rem] w-max px-2 py-2 rounded-r-lg border-l-[1px] border-l-light-juice/40 flex items-center justify-center p-1 md:p-3 gap-1 md:gap-2 md:text-base text-sm ${
                 selectedCategory === "completed"
                   ? "bg-green-600 text-white "
                   : "bg-white/10 text-white hover:bg-white/20 duration-200"
@@ -113,7 +113,7 @@ const Orders = () => {
               Payment
             </p>
           </div>
-          <div className="flex">
+          <div className="flex md:hidden">
             <p className="w-[70%]  text-white/80 bg-white/10 px-1 py-1 text-center border-r-[1px] border-r-light-juice/20 md:text-base text-sm">
               About order
             </p>

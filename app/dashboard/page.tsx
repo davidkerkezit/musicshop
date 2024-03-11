@@ -25,8 +25,6 @@ export default async function page({
       <PageBanner page="Dashboard" />
 
       <div className="z-10 relative flex">
-        <DashboardNav />
-
         <Options />
         <Dashboard products={products} pages={pages} />
       </div>

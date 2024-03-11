@@ -10,11 +10,12 @@ import { useDispatch } from "react-redux";
 import { getOrders, getQuestions } from "@/libs/actions";
 import { ordersUpdate } from "@/libs/features/ordersSlice";
 import { questionsUpdate } from "@/libs/features/questionsSlice";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { BASE_URL } from "@/libs/utils";
 
 const DashboardNav = () => {
+  const path = usePathname();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const unreadQuestions = useAppSelector(
     (state) => state.questionsSlice.unreadQuestions
@@ -48,7 +49,11 @@ const DashboardNav = () => {
   }, []);
 
   return (
-    <div className="fixed bg-white text-black z-50 w-full h-[3.5rem] bottom-0 left-0 right-0 flex text-lg font-thin md:hidden">
+    <div
+      className={`fixed bg-white text-black z-50 w-full h-[3.5rem] bottom-0 left-0 right-0  text-lg font-thin md:hidden ${
+        path.includes("dashboard") ? "flex" : "hidden"
+      }`}
+    >
       <button
         className={`w-[20%] flex justify-center items-center flex-col  border-t-[3px] ${
           option === "editproducts"
@@ -70,23 +75,21 @@ const DashboardNav = () => {
       >
         <FiTruck />
         <p className="text-[10px] leading-5"> Orders</p>{" "}
-        {!isLoading ||
-          (inProccessOrders.length !== 0 && (
-            <p className="bg-juice text-white absolute top-0 left-7 right-0 bottom-7 w-[1.2rem] h-[1.2rem] rounded-full flex justify-center items-center p-[2px] text-sm mx-auto my-auto">
-              {inProccessOrders.length}
-            </p>
-          ))}
+        {(!isLoading || inProccessOrders.length !== 0) && (
+          <p className="bg-juice text-white absolute top-0 left-7 right-0 bottom-7 w-[1.2rem] h-[1.2rem] rounded-full flex justify-center items-center p-[2px] text-sm mx-auto my-auto">
+            {inProccessOrders.length}
+          </p>
+        )}
       </button>
       <button
-        className={`w-[20%] flex justify-center items-center flex-col bg-light-juice/40 border-t-[3px] ${
+        className={`w-[20%] flex justify-center items-center flex-col bg-light-juice/40 border-t-[3px] pb-3 ${
           option === "addproduct"
             ? "border-t-juice bg-light-juice/40"
             : "border-t-black/70 bg-white"
         } pt-3 `}
         onClick={() => router.push(`${BASE_URL}/dashboard?option=addproduct`)}
       >
-        <RiAddCircleLine />
-        <p className="text-[10px] leading-5"> Add Product</p>{" "}
+        <RiAddCircleLine size={80} />
       </button>
       <button
         className={`w-[20%] flex justify-center items-center flex-col bg-light-juice/40 border-t-[3px] relative ${
@@ -98,12 +101,11 @@ const DashboardNav = () => {
       >
         <BiMessageDetail />
         <p className="text-[10px] leading-5"> Inbox</p>{" "}
-        {!isLoading ||
-          (unreadQuestions.length !== 0 && (
-            <p className="bg-juice text-white absolute top-0 left-7 right-0 bottom-7 w-[1.2rem] h-[1.2rem] rounded-full flex justify-center items-center p-[2px] text-sm mx-auto my-auto">
-              {unreadQuestions.length}
-            </p>
-          ))}
+        {(!isLoading || unreadQuestions.length > 0) && (
+          <p className="bg-juice text-white absolute top-0 left-7 right-0 bottom-7 w-[1.2rem] h-[1.2rem] rounded-full flex justify-center items-center p-[2px] text-sm mx-auto my-auto">
+            {unreadQuestions.length}
+          </p>
+        )}
       </button>
       <button
         className={`w-[20%] flex justify-center items-center flex-col bg-light-juice/40 border-t-[3px] ${

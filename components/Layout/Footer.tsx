@@ -182,7 +182,11 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="bg-neutral-900/30 relative pt-5 pb-12">
+      <div
+        className={`bg-neutral-900/30 relative pt-5  ${
+          path.includes("dashboard") ? "pb-24" : "pb-12"
+        }`}
+      >
         <div className=" flex w-max mx-auto gap-7 ">
           <div className="text-xl p-3 rounded-full border-[1px] border-neutral-400 text-neutral-400 hover:text-blue-500 duration-200 cursor-pointer hover:border-blue-500 hover:bg-white/10">
             <GrFacebookOption />

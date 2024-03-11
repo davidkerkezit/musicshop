@@ -6,6 +6,7 @@ import Modal from "@/components/UI/Modals/Modal";
 import { Footer, Nav, Search } from "@/components/Layout";
 import { Cart } from "@/components/Cart";
 import MenuMobile from "@/components/Layout/MenuMobile";
+import DashboardNav from "@/components/Layout/DashboardNav";
 
 export default function RootLayout({
   children,
@@ -24,6 +25,7 @@ export default function RootLayout({
           <Search />
           <Cart />
           <div className="overflow-y-hidden">{children}</div>
+          <DashboardNav />
           <Footer />
         </StoreProvider>
       </body>

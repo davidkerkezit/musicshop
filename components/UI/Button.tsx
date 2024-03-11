@@ -20,7 +20,9 @@ const Button = ({
         isPending || label === "Out of stock" || label === "No Permission"
       }
       className={` flex gap-1  items-center border-[2px] md:border-[3px] rounded-full   mb-4 ${
-        label === "Delete" || label === "Edit" ? "w-[8rem]" : "w-max"
+        label === "Delete" || label === "Edit"
+          ? "w-[7rem] md:w-[8rem]"
+          : "w-max"
       }     ${
         label === "Out of stock" || isPending || label === "No Permission"
           ? "cursor-not-allowed  border-juice/30"
@@ -42,9 +44,9 @@ const Button = ({
           <LoadingDots />
         ) : (
           <div className="flex flex-row items-center gap-2">
-            <p className="text-sm md:text-md md:pl-2 pl-1">{label}</p>
+            <p className={`text-sm md:text-md md:pl-2 pl-1 `}>{label}</p>
             {label === "No Permission" && (
-              <FaLock size={12} className="text-white/50" />
+              <FaLock size={12} className="text-white/50 md:block hidden" />
             )}
           </div>
         )}

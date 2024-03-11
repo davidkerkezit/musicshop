@@ -45,9 +45,7 @@ const Filter = () => {
   };
 
   const collectionQuery = params.get("collection") ?? "allproducts";
-  useEffect(() => {
-    console.log(selectedSort);
-  }, [selectedSort]);
+
   return (
     <div className="md:w-[80%] w-full  my-5 mx-auto   flex md:flex-row flex-col  justify-between border-b-[1px] md:border-b-white/20 border-b-white/5 items-end  bg-white/5 ">
       <div className=" flex flex-row w-full md:hidden">
@@ -74,7 +72,7 @@ const Filter = () => {
             </p>
           )}
         </div>
-        <div className="w-full">
+        <div className={`w-full ${!isShopPage && "hidden"}`}>
           <button
             className={`p-5 md:border-b-[1px] border-[1px]   md:w-[10rem] w-full md:border-b-transparent border-gray-800/20  gap-2 flex items-center justify-center md:hidden`}
             onClick={() => {

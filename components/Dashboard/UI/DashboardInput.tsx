@@ -25,7 +25,7 @@ const DashboardInput = ({
 }) => {
   return (
     <div className="flex flex-col   ">
-      <div className="flex gap-2 items-center">
+      <div className="flex md:gap-2 md:items-center md:flex-row flex-col items-start">
         <label htmlFor="" className="px-1 text-lg font-light">
           {label}:
         </label>

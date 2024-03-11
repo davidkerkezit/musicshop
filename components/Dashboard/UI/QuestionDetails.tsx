@@ -84,18 +84,18 @@ const QuestionDetails: React.FC<QuestionDetailProps> = ({
   return (
     <details className=" border-b-[1px] border-b-white/10  " open={isOpen}>
       <summary className="flex  bg-white/20  cursor-pointer hover:bg-white/30 w-full">
-        <div className="flex items-center w-[2%] justify-center text-light-juice">
+        <div className="md:flex items-center w-[2%] justify-center text-light-juice hidden">
           <FaAngleDoubleRight />
         </div>
 
-        <div className="w-[58%] px-1 py-1   overflow-hidden ">
+        <div className="md:w-[58%] w-[80%] md:px-1 py-1 px-2   overflow-hidden md:text-base text-sm ">
           <p className=" font-thin">{question.message.substring(0, 70)}...</p>
         </div>
 
-        <p className="w-[15%] font-thin text-white/60 bg-white/5 px-1 py-1 text-center">
+        <p className="w-[15%] font-thin text-white/60 bg-white/5 px-1 py-1 text-center md:block hidden">
           {question.name}
         </p>
-        <div className="w-[10%] flex items-center justify-center">
+        <div className="md:w-[10%] w-[20%] flex items-center justify-center md:bg-transparent bg-white/5">
           {" "}
           <div
             className={`w-[0.5rem] h-[0.5rem] rounded-full ${
@@ -103,7 +103,7 @@ const QuestionDetails: React.FC<QuestionDetailProps> = ({
             }`}
           />
         </div>
-        <p className="w-[15%] font-thin text-white/60  px-1 py-1 text-center bg-white/5">
+        <p className="w-[15%] font-thin text-white/60  px-1 py-1 text-center bg-white/5 md:block hidden">
           {date}
         </p>
       </summary>
@@ -118,7 +118,7 @@ const QuestionDetails: React.FC<QuestionDetailProps> = ({
             Message:<span className="font-thin"> {question.message}</span>
           </p>
           {question.read && (
-            <div className="bg-light-juice text-black rounded-lg w-1/2 float-right p-2 flex flex-col mb-5">
+            <div className="bg-light-juice text-black rounded-lg md:w-1/2 w-[80%] float-right p-2 flex flex-col mb-5">
               <h6 className="bg-black/50 font-semibold w-max p-1 rounded-lg text-white tracking-wide ">
                 Musicshop:
               </h6>
@@ -151,7 +151,7 @@ const QuestionDetails: React.FC<QuestionDetailProps> = ({
             <input
               {...register("subject")}
               type="text"
-              className="bg-transparent text-white border-[1px] border-light-juice rounded-md w-1/3 py-1 px-2"
+              className="bg-transparent text-white border-[1px] border-light-juice rounded-md md:w-1/3 w-full py-1 px-2"
               placeholder="Enter subject..."
             />
           </div>

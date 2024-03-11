@@ -16,7 +16,7 @@ const MenuMobile = () => {
   const path = usePathname();
   const showMenu = useAppSelector((state) => state.menuSlice);
   const dispatch = useDispatch<AppDispatch>();
-
+  let delay = 50;
   return (
     <div
       className={`bg-black/60 backdrop-blur-lg fixed top-0 bottom-0  w-full h-full z-50 flex flex-col items-center gap-4 md:hidden ${
@@ -41,12 +41,15 @@ const MenuMobile = () => {
       </div>
       <div className="flex flex-col  w-full">
         {MENU.map((item: Menu) => {
+          delay = delay + 200;
           return (
             <Link
               onClick={() => dispatch(hideMenu())}
               key={item.label}
               href={item.link}
               className={`text-2xl font-thin text-center py-4 text-white border-y-light-juice/5 border-y-[1px] w-full flex items-center gap-2 justify-center relative ${
+                showMenu && ` animate-opacity  delay-${delay}`
+              }  ${
                 path === item.link
                   ? "bg-white/10 border-y-light-juice/80"
                   : "bg-transparent border-y-light-juice/5"
@@ -68,8 +71,8 @@ const MenuMobile = () => {
         <Link
           onClick={() => dispatch(hideMenu())}
           className={`text-2xl font-thin text-center py-4 text-white border-y-light-juice/5 border-y-[1px] w-full flex items-center gap-2 justify-center relative ${
-            path === "dashboard" ? "bg-white/10" : "bg-transparent"
-          }`}
+            showMenu && ` animate-opacity  delay-500`
+          } ${path === "dashboard" ? "bg-white/10" : "bg-transparent"}`}
           href={`${BASE_URL}/dashboard`}
         >
           Dashboard
