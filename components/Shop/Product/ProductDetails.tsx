@@ -53,7 +53,7 @@ const ProductDetails = ({
           alt="product"
           width={400}
           height={400}
-          className="white-shadow w-full"
+          className="white-shadow w-full md:w-[50%] object-contain"
         />
       </div>
 

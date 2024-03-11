@@ -21,7 +21,13 @@ import { addItemToCart } from "@/libs/features/cartSlice";
 import Portal from "./Modals/Portal";
 import DeletingProduct from "./Modals/DeletingProduct";
 
-const ProductCard = ({ product }: { product: ProductType }) => {
+const ProductCard = ({
+  product,
+  parent,
+}: {
+  product: ProductType;
+  parent: string;
+}) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const pathname = usePathname();
   const isShopPage = pathname.startsWith("/shop");
@@ -91,7 +97,11 @@ const ProductCard = ({ product }: { product: ProductType }) => {
             ? `${BASE_URL}/shop/${product._id}`
             : `${BASE_URL}/dashboard/${product._id}`
         }`}
-        className="md:mx-2   bg-white/5 md:hover:bg-white/10 md:rounded-2xl h-max pt-[1px] group duration-200 md:hover:border-[1px] md:hover:border-juice border-transparent  "
+        className={`md:mx-2   bg-white/5  md:rounded-2xl h-max pt-[1px] group duration-200  ${
+          parent !== "swiper"
+            ? "md:hover:border-juice md:hover:bg-white/10 md:hover:border-[1px]"
+            : "md:hover:border-transparent "
+        }  border-transparent`}
       >
         <div className="md:w-[90%] bg-gradient-to-tr from-[#424242] to-[#191919] aspect-square mx-auto md:mt-0 lg:mt-4 md:rounded-2xl flex items-center justify-center relative  ">
           <Image

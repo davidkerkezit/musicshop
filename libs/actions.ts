@@ -603,7 +603,7 @@ export async function sendMessage(
     if (!res.ok) {
       throw new Error("Failed to send contact message");
     }
-    const data = res.json();
+    const data = res.status;
     return data;
   } catch (error) {
     console.log("Error message: Error on sendMessage action");

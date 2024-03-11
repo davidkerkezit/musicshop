@@ -11,7 +11,9 @@ const Products = ({ products }: { products: ProductType[] }) => {
       <SearchQuery />
       <div className=" grid lg:grid-cols-4 grid-cols-2 gap-2">
         {products.map((product: ProductType, index: number) => {
-          return <ProductCard key={product._id} product={product} />;
+          return (
+            <ProductCard key={product._id} product={product} parent="shop" />
+          );
         })}
       </div>
     </div>

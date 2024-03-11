@@ -41,6 +41,7 @@ const Search = () => {
           placeholder="Search product..."
         />
         <Link
+          onClick={() => dispatch(hideSearch())}
           className="w-max "
           href={`${BASE_URL}/shop?page=1&q=${searchValue}#sort`}
           shallow={true}

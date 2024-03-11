@@ -39,7 +39,7 @@ const MenuMobile = () => {
           <MdKeyboardBackspace />
         </button>
       </div>
-      <div className="flex flex-col  w-full">
+      <div className="flex flex-col  w-full mt-10">
         {MENU.map((item: Menu) => {
           delay = delay + 200;
           return (

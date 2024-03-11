@@ -16,9 +16,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { contact } from "@/libs/utils";
+import { useState } from "react";
 
 type FormFields = z.infer<typeof contact>;
 const ContactForm = () => {
+  const [errorStatus, setErrorStatus] = useState<number | undefined>(undefined);
   const {
     register,
     handleSubmit,
@@ -31,7 +33,9 @@ const ContactForm = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data, e) => {
     e?.preventDefault();
-    await sendMessage(data.name, data.email, data.message);
+    const status = await sendMessage(data.name, data.email, data.message);
+    setErrorStatus(status);
+
     reset({
       name: "",
       email: "",
@@ -95,6 +99,12 @@ const ContactForm = () => {
             <p className="text-sm lg:text-xl italic font-extralight text-neutral-400">
               Forming partnerships will help to share good vibes
             </p>
+            {errorStatus === 200 && (
+              <p className="text-green-400 text-sm mt-4">
+                Your question has been sent successfully. Expect a response from
+                us soon.
+              </p>
+            )}
           </div>
           <form
             className="w-full px-5 md:px-20 flex flex-col gap-5"

@@ -47,7 +47,7 @@ const NewArrivals = ({ products }: { products: ProductType[] }) => {
         {products.map((product, index: number) => {
           return (
             <SwiperSlide key={index} className="h-[55rem]">
-              <ProductCard product={product} />
+              <ProductCard product={product} parent="swiper" />
               <div id="sort" className="pb-10 lg:pb-10" />
             </SwiperSlide>
           );
