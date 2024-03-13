@@ -49,9 +49,10 @@ const Nav = () => {
       setIsUpdatedCart(false);
     }, 1000);
   }, [cartItems]);
+  // xs:bg-red-500 sm:bg-blue-600 md:bg-green-400 lg:bg-yellow-500 xl:bg-white RESPONSIVE  HINTS
   return (
     <header
-      className="w-full  z-40 fixed  bg-white/5 "
+      className="w-full  z-40 fixed  bg-white/5  "
       id="nav"
       data-nextjs-scroll-focus-boundary
     >
@@ -63,13 +64,13 @@ const Nav = () => {
         {/* Logo */}
         <Link
           href={"/"}
-          className="group flex items-center gap-3 text-xl md:min-w-[160px] "
+          className="group flex items-center gap-3 text-xl md:w-max lg:min-w-[160px] "
         >
           <FaGooglePlay className=" group-hover:scale-105 duration-200 text-juice" />
-          <p>MusicShop</p>
+          <p className="block md:hidden lg:block">MusicShop</p>
         </Link>
         {/* MENU */}
-        <div className="min-w-[250px] w-[700px]   gap-2 hidden md:flex  ">
+        <div className="min-w-[250px] w-[700px] md:w-full  lg:w-[800px]    gap-2 hidden md:flex md:mx-10  ">
           {MENU.map((item: Menu, index: number) => {
             return (
               <Link

@@ -11,20 +11,20 @@ const ProductInformation = ({
   const [selectedTab, setSelectedTab] = useState<string>("product");
   const isSelectedTabProductStyle: string =
     selectedTab === "product"
-      ? "text-white border-b-[1px] border-b-juice bg-white/10 py-3 md:text-2xl text-base"
-      : "text-white/60 bg-white/5 border-b-[1px] border-b-white/10 py-2 md:text-xl ";
+      ? "text-white border-b-[1px] border-b-juice bg-white/10 py-3 md:text-2xl text-lg"
+      : "text-white/60 bg-white/5 border-b-[1px] border-b-white/10 py-2 md:text-xl  ";
   const isSelectedTabSellerStyle: string =
     selectedTab === "seller"
-      ? "text-white border-b-[1px] border-b-juice bg-white/10 py-3 text-base md:text-2xl  "
-      : "text-white/60 bg-white/5 border-b-[1px] border-b-white/10 py-2 text-sm md:text-xl text-sm";
+      ? "text-white border-b-[1px] border-b-juice bg-white/10 py-3 text-lg md:text-xl  "
+      : "text-white/60 bg-white/5 border-b-[1px] border-b-white/10 py-2 text-sm md:text-xl text-lg";
   return (
     <div>
-      <div className="flex flex-row items-end ">
+      <div className="flex flex-row items-end justify-center lg:justify-start ">
         <button
           onClick={() => {
             setSelectedTab("product");
           }}
-          className={`font-thin  px-8  ${isSelectedTabProductStyle}`}
+          className={`font-thin   px-8  ${isSelectedTabProductStyle}`}
         >
           Product Description
         </button>
@@ -32,7 +32,7 @@ const ProductInformation = ({
           onClick={() => {
             setSelectedTab("seller");
           }}
-          className={` font-thin  px-8 ${isSelectedTabSellerStyle} `}
+          className={` font-thin   px-8 ${isSelectedTabSellerStyle} `}
         >
           About seller
         </button>

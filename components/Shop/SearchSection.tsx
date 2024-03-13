@@ -8,7 +8,7 @@ const SearchSection = () => {
       <h1 className="text-3xl md:text-7xl font-semibold relative z-10 ">
         Great Products.
       </h1>
-      <h1 className="text-3xl md:text-7xl font-semibold relative z-10 ">
+      <h1 className="text-3xl md:text-7xl font-semibold relative z-10 text-center ">
         Feel The Vibe With Us.
       </h1>
       <p className="text-lg italic text-gray-400 font-extralight relative z-10 text-center">

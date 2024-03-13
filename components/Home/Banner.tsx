@@ -32,7 +32,7 @@ const Banner = () => {
           New shop in your <span className="text-juice">town</span>.
         </h1>
         {/* About new  shop */}
-        <p className="py-5 text-base md:text-lg ">
+        <p className="py-5 text-base md:text-lg text-justify pr-5">
           Welcome to "Music Shop" at our new address, Evershold St. 24 in
           London! Dive into a world of musical wonders where we offer a curated
           collection of vinyls, top-notch DJ equipment, and cutting-edge audio

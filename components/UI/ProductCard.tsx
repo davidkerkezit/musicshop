@@ -97,13 +97,13 @@ const ProductCard = ({
             ? `${BASE_URL}/shop/${product._id}`
             : `${BASE_URL}/dashboard/${product._id}`
         }`}
-        className={`md:mx-2   bg-white/5  md:rounded-2xl h-max pt-[1px] group duration-200  ${
+        className={`lg:mx-0   bg-white/5   h-max pt-[1px] group duration-200  ${
           parent !== "swiper"
             ? "md:hover:border-juice md:hover:bg-white/10 md:hover:border-[1px]"
             : "md:hover:border-transparent "
         }  border-transparent`}
       >
-        <div className="md:w-[90%] bg-gradient-to-tr from-[#424242] to-[#191919] aspect-square mx-auto md:mt-0 lg:mt-4 md:rounded-2xl flex items-center justify-center relative  ">
+        <div className="lg:w-[95%] bg-gradient-to-tr from-[#424242] to-[#191919] aspect-square mx-auto lg:mt-1   flex items-center justify-center relative  ">
           <Image
             width={300}
             height={300}

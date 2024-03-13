@@ -297,7 +297,7 @@ const CheckoutDetails = () => {
               </div>
             </div>
           </div>
-          <div className="md:w-[30%] w-full md:bg-white/20 bg-white/5 md:rounded-xl flex flex-col justify-between border-[1px] border-light-juice/70 ">
+          <div className="md:w-[30%] w-full md:bg-white/20 bg-white/5 md:rounded-xl flex flex-col justify-between border-[1px] md:border-light-juice/70 border-light-juice/10 ">
             <div className="flex flex-col ">
               <p className="text-center text-2xl font-semibold py-4">
                 {" "}

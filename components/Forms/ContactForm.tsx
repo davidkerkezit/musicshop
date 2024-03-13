@@ -44,9 +44,9 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-neutral-900 to-neutral-800 flex  h-max overflow-hidden flex-col items-center relative z-10 lg:m-32">
+    <div className="bg-gradient-to-r from-neutral-900 to-neutral-800 flex  h-max overflow-hidden flex-col items-center relative z-10 md:mx-5 mx-0 lg:mx-0 lg:m-10 rounded-none md:rounded-2xl">
       <div className="w-full h-max md:my-5 my-5 flex flex-col lg:flex-row gap-5  items-center justify-center ">
-        <div className="lg:w-1/2 w-full  md:px-20 px-5 flex flex-col md:gap-10 gap-5">
+        <div className="lg:w-[40%] w-full  md:px-5 px-5 flex flex-col md:gap-10 gap-5">
           <h3 className="text-3xl md:text-5xl font-semibold md:leading-[4rem] text-center">
             Let's discuss on something <span className="text-juice">cool </span>
             together
@@ -84,7 +84,7 @@ const ContactForm = () => {
             </div>
           </div>
         </div>
-        <div className="lg:w-1/2 w-full md:w-[80%]   md:bg-gradient-to-tr md:from-neutral-700 tmd:o-neutral-900 h-full lg:mr-20 md:rounded-2xl flex flex-col items-center py-5 md:py-10 lg:py-20 gap-8 md:gap-14 ">
+        <div className="lg:w-[60%] w-full md:w-[80%]   md:bg-gradient-to-tr md:from-neutral-700 tmd:o-neutral-900 h-full lg:mr-5 md:rounded-2xl flex flex-col items-center py-5 md:py-10 lg:py-20 gap-8 md:gap-14 ">
           <div className="flex flex-col gap-1 items-center">
             <Image
               width={200}

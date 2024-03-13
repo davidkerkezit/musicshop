@@ -116,7 +116,7 @@ const CartProductDetails = ({
             />
           </div>
           <div className="flex flex-col items-center gap-3">
-            <p className="text-base font-thin">{product.name}</p>
+            <p className="text-sm md:text-base font-thin">{product.name}</p>
             {cartItems.find((prod: CartItem) => prod.productId === product._id)
               ?.quantity !== 0 && (
               <div className="flex   items-center bg-white/10 text-white rounded-full border-[1px] border-juice/20 p-1 ">

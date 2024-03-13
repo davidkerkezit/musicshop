@@ -3,9 +3,8 @@ import Image from "next/image";
 import React from "react";
 import LOGO from "@/assets/logo.png";
 import { BASE_URL } from "@/libs/utils";
-import { useRouter } from "next/navigation";
+
 const ProductAdded = ({ setHidden }: { setHidden: any }) => {
-  const router = useRouter();
   return (
     <div
       onClick={(e) => {
@@ -22,7 +21,7 @@ const ProductAdded = ({ setHidden }: { setHidden: any }) => {
         <button
           onClick={() => {
             setHidden(false);
-            router.push(`${BASE_URL}/dashboard?option=addproduct`);
+            window.location.href = "/dashboard?option=addproduct";
           }}
           className="bg-white px-2 rounded-md text-black text-lg py-2 border-[1px] border-light-juice"
         >
@@ -31,7 +30,7 @@ const ProductAdded = ({ setHidden }: { setHidden: any }) => {
         <button
           onClick={() => {
             setHidden(false);
-            router.push(`${BASE_URL}/dashboard?option=editproducts`);
+            window.location.href = "/dashboard?option=editproducts";
           }}
           className="bg-white px-2 rounded-md text-black text-lg py-2 border-[1px] border-light-juice"
         >

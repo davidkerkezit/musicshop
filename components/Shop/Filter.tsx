@@ -31,6 +31,7 @@ const Filter = () => {
     setSelectedSort(query);
     const searchParams = new URLSearchParams(params);
     searchParams.set("sort", query);
+    searchParams.set("page", "1");
     const searchString = searchParams.toString();
     const updatedUrl = `${pathname}?${searchString}`;
     router.push(`${updatedUrl}#sort`);
@@ -39,6 +40,8 @@ const Filter = () => {
   const handleCollectionChange = (collection: string) => {
     const searchParams = new URLSearchParams(params);
     searchParams.set("collection", collection);
+    searchParams.set("page", "1");
+
     const searchString = searchParams.toString();
     const updatedUrl = `${pathname}?${searchString}`;
     router.push(`${updatedUrl}#sort`);
@@ -47,8 +50,8 @@ const Filter = () => {
   const collectionQuery = params.get("collection") ?? "allproducts";
 
   return (
-    <div className="md:w-[80%] w-full  my-5 mx-auto   flex md:flex-row flex-col  justify-between border-b-[1px] md:border-b-white/20 border-b-white/5 items-end  bg-white/5 ">
-      <div className=" flex flex-row w-full md:hidden">
+    <div className="md:w-[80%] w-full  my-5 mx-auto   flex lg:flex-row flex-col  justify-between border-b-[1px] lg:border-b-white/20 border-b-white/5 items-end  bg-white/5 ">
+      <div className=" flex flex-row w-full lg:hidden">
         <div className="w-full ">
           {" "}
           <button
@@ -56,13 +59,13 @@ const Filter = () => {
               setShowCollections(!showCollections);
               setShowSortOptions(false);
             }}
-            className={`p-5 md:border-b-[1px] border-[1px] md:w-[10rem] text-center w-full md:border-b-transparent  border-gray-800/20 flex items-center gap-2 justify-center  md:hidden`}
+            className={`p-5 lg:border-b-[1px] border-[1px] lg:w-[10rem] text-center w-full lg:border-b-transparent  border-gray-800/20 flex items-center gap-2 justify-center  lg:hidden`}
           >
             <p>Categories</p>
             {!showCollections ? <FaAngleDown /> : <FaAngleUp />}
           </button>
           {!showSortOptions && !showCollections && (
-            <p className="bg-light-juice py-2 px-3 text-sm  text-black w-full text-center block md:hidden border-r-[1px] border-r-black">
+            <p className="bg-light-juice py-2 px-3 text-sm  text-black w-full text-center block lg:hidden border-r-[1px] border-r-black">
               {
                 collections.find(
                   (collection: CollectionsType) =>
@@ -74,7 +77,7 @@ const Filter = () => {
         </div>
         <div className={`w-full ${!isShopPage && "hidden"}`}>
           <button
-            className={`p-5 md:border-b-[1px] border-[1px]   md:w-[10rem] w-full md:border-b-transparent border-gray-800/20  gap-2 flex items-center justify-center md:hidden`}
+            className={`p-5 lg:border-b-[1px] border-[1px]   lg:w-[10rem] w-full lg:border-b-transparent border-gray-800/20  gap-2 flex items-center justify-center lg:hidden`}
             onClick={() => {
               setShowSortOptions(!showSortOptions);
               setShowCollections(false);
@@ -84,7 +87,7 @@ const Filter = () => {
             {!showSortOptions ? <FaAngleDown /> : <FaAngleUp />}
           </button>
           {!showSortOptions && !showCollections && (
-            <p className="bg-light-juice text-black py-2 px-3 text-sm block   w-full text-center  md:hidden">
+            <p className="bg-light-juice text-black py-2 px-3 text-sm block   w-full text-center  lg:hidden">
               {selectedTitle === null ? "Relevant" : selectedTitle}
             </p>
           )}

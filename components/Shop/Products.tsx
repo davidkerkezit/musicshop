@@ -9,7 +9,7 @@ const Products = ({ products }: { products: ProductType[] }) => {
   return (
     <div className="md:w-[80%] w-full mx-auto">
       <SearchQuery />
-      <div className=" grid lg:grid-cols-4 grid-cols-2 gap-2">
+      <div className=" grid lg:grid-cols-4 grid-cols-2 sm:grid-cols-3  gap-2">
         {products.map((product: ProductType, index: number) => {
           return (
             <ProductCard key={product._id} product={product} parent="shop" />

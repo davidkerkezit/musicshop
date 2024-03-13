@@ -22,20 +22,20 @@ const Collections = ({
   const collectionQuery = params.get("collection") ?? "allproducts";
   return (
     <div
-      className={`md:flex   text-base md:text-xl font-extralight w-full md:w-full ${
+      className={`lg:flex   text-base lg:text-xl font-extralight w-full lg:w-full ${
         !showCollections && "hidden"
       }`}
     >
-      <div className="md:flex grid grid-cols-2  ">
+      <div className="lg:flex grid grid-cols-2  ">
         {collections.map((collection: CollectionsType) => {
           const isSelectedCollectionStyle: string =
             collectionQuery === collection.query
-              ? " md:border-b-juice border-juice/50 md:border-transparent bg-white/5"
-              : " md:border-b-transparent border-gray-800/20 md:border-transparent ";
+              ? " lg:border-b-juice border-juice/50 lg:border-transparent bg-white/5"
+              : " lg:border-b-transparent border-gray-800/20 lg:border-transparent ";
           return (
             <button
               key={collection.title}
-              className={`p-5 md:border-b-[1px]  md:block border-[1px] md:w-[12rem] w-full   ${isSelectedCollectionStyle}`}
+              className={`p-5 lg:border-b-[1px] lg:text-base xl:text-lg  lg:block border-[1px] lg:w-[9.5rem] xl:w-[11rem] w-full   ${isSelectedCollectionStyle}`}
               onClick={() => {
                 handleCollectionChange(collection.query);
                 setShowCollections(false);

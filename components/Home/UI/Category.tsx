@@ -21,7 +21,7 @@ const Category = ({
     <Link
       href={`${BASE_URL}/shop?page=1&collection=${query}#sort`}
       shallow={true}
-      className={`group ${background} border-[3px] lg:border-[5px] border-light-juice lg:hover:border-juice duration-200 lg:w-full    w-full lg:h-[23rem] h-[13rem] relative `}
+      className={`group ${background} border-[3px] lg:border-[5px] border-light-juice lg:hover:border-juice duration-200 lg:w-full    w-full lg:h-[19rem] h-[13rem] relative overflow-hidden lg:overflow-visible`}
     >
       <div className="absolute left-0 right-0 top-0 bottom-0 bg-black/50  backdrop-blur-md lg:group-hover:backdrop-blur-sm lg:group-hover:bg-black/40 duration-200 cursor-pointer" />
       <Image
@@ -29,7 +29,7 @@ const Category = ({
         height={height}
         alt={imageAlt}
         src={imageSrc}
-        className={`absolute left-0 right-0 mx-auto -top-6 lg:-top-14 lg:relative bottom-0 my-auto    group cursor-pointer ${hover} w-[45%] md:w-[40%] lg:w-[8rem]`}
+        className={`absolute left-0 right-0 mx-auto -top-6 lg:-top-14 lg:relative bottom-0 my-auto    group cursor-pointer ${hover} w-[40%] md:w-[35%] h-[8rem] lg:h-[9rem] object-contain lg:w-[8rem]`}
       />
       <div className="  w-full h-[7rem] absolute bottom-0 flex flex-col items-center gap-5 group cursor-pointer px-4 ">
         <p className="italic drop-shadow-lg text-center  h-[5rem] text-base absolute px-2 hidden lg:block text-white/70  ">

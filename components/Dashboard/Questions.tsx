@@ -129,7 +129,6 @@ const Questions = () => {
               />
             );
           })}{" "}
-        *
       </div>
     </div>
   );

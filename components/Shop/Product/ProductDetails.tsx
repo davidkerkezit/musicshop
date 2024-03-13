@@ -46,22 +46,22 @@ const ProductDetails = ({
     }
   };
   return (
-    <div className="flex md:pt-40 pt-20 md:flex-row flex-col ">
+    <div className="flex md:pt-24 pt-20 md:flex-row flex-col ">
       <div className=" bg-white/10 flex items-center justify-center h-[28rem]  w-full md:w-1/2">
         <Image
           src={selectedProduct.imageUrl}
           alt="product"
           width={400}
           height={400}
-          className="white-shadow w-full md:w-[50%] object-contain"
+          className="white-shadow md:w-[350px] md:h-[350px] sm:h-[400px] sm:w-[400px] w-[300px] h-[300px] object-contain  "
         />
       </div>
 
-      <div className="md:w-1/2 w-full md:px-10 px-2 md:mt-0 mt-2 flex flex-col gap-1 md:gap-4">
-        <h2 className="md:text-5xl text-3xl  font-semibold">
+      <div className="md:w-1/2 w-full md:px-10 px-2 md:mt-0 mt-4 flex flex-col gap-1 md:gap-4">
+        <h2 className="md:text-3xl text-3xl sm:text-4xl  font-semibold">
           {selectedProduct.name}
         </h2>
-        <div className="flex  md:text-xl text-base gap-2">
+        <div className="flex  md:text-lg text-base gap-2">
           <p>Category: </p>
           {category === "DJ Equipments" && (
             <Link
@@ -88,7 +88,7 @@ const ProductDetails = ({
             </Link>
           )}
         </div>
-        <p className="text-lg  font-light text-white/60 my-2 md:my-0">
+        <p className="text-lg md:text-base  font-light text-white/60 my-2 md:my-0">
           {selectedProduct.about}
         </p>
         <p className="md:text-[4rem] text-2xl font-extralight">

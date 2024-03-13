@@ -63,7 +63,7 @@ const DashboardNav = () => {
         onClick={() => router.push(`${BASE_URL}/dashboard?option=editproducts`)}
       >
         <GrEdit />
-        <p className="text-[10px] leading-5"> Edit Product</p>{" "}
+        <p className="text-[10px] leading-5"> Edit Products</p>{" "}
       </button>
       <button
         className={`w-[20%] flex justify-center items-center flex-col bg-light-juice/40 border-t-[3px] relative ${

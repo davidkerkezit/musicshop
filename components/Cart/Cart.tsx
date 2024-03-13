@@ -31,6 +31,15 @@ const Cart = () => {
   const emptyCartHandler = () => {
     dispatch(emptyCart());
   };
+  useEffect(() => {
+    console.log(showCart);
+
+    if (showCart === true) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "visible";
+    }
+  }, [showCart]);
   return (
     <div
       className={`fixed z-50 w-full md:w-[25%] h-[100vh] bg-black/70 backdrop-blur-xl p-4 flex flex-col justify-between  ${

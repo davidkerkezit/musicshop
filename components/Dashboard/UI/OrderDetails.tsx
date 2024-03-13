@@ -160,7 +160,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
         open={isOpen}
       >
         <summary className="  flex  bg-white/20  cursor-pointer hover:bg-white/30 ">
-          <div className="flex flex-col w-[70%] text-sm">
+          <div className="flex flex-col w-[70%] text-sm pl-2">
             <p>
               {order.firstName} {order.lastName}
             </p>

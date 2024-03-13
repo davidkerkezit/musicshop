@@ -23,7 +23,23 @@ const NewArrivals = ({ products }: { products: ProductType[] }) => {
             slidesPerView: 2,
             spaceBetween: 10,
           },
-          1000: {
+          670: {
+            slidesPerView: 3,
+            spaceBetween: 5,
+          },
+          686: {
+            slidesPerView: 4,
+            spaceBetween: 5,
+          },
+          1022: {
+            slidesPerView: 5,
+            spaceBetween: 5,
+          },
+          1222: {
+            slidesPerView: 6,
+            spaceBetween: 5,
+          },
+          1500: {
             slidesPerView: 7,
           },
         }}
