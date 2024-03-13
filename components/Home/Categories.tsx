@@ -15,7 +15,7 @@ const Categories = () => {
         label="Discover our products"
       />
       {/* Categories */}
-      <div className="w-[80%] h-max py-10 mx-auto lg:py-20 grid grid-cols-2 md:grid-cols-3 lg:max-w-[1000px] lg:mx-auto lg:grid-cols-3 gap-3 justify-items-center px-5 place-items-center lg:gap-5   ">
+      <div className="w-[90%] h-max py-10 mx-auto lg:py-20 grid grid-cols-2 md:grid-cols-3 lg:max-w-[1000px] lg:mx-auto lg:grid-cols-3 gap-3 justify-items-center px-5 place-items-center lg:gap-5   ">
         {allCategories.map((category: CategoryType) => {
           return (
             <Category
