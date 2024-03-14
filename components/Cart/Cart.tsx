@@ -32,8 +32,6 @@ const Cart = () => {
     dispatch(emptyCart());
   };
   useEffect(() => {
-    console.log(showCart);
-
     if (showCart === true) {
       document.body.style.overflow = "hidden";
     } else {
@@ -42,10 +40,10 @@ const Cart = () => {
   }, [showCart]);
   return (
     <div
-      className={`fixed z-50 w-full md:w-[25%] h-[100vh] bg-black/70 backdrop-blur-xl p-4 flex flex-col justify-between  ${
+      className={`fixed z-50 w-full  max-w-[560px] h-[100vh] bg-black/70 backdrop-blur-xl p-4 flex flex-col justify-between  ${
         showCart && "animate-openFromRight"
       } ${showCart === false && "animate-closeToRight"} ${
-        showCart === null && " -right-[100%] md:-right-[25%]"
+        showCart === null && " -right-[100%] md:-right-[570px]"
       } `}
     >
       <div>

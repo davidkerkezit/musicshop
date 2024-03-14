@@ -37,7 +37,7 @@ const ProductInformation = ({
           About seller
         </button>
       </div>
-      <p className="px-8 py-8 text-base text-center md:text-left md:text-lg text-white/80 font-light bg-white/10 ">
+      <p className="px-8 py-8 text-base text-center lg:text-left md:text-lg text-white/80 font-light bg-white/10 ">
         {selectedTab === "product" && aboutProduct}
         {selectedTab === "seller" && aboutSeller}
       </p>

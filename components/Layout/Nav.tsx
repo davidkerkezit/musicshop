@@ -49,10 +49,10 @@ const Nav = () => {
       setIsUpdatedCart(false);
     }, 1000);
   }, [cartItems]);
-  // xs:bg-red-500 sm:bg-blue-600 md:bg-green-400 lg:bg-yellow-500 xl:bg-white RESPONSIVE HINTS
+
   return (
     <header
-      className="w-full  z-40 fixed  bg-white/5  "
+      className="w-full  z-40 fixed  bg-white/5    "
       id="nav"
       data-nextjs-scroll-focus-boundary
     >

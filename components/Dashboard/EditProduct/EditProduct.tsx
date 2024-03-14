@@ -129,7 +129,7 @@ const EditProduct = ({ selectedProduct }: { selectedProduct: ProductType }) => {
         <div className="flex md:pt-40 pt-5 md:flex-row flex-col-reverse  ">
           {/* IMG */}
           <div className="flex flex-col items-center md:mt-0 mt-5">
-            <div className=" bg-white/10 flex items-center justify-center relative rounded-xl border-light-juice border-[1px] border-dashed md:h-[28rem] w-[90%] md:w-[28rem] ">
+            <div className=" bg-white/10 flex items-center justify-center relative rounded-xl border-light-juice border-[1px] border-dashed md:h-[28rem] w-[12rem] h-[12rem] md:w-[28rem] ">
               <div className="absolute  bottom-0 left-0 right-0 top-0 bg-black/60 z-10 " />
 
               {imageSrc !== null ? (

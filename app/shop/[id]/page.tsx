@@ -34,7 +34,7 @@ const page = async ({ params }: { params: { id: string } }) => {
   } = await getProduct(id);
 
   return (
-    <div className="flex flex-col gap-10 lg:mx-14 mx-0 ">
+    <div className="flex flex-col gap-10  mx-0 ">
       <ProductDetails selectedProduct={selectedProduct} category={category} />
       <ProductInformation
         aboutProduct={selectedProduct.description}

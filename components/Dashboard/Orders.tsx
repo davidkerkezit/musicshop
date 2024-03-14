@@ -37,7 +37,7 @@ const Orders = () => {
   }, [selectedCategory]);
 
   return (
-    <div className="w-full md:mx-32 mx-2 mt-10">
+    <div className="w-full md:mx-4 xl:mx-5 mx-2 mt-10">
       {isLoading ? (
         <Loading />
       ) : (
@@ -94,7 +94,7 @@ const Orders = () => {
             </button>
           </div>
           <div className="hidden md:flex">
-            <p className="w-[20%]  text-white/80 bg-white/10 px-1 py-1 text-center border-r-[1px] border-r-light-juice/20">
+            <p className="w-[20%] md:w-[38%] xl:w-[27%] text-white/80 bg-white/10 px-1 py-1 text-center border-r-[1px] border-r-light-juice/20">
               Order ID
             </p>
             <p className="w-[18%] px-1 py-1 text-white/80 bg-white/10  text-center border-r-[1px] border-r-light-juice/20">
@@ -103,13 +103,13 @@ const Orders = () => {
             <p className="w-[18%]  text-white/80 bg-white/10 px-1 py-1 text-center border-r-[1px] border-r-light-juice/20">
               Created At
             </p>
-            <p className="w-[16%]  text-white/80 bg-white/10  px-1 py-1 text-center border-r-[1px] border-r-light-juice/20">
+            <p className="w-[16%] md:w-[21%] xl:w-[13%]  text-white/80 bg-white/10  px-1 py-1 text-center border-r-[1px] border-r-light-juice/20">
               Pricing
             </p>
-            <p className="w-[18%] text-white/80 bg-white/10 px-1 py-1  flex items-center justify-center border-r-[1px] border-r-light-juice/20">
-              Delivery Status
+            <p className="w-[18%] md:w-[5%] lg:w-[17%] text-white/80 bg-white/10 px-1 py-1  flex items-center justify-center border-r-[1px] border-r-light-juice/20 ">
+              <span className="hidden xl:block"> Delivery Status</span>
             </p>
-            <p className="w-[10%]  text-white/80 bg-white/10 px-1 py-1 text-center">
+            <p className="w-[10%] xl:w-[15%]  text-white/80 bg-white/10 px-1 py-1 text-center hidden xl:block">
               Payment
             </p>
           </div>

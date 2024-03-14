@@ -71,7 +71,7 @@ const Options = () => {
       ? "bg-white/10  border-r-[5px] border-r-juice"
       : "bg-transparent  border-r-[5px] border-r-transparent";
   return (
-    <div className="w-1/5 md:flex flex-col py-3 bg-white/5 h-[100vh] hidden">
+    <div className="min-w-[200px] lg:min-w-[250px] md:flex flex-col py-3 bg-white/5 h-[100vh] hidden">
       <button
         onClick={() => router.push(`${BASE_URL}/dashboard?option=addproduct`)}
         className={`text-xl font-thin flex items-center py-3 px-2 gap-2 hover:bg-white/20  ${isAddDashboardStyle}`}

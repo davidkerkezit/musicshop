@@ -36,7 +36,7 @@ const Questions = () => {
     fetchData();
   }, [selectedCategory]);
   return (
-    <div className="w-full md:mx-32 mt-10">
+    <div className="w-full md:mx-5  mt-10">
       <div>
         <div className="flex justify-center mb-4">
           {" "}

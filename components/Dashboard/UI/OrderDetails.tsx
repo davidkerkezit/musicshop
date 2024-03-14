@@ -45,31 +45,36 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
         open={isOpen}
       >
         <summary className="md:flex hidden  bg-white/20  cursor-pointer hover:bg-white/30 ">
-          <div className="flex items-center w-[2%] justify-center text-light-juice">
+          <div className=" items-start w-[2%] hidden lg:flex justify-center text-light-juice pt-2">
             <FaAngleDoubleRight />
           </div>
-          <p className="w-[18%] font-thin text-white/60 bg-white/5 px-1 py-1">
+          <p className="w-[18%] md:w-[38%] xl:w-[25%] font-thin text-white/60 bg-white/5 px-1 py-1 text-base md:text-sm lg:text-base">
             {order._id}
           </p>
           <p className="w-[18%] px-1 py-1  text-center">
             {order.firstName} {order.lastName}
           </p>
-          <p className="w-[18%] font-thin text-white/60 bg-white/5 px-1 py-1 text-center">
+          <p className="w-[18%] font-thin text-white/60 bg-white/5 px-1 py-1 text-center  text-base md:text-sm lg:text-base">
             {date}
           </p>
-          <p className="w-[16%] font-thin text-white/60  px-1 py-1 text-center">
+          <p className="w-[16%] md:w-[21%] xl:w-[13%] font-thin text-white/60  px-1 py-1 text-center">
             {order.totalPrice}.00 $
           </p>
-          <div className="w-[18%] bg-white/5 px-1 py-1  flex items-center justify-center">
+          <div className="w-[18%] md:w-[5%] xl:w-[17%] bg-white/5 px-1 py-1  flex items-center justify-center">
             <p
               className={`${
                 order.isChecked === true ? "bg-green-600" : "bg-yellow-600"
-              } w-max px-4 rounded-md font-thin text-sm`}
+              } w-max px-4 rounded-md font-thin text-sm hidden xl:block`}
             >
               {order.isChecked ? "Completed" : "In procces"}
             </p>
+            <div
+              className={`w-[0.5rem] h-[0.5rem] rounded-full xl:hidden  ${
+                order.isChecked === true ? "bg-green-600" : "bg-yellow-600"
+              }`}
+            ></div>
           </div>
-          <p className="w-[10%] font-thin text-white/60  px-1 py-1 text-center">
+          <p className="lg:w-[10%] w-[1%] xl:w-[15%] font-thin text-white/60  px-1 py-1 text-center hidden xl:block">
             Cash on Delivery
           </p>
         </summary>
@@ -80,8 +85,8 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
           </h2>
         </div>
 
-        <div className="flex md:flex-row flex-col py-4 px-[2%] bg-white/5 ">
-          <div className="md:w-1/2 w-full ">
+        <div className="flex lg:flex-row flex-col py-4 px-[2%] lg:gap-5 bg-white/5 ">
+          <div className="lg:w-1/2 w-full ">
             <p className="bg-light-juice w-max px-4 text-black mb-4">
               About Customer
             </p>
@@ -95,9 +100,9 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
               {order.city}({order.postalCode})
             </p>
             <p className="font-thin">{order.phoneNumber}</p>
-            <p className="font-thin">{order.moreInformation}</p>
+            <p className="font-thin text-justify">{order.moreInformation}</p>
           </div>
-          <div className="md:w-1/2 w-full bg-white/5 p-5 flex flex-col gap-1 ">
+          <div className="lg:w-1/2 w-full bg-white/5 p-5 flex flex-col gap-1 ">
             <p className="bg-light-juice w-max px-4 text-black mb-4">
               Order Information{" "}
             </p>

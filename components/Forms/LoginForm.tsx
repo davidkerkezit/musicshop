@@ -46,7 +46,7 @@ const LoginForm = () => {
       {error === 201 ? (
         <Loading />
       ) : (
-        <div className="md:w-1/3 w-full  mx-auto ">
+        <div className="md:max-w-[600px] w-full  mx-auto ">
           <h1 className=" py-4 text-center text-4xl font-thin">
             Admin Acces Only{" "}
           </h1>

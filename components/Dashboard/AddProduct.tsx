@@ -84,18 +84,18 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="w-full md:mx-32 md:mt-5 mt-2 " ref={addProductRef}>
+    <div className="w-full  md:mx-4 lg:mx-7 md:mt-5 mt-2 " ref={addProductRef}>
       {showModal && (
         <Portal setHidden={setShowModal}>
           <ProductAdded setHidden={setShowModal} />
         </Portal>
       )}
-      <h2 className=" py-1 md:py-4 text-3xl font-thin md:mb-5 mb-2  text-center md:text-left">
+      <h2 className=" py-1 md:py-4 text-3xl font-thin md:mb-5 mb-2 ml-9 lg:ml-1  text-left md:text-left">
         Add New Product
       </h2>
       <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex md:flex-row flex-col md:gap-20 gap-5 items-center md:items-start ">
-          <div className="md:w-1/2 w-[90%] flex flex-col gap-4   ">
+        <div className="flex lg:flex-row flex-col xl:gap-20  gap-5 items-center lg:items-start ">
+          <div className="lg:w-[90%] w-[90%] flex flex-col gap-4   ">
             <div className="md:block flex justify-center flex-col items-start md:items-center">
               <label htmlFor="" className="text-lg font-light ">
                 Category:
@@ -109,7 +109,7 @@ const AddProduct = () => {
                 <button
                   type="button"
                   onClick={() => setSelectedCategory("dj")}
-                  className={` md:w-[10rem] w-[7rem] text-sm md:text-base md:px-0 py-2 rounded-l-lg border-r-[1px] border-r-light-juice/40  ${
+                  className={` md:w-[10rem] w-[7rem] lg:w-[9rem] text-sm md:text-base md:px-0 py-2 rounded-l-lg border-r-[1px] border-r-light-juice/40  ${
                     selectedCategory === "dj"
                       ? "bg-light-juice text-black/80"
                       : "bg-white/10 text-white hover:bg-white/20 duration-200"
@@ -120,7 +120,7 @@ const AddProduct = () => {
                 <button
                   type="button"
                   onClick={() => setSelectedCategory("vinyls")}
-                  className={`md:w-[10rem] w-[7rem] text-sm md:text-base md:px-0 py-2   ${
+                  className={`md:w-[10rem] w-[7rem] lg:w-[8rem] text-sm md:text-base md:px-0 py-2   ${
                     selectedCategory === "vinyls"
                       ? "bg-light-juice text-black/80"
                       : "bg-white/10 text-white hover:bg-white/20 duration-200"
@@ -131,7 +131,7 @@ const AddProduct = () => {
                 <button
                   type="button"
                   onClick={() => setSelectedCategory("softweres")}
-                  className={` md:w-[10rem] w-[7rem] text-sm md:text-base md:px-0 py-2 rounded-r-lg border-l-[1px] border-l-light-juice/40 ${
+                  className={` md:w-[10rem] w-[7rem] lg:w-[8rem] text-sm md:text-base md:px-0 py-2 rounded-r-lg border-l-[1px] border-l-light-juice/40 ${
                     selectedCategory === "softweres"
                       ? "bg-light-juice text-black/80 "
                       : "bg-white/10 text-white hover:bg-white/20 duration-200"
@@ -142,7 +142,7 @@ const AddProduct = () => {
               </div>
 
               {selectedCategory === "dj" && (
-                <div className=" flex mt-2  flex-col md:items-start items-center">
+                <div className=" flex mt-2  flex-col md:items-start items-start">
                   <label htmlFor="">Brand:</label>
                   {selectedSubCategory === null && hasInteracted && (
                     <p className="text-sm text-red-500">
@@ -212,7 +212,7 @@ const AddProduct = () => {
               );
             })}
           </div>
-          <div className="md:w-1/2 w-full  flex flex-col gap-4 md:justify-start justify-center items-center md:items-start ">
+          <div className="lg:w-1/2 md:w-[80%] w-full  flex flex-col gap-4 md:justify-start justify-center items-center lg:items-start ">
             <div
               className={`border-light-juice border-dashed border-[1px] h-[18rem]  w-[90%] md:w-[18rem]  aspect-square md:mt-5 mt-1 flex justify-center items-center relative rounded-lg ${
                 imageSrc === null && hasInteracted && "animate-shake"
@@ -273,7 +273,7 @@ const AddProduct = () => {
             </div>
           </div>
         </div>
-        <div className=" md:block flex justify-center">
+        <div className=" lg:block flex justify-center">
           <Button
             icon={<MdDone />}
             label="Submit"

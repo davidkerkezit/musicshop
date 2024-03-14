@@ -35,7 +35,11 @@ export default async function Page({
       <SearchSection />
       <NewArrivals products={newProducts} />
       <Filter />
-      {products.length > 0 ? <Products products={products} /> : <NoProducts />}
+      {products.length > 0 ? (
+        <Products parent="shop" products={products} />
+      ) : (
+        <NoProducts />
+      )}
       {pages && <Pagination pagesNumber={pages} />}
     </>
   );

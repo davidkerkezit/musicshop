@@ -86,10 +86,10 @@ const CheckoutDetails = () => {
         </div>
       ) : (
         <form
-          className="md:mx-20  flex md:flex-row flex-col"
+          className="lg:mx-5 xl:mx-20  flex lg:flex-row flex-col"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="md:w-[70%] w-full md:rounded-l-xl bg-white/10 p-5 my-6 md:border-[1px] border-y-[1px] border-light-juice/20 ">
+          <div className="lg:w-[70%] w-full lg:rounded-l-xl bg-white/10 p-5 my-6 lg:border-[1px] border-y-[1px] border-light-juice/20 ">
             <h4 className="pb-3 text-xl font-semibold">Payment options</h4>
             <div className="bg-white/10 p-3 rounded-lg">
               {/* Payment */}
@@ -162,7 +162,7 @@ const CheckoutDetails = () => {
               {/* About user */}
               <div className=" grid md:grid-cols-2 grid-cols-1 gap-5 my-4 pt-4 border-t-[1px] border-t-white/40 border-dotted">
                 <div className="flex flex-col ">
-                  <div className="flex md:flex-row flex-col md:gap-2 md:items-center">
+                  <div className="flex  flex-col ">
                     {" "}
                     <label className="font-thin">First name:</label>{" "}
                     {errors.firstName && (
@@ -180,7 +180,7 @@ const CheckoutDetails = () => {
                 </div>
 
                 <div className="flex flex-col">
-                  <div className="flex md:flex-row flex-col md:gap-2 md:items-center">
+                  <div className="flex flex-col lg: ">
                     {" "}
                     <label className="font-thin">Last name:</label>{" "}
                     {errors.lastName && (
@@ -198,7 +198,7 @@ const CheckoutDetails = () => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <div className="flex md:flex-row flex-col md:gap-2 md:items-center">
+                  <div className="flex  flex-col  ">
                     {" "}
                     <label className="font-thin">City:</label>{" "}
                     {errors.city && (
@@ -215,7 +215,7 @@ const CheckoutDetails = () => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <div className="flex md:flex-row flex-col md:gap-2 md:items-center">
+                  <div className="flex  flex-col  ">
                     {" "}
                     <label className="font-thin">Postal code:</label>{" "}
                     {errors.postalCode && (
@@ -232,7 +232,7 @@ const CheckoutDetails = () => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <div className="flex md:flex-row flex-col md:gap-2 md:items-center">
+                  <div className="flex  flex-col  ">
                     {" "}
                     <label className="font-thin">Street name:</label>{" "}
                     {errors.streetName && (
@@ -249,7 +249,7 @@ const CheckoutDetails = () => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <div className="flex md:flex-row flex-col md:gap-2 md:items-center">
+                  <div className="flex  flex-col  ">
                     {" "}
                     <label className="font-thin">House number:</label>{" "}
                     {errors.houseNumber && (
@@ -266,7 +266,7 @@ const CheckoutDetails = () => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <div className="flex md:flex-row flex-col md:gap-2 md:items-center">
+                  <div className="flex  flex-col  ">
                     {" "}
                     <label className="font-thin">More information:</label>{" "}
                   </div>
@@ -278,7 +278,7 @@ const CheckoutDetails = () => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <div className="flex md:flex-row flex-col md:gap-2 md:items-center">
+                  <div className="flex flex-col  ">
                     {" "}
                     <label className="font-thin">Phone number:</label>{" "}
                     {errors.phoneNumber && (
@@ -297,7 +297,7 @@ const CheckoutDetails = () => {
               </div>
             </div>
           </div>
-          <div className="md:w-[30%] w-full md:bg-white/20 bg-white/5 md:rounded-xl flex flex-col justify-between border-[1px] md:border-light-juice/70 border-light-juice/10 ">
+          <div className="lg:w-[30%] w-full md:bg-white/20 bg-white/5 lg:rounded-xl flex flex-col justify-between border-[1px] lg:border-light-juice/70 border-light-juice/10 ">
             <div className="flex flex-col ">
               <p className="text-center text-2xl font-semibold py-4">
                 {" "}
@@ -330,10 +330,10 @@ const CheckoutDetails = () => {
                             <p className=" md:bg-light-juice/20 pl-2 text-gray-300">
                               {quantity && quantity}x
                             </p>
-                            <p className=" md:bg-light-juice/20 pr-2 text-gray-300">
+                            <p className=" md:bg-light-juice/20 pr-2 text-gray-300 w-[5rem]">
                               {product.price}.00$
                             </p>
-                            <p className="bg-light-juice px-2 text-black ">
+                            <p className="bg-light-juice px-2 text-black w-[5rem] ">
                               {quantity
                                 ? quantity * product.price
                                 : product.price}

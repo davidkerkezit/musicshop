@@ -21,7 +21,7 @@ const SearchForm = () => {
   return (
     <form
       onSubmit={searchValueHandler}
-      className="flex bg-slate-600 w-[80%] md:w-1/2 lg:w-1/5 my-5 rounded-full relative z-10"
+      className="flex bg-slate-600 w-[80%] md:w-1/3 lg:w-1/3 my-5 rounded-full relative z-10"
     >
       <input
         onChange={searchHandler}

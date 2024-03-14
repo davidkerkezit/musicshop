@@ -33,7 +33,7 @@ const SimilarProducts = ({
     }
   }, [category]);
   return (
-    <div className=" bg-white/5 md:border-[1px] border-y-[1px] border-light-juice/40 py-2 md:rounded-2xl  overflow-x-scroll md:overflow-hidden w-full">
+    <div className=" bg-white/5 md:border-[1px] border-y-[1px] border-light-juice/40 py-2   overflow-x-scroll md:overflow-hidden w-full">
       <div className="flex justify-between px-4 md:py-2 py-5">
         <h3 className="text-xl">Similar Products</h3>
         <Link
@@ -44,7 +44,7 @@ const SimilarProducts = ({
           <FaArrowRight size={12} />
         </Link>
       </div>
-      <div className="md:flex md:justify-center justify-start md:gap-0 gap-1  grid grid-cols-2">
+      <div className="lg:flex lg:justify-center justify-start lg:gap-0 gap-1  grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {products.map((product: ProductType) => {
           return (
             <ProductCard

@@ -11,10 +11,10 @@ const ProductAdded = ({ setHidden }: { setHidden: any }) => {
         e.preventDefault();
         e.stopPropagation();
       }}
-      className=" p-12 bg-[#1c1c21] rounded-lg shadow-lg  mx-auto left-0 right-0 top-0 bottom-0 my-auto h-max fixed flex flex-col items-center md:w-1/3 w-[90%] border-[1px] border-light-juice/20 z-50"
+      className=" p-12 bg-[#1c1c21] rounded-lg shadow-lg  mx-auto left-0 right-0 top-0 bottom-0 my-auto h-max fixed flex flex-col items-center md:min-w-[400px] md:max-w-[600px] w-[90%] border-[1px] border-light-juice/20 z-50"
     >
       <Image src={LOGO} alt="logo" width={100} height={100} />
-      <h2 className="text-xl font-bold mb-4 text-light-juice pt-4 md:text-left text-center">
+      <h2 className="text-xl font-bold mb-4 text-light-juice pt-4  text-center">
         Your product has been successfully added
       </h2>
       <div className="flex gap-2 mt-4">

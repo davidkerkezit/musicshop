@@ -84,7 +84,7 @@ const QuestionDetails: React.FC<QuestionDetailProps> = ({
   return (
     <details className=" border-b-[1px] border-b-white/10  " open={isOpen}>
       <summary className="flex  bg-white/20  cursor-pointer hover:bg-white/30 w-full">
-        <div className="md:flex items-center w-[2%] justify-center text-light-juice hidden">
+        <div className="md:flex items-start w-[2%] justify-center text-light-juice hidden pt-2">
           <FaAngleDoubleRight />
         </div>
 

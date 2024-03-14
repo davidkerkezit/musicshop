@@ -91,10 +91,10 @@ const ProductDetails = ({
         <p className="text-lg md:text-base  font-light text-white/60 my-2 md:my-0">
           {selectedProduct.about}
         </p>
-        <p className="md:text-[4rem] text-2xl font-extralight">
+        <p className="md:text-[2.5rem] text-2xl font-extralight">
           <span className="text-lg  font-light pr-1">Price: </span>
           {selectedProduct.price}.00
-          <span className="md:text-[3rem] text-xl font-extralight pl-1">$</span>
+          <span className="md:text-[2rem] text-xl font-extralight pl-1">$</span>
         </p>
         <div className="md:mt-0 mt-4">
           <Button
