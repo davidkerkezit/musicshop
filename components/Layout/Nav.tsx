@@ -91,8 +91,10 @@ const Nav = () => {
             );
           })}
           <Link
-            className={`nav-links relative    {(path.includes("dashboard") || path.includes("admin")) &&
-              "bg-juice/90"}`}
+            className={`nav-links relative    ${
+              (path.includes("dashboard") || path.includes("admin")) &&
+              "bg-juice/90"
+            }`}
             href={`${BASE_URL}/dashboard`}
           >
             Dashboard
