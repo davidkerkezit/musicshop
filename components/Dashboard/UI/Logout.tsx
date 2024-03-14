@@ -12,8 +12,10 @@ const Logout = () => {
   const logoutHandler = async () => {
     setIsLoading(true);
     const status = await logoutAuthAction();
-    status === 201 && router.push(`${BASE_URL}`);
-    setIsLoading(false);
+    if (status === 201) {
+      window.location.href = BASE_URL;
+      setIsLoading(false);
+    }
   };
   return (
     <>
