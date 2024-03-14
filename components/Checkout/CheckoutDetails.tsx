@@ -297,13 +297,13 @@ const CheckoutDetails = () => {
               </div>
             </div>
           </div>
-          <div className="lg:w-[30%] w-full md:bg-white/20 bg-white/5 lg:rounded-xl flex flex-col justify-between border-[1px] lg:border-light-juice/70 border-light-juice/10 ">
+          <div className="lg:w-[30%] w-full md:bg-white/20 bg-white/5 lg:rounded-xl flex flex-col justify-between border-[1px] lg:border-light-juice/70 border-light-juice/10  ">
             <div className="flex flex-col ">
               <p className="text-center text-2xl font-semibold py-4">
                 {" "}
                 Your order:
               </p>
-              <div className=" flex flex-col gap-2 mt-4 h-max ">
+              <div className=" flex flex-col gap-2 mt-4 h-[23rem] overflow-y-scroll no-scrollbar ">
                 {isLoading && <LoadingDots />}
                 {allProducts.length > 0 &&
                   allProducts.map((product: ProductType) => {

@@ -99,7 +99,7 @@ const ProductCard = ({
         }`}
         className={`lg:mx-0   bg-white/5   h-max pt-[1px] group duration-200  ${
           parent !== "swiper"
-            ? "md:hover:border-juice md:hover:bg-white/10 md:hover:border-[1px]"
+            ? "md:hover:border-juice md:hover:bg-white/10 md:hover:border-[1px] group:hover:border-transparent"
             : "md:hover:border-transparent "
         }  border-transparent`}
       >

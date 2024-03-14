@@ -19,7 +19,7 @@ const Button = ({
       disabled={
         isPending || label === "Out of stock" || label === "No Permission"
       }
-      className={` flex gap-1  items-center border-[2px] md:border-[3px] rounded-full   mb-4 ${
+      className={` flex gap-1  items-center group border-[2px] md:border-[3px] rounded-full   mb-4 ${
         label === "Delete" || label === "Edit"
           ? "w-[7rem] md:w-[7.3rem]"
           : "w-max"

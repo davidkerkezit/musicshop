@@ -26,6 +26,17 @@ body {
     @apply flex-1 text-center text-light duration-200 py-2 text-lg hover:bg-juice/50 rounded-xl;
   }
 }
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
 .custom-shadow {
   @apply filter drop-shadow-md;
   filter: drop-shadow(5px 5px 5px #222);
