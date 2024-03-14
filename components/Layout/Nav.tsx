@@ -75,29 +75,26 @@ const Nav = () => {
             return (
               <Link
                 key={index}
-                className={`nav-links relative `}
+                className={`nav-links ${path === item.link && "bg-juice/90"}`}
                 href={item.link}
               >
-                {path === item.link && (
+                {/* {path === item.link && (
                   <motion.div
                     layoutId="bubble"
                     className="absolute inset-0 -z-10 bg-juice rounded-xl "
                     transition={{ type: "spring", duration: 0.6 }}
                   ></motion.div>
-                )}
+                )} */}
 
                 {item.label}
               </Link>
             );
           })}
-          <Link className={`nav-links relative`} href={`${BASE_URL}/dashboard`}>
-            {(path.includes("dashboard") || path.includes("admin")) && (
-              <motion.div
-                layoutId="bubble"
-                className="absolute inset-0 -z-10 bg-juice rounded-xl "
-                transition={{ type: "spring", duration: 0.6 }}
-              ></motion.div>
-            )}
+          <Link
+            className={`nav-links relative    {(path.includes("dashboard") || path.includes("admin")) &&
+              "bg-juice/90"}`}
+            href={`${BASE_URL}/dashboard`}
+          >
             Dashboard
           </Link>
         </div>
