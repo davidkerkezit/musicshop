@@ -39,7 +39,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 }
 export async function GET(request: NextRequest, response: NextResponse) {
   try {
-    const orders = await Order.find();
+    const orders = await Order.find().sort({ createdAt: -1 });
     return NextResponse.json(
       { message: "Order added successfully", orders },
       { status: 201 }

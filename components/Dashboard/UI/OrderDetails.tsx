@@ -19,7 +19,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
 
   selectedCategory,
 }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpenId, setIsOpenId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
@@ -35,14 +35,14 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
     );
     setIsLoading(false);
   };
-  const toggleDetails = () => {
-    setIsOpen(false);
+  const toggleDetails = (id: string) => {
+    setIsOpenId(id);
   };
   return (
     <>
       <details
         className=" border-b-[1px] border-b-white/10 md:block hidden  "
-        open={isOpen}
+        open={isOpenId !== null && isOpenId === order._id ? false : undefined}
       >
         <summary className="md:flex hidden  bg-white/20  cursor-pointer hover:bg-white/30 ">
           <div className=" items-start w-[2%] hidden lg:flex justify-center text-light-juice pt-2">
@@ -152,9 +152,8 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
             )}
           </button>
           <button
-            disabled
-            onClick={toggleDetails}
-            className="px-2 py-1 border-[1px] border-white/20 rounded-md font-thin w-[7rem]  hover:bg-white/10 cursor-not-allowed"
+            onClick={() => toggleDetails(order._id)}
+            className="px-2 py-1 border-[1px] border-white/20 rounded-md font-thin w-[7rem]  hover:bg-white/10 "
           >
             Close
           </button>
@@ -162,7 +161,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
       </details>
       <details
         className=" border-b-[1px] border-b-white/10 md:hidden block  "
-        open={isOpen}
+        open={isOpenId !== null && isOpenId === order._id ? false : undefined}
       >
         <summary className="  flex  bg-white/20  cursor-pointer hover:bg-white/30 ">
           <div className="flex flex-col w-[70%] text-sm pl-2">
@@ -257,9 +256,8 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
             )}
           </button>
           <button
-            disabled
-            onClick={toggleDetails}
-            className="px-2 py-1 border-[1px] border-white/20 rounded-md font-thin w-[7rem]  hover:bg-white/10 cursor-not-allowed"
+            onClick={() => toggleDetails(order._id)}
+            className="px-2 py-1 border-[1px] border-white/20 rounded-md font-thin w-[7rem]  hover:bg-white/10 "
           >
             Close
           </button>
