@@ -84,7 +84,7 @@ const Options = () => {
         className={`text-xl font-thin flex items-center gap-2 py-3 px-2 hover:bg-white/20 ${isEditDashboardStyle}`}
       >
         <FiEdit size={15} />
-        All Products
+        Edit Products
       </button>
       <button
         onClick={() => router.push(`${BASE_URL}/dashboard?option=orders`)}
